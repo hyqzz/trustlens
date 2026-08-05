@@ -2,7 +2,7 @@
   "name": "memory",
   "server_type": "mcp-server",
   "source": "official-reference",
-  "evaluated_at": 1785952650.8157234,
+  "evaluated_at": 1785953861.5098956,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -21,7 +21,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.002,
+        "avg_latency_s": 0.001,
         "failure_rate": 0.0,
         "attempts": 10
       }
