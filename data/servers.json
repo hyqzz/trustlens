@@ -1,0 +1,13 @@
+{
+  "$comment": "待评测的能力单元清单。command/args 为可复现的启动方式；source 为来源注册表。MVP 阶段先放本地可验证的样例与少量真实目标。",
+  "servers": [
+    {
+      "name": "mock-echo",
+      "type": "mcp-server",
+      "source": "builtin-fixture",
+      "command": "{python}",
+      "args": ["tests/fixtures/mock_mcp_server.py"],
+      "note": "内置样例服务器：包含正常工具与投毒工具，用于端到端自检与 CI 冒烟"
+    }
+  ]
+}
