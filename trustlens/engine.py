@@ -24,6 +24,19 @@ def _dummy_arguments(schema: dict) -> dict:
     return args
 
 
+def _finalize_failure(report: ServerReport, error: str) -> ServerReport:
+    """启动/握手失败的统一收尾：四个维度按失败计分。"""
+    report.error = error
+    report.dimensions = {
+        "functionality": score.functionality_score(False, 0, 0, []),
+        "reliability": score.reliability_score([], 0, 0),
+        "security": score.security_score([]),
+        "compatibility": score.compatibility_score([]),
+    }
+    report.total_score, report.grade = score.total_score(report.dimensions)
+    return report
+
+
 def evaluate_server(name: str, command: list[str], server_type: str = "mcp-server",
                     source: str = "", providers: list[ToolUseProvider] | None = None,
                     timeout: float = 15.0) -> ServerReport:
@@ -31,20 +44,17 @@ def evaluate_server(name: str, command: list[str], server_type: str = "mcp-serve
     report = ServerReport(name=name, server_type=server_type, source=source)
     providers = providers if providers is not None else default_providers()
 
-    with McpStdioClient(command, timeout=timeout) as client:
+    try:
+        client = McpStdioClient(command, timeout=timeout)
+    except OSError as e:
+        return _finalize_failure(report, f"无法启动服务器进程: {e}")
+
+    with client:
         try:
             client.initialize()
             raw_tools = client.list_tools()
         except ProtocolError as e:
-            report.error = str(e)
-            report.dimensions = {
-                "functionality": score.functionality_score(False, 0, 0, []),
-                "reliability": score.reliability_score([], 0, 0),
-                "security": score.security_score([]),
-                "compatibility": score.compatibility_score([]),
-            }
-            report.total_score, report.grade = score.total_score(report.dimensions)
-            return report
+            return _finalize_failure(report, str(e))
 
         tools = [ToolInfo(
             name=t.get("name", ""),
@@ -66,9 +76,13 @@ def evaluate_server(name: str, command: list[str], server_type: str = "mcp-serve
             for _ in range(CALLS_PER_TOOL):
                 attempts += 1
                 try:
-                    _, latency = client.call_tool(tool.name, _dummy_arguments(tool.schema))
+                    result, latency = client.call_tool(tool.name, _dummy_arguments(tool.schema))
                     latencies.append(latency)
-                    tool_ok = True
+                    # MCP 语义错误（isError: true）计为失败：工具被调用但未正确履职
+                    if result.get("isError"):
+                        failures += 1
+                    else:
+                        tool_ok = True
                 except ProtocolError:
                     failures += 1
             if tool_ok:

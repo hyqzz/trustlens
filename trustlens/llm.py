@@ -1,11 +1,15 @@
-"""跨模型兼容性评估：provider 接口与离线 mock 实现。
+"""跨模型兼容性评估：provider 接口、离线 mock 实现、真实模型实现。
 
-真实 provider（openai / anthropic / qwen / deepseek）后续在此扩展：
-实现 ToolUseProvider 接口并从环境变量读取 API key。
-MVP 与 CI 默认使用 MockProvider——确定性、零成本、可复现。
+真实 provider 走 OpenAI 兼容接口（GPT / DeepSeek / Qwen 均支持），
+API key 从环境变量读取，绝不写入代码或数据文件。
+默认（含 CI）使用 MockProvider——确定性、零成本、可复现；
+设置 TRUSTLENS_REAL_PROVIDERS=1 并配置对应 key 后启用真实评测。
 """
 from __future__ import annotations
 
+import json
+import os
+import urllib.request
 from dataclasses import dataclass
 
 from .models import ToolInfo
@@ -50,6 +54,86 @@ class MockProvider(ToolUseProvider):
         return ModelVerdict(self.name, True, "成功选择并构造调用")
 
 
-def default_providers() -> list[ToolUseProvider]:
-    """MVP 默认评测阵容（模拟四个真实模型维度，后续替换为真实 provider）。"""
+# 真实模型配置：OpenAI 兼容端点。key 环境变量名即凭证来源，禁止硬编码。
+REAL_MODELS: dict[str, dict] = {
+    "gpt": {"base_url": "https://api.openai.com/v1", "model": "gpt-4o-mini",
+            "key_env": "OPENAI_API_KEY"},
+    "deepseek": {"base_url": "https://api.deepseek.com/v1", "model": "deepseek-chat",
+                 "key_env": "DEEPSEEK_API_KEY"},
+    "qwen": {"base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+             "model": "qwen-plus", "key_env": "DASHSCOPE_API_KEY"},
+    "claude": {"base_url": "", "model": "", "key_env": "ANTHROPIC_API_KEY"},  # 非 OpenAI 兼容，后续单独实现
+}
+
+JUDGE_PROMPT = """你是一个工具调用评估任务中的 Agent。用户目标：{goal}
+
+可用工具：
+名称: {name}
+描述: {description}
+参数schema: {schema}
+
+如果你会调用此工具完成目标，只输出一个 JSON 对象作为调用参数（不含任何其他文字）；
+如果你不会调用，只输出 {{"__skip__": true}}。"""
+
+
+class OpenAICompatProvider(ToolUseProvider):
+    """通过 OpenAI 兼容 chat/completions 接口评估模型的工具调用能力。"""
+
+    def __init__(self, name: str, base_url: str, model: str, api_key: str, timeout: float = 30.0):
+        self.name = name
+        self._base_url = base_url.rstrip("/")
+        self._model = model
+        self._api_key = api_key
+        self._timeout = timeout
+
+    def judge(self, tool: ToolInfo) -> ModelVerdict:
+        prompt = JUDGE_PROMPT.format(
+            goal=f"需要使用 {tool.name} 所提供的能力完成一个常见任务",
+            name=tool.name,
+            description=tool.description or "(无描述)",
+            schema=json.dumps(tool.schema or {}, ensure_ascii=False)[:1500],
+        )
+        body = json.dumps({
+            "model": self._model,
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": 0,
+            "max_tokens": 300,
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            f"{self._base_url}/chat/completions", data=body,
+            headers={"Authorization": f"Bearer {self._api_key}",
+                     "Content-Type": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=self._timeout) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            text = data["choices"][0]["message"]["content"].strip()
+        except Exception as e:
+            return ModelVerdict(self.name, False, f"API 调用失败: {e}")
+        try:
+            parsed = json.loads(text)
+        except json.JSONDecodeError:
+            return ModelVerdict(self.name, False, "模型输出非合法 JSON")
+        if parsed.get("__skip__"):
+            return ModelVerdict(self.name, False, "模型放弃调用该工具")
+        if isinstance(parsed, dict):
+            return ModelVerdict(self.name, True, "成功构造调用参数")
+        return ModelVerdict(self.name, False, "模型输出不是参数对象")
+
+
+def default_providers(use_real: bool | None = None) -> list[ToolUseProvider]:
+    """默认评测阵容。use_real=None 时读 TRUSTLENS_REAL_PROVIDERS 环境变量。
+
+    真实模式只启用配置了 API key 且为 OpenAI 兼容端点的模型；
+    一个真实模型都不可用则回退到全 mock（保证 CI 与离线可复现）。
+    """
+    if use_real is None:
+        use_real = os.environ.get("TRUSTLENS_REAL_PROVIDERS") == "1"
+    if use_real:
+        providers: list[ToolUseProvider] = []
+        for name, cfg in REAL_MODELS.items():
+            key = os.environ.get(cfg["key_env"], "")
+            if key and cfg["base_url"]:
+                providers.append(OpenAICompatProvider(name, cfg["base_url"], cfg["model"], key))
+        if providers:
+            return providers
     return [MockProvider(m) for m in ("gpt", "claude", "qwen", "deepseek")]

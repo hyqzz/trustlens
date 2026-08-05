@@ -3,6 +3,7 @@ name: weekly evaluation
 # 每周定时评测所有能力单元，把结果数据提交回仓库。
 # 安全设计：本任务评测不可信第三方代码，因此【不配置任何密钥】。
 # 真实模型 provider 的 API key 未来如需接入，放在独立的、不执行第三方代码的任务中。
+# 注意：提交信息【不要】带 [skip ci]——pages 部署依赖 data/results 变更触发。
 
 on:
   schedule:
@@ -22,13 +23,19 @@ jobs:
         with:
           python-version: "3.11"
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: astral-sh/setup-uv@v5
+
       - name: Run evaluation (no secrets in this job)
-        run: python -m trustlens evaluate-all
+        run: python -m trustlens evaluate-all --timeout 120
 
       - name: Commit results
         run: |
           git config user.name "trustlens-bot"
           git config user.email "bot@users.noreply.github.com"
           git add data/results/
-          git diff --cached --quiet || git commit -m "data: weekly evaluation results [skip ci]"
+          git diff --cached --quiet || git commit -m "data: weekly evaluation results"
           git push

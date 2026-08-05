@@ -10,3 +10,5 @@ venv/
 site/dist/
 .DS_Store
 Thumbs.db
+
+trustlens-probe

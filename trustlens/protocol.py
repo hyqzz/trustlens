@@ -4,6 +4,7 @@
 """
 from __future__ import annotations
 
+import collections
 import json
 import os
 import queue
@@ -16,19 +17,34 @@ from typing import Any
 PROTOCOL_VERSION = "2025-06-18"
 
 
+def resolve_command(command: list[str]) -> list[str]:
+    """Windows 下 CreateProcess 不做 PATHEXT 查找，npx/uvx 等 .cmd 脚本
+    必须用 shutil.which 解析为带扩展名的完整路径。"""
+    if sys.platform == "win32" and command:
+        import shutil
+        resolved = shutil.which(command[0])
+        if resolved:
+            command = [resolved, *command[1:]]
+    return command
+
+
 def _safe_env() -> dict:
     """子进程的最小环境：剥离一切可能的密钥，仅保留运行必需项。
 
     Windows 下进程启动要求 SystemRoot 存在（否则 WinError 87）；
-    PATH 仅用于解释器自身定位依赖 DLL，不含敏感信息。
+    PATH 用于定位 npx/uvx 与解释器依赖，本身不含敏感信息，两个平台都保留。
     """
+    env = {"PATH": os.environ.get("PATH", "/usr/bin:/bin")}
     if sys.platform == "win32":
-        env = {}
-        for key in ("SystemRoot", "PATH", "COMSPEC", "PATHEXT", "TEMP", "TMP"):
+        # USERPROFILE/LOCALAPPDATA 等是 uv/npm 缓存目录的定位依赖，非敏感信息
+        for key in ("SystemRoot", "COMSPEC", "PATHEXT", "TEMP", "TMP",
+                    "USERPROFILE", "LOCALAPPDATA", "APPDATA", "HOME"):
             if key in os.environ:
                 env[key] = os.environ[key]
-        return env
-    return {"PATH": "/usr/bin:/bin"}
+    else:
+        if "HOME" in os.environ:
+            env["HOME"] = os.environ["HOME"]
+    return env
 
 
 class ProtocolError(Exception):
@@ -42,23 +58,45 @@ class McpStdioClient:
         self._timeout = timeout
         safe_env = env if env is not None else _safe_env()
         self._proc = subprocess.Popen(
-            command,
+            resolve_command(command),
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
-            stderr=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
             text=True,
             bufsize=1,
             env=safe_env,
         )
         self._lines: queue.Queue[str] = queue.Queue()
+        self._stderr_tail: collections.deque[str] = collections.deque(maxlen=10)
         self._id = 0
         self._reader = threading.Thread(target=self._read_loop, daemon=True)
         self._reader.start()
+        self._err_reader = threading.Thread(target=self._err_loop, daemon=True)
+        self._err_reader.start()
 
     def _read_loop(self) -> None:
         assert self._proc.stdout is not None
         for line in self._proc.stdout:
             self._lines.put(line)
+
+    def _err_loop(self) -> None:
+        assert self._proc.stderr is not None
+        for line in self._proc.stderr:
+            self._stderr_tail.append(line.rstrip())
+
+    @property
+    def stderr_tail(self) -> str:
+        """进程最近的 stderr 输出（诊断启动失败原因用）。"""
+        return "\n".join(self._stderr_tail)
+
+    def _fail(self, msg: str) -> ProtocolError:
+        """构造带诊断上下文的协议错误。"""
+        if self._proc.poll() is not None:
+            msg += f"（进程已退出，退出码 {self._proc.returncode}）"
+        tail = self.stderr_tail
+        if tail:
+            msg += f" | stderr: {tail[-400:]}"
+        return ProtocolError(msg)
 
     def _next_id(self) -> int:
         self._id += 1
@@ -80,11 +118,11 @@ class McpStdioClient:
         while True:
             remaining = deadline - time.monotonic()
             if remaining <= 0:
-                raise ProtocolError(f"等待 {method} 响应超时")
+                raise self._fail(f"等待 {method} 响应超时")
             try:
                 line = self._lines.get(timeout=remaining)
             except queue.Empty:
-                raise ProtocolError(f"等待 {method} 响应超时")
+                raise self._fail(f"等待 {method} 响应超时")
             line = line.strip()
             if not line:
                 continue

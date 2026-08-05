@@ -1,5 +1,5 @@
 {
-  "$comment": "待评测的能力单元清单。command/args 为可复现的启动方式；source 为来源注册表。MVP 阶段先放本地可验证的样例与少量真实目标。",
+  "$comment": "待评测的能力单元清单。command/args 为可复现的启动方式；source 为来源注册表。首批评测目标选自官方参考实现与高下载量热门服务器。",
   "servers": [
     {
       "name": "mock-echo",
@@ -7,7 +7,47 @@
       "source": "builtin-fixture",
       "command": "{python}",
       "args": ["tests/fixtures/mock_mcp_server.py"],
-      "note": "内置样例服务器：包含正常工具与投毒工具，用于端到端自检与 CI 冒烟"
+      "note": "内置样例服务器：含正常工具与投毒工具，用于端到端自检与 CI 冒烟"
+    },
+    {
+      "name": "everything",
+      "type": "mcp-server",
+      "source": "official-reference",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-everything"],
+      "note": "MCP 官方参考/测试服务器，覆盖全部协议特性"
+    },
+    {
+      "name": "filesystem",
+      "type": "mcp-server",
+      "source": "official-reference",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."],
+      "note": "官方文件系统服务器（评测范围限定当前目录）"
+    },
+    {
+      "name": "memory",
+      "type": "mcp-server",
+      "source": "official-reference",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "note": "官方知识图谱记忆服务器"
+    },
+    {
+      "name": "time",
+      "type": "mcp-server",
+      "source": "official-reference",
+      "command": "uvx",
+      "args": ["mcp-server-time", "--local-timezone=UTC"],
+      "note": "官方时间/时区转换服务器（Python）"
+    },
+    {
+      "name": "fetch",
+      "type": "mcp-server",
+      "source": "official-reference",
+      "command": "uvx",
+      "args": ["mcp-server-fetch"],
+      "note": "官方网页抓取服务器（Python）"
     }
   ]
 }
