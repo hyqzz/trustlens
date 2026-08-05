@@ -2,10 +2,10 @@
   "name": "time",
   "server_type": "mcp-server",
   "source": "official-reference",
-  "evaluated_at": 1785960221.4898028,
+  "evaluated_at": 1785961142.2286446,
   "engine_version": "0.1.0",
   "ok": false,
-  "error": "等待 initialize 响应超时（进程已退出，退出码 1） | stderr: \"C:\\Users\\hyqzz\\AppData\\Local\\uv\\cache\\archive-v0\\UxVVToMOavbkqPFNug2T_\\Lib\\site-packages\\mcp_server_time\\server.py\", line 12, in <module>\n    from mcp.shared.exceptions import McpError\nImportError: cannot import name 'McpError' from 'mcp.shared.exceptions' (C:\\Users\\hyqzz\\AppData\\Local\\uv\\cache\\archive-v0\\UxVVToMOavbkqPFNug2T_\\Lib\\site-packages\\mcp\\shared\\exceptions.py). Did you mean: 'MCPError'?",
+  "error": "等待 initialize 响应超时（进程已退出，退出码 1） | stderr: module>\n    from .server import serve\n  File \"/home/runner/.cache/uv/archive-v0/YtQG9mjv7pJSJ_hp/lib/python3.11/site-packages/mcp_server_time/server.py\", line 12, in <module>\n    from mcp.shared.exceptions import McpError\nImportError: cannot import name 'McpError' from 'mcp.shared.exceptions' (/home/runner/.cache/uv/archive-v0/YtQG9mjv7pJSJ_hp/lib/python3.11/site-packages/mcp/shared/exceptions.py)",
   "total_score": 25.0,
   "grade": "F",
   "dimensions": {
