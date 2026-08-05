@@ -12,3 +12,6 @@ site/dist/
 Thumbs.db
 
 trustlens-probe
+
+probe.sqlite
+memory.json

@@ -1,11 +1,11 @@
 {
-  "name": "fetch",
+  "name": "git",
   "server_type": "mcp-server",
   "source": "official-reference",
-  "evaluated_at": 1785960401.521362,
+  "evaluated_at": 1785960633.0120678,
   "engine_version": "0.1.0",
   "ok": false,
-  "error": "等待 initialize 响应超时（进程已退出，退出码 1） | stderr: \"C:\\Users\\hyqzz\\AppData\\Local\\uv\\cache\\archive-v0\\IJxf_PIv8Wsb-pEdTspOb\\Lib\\site-packages\\mcp_server_fetch\\server.py\", line 6, in <module>\n    from mcp.shared.exceptions import McpError\nImportError: cannot import name 'McpError' from 'mcp.shared.exceptions' (C:\\Users\\hyqzz\\AppData\\Local\\uv\\cache\\archive-v0\\IJxf_PIv8Wsb-pEdTspOb\\Lib\\site-packages\\mcp\\shared\\exceptions.py). Did you mean: 'MCPError'?",
+  "error": "等待 initialize 响应超时（进程已退出，退出码 1） | stderr: thon-3.13.12-windows-x86_64-none\\Lib\\asyncio\\base_events.py\", line 725, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"C:\\Users\\hyqzz\\AppData\\Local\\uv\\cache\\archive-v0\\xC99SSFyproRIvQiDjQNA\\Lib\\site-packages\\mcp_server_git\\server.py\", line 321, in serve\n    @server.list_tools()\n     ^^^^^^^^^^^^^^^^^\nAttributeError: 'Server' object has no attribute 'list_tools'",
   "total_score": 25.0,
   "grade": "F",
   "dimensions": {

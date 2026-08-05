@@ -1,5 +1,5 @@
 {
-  "$comment": "待评测的能力单元清单。command/args 为可复现的启动方式；source 为来源注册表。首批评测目标选自官方参考实现与高下载量热门服务器。",
+  "$comment": "待评测的能力单元清单。command/args 为可复现的启动方式；source 为来源注册表。第一批为官方参考实现，第二批为高下载量热门服务器（均无需凭证即可运行）。",
   "servers": [
     {
       "name": "mock-echo",
@@ -48,6 +48,54 @@
       "command": "uvx",
       "args": ["mcp-server-fetch"],
       "note": "官方网页抓取服务器（Python）"
+    },
+    {
+      "name": "sequential-thinking",
+      "type": "mcp-server",
+      "source": "official-reference",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "note": "官方序列化思考服务器，高下载量"
+    },
+    {
+      "name": "context7",
+      "type": "mcp-server",
+      "source": "upstash",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"],
+      "note": "Upstash 出品的文档检索服务器，生态内热门"
+    },
+    {
+      "name": "playwright",
+      "type": "mcp-server",
+      "source": "microsoft",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "note": "微软出品的浏览器自动化服务器，生态内高热度"
+    },
+    {
+      "name": "desktop-commander",
+      "type": "mcp-server",
+      "source": "community-popular",
+      "command": "npx",
+      "args": ["-y", "@wonderwhy-er/desktop-commander@latest"],
+      "note": "社区高下载量的桌面操作服务器"
+    },
+    {
+      "name": "git",
+      "type": "mcp-server",
+      "source": "official-reference",
+      "command": "uvx",
+      "args": ["mcp-server-git", "--repository", "."],
+      "note": "官方 Git 仓库操作服务器（Python），评测范围限定当前仓库"
+    },
+    {
+      "name": "sqlite",
+      "type": "mcp-server",
+      "source": "official-reference",
+      "command": "uvx",
+      "args": ["mcp-server-sqlite", "--db-path", "probe.sqlite"],
+      "note": "官方 SQLite 服务器（Python），评测使用临时库文件"
     }
   ]
 }
