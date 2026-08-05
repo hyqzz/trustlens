@@ -1,13 +1,13 @@
 name: deploy leaderboard
 
-# 数据或代码变更后重建静态排行榜并部署到 GitHub Pages。
-# 仓库设置：Settings → Pages → Source 选 "GitHub Actions"。
+# 网站生成代码变更时重建排行榜。
+# 注意：每周评测后的发布在 evaluate.yml 内完成
+# （GITHUB_TOKEN 推送不触发工作流，不能依赖 data/results 的 push 事件）。
 
 on:
   push:
     branches: [main]
     paths:
-      - "data/results/**"
       - "trustlens/site.py"
       - ".github/workflows/pages.yml"
   workflow_dispatch:

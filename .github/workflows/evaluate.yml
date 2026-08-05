@@ -1,9 +1,9 @@
 name: weekly evaluation
 
-# 每周定时评测所有能力单元，把结果数据提交回仓库。
-# 安全设计：本任务评测不可信第三方代码，因此【不配置任何密钥】。
+# 每周定时评测所有能力单元，把结果数据提交回仓库并重新发布排行榜。
+# 安全设计：评测任务执行不可信第三方代码，因此【不配置任何密钥】。
 # 真实模型 provider 的 API key 未来如需接入，放在独立的、不执行第三方代码的任务中。
-# 注意：提交信息【不要】带 [skip ci]——pages 部署依赖 data/results 变更触发。
+# 注意：GITHUB_TOKEN 推送不会触发其他工作流，所以本站发布必须在本工作流内完成。
 
 on:
   schedule:
@@ -12,6 +12,12 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: evaluate-publish
+  cancel-in-progress: false
 
 jobs:
   evaluate:
@@ -37,5 +43,23 @@ jobs:
           git config user.name "trustlens-bot"
           git config user.email "bot@users.noreply.github.com"
           git add data/results/
-          git diff --cached --quiet || git commit -m "data: weekly evaluation results"
+          git diff --cached --quiet || git commit -m "data: evaluation results"
           git push
+
+      - name: Build static site
+        run: python -m trustlens build-site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+  publish:
+    needs: evaluate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
