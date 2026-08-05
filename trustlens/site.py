@@ -69,7 +69,7 @@ def _render_index(reports: list[ServerReport]) -> str:
 <h1>TrustLens 排行榜 <span class="badge">LIVE</span></h1>
 <p class="subtitle">Agent 能力生态的信任基准：自动化实测 MCP Server / Skills，每周更新。<br>
 装任何工具之前，先查分。评分依据全部公开于
-<a href="https://github.com/OWNER/trustlens">GitHub 仓库</a>（git 历史即审计日志）。</p>
+<a href="https://github.com/hyqzz/trustlens">GitHub 仓库</a>（git 历史即审计日志）。</p>
 <table><thead><tr><th>能力单元</th><th>信任分</th><th>等级</th><th>速览</th></tr></thead>
 <tbody>{''.join(rows) if rows else '<tr><td colspan="4">暂无评测数据</td></tr>'}</tbody></table>
 <footer>共 {len(reports)} 个评测对象 · 更新于 {ts} · 由 TrustLens 自动生成</footer>
