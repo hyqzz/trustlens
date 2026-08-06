@@ -1,9 +1,11 @@
 name: weekly evaluation
 
-# 每周定时评测所有能力单元，把结果数据提交回仓库并重新发布排行榜。
-# 安全设计：评测任务执行不可信第三方代码，因此【不配置任何密钥】。
-# 真实模型 provider 的 API key 未来如需接入，放在独立的、不执行第三方代码的任务中。
-# 注意：GITHUB_TOKEN 推送不会触发其他工作流，所以本站发布必须在本工作流内完成。
+# 每周定时评测能力单元并发布排行榜。
+# 安全设计：
+#   - evaluate-all 执行不可信第三方代码，该步骤【不持有任何密钥】
+#   - model-compat 不执行服务器代码（只读已存结果 + 调模型 API），
+#     密钥以【步骤级 env】注入，且在该步骤内没有不可信代码运行
+#   - 提交信息不含 [skip ci]——pages 发布在本工作流内完成
 
 on:
   schedule:
@@ -51,8 +53,18 @@ jobs:
           restore-keys: |
             uv-${{ runner.os }}-
 
-      - name: Run evaluation (no secrets in this job)
-        run: python -m trustlens evaluate-all --timeout 150 --workers 4
+      # 只重测健康服务器（已失败的保持原样），显著缩短周更时长
+      - name: Run evaluation (no secrets in this step)
+        timeout-minutes: 45
+        run: python -m trustlens evaluate-all --skip-f --timeout 90 --workers 4
+
+      # 真实模型工具调用准确率（DeepSeek-V4 Flash）。密钥仅注入本步骤。
+      - name: Update model tool-call accuracy
+        if: ${{ secrets.OPENCODE_API_KEY != '' }}
+        env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+        timeout-minutes: 30
+        run: python -m trustlens model-compat --real --workers 6
 
       - name: Build static site
         run: python -m trustlens build-site
@@ -61,8 +73,7 @@ jobs:
         run: |
           git config user.name "trustlens-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add data/results/
-          git add -f site/dist/
+          git add -A data/results/ data/skills/ site/dist/
           git diff --cached --quiet || git commit -m "data+site: weekly evaluation and site build"
           git push
 
@@ -79,4 +90,3 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
-

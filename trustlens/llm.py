@@ -54,15 +54,16 @@ class MockProvider(ToolUseProvider):
         return ModelVerdict(self.name, True, "成功选择并构造调用")
 
 
-# 真实模型配置：OpenAI 兼容端点。key 环境变量名即凭证来源，禁止硬编码。
+# 真实模型配置：OpenAI 兼容端点（OpenCode Go）。
+# 当前策略：全程只用 DeepSeek-V4 Flash（$0.14/$0.28，最便宜档）。key 走环境变量，禁止硬编码。
 REAL_MODELS: dict[str, dict] = {
-    "gpt": {"base_url": "https://api.openai.com/v1", "model": "gpt-4o-mini",
-            "key_env": "OPENAI_API_KEY"},
-    "deepseek": {"base_url": "https://api.deepseek.com/v1", "model": "deepseek-chat",
-                 "key_env": "DEEPSEEK_API_KEY"},
-    "qwen": {"base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-             "model": "qwen-plus", "key_env": "DASHSCOPE_API_KEY"},
-    "claude": {"base_url": "", "model": "", "key_env": "ANTHROPIC_API_KEY"},  # 非 OpenAI 兼容，后续单独实现
+    "deepseek": {"base_url": "https://opencode.ai/zen/go/v1", "model": "deepseek-v4-flash",
+                 "key_env": "OPENCODE_API_KEY"},
+    # 备选（需切换时启用，当前策略不使用）：
+    # "gpt": {"base_url": "https://opencode.ai/zen/go/v1", "model": "gpt-5.6-luna",
+    #         "key_env": "OPENCODE_API_KEY"},
+    # "qwen": {"base_url": "https://opencode.ai/zen/go/v1", "model": "qwen3.7-plus",
+    #          "key_env": "OPENCODE_API_KEY"},
 }
 
 JUDGE_PROMPT = """你是一个工具调用评估任务中的 Agent。用户目标：{goal}
@@ -79,12 +80,32 @@ JUDGE_PROMPT = """你是一个工具调用评估任务中的 Agent。用户目�
 class OpenAICompatProvider(ToolUseProvider):
     """通过 OpenAI 兼容 chat/completions 接口评估模型的工具调用能力。"""
 
-    def __init__(self, name: str, base_url: str, model: str, api_key: str, timeout: float = 30.0):
+    _UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+           "(KHTML, like Gecko) Chrome/120.0 Safari/537.36")
+
+    def __init__(self, name: str, base_url: str, model: str, api_key: str, timeout: float = 40.0):
         self.name = name
         self._base_url = base_url.rstrip("/")
         self._model = model
         self._api_key = api_key
         self._timeout = timeout
+
+    def complete(self, prompt: str, max_tokens: int = 500) -> tuple[str, str]:
+        """原始补全：返回 (content, error)。供 Skills 质量评分等直接读文本的场景用。"""
+        body = json.dumps({"model": self._model,
+                           "messages": [{"role": "user", "content": prompt}],
+                           "temperature": 0, "max_tokens": max_tokens}).encode("utf-8")
+        req = urllib.request.Request(
+            f"{self._base_url}/chat/completions", data=body,
+            headers={"Authorization": f"Bearer {self._api_key}",
+                     "Content-Type": "application/json",
+                     "User-Agent": self._UA})
+        try:
+            with urllib.request.urlopen(req, timeout=self._timeout) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            return data["choices"][0]["message"]["content"].strip(), ""
+        except Exception as e:
+            return "", str(e)
 
     def judge(self, tool: ToolInfo) -> ModelVerdict:
         prompt = JUDGE_PROMPT.format(
@@ -102,7 +123,8 @@ class OpenAICompatProvider(ToolUseProvider):
         req = urllib.request.Request(
             f"{self._base_url}/chat/completions", data=body,
             headers={"Authorization": f"Bearer {self._api_key}",
-                     "Content-Type": "application/json"})
+                     "Content-Type": "application/json",
+                     "User-Agent": self._UA})  # 部分网关拦截 urllib 默认 UA（403）
         try:
             with urllib.request.urlopen(req, timeout=self._timeout) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
@@ -136,4 +158,4 @@ def default_providers(use_real: bool | None = None) -> list[ToolUseProvider]:
                 providers.append(OpenAICompatProvider(name, cfg["base_url"], cfg["model"], key))
         if providers:
             return providers
-    return [MockProvider(m) for m in ("gpt", "claude", "qwen", "deepseek")]
+    return [MockProvider(m) for m in ("gpt", "qwen", "deepseek")]

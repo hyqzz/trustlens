@@ -8,6 +8,7 @@ from pathlib import Path
 
 from . import report as report_mod
 from .engine import evaluate_server
+from .models import ServerReport
 
 SERVERS_FILE = Path("data/servers.json")
 
@@ -70,11 +71,33 @@ def cmd_check(args) -> int:
     return 0 if r.ok else 1
 
 
+def _existing_report(name: str):
+    """读取已有评测结果（无则返回 None）。"""
+    from .engine import slugify
+    path = report_mod.RESULTS_DIR / f"{slugify(name)}.json"
+    if path.exists():
+        try:
+            return ServerReport.from_dict(json.loads(path.read_text(encoding="utf-8")))
+        except (json.JSONDecodeError, KeyError, TypeError):
+            return None
+    return None
+
+
 def cmd_evaluate_all(args) -> int:
     from concurrent.futures import ThreadPoolExecutor
 
     servers = _load_servers()
-    print(f"开始评测 {len(servers)} 个能力单元（并发 {args.workers}）…")
+    skipped = 0
+    if args.skip_f:
+        keep = []
+        for s in servers:
+            existing = _existing_report(s["name"])
+            if existing is not None and (not existing.ok or not existing.tools):
+                skipped += 1
+                continue
+            keep.append(s)
+        servers = keep
+    print(f"开始评测 {len(servers)} 个能力单元（并发 {args.workers}，跳过已有失败 {skipped}）…")
 
     def _run(s: dict):
         r = evaluate_server(s["name"], _resolve_command(s), s.get("type", "mcp-server"),
@@ -92,6 +115,51 @@ def cmd_evaluate_all(args) -> int:
             results.append(r)
     failed = sum(1 for r in results if not r.ok)
     print(f"\n完成：{len(results) - failed}/{len(results)} 成功")
+    return 0
+
+
+def cmd_model_compat(args) -> int:
+    """用真实模型更新全部已存结果的跨模型兼容维度（不执行服务器代码，可安全持 key）。"""
+    from concurrent.futures import ThreadPoolExecutor
+
+    from . import llm
+    from .engine import apply_compatibility
+
+    providers = llm.default_providers(use_real=args.real)
+    if not providers or isinstance(providers[0], llm.MockProvider):
+        print("错误：未启用真实模型。设置 OPENCODE_API_KEY（推荐）或对应厂商 key，并加 --real。",
+              file=sys.stderr)
+        return 2
+    targets = [r for r in report_mod.load_all() if r.tools]
+    print(f"用真实模型（{', '.join(p.name for p in providers)}）更新 "
+          f"{len(targets)} 个有工具的服务器（并发 {args.workers}）…")
+
+    def _run(r):
+        apply_compatibility(r, providers)
+        report_mod.save_report(r)
+        return f"✓ {r.name}: 兼容 {r.dimensions['compatibility'].value:.1f} → 总分 {r.total_score} ({r.grade})"
+
+    with ThreadPoolExecutor(max_workers=args.workers) as ex:
+        for line in ex.map(_run, targets):
+            print(line)
+    print(f"\n完成：{len(targets)} 个服务器已用真实模型更新跨模型兼容分")
+    return 0
+
+
+def cmd_eval_skills(args) -> int:
+    """评估 Agent Skills（SKILL.md）：静态质量 + 安全 + 可选 LLM 质量评分。"""
+    from . import skills as skills_mod
+    from . import llm as llm_mod
+
+    provider = None
+    if args.real:
+        providers = llm_mod.default_providers(use_real=True)
+        if providers and not isinstance(providers[0], llm_mod.MockProvider):
+            provider = providers[0]  # 用第一个（deepseek-v4-flash）做质量评分，成本最低
+            print(f"LLM 质量评分模型: {provider.name}")
+        else:
+            print("警告：未启用真实模型，仅做静态评测。设置 OPENCODE_API_KEY + --real。")
+    reports = skills_mod.evaluate_all(llm=provider, target=args.count)
     return 0
 
 
@@ -120,10 +188,22 @@ def main(argv: list[str] | None = None) -> int:
     p_all = sub.add_parser("evaluate-all", help="评测清单中的全部服务器")
     p_all.add_argument("--timeout", type=float, default=90.0, help="单请求超时秒数")
     p_all.add_argument("--workers", type=int, default=4, help="并发评测数")
+    p_all.add_argument("--skip-f", action="store_true",
+                       help="跳过已有结果为失败/无工具的服务器（失败保持原样，周更提速）")
     p_all.set_defaults(func=cmd_evaluate_all)
+
+    p_mc = sub.add_parser("model-compat", help="用真实模型更新已存结果的跨模型兼容分（不执行服务器代码）")
+    p_mc.add_argument("--real", action="store_true", help="使用真实模型（需配置 API key）")
+    p_mc.add_argument("--workers", type=int, default=6, help="并发数")
+    p_mc.set_defaults(func=cmd_model_compat)
 
     p_site = sub.add_parser("build-site", help="生成静态排行榜网站")
     p_site.set_defaults(func=cmd_build_site)
+
+    p_sk = sub.add_parser("eval-skills", help="评测 Agent Skills（SKILL.md）")
+    p_sk.add_argument("--count", type=int, default=110, help="评测多少个 skill")
+    p_sk.add_argument("--real", action="store_true", help="使用真实模型做质量评分")
+    p_sk.set_defaults(func=cmd_eval_skills)
 
     args = parser.parse_args(argv)
     return args.func(args)

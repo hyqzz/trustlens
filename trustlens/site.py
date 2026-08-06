@@ -26,6 +26,16 @@ DIST = Path("site/dist")
 BASE_URL = os.environ.get("TRUSTLENS_BASE_URL", "https://trustlens.icodestar.net")
 REPO_URL = "https://github.com/hyqzz/trustlens"
 PAGE_SIZE = 20
+SKILLS_FILE = Path("data/skills/skills.json")
+
+
+def load_skills() -> list[dict]:
+    if SKILLS_FILE.exists():
+        try:
+            return json.loads(SKILLS_FILE.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            return []
+    return []
 
 FAVICON = ("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>"
            "<text y='.9em' font-size='90'>🛡️</text></svg>")
@@ -41,6 +51,12 @@ body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'PingFang SC','Micros
 .brand-name{font-weight:800;font-size:1.05rem;letter-spacing:.02em}
 .brand-name .en{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .brand-sub{opacity:.55;font-size:.8rem;margin-left:.15rem}
+.nav{display:flex;gap:.4rem;margin:.4rem 0 .3rem;flex-wrap:wrap}
+.nav a{font-size:.88rem;border:1px solid var(--line);border-radius:1.4em;padding:.22em .95em;text-decoration:none}
+.nav a.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.nav a:hover:not(.on){border-color:var(--accent)}
+.method{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:.55rem;padding:.5rem .85rem;font-size:.83rem;opacity:.85;margin:.8rem 0}
+.method b{opacity:1}
 .lang{margin-left:auto;font-size:.86rem;border:1px solid var(--line);border-radius:1.2em;padding:.18em .85em;text-decoration:none}
 .lang:hover{text-decoration:none;background:var(--bg-card)}
 h1{margin:.3rem 0 .2rem;font-size:1.65rem}
@@ -128,6 +144,15 @@ T = {
         "prev": "上一页", "next": "下一页", "page_of": "第 {p} / {n} 页", "reset": "重置筛选",
         "empty_title": "没有匹配的评测对象", "empty_hint": "试试清空搜索或换个筛选条件",
         "no_desc": "无描述", "back": "← 返回排行榜",
+        "nav_mcp": "MCP 服务器", "nav_skills": "Skills",
+        "method_mcp": "<b>评测方法</b>：隔离沙箱 + 零凭证开箱即用（90s 握手超时）实测；模型工具调用维度由 <b>DeepSeek-V4 Flash</b> 真实调用评测。全部数据以 JSON 公开在仓库，git 历史即审计日志。",
+        "method_skills": "<b>评测方法</b>：对每个 SKILL.md 做结构质量 + 安全扫描（静态），并由 <b>DeepSeek-V4 Flash</b> 实测可执行性质量分。来源：GitHub 公开的官方与社区技能仓库。",
+        "sk_heading": "Skills 信任榜", "sk_badge": "SKILLS",
+        "sk_tagline": "Agent Skills（SKILL.md 能力单元）的质量与信任基准：结构、安全、可执行性三维实测。",
+        "sk_col_skill": "技能", "sk_col_repo": "来源", "sk_col_struct": "结构",
+        "sk_col_sec": "安全", "sk_col_llm": "质量(LLM)",
+        "sk_stat_total": "评测 Skills", "sk_stat_avg": "平均分", "sk_meta_title": "Skills 信任榜 — Agent Skills 质量评测 · TrustLens",
+        "sk_desc": "TrustLens 实测 GitHub 上的 Agent Skills（SKILL.md）：结构完整性、安全性与大模型可执行性三维评分，发布 0–100 信任分榜单。装/用任何 skill 之前先查分。",
         "report_title": "{name} 质检报告 — TrustLens · 智码星", "score_line": "信任分",
         "dims_heading": "维度明细", "tools_heading": "工具清单（{n}）",
         "report_footer": "评测于 {ts} · 引擎版本 {v} · 来源 {src}", "error_prefix": "错误：",
@@ -161,6 +186,16 @@ T = {
         "prev": "Prev", "next": "Next", "page_of": "Page {p} / {n}", "reset": "Reset",
         "empty_title": "No matching capability units", "empty_hint": "Clear the search or change filters",
         "no_desc": "no description", "back": "← Back to leaderboard",
+        "nav_mcp": "MCP Servers", "nav_skills": "Skills",
+        "method_mcp": "<b>Method</b>: isolated sandbox, zero-credential out-of-the-box eval (90s handshake). Model tool-call accuracy is measured with real calls by <b>DeepSeek-V4 Flash</b>. All data is public JSON in the repo — git history is the audit log.",
+        "method_skills": "<b>Method</b>: static structure + security scan of each SKILL.md, plus an actionability score judged by <b>DeepSeek-V4 Flash</b>. Sources: official and community skill repos on GitHub.",
+        "sk_heading": "Skills Leaderboard", "sk_badge": "SKILLS",
+        "sk_tagline": "Trust benchmark for Agent Skills (SKILL.md): structure, security and actionability, measured in three dimensions.",
+        "sk_col_skill": "Skill", "sk_col_repo": "Source", "sk_col_struct": "Struct",
+        "sk_col_sec": "Security", "sk_col_llm": "Quality(LLM)",
+        "sk_stat_total": "Skills", "sk_stat_avg": "Avg score",
+        "sk_meta_title": "Skills Leaderboard — Agent Skills Quality · TrustLens",
+        "sk_desc": "TrustLens evaluates Agent Skills (SKILL.md) from GitHub: structure completeness, security, and LLM-measured actionability, published as a 0-100 trust leaderboard. Check before you use any skill.",
         "report_title": "{name} Inspection Report — TrustLens · ICodeStar", "score_line": "Trust score",
         "dims_heading": "Dimension breakdown", "tools_heading": "Tools ({n})",
         "report_footer": "Evaluated {ts} · Engine v{v} · Source: {src}", "error_prefix": "Error: ",
@@ -182,8 +217,8 @@ T = {
 
 GRADE_LABEL = {"zh": {"A": "可信", "B": "良好", "C": "及格", "D": "风险", "F": "不可用"},
                "en": {"A": "Trusted", "B": "Good", "C": "Fair", "D": "Risky", "F": "Broken"}}
-DIM_LABEL = {"zh": {"functionality": "功能性", "reliability": "可靠性", "security": "安全性", "compatibility": "兼容"},
-             "en": {"functionality": "Func", "reliability": "Rel", "security": "Sec", "compatibility": "Compat"}}
+DIM_LABEL = {"zh": {"functionality": "功能性", "reliability": "可靠性", "security": "安全性", "compatibility": "模型调用"},
+             "en": {"functionality": "Func", "reliability": "Rel", "security": "Sec", "compatibility": "Tool-call"}}
 GRADE_COLOR = {"A": "2da44e", "B": "6f9e1f", "C": "bf8700", "D": "cf6020", "F": "cf222e"}
 
 LANG_SCRIPT = """<script>
@@ -207,6 +242,16 @@ def _brandbar(t: dict, toggle_href: str) -> str:
             f'<span class="brand-name"><span class="en">ICodeStar</span> 智码星'
             f'<span class="brand-sub">TrustLens</span></span>'
             f'<a class="lang" href="{toggle_href}" onclick="tlSetLang()">{t["switch"]}</a></div>')
+
+
+def _nav(t: dict, en: bool, current: str) -> str:
+    """MCP 榜 / Skills 榜 切换。current: 'mcp' | 'skills'"""
+    mcp_href = "en/index.html" if en else "index.html"
+    sk_href = "en/skills.html" if en else "skills.html"
+    mcp_on = ' class="on"' if current == "mcp" else ""
+    sk_on = ' class="on"' if current == "skills" else ""
+    return (f'<nav class="nav"><a href="{mcp_href}"{mcp_on}>{t["nav_mcp"]}</a>'
+            f'<a href="{sk_href}"{sk_on}>{t["nav_skills"]}</a></nav>')
 
 
 def _head(t: dict, title: str, path: str, alt_path: str, rel_alt: str) -> str:
@@ -414,8 +459,10 @@ def _render_index(reports: list[ServerReport], lang: str) -> str:
     src_opts = "".join(f'<option value="{s}">{s}</option>' for s in sources)
     body = f"""
 {_brandbar(t, t['switch_href'])}
+{_nav(t, en, 'mcp')}
 <h1>{t['heading']} <span class="badge">LIVE</span></h1>
 <p class="subtitle">{t['tagline']}<br>{tagline2}</p>
+<div class="method">{t['method_mcp']}</div>
 
 <div class="stats">
   <div class="stat"><div class="v">{total}</div><div class="l">{t['stat_total']}</div></div>
@@ -451,6 +498,143 @@ def _render_index(reports: list[ServerReport], lang: str) -> str:
 {js}
 </body></html>"""
     return _head(t, t["title"], "/en/" if en else "/", "/" if en else "/en/", t["switch_href"]) + body
+
+
+SKILLS_JS = """
+<script>
+(function(){
+var DATA = JSON.parse(document.getElementById('sk-data').textContent);
+var L = %(labels)s;
+var st = {q:'', grade:'all', sort:'desc', page:1, size:20};
+function filtered(){
+  var q=st.q.trim().toLowerCase();
+  var rows=DATA.filter(function(r){
+    if(q && r.name.toLowerCase().indexOf(q)===-1) return false;
+    if(st.grade!=='all' && r.grade!==st.grade) return false;
+    return true;
+  });
+  rows.sort(function(a,b){ return st.sort==='asc'?a.score-b.score:b.score-a.score; });
+  return rows;
+}
+function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML;}
+function rowsHtml(rows){
+  var start=(st.page-1)*st.size;
+  return rows.slice(start,start+st.size).map(function(r,i){
+    return '<tr><td class="rank">'+(start+i+1)+'</td>'+
+      '<td class="name"><a href="'+esc(r.url)+'" target="_blank" rel="noopener">'+esc(r.name)+'</a>'+
+      (r.description?'<small>'+esc(r.description)+'</small>':'')+'</td>'+
+      '<td class="score" style="color:#'+r.color+'">'+r.score.toFixed(1)+'</td>'+
+      '<td><span class="grade g'+r.grade+'">'+r.grade+'</span></td>'+
+      '<td class="src">'+esc(r.repo)+'</td>'+
+      '<td class="dims">'+r.structure+'</td><td class="dims">'+r.security+'</td>'+
+      '<td class="dims">'+(r.llm==null?'—':r.llm)+'</td></tr>';
+  }).join('');
+}
+function pager(rows,tp){
+  var cur=st.page,ps=[];
+  for(var i=1;i<=tp;i++){ if(i===1||i===tp||(i>=cur-2&&i<=cur+2))ps.push(i); else if(ps[ps.length-1]!=='…')ps.push('…'); }
+  var h='<button data-p="'+(cur-1)+'" '+(cur<=1?'disabled':'')+'>'+L.prev+'</button>';
+  ps.forEach(function(p){ if(p==='…'){h+='<span style="opacity:.5;padding:0 .2em">…</span>';} else {h+='<button class="pg'+(p===cur?' on':'')+'" data-p="'+p+'">'+p+'</button>';} });
+  h+='<button data-p="'+(cur+1)+'" '+(cur>=tp?'disabled':'')+'>'+L.next+'</button>';
+  return h;
+}
+function render(){
+  var rows=filtered(), tp=Math.max(1,Math.ceil(rows.length/st.size));
+  if(st.page>tp) st.page=tp;
+  document.getElementById('sk-body').innerHTML = rows.length?rowsHtml(rows):
+    '<tr><td colspan="8"><div class="empty"><div style="font-weight:700">'+L.empty_title+'</div><div>'+L.empty_hint+'</div></div></td></tr>';
+  document.getElementById('sk-pager').innerHTML = pager(rows,tp);
+  document.getElementById('sk-count').textContent = rows.length+' / '+DATA.length;
+  document.getElementById('sk-pageof').textContent = L.page_of.replace('{p}',st.page).replace('{n}',tp);
+}
+function bind(){
+  var si=document.getElementById('sk-search'); si.value=st.q;
+  var gd=document.getElementById('sk-grade'); gd.value=st.grade;
+  var so=document.getElementById('sk-sort'); so.value=st.sort;
+  si.addEventListener('input',function(){st.q=si.value;st.page=1;render();});
+  gd.addEventListener('change',function(){st.grade=gd.value;st.page=1;render();});
+  so.addEventListener('change',function(){st.sort=so.value;st.page=1;render();});
+  document.getElementById('sk-pager').addEventListener('click',function(e){
+    var b=e.target.closest('button[data-p]'); if(!b||b.disabled)return;
+    st.page=parseInt(b.getAttribute('data-p'),10); render(); window.scrollTo({top:0,behavior:'smooth'});
+  });
+}
+render(); bind();
+})();
+</script>
+"""
+
+
+def _render_skills_index(skills: list[dict], lang: str) -> str:
+    t = T[lang]
+    en = lang == "en"
+    total = len(skills)
+    avg = round(sum(s["total_score"] for s in skills) / total, 1) if total else 0
+    counts = {g: sum(1 for s in skills if s["grade"] == g) for g in "ABCDF"}
+    pct = lambda g: round(counts[g] * 100 / total, 0) if total else 0
+
+    data = [{"name": s["name"], "repo": s["repo"], "url": s["url"], "score": s["total_score"],
+             "grade": s["grade"], "color": GRADE_COLOR[s["grade"]],
+             "structure": int(s["structure"]), "security": int(s["security"]),
+             "llm": int(s["llm_quality"]) if s.get("llm_quality") is not None else None,
+             "description": s.get("description", "")[:90]}
+            for s in sorted(skills, key=lambda x: -x["total_score"])]
+    labels = {k: t.get(k, "") for k in ("prev", "next", "page_of", "empty_title", "empty_hint")}
+    js = SKILLS_JS % {"labels": json.dumps(labels, ensure_ascii=False)}
+
+    rows = []
+    for i, s in enumerate(sorted(skills, key=lambda x: -x["total_score"]), 1):
+        llm = f"{s['llm_quality']:.0f}" if s.get("llm_quality") is not None else "—"
+        desc = s.get("description", "")
+        desc_html = f"<small>{_esc(desc[:90])}</small>" if desc else ""
+        rows.append(
+            f'<tr><td class="rank">{i}</td>'
+            f'<td class="name"><a href="{_esc(s["url"])}" target="_blank" rel="noopener">{_esc(s["name"])}</a>{desc_html}</td>'
+            f'<td class="score">{s["total_score"]:.1f}</td>'
+            f'<td><span class="grade g{s["grade"]}">{s["grade"]}</span></td>'
+            f'<td class="src">{_esc(s["repo"])}</td>'
+            f'<td class="dims">{s["structure"]:.0f}</td><td class="dims">{s["security"]:.0f}</td>'
+            f'<td class="dims">{llm}</td></tr>')
+
+    ts = time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())
+    dist = "".join(f'<i class="g{g}" style="width:{pct(g)}%"></i>' for g in "ABCDF")
+    grade_opts = "".join(f'<option value="{g}">{g}</option>' for g in "ABCDF")
+    body = f"""
+{_brandbar(t, t['switch_href'])}
+{_nav(t, en, 'skills')}
+<h1>{t['sk_heading']} <span class="badge">{t['sk_badge']}</span></h1>
+<p class="subtitle">{t['sk_tagline']}</p>
+<div class="method">{t['method_skills']}</div>
+
+<div class="stats">
+  <div class="stat"><div class="v">{total}</div><div class="l">{t['sk_stat_total']}</div></div>
+  <div class="stat"><div class="v">{avg:.1f}</div><div class="l">{t['sk_stat_avg']}</div></div>
+  <div class="stat"><div class="v gA">{counts['A']}</div><div class="l">{t['stat_a']}</div><div class="distbar">{dist}</div></div>
+  <div class="stat"><div class="v gF">{counts['F']}</div><div class="l">{t['stat_f']}</div></div>
+</div>
+
+<div class="toolbar">
+  <input type="search" id="sk-search" placeholder="{t['search_ph']}" aria-label="{t['search_ph']}">
+  <select id="sk-grade" aria-label="{t['filt_grade']}"><option value="all">{t['filt_grade']}</option>{grade_opts}</select>
+  <select id="sk-sort" aria-label="{t['sort_label']}"><option value="desc">{t['sort_desc']}</option><option value="asc">{t['sort_asc']}</option></select>
+  <span class="resultcount" id="sk-count" aria-live="polite">{total} / {total}</span>
+</div>
+
+<div class="tablewrap"><table>
+<thead><tr><th>{t['col_rank']}</th><th>{t['sk_col_skill']}</th><th>{t['col_score']}</th><th>{t['col_grade']}</th>
+<th>{t['sk_col_repo']}</th><th>{t['sk_col_struct']}</th><th>{t['sk_col_sec']}</th><th>{t['sk_col_llm']}</th></tr></thead>
+<tbody id="sk-body">{''.join(rows)}</tbody></table></div>
+
+<div class="pager" id="sk-pager"></div>
+<div style="text-align:center;opacity:.7;font-size:.86rem" id="sk-pageof"></div>
+<script id="sk-data" type="application/json">{json.dumps(data, ensure_ascii=False)}</script>
+{_faq_html(t)}
+<footer>{t['footer'].format(n=total, ts=ts)}</footer>
+{_faq_jsonld(t)}
+{js}
+</body></html>"""
+    return _head(t, t["sk_meta_title"], f"{'/en/' if en else '/'}skills.html",
+                 f"{'' if en else '/en/'}skills.html", "") + body
 
 
 def _render_detail(r: ServerReport, lang: str) -> str:
@@ -489,13 +673,13 @@ def _render_detail(r: ServerReport, lang: str) -> str:
     return _head(t, title, path, alt, toggle_href) + body
 
 
-def _render_sitemap(reports: list[ServerReport]) -> str:
+def _render_sitemap(reports: list[ServerReport], skills: list[dict] | None = None) -> str:
     today = time.strftime("%Y-%m-%d", time.gmtime())
 
     def url(loc: str) -> str:
         return f"  <url><loc>{BASE_URL}{loc}</loc><lastmod>{today}</lastmod></url>"
 
-    locs = ["/", "/en/"]
+    locs = ["/", "/en/", "/skills.html", "/en/skills.html"]
     for r in reports:
         slug = slugify(r.name)
         locs += [f"/server/{slug}.html", f"/en/server/{slug}.html"]
@@ -510,14 +694,17 @@ def _render_robots() -> str:
 def build_site(results_dir: Path | None = None, dist: Path | None = None) -> Path:
     dist = Path(dist) if dist else DIST
     reports = load_all(results_dir)
+    skills = load_skills()
     for sub in ("server", "en", "en/server"):
         (dist / sub).mkdir(parents=True, exist_ok=True)
     (dist / "index.html").write_text(_render_index(reports, "zh"), encoding="utf-8")
     (dist / "en" / "index.html").write_text(_render_index(reports, "en"), encoding="utf-8")
+    (dist / "skills.html").write_text(_render_skills_index(skills, "zh"), encoding="utf-8")
+    (dist / "en" / "skills.html").write_text(_render_skills_index(skills, "en"), encoding="utf-8")
     for r in reports:
         slug = slugify(r.name)
         (dist / "server" / f"{slug}.html").write_text(_render_detail(r, "zh"), encoding="utf-8")
         (dist / "en" / "server" / f"{slug}.html").write_text(_render_detail(r, "en"), encoding="utf-8")
-    (dist / "sitemap.xml").write_text(_render_sitemap(reports), encoding="utf-8")
+    (dist / "sitemap.xml").write_text(_render_sitemap(reports, skills), encoding="utf-8")
     (dist / "robots.txt").write_text(_render_robots(), encoding="utf-8")
     return dist

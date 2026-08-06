@@ -106,5 +106,17 @@ def evaluate_server(name: str, command: list[str], server_type: str = "mcp-serve
         return report
 
 
+def apply_compatibility(report: ServerReport, providers: list[ToolUseProvider]) -> ServerReport:
+    """只更新跨模型兼容维度（不重跑服务器）——用真实模型评测已存结果的工具清单。"""
+    verdicts: list[tuple[str, str, bool]] = []
+    for tool in report.tools:
+        for provider in providers:
+            v = provider.judge(tool)
+            verdicts.append((v.model, tool.name, v.success))
+    report.dimensions["compatibility"] = score.compatibility_score(verdicts)
+    report.total_score, report.grade = score.total_score(report.dimensions)
+    return report
+
+
 def slugify(name: str) -> str:
     return re.sub(r"[^a-z0-9\-]", "-", name.lower()).strip("-") or "unnamed"
