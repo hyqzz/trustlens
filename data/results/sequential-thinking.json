@@ -2,7 +2,7 @@
   "name": "sequential-thinking",
   "server_type": "mcp-server",
   "source": "official-reference",
-  "evaluated_at": 1785984758.5798194,
+  "evaluated_at": 1785987880.2855961,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -33,7 +33,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.0,
+        "avg_latency_s": 0.002,
         "failure_rate": 1.0,
         "attempts": 2
       }

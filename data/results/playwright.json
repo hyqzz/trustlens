@@ -2,33 +2,33 @@
   "name": "playwright",
   "server_type": "mcp-server",
   "source": "microsoft",
-  "evaluated_at": 1785984767.1454859,
+  "evaluated_at": 1785987889.2725768,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 64.0,
+  "total_score": 71.2,
   "grade": "C",
   "dimensions": {
     "functionality": {
-      "value": 40.0,
+      "value": 45.0,
       "findings": [],
       "details": {
         "tools_total": 24,
-        "tools_callable": 0
+        "tools_callable": 2
       }
     },
     "reliability": {
-      "value": 40.0,
+      "value": 61.9,
       "findings": [
         {
           "severity": "warning",
           "code": "REL-FAIL",
-          "message": "调用失败率 100%"
+          "message": "调用失败率 60%"
         }
       ],
       "details": {
-        "avg_latency_s": 0.003,
-        "failure_rate": 1.0,
+        "avg_latency_s": 0.737,
+        "failure_rate": 0.6,
         "attempts": 10
       }
     },

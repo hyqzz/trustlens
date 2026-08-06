@@ -2,7 +2,7 @@
   "name": "excel",
   "server_type": "mcp-server",
   "source": "community-popular",
-  "evaluated_at": 1785985382.543952,
+  "evaluated_at": 1785988156.5862272,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -13,7 +13,7 @@
       "value": 40.0,
       "findings": [],
       "details": {
-        "tools_total": 7,
+        "tools_total": 6,
         "tools_callable": 0
       }
     },
@@ -50,7 +50,7 @@
           "gpt",
           "qwen"
         ],
-        "verdicts": 28
+        "verdicts": 24
       }
     }
   },
@@ -349,31 +349,6 @@
           "showStyle": {
             "description": "Show style information for cells",
             "type": "boolean"
-          }
-        },
-        "required": [
-          "fileAbsolutePath",
-          "sheetName"
-        ],
-        "type": "object"
-      }
-    },
-    {
-      "name": "excel_screen_capture",
-      "description": "[Windows only] Take a screenshot of the Excel sheet with pagination.",
-      "schema": {
-        "properties": {
-          "fileAbsolutePath": {
-            "description": "Absolute path to the Excel file",
-            "type": "string"
-          },
-          "range": {
-            "description": "Range of cells to read in the Excel sheet (e.g., \"A1:C10\"). [default: first paging range]",
-            "type": "string"
-          },
-          "sheetName": {
-            "description": "Sheet name in the Excel file",
-            "type": "string"
           }
         },
         "required": [

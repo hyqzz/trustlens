@@ -1,27 +1,27 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>sqlite 质检报告 — TrustLens · 智码星</title>
+<title>commands 质检报告 — TrustLens · 智码星</title>
 <meta name="description" content="智码星 ICodeStar 出品的 TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
-<link rel="canonical" href="https://trustlens.icodestar.net/server/sqlite.html">
-<link rel="alternate" hreflang="zh-CN" href="https://trustlens.icodestar.net/server/sqlite.html">
-<link rel="alternate" hreflang="en" href="https://trustlens.icodestar.net/en/server/sqlite.html">
+<link rel="canonical" href="https://trustlens.icodestar.net/server/commands.html">
+<link rel="alternate" hreflang="zh-CN" href="https://trustlens.icodestar.net/server/commands.html">
+<link rel="alternate" hreflang="en" href="https://trustlens.icodestar.net/en/server/commands.html">
 <link rel="alternate" hreflang="x-default" href="https://trustlens.icodestar.net/en/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="sqlite 质检报告 — TrustLens · 智码星">
+<meta property="og:title" content="commands 质检报告 — TrustLens · 智码星">
 <meta property="og:description" content="智码星 ICodeStar 出品的 TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
-<meta property="og:url" content="https://trustlens.icodestar.net/server/sqlite.html">
+<meta property="og:url" content="https://trustlens.icodestar.net/server/commands.html">
 <meta property="og:site_name" content="TrustLens · ICodeStar">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sqlite 质检报告 — TrustLens · 智码星">
+<meta name="twitter:title" content="commands 质检报告 — TrustLens · 智码星">
 <meta name="twitter:description" content="智码星 ICodeStar 出品的 TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
 <script>
 function tlSetLang(){try{sessionStorage.setItem('tl-lang','1')}catch(e){}}
 (function(){try{
 if(sessionStorage.getItem('tl-lang'))return;
 var zh=/^zh([-_]|$)/i.test(navigator.language||navigator.userLanguage||'');
-if(zh!==true){location.replace('../en/server/sqlite.html');}
+if(zh!==true){location.replace('../en/server/commands.html');}
 }catch(e){}})();
 </script>
 <style>
@@ -62,19 +62,13 @@ footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #8884;opacity:.6;
 <div class="brandbar">
 <span class="brand-logo">🛡️</span>
 <span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span>
-<a class="lang" href="../en/server/sqlite.html" onclick="tlSetLang()">English</a>
+<a class="lang" href="../en/server/commands.html" onclick="tlSetLang()">English</a>
 </div>
 <p><a href="../">← 返回排行榜</a></p>
-<h1>sqlite</h1>
-<p class="subtitle">信任分 <span class="score">25.0/100</span> · <span class="grade gF">F</span> 不可信</p>
-<p class="crit">错误：等待 initialize 响应超时（进程已退出，退出码 1） | stderr: thon/3.11.15/x64/lib/python3.11/asyncio/base_events.py&quot;, line 654, in run_until_complete
-    return future.result()
-           ^^^^^^^^^^^^^^^
-  File &quot;/home/runner/.cache/uv/archive-v0/jqEVkylcXWBaEo4K/lib/python3.11/site-packages/mcp_server_sqlite/server.py&quot;, line 173, in main
-    @server.list_resources()
-     ^^^^^^^^^^^^^^^^^^^^^
-AttributeError: &#x27;Server&#x27; object has no attribute &#x27;list_resources&#x27;</p>
-<h2>维度明细</h2><div class="dim"><b>功能性 0.0</b><div class="finding crit">[FUNC-HANDSHAKE] 协议握手失败</div></div><div class="dim"><b>可靠性 0.0</b><div class="finding warn">[REL-NONE] 无可测调用</div></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>跨模型兼容 0.0</b><div class="finding ">[COMPAT-NONE] 未执行跨模型评估</div></div>
-<h2>工具清单（0）</h2><ul><li>暂无评测数据</li></ul>
-<footer>评测于 2026-08-06 03:47 UTC · 引擎版本 0.1.0 · 来源 official-reference<br>© 智码星 ICodeStar · TrustLens 开源项目（Apache-2.0）</footer>
+<h1>commands</h1>
+<p class="subtitle">信任分 <span class="score">64.0/100</span> · <span class="grade gC">C</span> 及格</p>
+
+<h2>维度明细</h2><div class="dim"><b>功能性 40.0</b></div><div class="dim"><b>可靠性 40.0</b><div class="finding warn">[REL-FAIL] 调用失败率 100%</div></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>跨模型兼容 100.0</b></div>
+<h2>工具清单（1）</h2><ul><li><code>run_process</code> — Run a process on this linux machine</li></ul>
+<footer>评测于 2026-08-06 03:49 UTC · 引擎版本 0.1.0 · 来源 community-popular<br>© 智码星 ICodeStar · TrustLens 开源项目（Apache-2.0）</footer>
 </body></html>
