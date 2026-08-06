@@ -53,9 +53,9 @@ jobs:
           restore-keys: |
             uv-${{ runner.os }}-
 
-      # 只重测健康服务器（已失败的保持原样），显著缩短周更时长
+      # 只重测健康服务器（已失败的保持原样）。首次冷缓存较慢，之后走缓存。
       - name: Run evaluation (no secrets in this step)
-        timeout-minutes: 45
+        timeout-minutes: 90
         run: python -m trustlens evaluate-all --skip-f --timeout 90 --workers 4
 
       # 真实模型工具调用准确率（DeepSeek-V4 Flash）。密钥仅注入本步骤。

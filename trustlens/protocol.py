@@ -106,13 +106,19 @@ class McpStdioClient:
 
     def _read_loop(self) -> None:
         assert self._proc.stdout is not None
-        for line in self._proc.stdout:
-            self._lines.put(line)
+        try:
+            for line in self._proc.stdout:
+                self._lines.put(line)
+        except Exception:
+            pass  # 进程被强杀时流可能关闭，读取线程静默退出
 
     def _err_loop(self) -> None:
         assert self._proc.stderr is not None
-        for line in self._proc.stderr:
-            self._stderr_tail.append(line.rstrip())
+        try:
+            for line in self._proc.stderr:
+                self._stderr_tail.append(line.rstrip())
+        except Exception:
+            pass  # 进程被强杀时流可能关闭
 
     @property
     def stderr_tail(self) -> str:
