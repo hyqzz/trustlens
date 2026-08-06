@@ -60,11 +60,15 @@ jobs:
 
       # 真实模型工具调用准确率（DeepSeek-V4 Flash）。密钥仅注入本步骤。
       - name: Update model tool-call accuracy
-        if: ${{ secrets.OPENCODE_API_KEY != '' }}
         env:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
         timeout-minutes: 30
-        run: python -m trustlens model-compat --real --workers 6
+        run: |
+          if [ -z "$OPENCODE_API_KEY" ]; then
+            echo "OPENCODE_API_KEY 未配置，跳过模型兼容评测"
+          else
+            python -m trustlens model-compat --real --workers 6
+          fi
 
       - name: Build static site
         run: python -m trustlens build-site
