@@ -17,7 +17,8 @@ def _load_servers(path: Path = SERVERS_FILE) -> list[dict]:
         print(f"错误：找不到服务器清单 {path}", file=sys.stderr)
         sys.exit(2)
     data = json.loads(path.read_text(encoding="utf-8"))
-    return data.get("servers", [])
+    # enabled: false 的条目暂停评测（如方法论待升级的类别）
+    return [s for s in data.get("servers", []) if s.get("enabled", True)]
 
 
 def _resolve_command(server: dict) -> list[str]:

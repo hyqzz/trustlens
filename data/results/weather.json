@@ -1,11 +1,11 @@
 {
-  "name": "sqlite",
+  "name": "weather",
   "server_type": "mcp-server",
-  "source": "official-reference",
-  "evaluated_at": 1785985082.5226371,
+  "source": "community",
+  "evaluated_at": 1785987431.203537,
   "engine_version": "0.1.0",
   "ok": false,
-  "error": "等待 initialize 响应超时（进程已退出，退出码 1） | stderr: indows-x86_64-none\\Lib\\asyncio\\base_events.py\", line 725, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"C:\\Users\\hyqzz\\AppData\\Local\\uv\\cache\\archive-v0\\EspXXV2RycDenmr6riN6b\\Lib\\site-packages\\mcp_server_sqlite\\server.py\", line 173, in main\n    @server.list_resources()\n     ^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'Server' object has no attribute 'list_resources'",
+  "error": "等待 initialize 响应超时（进程已退出，退出码 1） | stderr: Installed 42 packages in 1.48s\nPackage `mcp-weather` does not provide any executables.",
   "total_score": 25.0,
   "grade": "F",
   "dimensions": {

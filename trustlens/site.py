@@ -1,13 +1,16 @@
-"""静态排行榜网站生成器：中英双语 + SEO/AEO 优化。
+"""静态排行榜网站生成器：智码星 ICodeStar 品牌、中英双语、浏览器语言自适应、SEO/AEO。
 
 输出结构（site/dist/）：
   index.html            中文总榜        /en/index.html        英文总榜
   server/<slug>.html    中文详情页      /en/server/<slug>.html 英文详情页
   sitemap.xml / robots.txt
 
-SEO：canonical、hreflang 互链、meta description、Open Graph、Twitter Card
-AEO：JSON-LD 结构化数据（Dataset + ItemList）、FAQ 问答块（答案引擎友好）
-零依赖，纯 HTML + 内联 CSS，可由任意静态托管（GitHub Pages / nginx）服务。
+语言自适应：静态站无法做服务端协商，采用首访 JS 检测
+（navigator.language 以 zh 开头 → 中文页，否则 → 英文页）；
+用户手动切换后写入 sessionStorage 不再强制跳转。站内链接全相对路径，
+任意 base path 可部署（自有域名 / GitHub Pages 调试镜像）。
+SEO：canonical、hreflang、meta description、Open Graph、Twitter Card
+AEO：JSON-LD（Dataset + ItemList + FAQPage）、FAQ 问答块
 """
 from __future__ import annotations
 
@@ -23,31 +26,45 @@ from .report import load_all
 
 DIST = Path("site/dist")
 BASE_URL = os.environ.get("TRUSTLENS_BASE_URL", "https://trustlens.icodestar.net")
+REPO_URL = "https://github.com/hyqzz/trustlens"
+
+FAVICON = ("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>"
+           "<text y='.9em' font-size='90'>🛡️</text></svg>")
 
 CSS = """
 :root{color-scheme:light dark}
-body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;max-width:960px;margin:0 auto;padding:2rem 1rem;line-height:1.6}
-h1{margin-bottom:.2rem}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif;
+     max-width:1000px;margin:0 auto;padding:0 1rem 2rem;line-height:1.65}
+.brandbar{display:flex;align-items:center;gap:.6rem;padding:.9rem 0;border-bottom:1px solid #8884;margin-bottom:1.2rem}
+.brand-logo{font-size:1.5rem}
+.brand-name{font-weight:800;font-size:1.05rem;letter-spacing:.02em}
+.brand-name .en{background:linear-gradient(90deg,#4f8ef7,#9b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-sub{opacity:.55;font-size:.8rem;margin-left:.1rem}
+.lang{margin-left:auto;font-size:.88rem;border:1px solid #8886;border-radius:1em;padding:.15em .8em}
+h1{margin:.4rem 0 .2rem;font-size:1.7rem}
 .subtitle{opacity:.7;margin-top:0}
-table{width:100%;border-collapse:collapse;margin-top:1.5rem}
-th,td{padding:.6rem .8rem;text-align:left;border-bottom:1px solid #8884}
-th{white-space:nowrap}
+table{width:100%;border-collapse:collapse;margin-top:1.2rem;font-size:.95rem}
+th,td{padding:.65rem .8rem;text-align:left;border-bottom:1px solid #8883}
+th{white-space:nowrap;opacity:.75;font-weight:600}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:#8881}
 a{color:#4f8ef7;text-decoration:none}
 a:hover{text-decoration:underline}
-.score{font-weight:700;font-variant-numeric:tabular-nums}
-.grade{display:inline-block;min-width:1.6em;text-align:center;border-radius:.3em;padding:.05em .3em;color:#fff;font-weight:700}
+.score{font-weight:800;font-variant-numeric:tabular-nums}
+.grade{display:inline-block;min-width:1.7em;text-align:center;border-radius:.4em;padding:.08em .35em;color:#fff;font-weight:700;font-size:.85em}
 .gA{background:#2da44e}.gB{background:#6f9e1f}.gC{background:#bf8700}.gD{background:#cf6020}.gF{background:#cf222e}
-.dim{margin:.4rem 0}
-.dim b{display:inline-block;width:9em}
-.finding{font-size:.9em;opacity:.85;margin-left:1em}
+.dim{margin:.5rem 0;padding:.55rem .8rem;border:1px solid #8883;border-radius:.5rem}
+.dim b{display:inline-block;min-width:11em}
+.finding{font-size:.88em;opacity:.85;margin:.15rem 0 0 .4rem;word-break:break-all}
 .crit{color:#cf222e}.warn{color:#bf8700}
-footer{margin-top:3rem;opacity:.6;font-size:.85rem}
-.badge{background:#4f8ef7;color:#fff;border-radius:.3em;padding:.1em .5em;font-size:.8em}
-.lang{float:right;font-size:.9em}
-.faq{margin-top:2.5rem}
-.faq h2{font-size:1.2rem}
-.faq details{margin:.5rem 0;border-bottom:1px solid #8884;padding:.4rem 0}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #8884;opacity:.6;font-size:.85rem}
+.badge{background:linear-gradient(90deg,#4f8ef7,#9b5cf6);color:#fff;border-radius:.35em;padding:.12em .55em;font-size:.75rem;vertical-align:middle}
+.faq{margin-top:2.2rem}
+.faq h2{font-size:1.15rem}
+.faq details{margin:.5rem 0;border:1px solid #8883;border-radius:.5rem;padding:.55rem .9rem}
 .faq summary{cursor:pointer;font-weight:600}
+.faq p{opacity:.85;margin:.4rem 0 .2rem}
 """
 
 # ---- 文案（双语） ----
@@ -55,16 +72,18 @@ footer{margin-top:3rem;opacity:.6;font-size:.85rem}
 T = {
     "zh": {
         "lang": "zh-CN",
-        "title": "TrustLens 排行榜 — Agent 能力生态信任基准",
-        "heading": "TrustLens 排行榜",
+        "is_zh": True,
+        "title": "TrustLens 信任榜 — 智码星 ICodeStar",
+        "heading": "TrustLens 信任榜",
         "tagline": "Agent 能力生态的信任基准：自动化实测 MCP Server / Skills，每周更新。",
         "tagline2": "装任何工具之前，先查分。评分依据全部公开于 GitHub 仓库（git 历史即审计日志）。",
-        "meta_desc": "TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。",
+        "meta_desc": "智码星 ICodeStar 出品的 TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。",
         "col_name": "能力单元", "col_score": "信任分", "col_grade": "等级", "col_brief": "速览",
         "empty": "暂无评测数据",
-        "footer": "共 {n} 个评测对象 · 更新于 {ts} · 由 TrustLens 自动生成",
+        "footer": "共 {n} 个评测对象 · 更新于 {ts}",
+        "copyright": "© 智码星 ICodeStar · TrustLens 开源项目（Apache-2.0）",
         "back": "← 返回排行榜",
-        "report_title": "{name} — TrustLens 质检报告",
+        "report_title": "{name} 质检报告 — TrustLens · 智码星",
         "score_line": "信任分",
         "dims_heading": "维度明细", "tools_heading": "工具清单（{n}）",
         "report_footer": "评测于 {ts} · 引擎版本 {v} · 来源 {src}",
@@ -86,16 +105,18 @@ T = {
     },
     "en": {
         "lang": "en",
-        "title": "TrustLens Leaderboard — Trust Benchmark for the Agent Ecosystem",
+        "is_zh": False,
+        "title": "TrustLens Leaderboard — ICodeStar",
         "heading": "TrustLens Leaderboard",
         "tagline": "The trust benchmark for the agent capability ecosystem: automated, evidence-based evaluation of MCP servers and agent skills, updated weekly.",
         "tagline2": "Check the score before you install any tool. All evaluation data is public in the GitHub repo — git history is the audit log.",
-        "meta_desc": "TrustLens measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores and a weekly leaderboard. Check before you install.",
+        "meta_desc": "TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.",
         "col_name": "Capability", "col_score": "Trust score", "col_grade": "Grade", "col_brief": "At a glance",
         "empty": "No evaluation data yet",
-        "footer": "{n} evaluated · Updated {ts} · Generated by TrustLens",
+        "footer": "{n} evaluated · Updated {ts}",
+        "copyright": "© ICodeStar · TrustLens is open source (Apache-2.0)",
         "back": "← Back to leaderboard",
-        "report_title": "{name} — TrustLens Inspection Report",
+        "report_title": "{name} Inspection Report — TrustLens · ICodeStar",
         "score_line": "Trust score",
         "dims_heading": "Dimension breakdown", "tools_heading": "Tools ({n})",
         "report_footer": "Evaluated {ts} · Engine v{v} · Source: {src}",
@@ -128,6 +149,16 @@ DIM_LABEL = {
            "security": "Security", "compatibility": "Compatibility"},
 }
 
+# 语言自适应脚本：首访按浏览器语言跳转，手动切换后记住选择
+LANG_SCRIPT = """<script>
+function tlSetLang(){try{sessionStorage.setItem('tl-lang','1')}catch(e){}}
+(function(){try{
+if(sessionStorage.getItem('tl-lang'))return;
+var zh=/^zh([-_]|$)/i.test(navigator.language||navigator.userLanguage||'');
+if(zh!==%(is_zh)s){location.replace('%(alt)s');}
+}catch(e){}})();
+</script>"""
+
 
 def _esc(s: str) -> str:
     return html.escape(s, quote=True)
@@ -137,28 +168,39 @@ def _grade_badge(grade: str, lang: str) -> str:
     return f'<span class="grade g{grade}">{grade}</span> {GRADE_LABEL[lang].get(grade, "")}'
 
 
-def _head(t: dict, title: str, path: str, alt_path: str) -> str:
-    """<head>：SEO meta + OG + Twitter Card + canonical + hreflang。"""
+def _brandbar(t: dict, toggle_href: str) -> str:
+    return f"""<div class="brandbar">
+<span class="brand-logo">🛡️</span>
+<span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span>
+<a class="lang" href="{toggle_href}" onclick="tlSetLang()">{t['switch']}</a>
+</div>"""
+
+
+def _head(t: dict, title: str, path: str, alt_path: str, rel_alt: str) -> str:
+    """<head>：SEO meta + OG + Twitter Card + canonical + hreflang + 语言自适应脚本。"""
     canonical = f"{BASE_URL}{path}"
     alt = f"{BASE_URL}{alt_path}"
-    x_default = f"{BASE_URL}{alt_path if t['lang'] == 'zh-CN' else path}"  # x-default 指向英文版
+    is_zh = "true" if t["is_zh"] else "false"
+    script = LANG_SCRIPT % {"is_zh": is_zh, "alt": rel_alt}
     return f"""<!doctype html>
 <html lang="{t['lang']}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{_esc(title)}</title>
 <meta name="description" content="{_esc(t['meta_desc'])}">
+<link rel="icon" href="{FAVICON}">
 <link rel="canonical" href="{canonical}">
 <link rel="alternate" hreflang="{t['lang']}" href="{canonical}">
-<link rel="alternate" hreflang="{'en' if t['lang'] == 'zh-CN' else 'zh-CN'}" href="{alt}">
-<link rel="alternate" hreflang="x-default" href="{x_default}">
+<link rel="alternate" hreflang="{'en' if t['is_zh'] else 'zh-CN'}" href="{alt}">
+<link rel="alternate" hreflang="x-default" href="{BASE_URL}/en/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{_esc(title)}">
 <meta property="og:description" content="{_esc(t['meta_desc'])}">
 <meta property="og:url" content="{canonical}">
-<meta property="og:site_name" content="TrustLens">
+<meta property="og:site_name" content="TrustLens · ICodeStar">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{_esc(title)}">
 <meta name="twitter:description" content="{_esc(t['meta_desc'])}">
+{script}
 <style>{CSS}</style></head><body>"""
 
 
@@ -182,20 +224,18 @@ def _faq_jsonld(t: dict) -> str:
 
 
 def _index_jsonld(reports: list[ServerReport], t: dict) -> str:
-    """AEO：把排行榜标注为 Dataset + ItemList，供搜索引擎/AI 引擎理解。"""
     data = {
         "@context": "https://schema.org",
         "@type": "Dataset",
         "name": t["title"],
         "description": t["meta_desc"],
-        "url": BASE_URL + ("/en/" if t["lang"] == "en" else "/"),
+        "url": BASE_URL + ("/en/" if not t["is_zh"] else "/"),
         "dateModified": time.strftime("%Y-%m-%d", time.gmtime()),
         "license": "https://www.apache.org/licenses/LICENSE-2.0",
-        "creator": {"@type": "Organization", "name": "TrustLens",
-                    "url": "https://github.com/hyqzz/trustlens"},
+        "creator": {"@type": "Organization", "name": "ICodeStar 智码星", "url": BASE_URL},
         "hasPart": [
             {"@type": "SoftwareApplication", "name": r.name,
-             "url": f"{BASE_URL}{'/en' if t['lang'] == 'en' else ''}/server/{slugify(r.name)}.html",
+             "url": f"{BASE_URL}{'' if t['is_zh'] else '/en'}/server/{slugify(r.name)}.html",
              "aggregateRating": {"@type": "AggregateRating", "ratingValue": r.total_score,
                                  "bestRating": 100, "worstRating": 0, "ratingCount": 1}}
             for r in sorted(reports, key=lambda x: -x.total_score)
@@ -210,7 +250,6 @@ def _render_index(reports: list[ServerReport], lang: str) -> str:
     rows = []
     for r in sorted(reports, key=lambda x: -x.total_score):
         slug = slugify(r.name)
-        # 相对链接：同一棵目录树下，zh/en 各自的 server/ 子目录
         dims = " · ".join(f"{DIM_LABEL[lang].get(k, k)} {r.dimensions[k].value:.0f}"
                           for k in ("functionality", "security") if k in r.dimensions)
         rows.append(
@@ -220,28 +259,28 @@ def _render_index(reports: list[ServerReport], lang: str) -> str:
             f'<td style="font-size:.85em;opacity:.75">{dims}</td></tr>'
         )
     ts = time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())
+    tagline2 = t["tagline2"].replace("GitHub 仓库", f'<a href="{REPO_URL}">GitHub 仓库</a>') \
+                           .replace("GitHub repo", f'<a href="{REPO_URL}">GitHub repo</a>')
     body = f"""
-<a class="lang" href="{t['switch_href']}">{t['switch']}</a>
+{_brandbar(t, t['switch_href'])}
 <h1>{t['heading']} <span class="badge">LIVE</span></h1>
-<p class="subtitle">{t['tagline']}<br>{t['tagline2'].replace('GitHub 仓库', '<a href="https://github.com/hyqzz/trustlens">GitHub 仓库</a>').replace('GitHub repo', '<a href="https://github.com/hyqzz/trustlens">GitHub repo</a>')}</p>
+<p class="subtitle">{t['tagline']}<br>{tagline2}</p>
 <table><thead><tr><th>{t['col_name']}</th><th>{t['col_score']}</th><th>{t['col_grade']}</th><th>{t['col_brief']}</th></tr></thead>
 <tbody>{''.join(rows) if rows else f'<tr><td colspan="4">{t["empty"]}</td></tr>'}</tbody></table>
 {_faq_html(t)}
-<footer>{t['footer'].format(n=len(reports), ts=ts)}</footer>
+<footer>{t['footer'].format(n=len(reports), ts=ts)}<br>{t['copyright']}</footer>
 {_index_jsonld(reports, t)}
 {_faq_jsonld(t)}
 </body></html>"""
-    return _head(t, t["title"], "/en/" if en else "/", "/" if en else "/en/") + body
+    return _head(t, t["title"], "/en/" if en else "/", "/" if en else "/en/", t["switch_href"]) + body
 
 
 def _render_detail(r: ServerReport, lang: str) -> str:
     t = T[lang]
     en = lang == "en"
     slug = slugify(r.name)
-    # 相对链接：详情页在 <prefix>/server/ 下，返回上级即榜单首页
     back_href = "../"
-    # 语言互切：zh 在 /server/ 下，en 在 /en/server/ 下，深度不同
-    toggle_href = f"../en/server/{slug}.html" if not en else f"../../server/{slug}.html"
+    toggle_href = f"../../server/{slug}.html" if en else f"../en/server/{slug}.html"
     dims_html = []
     for key, dim in r.dimensions.items():
         findings = "".join(
@@ -259,19 +298,19 @@ def _render_detail(r: ServerReport, lang: str) -> str:
     ts = time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime(r.evaluated_at))
     error = f'<p class="crit">{t["error_prefix"]}{_esc(r.error)}</p>' if r.error else ""
     body = f"""
-<a class="lang" href="{toggle_href}">{t['switch']}</a>
+{_brandbar(t, toggle_href)}
 <p><a href="{back_href}">{t['back']}</a></p>
 <h1>{_esc(r.name)}</h1>
 <p class="subtitle">{t['score_line']} <span class="score">{r.total_score:.1f}/100</span> · {_grade_badge(r.grade, lang)}</p>
 {error}
 <h2>{t['dims_heading']}</h2>{''.join(dims_html)}
 <h2>{t['tools_heading'].format(n=len(r.tools))}</h2><ul>{tools_html}</ul>
-<footer>{t['report_footer'].format(ts=ts, v=r.engine_version, src=_esc(r.source) or '?')}</footer>
+<footer>{t['report_footer'].format(ts=ts, v=r.engine_version, src=_esc(r.source) or '?')}<br>{t['copyright']}</footer>
 </body></html>"""
     title = t["report_title"].format(name=r.name)
     path = f"{'/en' if en else ''}/server/{slug}.html"
     alt = f"{'' if en else '/en'}/server/{slug}.html"
-    return _head(t, title, path, alt) + body
+    return _head(t, title, path, alt, toggle_href) + body
 
 
 def _render_sitemap(reports: list[ServerReport]) -> str:

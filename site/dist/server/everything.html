@@ -1,51 +1,74 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>everything — TrustLens 质检报告</title>
-<meta name="description" content="TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
+<title>everything 质检报告 — TrustLens · 智码星</title>
+<meta name="description" content="智码星 ICodeStar 出品的 TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
 <link rel="canonical" href="https://trustlens.icodestar.net/server/everything.html">
 <link rel="alternate" hreflang="zh-CN" href="https://trustlens.icodestar.net/server/everything.html">
 <link rel="alternate" hreflang="en" href="https://trustlens.icodestar.net/en/server/everything.html">
-<link rel="alternate" hreflang="x-default" href="https://trustlens.icodestar.net/en/server/everything.html">
+<link rel="alternate" hreflang="x-default" href="https://trustlens.icodestar.net/en/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="everything — TrustLens 质检报告">
-<meta property="og:description" content="TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
+<meta property="og:title" content="everything 质检报告 — TrustLens · 智码星">
+<meta property="og:description" content="智码星 ICodeStar 出品的 TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
 <meta property="og:url" content="https://trustlens.icodestar.net/server/everything.html">
-<meta property="og:site_name" content="TrustLens">
+<meta property="og:site_name" content="TrustLens · ICodeStar">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="everything — TrustLens 质检报告">
-<meta name="twitter:description" content="TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
+<meta name="twitter:title" content="everything 质检报告 — TrustLens · 智码星">
+<meta name="twitter:description" content="智码星 ICodeStar 出品的 TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
+<script>
+function tlSetLang(){try{sessionStorage.setItem('tl-lang','1')}catch(e){}}
+(function(){try{
+if(sessionStorage.getItem('tl-lang'))return;
+var zh=/^zh([-_]|$)/i.test(navigator.language||navigator.userLanguage||'');
+if(zh!==true){location.replace('../en/server/everything.html');}
+}catch(e){}})();
+</script>
 <style>
 :root{color-scheme:light dark}
-body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;max-width:960px;margin:0 auto;padding:2rem 1rem;line-height:1.6}
-h1{margin-bottom:.2rem}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif;
+     max-width:1000px;margin:0 auto;padding:0 1rem 2rem;line-height:1.65}
+.brandbar{display:flex;align-items:center;gap:.6rem;padding:.9rem 0;border-bottom:1px solid #8884;margin-bottom:1.2rem}
+.brand-logo{font-size:1.5rem}
+.brand-name{font-weight:800;font-size:1.05rem;letter-spacing:.02em}
+.brand-name .en{background:linear-gradient(90deg,#4f8ef7,#9b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-sub{opacity:.55;font-size:.8rem;margin-left:.1rem}
+.lang{margin-left:auto;font-size:.88rem;border:1px solid #8886;border-radius:1em;padding:.15em .8em}
+h1{margin:.4rem 0 .2rem;font-size:1.7rem}
 .subtitle{opacity:.7;margin-top:0}
-table{width:100%;border-collapse:collapse;margin-top:1.5rem}
-th,td{padding:.6rem .8rem;text-align:left;border-bottom:1px solid #8884}
-th{white-space:nowrap}
+table{width:100%;border-collapse:collapse;margin-top:1.2rem;font-size:.95rem}
+th,td{padding:.65rem .8rem;text-align:left;border-bottom:1px solid #8883}
+th{white-space:nowrap;opacity:.75;font-weight:600}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:#8881}
 a{color:#4f8ef7;text-decoration:none}
 a:hover{text-decoration:underline}
-.score{font-weight:700;font-variant-numeric:tabular-nums}
-.grade{display:inline-block;min-width:1.6em;text-align:center;border-radius:.3em;padding:.05em .3em;color:#fff;font-weight:700}
+.score{font-weight:800;font-variant-numeric:tabular-nums}
+.grade{display:inline-block;min-width:1.7em;text-align:center;border-radius:.4em;padding:.08em .35em;color:#fff;font-weight:700;font-size:.85em}
 .gA{background:#2da44e}.gB{background:#6f9e1f}.gC{background:#bf8700}.gD{background:#cf6020}.gF{background:#cf222e}
-.dim{margin:.4rem 0}
-.dim b{display:inline-block;width:9em}
-.finding{font-size:.9em;opacity:.85;margin-left:1em}
+.dim{margin:.5rem 0;padding:.55rem .8rem;border:1px solid #8883;border-radius:.5rem}
+.dim b{display:inline-block;min-width:11em}
+.finding{font-size:.88em;opacity:.85;margin:.15rem 0 0 .4rem;word-break:break-all}
 .crit{color:#cf222e}.warn{color:#bf8700}
-footer{margin-top:3rem;opacity:.6;font-size:.85rem}
-.badge{background:#4f8ef7;color:#fff;border-radius:.3em;padding:.1em .5em;font-size:.8em}
-.lang{float:right;font-size:.9em}
-.faq{margin-top:2.5rem}
-.faq h2{font-size:1.2rem}
-.faq details{margin:.5rem 0;border-bottom:1px solid #8884;padding:.4rem 0}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #8884;opacity:.6;font-size:.85rem}
+.badge{background:linear-gradient(90deg,#4f8ef7,#9b5cf6);color:#fff;border-radius:.35em;padding:.12em .55em;font-size:.75rem;vertical-align:middle}
+.faq{margin-top:2.2rem}
+.faq h2{font-size:1.15rem}
+.faq details{margin:.5rem 0;border:1px solid #8883;border-radius:.5rem;padding:.55rem .9rem}
 .faq summary{cursor:pointer;font-weight:600}
+.faq p{opacity:.85;margin:.4rem 0 .2rem}
 </style></head><body>
-<a class="lang" href="../en/server/everything.html">English</a>
+<div class="brandbar">
+<span class="brand-logo">🛡️</span>
+<span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span>
+<a class="lang" href="../en/server/everything.html" onclick="tlSetLang()">English</a>
+</div>
 <p><a href="../">← 返回排行榜</a></p>
 <h1>everything</h1>
 <p class="subtitle">信任分 <span class="score">82.5/100</span> · <span class="grade gB">B</span> 良好</p>
 
 <h2>维度明细</h2><div class="dim"><b>功能性 58.5</b></div><div class="dim"><b>可靠性 88.0</b><div class="finding warn">[REL-FAIL] 调用失败率 20%</div></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>跨模型兼容 100.0</b></div>
 <h2>工具清单（13）</h2><ul><li><code>echo</code> — Echoes back the input string</li><li><code>get-annotated-message</code> — Demonstrates how annotations can be used to provide metadata about content.</li><li><code>get-env</code> — Returns all environment variables, helpful for debugging MCP server configuration</li><li><code>get-resource-links</code> — Returns up to ten resource links that reference different types of resources</li><li><code>get-resource-reference</code> — Returns a resource reference that can be used by MCP clients</li><li><code>get-structured-content</code> — Returns structured content along with an output schema for client data validation</li><li><code>get-sum</code> — Returns the sum of two numbers</li><li><code>get-tiny-image</code> — Returns a tiny MCP logo image.</li><li><code>gzip-file-as-resource</code> — Compresses a single file using gzip compression. Depending upon the selected output type, returns either the compressed data as a gzipped resource or a resource</li><li><code>toggle-simulated-logging</code> — Toggles simulated, random-leveled logging on or off.</li><li><code>toggle-subscriber-updates</code> — Toggles simulated resource subscription updates on or off.</li><li><code>trigger-long-running-operation</code> — Demonstrates a long running operation with progress updates.</li><li><code>simulate-research-query</code> — Simulates a deep research operation that gathers, analyzes, and synthesizes information. Demonstrates MCP task-based operations with progress through multiple s</li></ul>
-<footer>评测于 2026-08-06 02:02 UTC · 引擎版本 0.1.0 · 来源 official-reference</footer>
+<footer>评测于 2026-08-06 02:42 UTC · 引擎版本 0.1.0 · 来源 official-reference<br>© 智码星 ICodeStar · TrustLens 开源项目（Apache-2.0）</footer>
 </body></html>

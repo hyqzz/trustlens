@@ -1,0 +1,92 @@
+{
+  "name": "commands",
+  "server_type": "mcp-server",
+  "source": "community-popular",
+  "evaluated_at": 1785985387.264751,
+  "engine_version": "0.1.0",
+  "ok": true,
+  "error": "",
+  "total_score": 64.0,
+  "grade": "C",
+  "dimensions": {
+    "functionality": {
+      "value": 40.0,
+      "findings": [],
+      "details": {
+        "tools_total": 1,
+        "tools_callable": 0
+      }
+    },
+    "reliability": {
+      "value": 40.0,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-FAIL",
+          "message": "调用失败率 100%"
+        }
+      ],
+      "details": {
+        "avg_latency_s": 0.0,
+        "failure_rate": 1.0,
+        "attempts": 2
+      }
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "success_rate": 1.0,
+        "models": [
+          "claude",
+          "deepseek",
+          "gpt",
+          "qwen"
+        ],
+        "verdicts": 4
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "run_process",
+      "description": "Run a process on this win32 machine",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "command_line": {
+            "type": "string",
+            "description": "Shell mode: a shell command line executed via the system's default shell. Supports pipes, redirects, globbing. Cannot be combined with 'argv'."
+          },
+          "argv": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Executable mode: directly spawn a process. argv[0] is the executable, followed by arguments passed verbatim (no shell interpretation). Cannot be combined with 'command_line'."
+          },
+          "cwd": {
+            "type": "string",
+            "description": "Optional to set working directory"
+          },
+          "stdin_text": {
+            "type": "string",
+            "description": "Optional text written to STDIN (written fully, then closed). Useful for heredoc-style input or file contents."
+          },
+          "timeout_ms": {
+            "type": "number",
+            "description": "Optional timeout in milliseconds, defaults to 30,000ms"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -96,6 +96,47 @@
       "command": "uvx",
       "args": ["mcp-server-sqlite", "--db-path", "probe.sqlite"],
       "note": "官方 SQLite 服务器（Python），评测使用临时库文件"
+    },
+    {
+      "name": "excel",
+      "type": "mcp-server",
+      "source": "community-popular",
+      "command": "npx",
+      "args": ["-y", "@negokaz/excel-mcp-server"],
+      "note": "社区热门 Excel 操作服务器"
+    },
+    {
+      "name": "commands",
+      "type": "mcp-server",
+      "source": "community-popular",
+      "command": "npx",
+      "args": ["-y", "mcp-server-commands"],
+      "note": "社区 shell 命令执行服务器"
+    },
+    {
+      "name": "puppeteer",
+      "type": "mcp-server",
+      "source": "official-reference",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "enabled": false,
+      "note": "暂缓评测：探针用哑参数调用浏览器工具会真实启动 Chromium 并挂起——哑探针对浏览器自动化类工具不公平，待评测方法论升级（按工具类型生成合理探针）后恢复"
+    },
+    {
+      "name": "duckduckgo-search",
+      "type": "mcp-server",
+      "source": "community-popular",
+      "command": "uvx",
+      "args": ["duckduckgo-mcp-server"],
+      "note": "社区 DuckDuckGo 搜索服务器（Python）"
+    },
+    {
+      "name": "weather",
+      "type": "mcp-server",
+      "source": "community",
+      "command": "uvx",
+      "args": ["mcp-weather"],
+      "note": "社区天气查询服务器（Python）"
     }
   ]
 }

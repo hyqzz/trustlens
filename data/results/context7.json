@@ -2,12 +2,12 @@
   "name": "context7",
   "server_type": "mcp-server",
   "source": "upstash",
-  "evaluated_at": 1785981985.344118,
+  "evaluated_at": 1785984760.1388824,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 90.4,
-  "grade": "A",
+  "total_score": 89.2,
+  "grade": "B",
   "dimensions": {
     "functionality": {
       "value": 95.0,
@@ -24,10 +24,10 @@
       }
     },
     "reliability": {
-      "value": 98.7,
+      "value": 93.9,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.641,
+        "avg_latency_s": 1.184,
         "failure_rate": 0.0,
         "attempts": 4
       }

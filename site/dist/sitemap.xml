@@ -2,12 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://trustlens.icodestar.net/</loc><lastmod>2026-08-06</lastmod></url>
   <url><loc>https://trustlens.icodestar.net/en/</loc><lastmod>2026-08-06</lastmod></url>
+  <url><loc>https://trustlens.icodestar.net/server/commands.html</loc><lastmod>2026-08-06</lastmod></url>
+  <url><loc>https://trustlens.icodestar.net/en/server/commands.html</loc><lastmod>2026-08-06</lastmod></url>
   <url><loc>https://trustlens.icodestar.net/server/context7.html</loc><lastmod>2026-08-06</lastmod></url>
   <url><loc>https://trustlens.icodestar.net/en/server/context7.html</loc><lastmod>2026-08-06</lastmod></url>
   <url><loc>https://trustlens.icodestar.net/server/desktop-commander.html</loc><lastmod>2026-08-06</lastmod></url>
   <url><loc>https://trustlens.icodestar.net/en/server/desktop-commander.html</loc><lastmod>2026-08-06</lastmod></url>
+  <url><loc>https://trustlens.icodestar.net/server/duckduckgo-search.html</loc><lastmod>2026-08-06</lastmod></url>
+  <url><loc>https://trustlens.icodestar.net/en/server/duckduckgo-search.html</loc><lastmod>2026-08-06</lastmod></url>
   <url><loc>https://trustlens.icodestar.net/server/everything.html</loc><lastmod>2026-08-06</lastmod></url>
   <url><loc>https://trustlens.icodestar.net/en/server/everything.html</loc><lastmod>2026-08-06</lastmod></url>
+  <url><loc>https://trustlens.icodestar.net/server/excel.html</loc><lastmod>2026-08-06</lastmod></url>
+  <url><loc>https://trustlens.icodestar.net/en/server/excel.html</loc><lastmod>2026-08-06</lastmod></url>
   <url><loc>https://trustlens.icodestar.net/server/fetch.html</loc><lastmod>2026-08-06</lastmod></url>
   <url><loc>https://trustlens.icodestar.net/en/server/fetch.html</loc><lastmod>2026-08-06</lastmod></url>
   <url><loc>https://trustlens.icodestar.net/server/filesystem.html</loc><lastmod>2026-08-06</lastmod></url>
@@ -26,4 +32,6 @@
   <url><loc>https://trustlens.icodestar.net/en/server/sqlite.html</loc><lastmod>2026-08-06</lastmod></url>
   <url><loc>https://trustlens.icodestar.net/server/time.html</loc><lastmod>2026-08-06</lastmod></url>
   <url><loc>https://trustlens.icodestar.net/en/server/time.html</loc><lastmod>2026-08-06</lastmod></url>
+  <url><loc>https://trustlens.icodestar.net/server/weather.html</loc><lastmod>2026-08-06</lastmod></url>
+  <url><loc>https://trustlens.icodestar.net/en/server/weather.html</loc><lastmod>2026-08-06</lastmod></url>
 </urlset>
