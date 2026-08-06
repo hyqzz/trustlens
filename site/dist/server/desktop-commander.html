@@ -33,6 +33,12 @@ body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'PingFang SC','Micros
 .brand-name{font-weight:800;font-size:1.05rem;letter-spacing:.02em}
 .brand-name .en{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .brand-sub{opacity:.55;font-size:.8rem;margin-left:.15rem}
+.nav{display:flex;gap:.4rem;margin:.4rem 0 .3rem;flex-wrap:wrap}
+.nav a{font-size:.88rem;border:1px solid var(--line);border-radius:1.4em;padding:.22em .95em;text-decoration:none}
+.nav a.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.nav a:hover:not(.on){border-color:var(--accent)}
+.method{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:.55rem;padding:.5rem .85rem;font-size:.83rem;opacity:.85;margin:.8rem 0}
+.method b{opacity:1}
 .lang{margin-left:auto;font-size:.86rem;border:1px solid var(--line);border-radius:1.2em;padding:.18em .85em;text-decoration:none}
 .lang:hover{text-decoration:none;background:var(--bg-card)}
 h1{margin:.3rem 0 .2rem;font-size:1.65rem}
@@ -103,9 +109,9 @@ footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opaci
 <div class="brandbar"><span class="brand-logo">🛡️</span><span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span><a class="lang" href="../en/server/desktop-commander.html" onclick="tlSetLang()">English</a></div>
 <p><a href="../">← 返回排行榜</a></p>
 <h1>desktop-commander</h1>
-<p class="subtitle">信任分 <span class="score">53.2/100</span> · <span class="grade gD">D</span> 风险</p>
+<p class="subtitle">信任分 <span class="score">48.0/100</span> · <span class="grade gD">D</span> 风险</p>
 
-<h2>维度明细</h2><div class="dim"><b>功能性 0.0</b><div class="finding warn">[SCHEMA-BLOAT] 工具 read_file 描述过长（4381 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 write_file 描述过长（2718 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 write_pdf 描述过长（3079 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 list_directory 描述过长（2274 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 start_search 描述过长（6393 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 edit_block 描述过长（3701 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 start_process 描述过长（5363 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 read_process_output 描述过长（2186 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 interact_with_process 描述过长（3826 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 give_feedback_to_desktop_commander 描述过长（2039 字符，加剧上下文膨胀）</div></div><div class="dim"><b>可靠性 76.0</b><div class="finding warn">[REL-FAIL] 调用失败率 40%</div></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>兼容 61.5</b></div>
+<h2>维度明细</h2><div class="dim"><b>功能性 0.0</b><div class="finding warn">[SCHEMA-BLOAT] 工具 read_file 描述过长（4381 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 write_file 描述过长（2718 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 write_pdf 描述过长（3079 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 list_directory 描述过长（2274 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 start_search 描述过长（6393 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 edit_block 描述过长（3701 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 start_process 描述过长（5363 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 read_process_output 描述过长（2186 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 interact_with_process 描述过长（3826 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 give_feedback_to_desktop_commander 描述过长（2039 字符，加剧上下文膨胀）</div></div><div class="dim"><b>可靠性 76.0</b><div class="finding warn">[REL-FAIL] 调用失败率 40%</div></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>模型调用 26.9</b></div>
 <h2>工具清单（26）</h2><ul><li><code>get_config</code> — 
                         Get the complete server configuration as JSON. Config includes fields for:
                         - blockedCommands (array of blocked </li><li><code>set_config_value</code> — 

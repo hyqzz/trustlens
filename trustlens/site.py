@@ -421,8 +421,9 @@ def _render_index(reports: list[ServerReport], lang: str) -> str:
     pct = lambda g: round(counts[g] * 100 / total, 0) if total else 0
 
     def dims_of(r: ServerReport) -> dict:
-        return {k: int(r.dimensions[k].value) if k in r.dimensions else 0
+        vals = {k: int(r.dimensions[k].value) if k in r.dimensions else 0
                 for k in ("functionality", "security", "compatibility")}
+        return {"f": vals["functionality"], "s": vals["security"], "c": vals["compatibility"]}
 
     data = [{
         "name": r.name, "slug": slugify(r.name), "score": r.total_score,

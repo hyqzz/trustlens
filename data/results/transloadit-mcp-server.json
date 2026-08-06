@@ -6,8 +6,8 @@
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 94.0,
-  "grade": "A",
+  "total_score": 83.3,
+  "grade": "B",
   "dimensions": {
     "functionality": {
       "value": 82.9,
@@ -34,17 +34,14 @@
       }
     },
     "compatibility": {
-      "value": 100.0,
+      "value": 28.6,
       "findings": [],
       "details": {
-        "success_rate": 1.0,
+        "success_rate": 0.286,
         "models": [
-          "claude",
-          "deepseek",
-          "gpt",
-          "qwen"
+          "deepseek"
         ],
-        "verdicts": 28
+        "verdicts": 7
       }
     }
   },

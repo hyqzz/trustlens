@@ -33,6 +33,12 @@ body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'PingFang SC','Micros
 .brand-name{font-weight:800;font-size:1.05rem;letter-spacing:.02em}
 .brand-name .en{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .brand-sub{opacity:.55;font-size:.8rem;margin-left:.15rem}
+.nav{display:flex;gap:.4rem;margin:.4rem 0 .3rem;flex-wrap:wrap}
+.nav a{font-size:.88rem;border:1px solid var(--line);border-radius:1.4em;padding:.22em .95em;text-decoration:none}
+.nav a.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.nav a:hover:not(.on){border-color:var(--accent)}
+.method{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:.55rem;padding:.5rem .85rem;font-size:.83rem;opacity:.85;margin:.8rem 0}
+.method b{opacity:1}
 .lang{margin-left:auto;font-size:.86rem;border:1px solid var(--line);border-radius:1.2em;padding:.18em .85em;text-decoration:none}
 .lang:hover{text-decoration:none;background:var(--bg-card)}
 h1{margin:.3rem 0 .2rem;font-size:1.65rem}
@@ -103,9 +109,9 @@ footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opaci
 <div class="brandbar"><span class="brand-logo">🛡️</span><span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span><a class="lang" href="../en/server/duckduckgo-search.html" onclick="tlSetLang()">English</a></div>
 <p><a href="../">← 返回排行榜</a></p>
 <h1>duckduckgo-search</h1>
-<p class="subtitle">信任分 <span class="score">99.8/100</span> · <span class="grade gA">A</span> 可信</p>
+<p class="subtitle">信任分 <span class="score">92.3/100</span> · <span class="grade gA">A</span> 可信</p>
 
-<h2>维度明细</h2><div class="dim"><b>功能性 100.0</b></div><div class="dim"><b>可靠性 99.1</b></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>兼容 100.0</b></div>
+<h2>维度明细</h2><div class="dim"><b>功能性 100.0</b></div><div class="dim"><b>可靠性 99.1</b></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>模型调用 50.0</b></div>
 <h2>工具清单（2）</h2><ul><li><code>search</code> — Search the web using DuckDuckGo. Returns a list of results with titles, URLs, and snippets. Use this to find current information, research topics, or locate spe</li><li><code>fetch_content</code> — Fetch and extract the main text content from a webpage. Strips out navigation, headers, footers, scripts, and styles to return clean readable text. Use this aft</li></ul>
 <footer>评测于 2026-08-06 09:35 UTC · 引擎版本 0.1.0 · 来源 community-popular</footer>
 </body></html>

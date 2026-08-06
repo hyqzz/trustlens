@@ -171,14 +171,14 @@ def evaluate_skill(cand: dict, llm: ToolUseProvider | None = None,
         else:
             llm_note = (err or "无输出")[:120]
 
-    # ---- 合成总分 ----
+    # ---- 合成总分（权重已是 100 制，勿再乘 100）----
     struct_ratio = min(struct / 100.0, 1.0)
     sec_ratio = max(sec, 0) / 100.0
     if llm_score is not None:
         total = 40 * struct_ratio + 30 * sec_ratio + 30 * (llm_score / 100)
     else:
         total = 60 * struct_ratio + 40 * sec_ratio
-    total = round(min(total * 100, 100), 1)
+    total = round(min(total, 100), 1)
 
     return {
         "name": cand["skill"],
