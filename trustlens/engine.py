@@ -10,6 +10,9 @@ from .protocol import McpStdioClient, ProtocolError
 
 MAX_TOOLS_TO_CALL = 5
 CALLS_PER_TOOL = 2
+# 连续 N 次协议超时即判定该服务器对真实调用不可用，跳过剩余探针。
+# 否则病理服务器每台可烧 calls×timeout（如 10×90s）的墙钟，拉爆 CI。
+MAX_CONSECUTIVE_TIMEOUTS = 2
 
 
 def _dummy_arguments(schema: dict) -> dict:
@@ -76,13 +79,19 @@ def evaluate_server(name: str, command: list[str], server_type: str = "mcp-serve
         latencies: list[float] = []
         callable_tools = 0
         attempts = failures = 0
+        consecutive_timeouts = 0
         for tool in tools[:max_tools]:
+            if consecutive_timeouts >= MAX_CONSECUTIVE_TIMEOUTS:
+                break
             tool_ok = False
             for _ in range(calls_per_tool):
+                if consecutive_timeouts >= MAX_CONSECUTIVE_TIMEOUTS:
+                    break
                 attempts += 1
                 try:
                     result, latency = client.call_tool(tool.name, _dummy_arguments(tool.schema))
                     latencies.append(latency)
+                    consecutive_timeouts = 0
                     # MCP 语义错误（isError: true）计为失败：工具被调用但未正确履职
                     if result.get("isError"):
                         failures += 1
@@ -90,6 +99,7 @@ def evaluate_server(name: str, command: list[str], server_type: str = "mcp-serve
                         tool_ok = True
                 except ProtocolError:
                     failures += 1
+                    consecutive_timeouts += 1
             if tool_ok:
                 callable_tools += 1
 

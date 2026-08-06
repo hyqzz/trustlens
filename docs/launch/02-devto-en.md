@@ -58,6 +58,7 @@ Every MCP server has a "model tool-call" score — not a static estimate, but **
 
 - Servers run in **env-stripped, sandboxed processes** — they get **zero credentials**
 - **Out-of-the-box criterion**: start via the standard `npx -y <pkg>`, no config, no API key; handshake must complete within 90s. This is deliberate: **a server that needs you to hunt for a key just to boot is unusable for most users**
+- **Fail-fast guardrail**: 2 consecutive tool-call timeouts → the server is judged unusable for calls and the remaining probes are skipped (otherwise one pathological server can stall an entire evaluation round)
 - Model tool-call scores come from real calls by **DeepSeek-V4 Flash** (cheapest tier)
 - Skills: structure completeness + security scan + model actionability judgment
 - Pipeline re-runs weekly and publishes automatically

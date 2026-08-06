@@ -223,25 +223,28 @@ class McpStdioClient:
         return result, time.monotonic() - start
 
     def close(self) -> None:
+        """关闭客户端。先强杀进程树再关管道；整个清理在守护线程中限时执行。
+
+        病态被测进程（不读 stdin / 子进程持有管道）会让 stdin.close() 或
+        terminate() 永久阻塞——必须让 close 有硬上限，绝不卡死评测线程。
+        """
         self._done.set()
+        t = threading.Thread(target=self._hard_close, daemon=True)
+        t.start()
+        t.join(5.0)
+
+    def _hard_close(self) -> None:
         try:
-            if self._proc.stdin:
-                self._proc.stdin.close()
+            self._kill_tree()
         except Exception:
             pass
-        try:
-            self._proc.terminate()
-            self._proc.wait(timeout=3)
-        except Exception:
+        for attr in ("stdin", "stdout", "stderr"):
             try:
-                self._proc.kill()
+                stream = getattr(self._proc, attr)
+                if stream is not None:
+                    stream.close()
             except Exception:
                 pass
-        try:
-            if self._proc.stdout:
-                self._proc.stdout.close()
-        except Exception:
-            pass
 
     def __enter__(self) -> "McpStdioClient":
         return self
