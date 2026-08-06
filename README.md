@@ -5,7 +5,7 @@
 > Trust benchmark for the agent capability ecosystem: automated, evidence-based trust scores for MCP servers and agent skills.
 
 [![weekly evaluation](https://github.com/hyqzz/trustlens/actions/workflows/evaluate.yml/badge.svg)](https://github.com/hyqzz/trustlens/actions/workflows/evaluate.yml)
-[![leaderboard](https://img.shields.io/badge/leaderboard-live-brightgreen)](https://hyqzz.github.io/trustlens/)
+[![leaderboard](https://img.shields.io/badge/leaderboard-live-brightgreen)](https://trustlens.icodestar.net/)
 
 ## 为什么需要 TrustLens
 
