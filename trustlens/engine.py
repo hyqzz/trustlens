@@ -39,8 +39,13 @@ def _finalize_failure(report: ServerReport, error: str) -> ServerReport:
 
 def evaluate_server(name: str, command: list[str], server_type: str = "mcp-server",
                     source: str = "", providers: list[ToolUseProvider] | None = None,
-                    timeout: float = 15.0) -> ServerReport:
-    """完整评测一个服务器：握手 → 列工具 → 静态检查 → 试调用 → 跨模型评估 → 计分。"""
+                    timeout: float = 15.0, quick: bool = False) -> ServerReport:
+    """完整评测一个服务器：握手 → 列工具 → 静态检查 → 试调用 → 跨模型评估 → 计分。
+
+    quick=True：减探针量（2 工具 × 1 次），用于每周快速复检（够判断是否退化）。
+    """
+    max_tools = 2 if quick else MAX_TOOLS_TO_CALL
+    calls_per_tool = 1 if quick else CALLS_PER_TOOL
     report = ServerReport(name=name, server_type=server_type, source=source)
     providers = providers if providers is not None else default_providers()
 
@@ -71,9 +76,9 @@ def evaluate_server(name: str, command: list[str], server_type: str = "mcp-serve
         latencies: list[float] = []
         callable_tools = 0
         attempts = failures = 0
-        for tool in tools[:MAX_TOOLS_TO_CALL]:
+        for tool in tools[:max_tools]:
             tool_ok = False
-            for _ in range(CALLS_PER_TOOL):
+            for _ in range(calls_per_tool):
                 attempts += 1
                 try:
                     result, latency = client.call_tool(tool.name, _dummy_arguments(tool.schema))

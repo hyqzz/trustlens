@@ -53,7 +53,28 @@ jobs:
           restore-keys: |
             uv-${{ runner.os }}-
 
-      # 只重测健康服务器（已失败的保持原样）。首次冷缓存较慢，之后走缓存。
+      # 冷缓存下评测慢的根因是 npx 串行下载（每包 15–60s × 100+ 包）。
+      # 先并行预暖 npm 缓存（同样执行不可信 npx 包，本步骤不含任何密钥），
+      # 评测阶段便全部命中缓存，下载只发生这一次并随 ~/.npm 缓存落库。
+      - name: Pre-warm npm cache (no secrets in this step)
+        timeout-minutes: 15
+        run: |
+          python - <<'PY' > /tmp/npx_pkgs.txt
+          import json
+          data = json.load(open("data/servers.json", encoding="utf-8"))
+          pkgs = set()
+          for s in data["servers"]:
+              if not s.get("enabled", True):
+                  continue
+              args = s.get("args", [])
+              if s.get("command") == "npx" and "-y" in args:
+                  pkgs.add(args[args.index("-y") + 1])
+          print("\n".join(sorted(pkgs)))
+          PY
+          xargs -P 12 -n 1 -a /tmp/npx_pkgs.txt \
+            bash -c 'timeout --kill-after=15s 120 npx -y "$0" --version >/dev/null 2>&1 || true'
+
+      # 只重测健康服务器（已失败的保持原样）。缓存被预暖后，本步骤基本只花纯评测时间。
       - name: Run evaluation (no secrets in this step)
         timeout-minutes: 90
         run: python -m trustlens evaluate-all --skip-f --timeout 90 --workers 4

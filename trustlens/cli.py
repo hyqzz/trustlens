@@ -101,7 +101,7 @@ def cmd_evaluate_all(args) -> int:
 
     def _run(s: dict):
         r = evaluate_server(s["name"], _resolve_command(s), s.get("type", "mcp-server"),
-                            s.get("source", ""), timeout=args.timeout)
+                            s.get("source", ""), timeout=args.timeout, quick=args.quick)
         report_mod.save_report(r)
         return r
 
@@ -190,6 +190,8 @@ def main(argv: list[str] | None = None) -> int:
     p_all.add_argument("--workers", type=int, default=4, help="并发评测数")
     p_all.add_argument("--skip-f", action="store_true",
                        help="跳过已有结果为失败/无工具的服务器（失败保持原样，周更提速）")
+    p_all.add_argument("--quick", action="store_true",
+                       help="快速模式：每服务器仅 2 工具 × 1 次试调用，用于每周快速复检")
     p_all.set_defaults(func=cmd_evaluate_all)
 
     p_mc = sub.add_parser("model-compat", help="用真实模型更新已存结果的跨模型兼容分（不执行服务器代码）")
