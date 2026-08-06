@@ -1,4 +1,4 @@
-# I benchmarked 12 MCP servers — all four official Python servers fail to start. So I built a trust benchmark.
+# I benchmarked 16 MCP servers — all four official Python servers fail to start. So I built a trust benchmark.
 
 > Project: https://github.com/hyqzz/trustlens
 > Live leaderboard (auto-updated weekly): https://trustlens.icodestar.net/en/
@@ -15,7 +15,7 @@ The ecosystem has app stores, but no review system. Thousands of products, no qu
 
 ## First real data: the official Python servers are all broken
 
-I ran my automated evaluation engine against 12 servers — official reference implementations and popular community projects:
+I ran my automated evaluation engine against 16 servers — official reference implementations and popular community projects:
 
 | Server | Source | Trust score | Verdict |
 |---|---|---|---|
@@ -26,7 +26,10 @@ I ran my automated evaluation engine against 12 servers — official reference i
 | playwright | Microsoft | 64.0 (C) | Big-tech built, middling score |
 | desktop-commander | community | 53.2 (D) | Hugely popular, worrying quality |
 | sequential-thinking | official | 47.2 (D) | Official, but D grade |
-| **time / fetch / git / sqlite** | official | 25.0 (F) | **None of them start** |
+| **duckduckgo-search** | community | **98.9 (A)** | **Top scorer** |
+| excel | community | 64.0 (C) | Middling |
+| commands | community | 64.0 (C) | Middling |
+| **time / fetch / git / sqlite / weather** | 4 official + 1 community | 25.0 (F) | **None of them start** |
 
 Three facts that should make you pause:
 

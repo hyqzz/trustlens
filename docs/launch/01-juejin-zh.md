@@ -1,4 +1,4 @@
-# 我实测了 12 个 MCP 服务器：官方 Python 系全军覆没 —— 所以我做了个"质检局"
+# 我实测了 16 个 MCP 服务器：官方 Python 系全军覆没 —— 所以我做了个"质检局"
 
 > 项目：https://github.com/hyqzz/trustlens
 > 排行榜（每周自动更新）：https://trustlens.icodestar.net/
@@ -15,7 +15,7 @@ MCP（Model Context Protocol）发布不到两年，公共服务器已经超过 
 
 ## 二、第一批实测数据：官方 Python 系全军覆没
 
-我用自己写的自动化评测引擎实测了 12 个服务器（含 MCP 官方参考实现和生态热门项目）：
+我用自己写的自动化评测引擎实测了 16 个服务器（含 MCP 官方参考实现和生态热门项目）：
 
 | 服务器 | 来源 | 信任分 | 结论 |
 |---|---|---|---|
@@ -26,7 +26,10 @@ MCP（Model Context Protocol）发布不到两年，公共服务器已经超过 
 | playwright | 微软 | 64.0 (C) | 大厂出品，分数一般 |
 | desktop-commander | 社区热门 | 53.2 (D) | 下载量大，质量堪忧 |
 | sequential-thinking | 官方 | 47.2 (D) | 官方出品只有 D |
-| **time / fetch / git / sqlite** | 官方 | 25.0 (F) | **全部起不来** |
+| **duckduckgo-search** | 社区 | **98.9 (A)** | **全场最高分** |
+| excel | 社区 | 64.0 (C) | 中等 |
+| commands | 社区 | 64.0 (C) | 中等 |
+| **time / fetch / git / sqlite / weather** | 官方4个+社区1个 | 25.0 (F) | **全部起不来** |
 
 三个让人坐不住的事实：
 
