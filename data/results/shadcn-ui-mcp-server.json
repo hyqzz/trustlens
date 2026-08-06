@@ -1,0 +1,116 @@
+{
+  "name": "shadcn-ui-mcp-server",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786011649.2671,
+  "engine_version": "0.1.0",
+  "ok": true,
+  "error": "",
+  "total_score": 82.0,
+  "grade": "B",
+  "dimensions": {
+    "functionality": {
+      "value": 70.0,
+      "findings": [],
+      "details": {
+        "tools_total": 4,
+        "tools_callable": 2
+      }
+    },
+    "reliability": {
+      "value": 70.0,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-FAIL",
+          "message": "调用失败率 50%"
+        }
+      ],
+      "details": {
+        "avg_latency_s": 0.254,
+        "failure_rate": 0.5,
+        "attempts": 8
+      }
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "success_rate": 1.0,
+        "models": [
+          "claude",
+          "deepseek",
+          "gpt",
+          "qwen"
+        ],
+        "verdicts": 16
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "list_shadcn_components",
+      "description": "Get a list of all available shadcn/ui components",
+      "schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "get_component_details",
+      "description": "Get detailed information about a specific shadcn/ui component",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "componentName": {
+            "type": "string",
+            "description": "Name of the shadcn/ui component (e.g., \"accordion\", \"button\")"
+          }
+        },
+        "required": [
+          "componentName"
+        ]
+      }
+    },
+    {
+      "name": "get_component_examples",
+      "description": "Get usage examples for a specific shadcn/ui component",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "componentName": {
+            "type": "string",
+            "description": "Name of the shadcn/ui component (e.g., \"accordion\", \"button\")"
+          }
+        },
+        "required": [
+          "componentName"
+        ]
+      }
+    },
+    {
+      "name": "search_components",
+      "description": "Search for shadcn/ui components by keyword",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query to find relevant components"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    }
+  ]
+}

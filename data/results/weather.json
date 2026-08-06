@@ -2,10 +2,10 @@
   "name": "weather",
   "server_type": "mcp-server",
   "source": "community",
-  "evaluated_at": 1785988163.5507407,
+  "evaluated_at": 1786008940.1641998,
   "engine_version": "0.1.0",
   "ok": false,
-  "error": "等待 initialize 响应超时（进程已退出，退出码 1） | stderr: Downloading cpython-3.13.14-linux-x86_64-gnu (download) (33.2MiB)\n Downloaded cpython-3.13.14-linux-x86_64-gnu (download)\nDownloading pydantic-core (2.0MiB)\n Downloaded pydantic-core\nInstalled 40 packages in 19ms\nPackage `mcp-weather` does not provide any executables.",
+  "error": "等待 initialize 响应超时（进程已退出，退出码 1） | stderr: Package `mcp-weather` does not provide any executables.",
   "total_score": 25.0,
   "grade": "F",
   "dimensions": {

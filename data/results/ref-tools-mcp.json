@@ -1,0 +1,85 @@
+{
+  "name": "ref-tools-mcp",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786011557.6737015,
+  "engine_version": "0.1.0",
+  "ok": true,
+  "error": "",
+  "total_score": 100.0,
+  "grade": "A",
+  "dimensions": {
+    "functionality": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "tools_total": 2,
+        "tools_callable": 2
+      }
+    },
+    "reliability": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "avg_latency_s": 0.0,
+        "failure_rate": 0.0,
+        "attempts": 4
+      }
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "success_rate": 1.0,
+        "models": [
+          "claude",
+          "deepseek",
+          "gpt",
+          "qwen"
+        ],
+        "verdicts": 8
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "ref_search_documentation",
+      "description": "Search for documentation on the web or github as well from private resources like repos and pdfs. Use Ref 'ref_read_url' to read the content of a url.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Query for documentation. Should include programming language and framework or library names. Searches public only docs by default, include ref_src=private to search a user's private docs."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "ref_read_url",
+      "description": "Read the content of a url as markdown. The EXACT url from a 'ref_search_documentation' result should be passed to this tool.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "The URL of the webpage to read."
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    }
+  ]
+}

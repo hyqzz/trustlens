@@ -1,0 +1,93 @@
+{
+  "name": "duckduckgo-mcp-server",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786011317.4486647,
+  "engine_version": "0.1.0",
+  "ok": true,
+  "error": "",
+  "total_score": 61.6,
+  "grade": "C",
+  "dimensions": {
+    "functionality": {
+      "value": 40.0,
+      "findings": [],
+      "details": {
+        "tools_total": 1,
+        "tools_callable": 0
+      }
+    },
+    "reliability": {
+      "value": 30.5,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-FAIL",
+          "message": "调用失败率 100%"
+        }
+      ],
+      "details": {
+        "avg_latency_s": 1.57,
+        "failure_rate": 1.0,
+        "attempts": 2
+      }
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "success_rate": 1.0,
+        "models": [
+          "claude",
+          "deepseek",
+          "gpt",
+          "qwen"
+        ],
+        "verdicts": 4
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "duckduckgo_web_search",
+      "description": "Performs a web search using the DuckDuckGo, ideal for general queries, news, articles, and online content. Use this for broad information gathering, recent events, or when you need diverse web sources. Supports content filtering and region-specific searches. Maximum 20 results per request.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query (max 400 chars)",
+            "maxLength": 400
+          },
+          "count": {
+            "type": "number",
+            "description": "Number of results (1-20, default 10)",
+            "minimum": 1,
+            "maximum": 20,
+            "default": 10
+          },
+          "safeSearch": {
+            "type": "string",
+            "description": "SafeSearch level (strict, moderate, off)",
+            "enum": [
+              "strict",
+              "moderate",
+              "off"
+            ],
+            "default": "moderate"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    }
+  ]
+}

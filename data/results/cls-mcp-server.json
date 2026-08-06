@@ -1,0 +1,972 @@
+{
+  "name": "cls-mcp-server",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786011225.1201,
+  "engine_version": "0.1.0",
+  "ok": true,
+  "error": "",
+  "total_score": 61.5,
+  "grade": "C",
+  "dimensions": {
+    "functionality": {
+      "value": 35.0,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "SCHEMA-BLOAT",
+          "message": "工具 GetAlarmLog 描述过长（2535 字符，加剧上下文膨胀）"
+        }
+      ],
+      "details": {
+        "tools_total": 20,
+        "tools_callable": 0
+      }
+    },
+    "reliability": {
+      "value": 40.0,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-FAIL",
+          "message": "调用失败率 100%"
+        }
+      ],
+      "details": {
+        "avg_latency_s": 0.037,
+        "failure_rate": 1.0,
+        "attempts": 10
+      }
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 95.0,
+      "findings": [],
+      "details": {
+        "success_rate": 0.95,
+        "models": [
+          "claude",
+          "deepseek",
+          "gpt",
+          "qwen"
+        ],
+        "verdicts": 80
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "SearchLog",
+      "description": "搜索CLS日志内容。在指定日志主题和时间范围内搜索日志，支持复杂查询语法和统计分析。\n\n重要：务必先使用 TextToSearchLogQuery 工具生成 CQL 查询语句！\nTextToSearchLogQuery 能自动适配日志主题索引配置，确保字段名称准确、语法正确。\n警告：如果不使用 TextToSearchLogQuery 生成 CQL，直接手写很可能出现字段名称错误、语法不规范等问题导致查询失败。\n\n与 DescribeLogHistogram 的分工：\n- SearchLog 支持 SQL 分析（管道符 |），可实现按时间分组统计、多维聚合等复杂分析，功能更强大，优先使用\n- DescribeLogHistogram 仅返回时间和计数两个维度，适用于不支持 SQL 分析的日志主题（如低频存储主题）\n\n后续操作：\n- 查看某条日志的上下文：使用返回结果中的 PkgId、PkgLogId、Time 调用 DescribeLogContext 工具\n\nCQL（Cloud Query Language）语法说明：\n1. 全文检索：直接输入关键词，如 error；多关键词空格分隔默认 OR 关系\n2. 键值检索：key:value 格式，如 level:ERROR、status:404\n3. 短语检索：双引号包裹，如 name:\"john Smith\"\n4. 模糊检索：* 匹配多字符，? 匹配单字符，如 host:www.test*.com\n5. 数值比较：支持 >、>=、<、<=、=，如 status:>400\n6. 范围检索：使用比较运算符组合，如 status:>=400 AND status:<500\n7. 逻辑运算符：AND、OR、NOT，支持括号组合，如 (level:ERROR OR level:WARNING) AND pid:1234\n8. SQL 分析（管道符 |）：\n   - 聚合统计：* | SELECT count(*) AS total\n   - 分组统计：* | SELECT count(*) AS cnt, level GROUP BY level\n   - 排序限制：* | SELECT count(*) AS cnt, host GROUP BY host ORDER BY cnt DESC LIMIT 10\n   - 条件过滤：* | SELECT * WHERE response_time > 1000",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "From": {
+            "type": "number",
+            "description": "查询起始时间，Unix时间戳（毫秒单位）。应当先调用 ConvertTimestampToTimeString 工具获取当前时间(不传timestamp参数就是获取当前时间)，基于时间字符串计算好From、To参数后，再调用 ConvertTimeStringToTimestamp 工具获取时间戳。To减去From的时间范围建议不要过大，建议默认近15分钟，否则会导致返回的数据过多，影响性能。"
+          },
+          "To": {
+            "type": "number",
+            "description": "查询结束时间，Unix时间戳（毫秒单位）。应当先调用 ConvertTimestampToTimeString 工具获取当前时间(不传timestamp参数就是获取当前时间)，基于时间字符串计算好From、To参数后，再调用 ConvertTimeStringToTimestamp 工具获取时间戳。To减去From的时间范围建议不要过大，建议默认近15分钟，否则会导致返回的数据过多，影响性能。"
+          },
+          "Query": {
+            "type": "string",
+            "description": "检索分析语句，最大长度为12KB。如果不限定检索条件，可传 * 或 空字符串，可查询所有日志"
+          },
+          "TopicId": {
+            "type": "string",
+            "description": "要检索分析的日志主题ID，仅能指定一个日志主题"
+          },
+          "Topics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "TopicId": {
+                  "type": "string",
+                  "description": "要检索分析的日志主题ID"
+                }
+              },
+              "additionalProperties": false
+            },
+            "description": "要检索分析的日志主题列表，最大支持50个日志主题"
+          },
+          "Sort": {
+            "type": "string",
+            "default": "desc",
+            "description": "原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为desc"
+          },
+          "Limit": {
+            "type": "number",
+            "default": 10,
+            "description": "单次查询返回的日志条数，默认为10，最大值为1000"
+          },
+          "Offset": {
+            "type": "number",
+            "default": 0,
+            "description": "查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0"
+          },
+          "SamplingRate": {
+            "type": "number",
+            "default": 1,
+            "description": "执行统计分析时是否对原始日志先进行采样，0：自动采样；0～1：按指定采样率采样；1：不采样"
+          },
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          }
+        },
+        "required": [
+          "From",
+          "To",
+          "Query",
+          "Region"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "DescribeLogContext",
+      "description": "获取指定日志的上下文内容（前后 N 条日志）。用于在定位到某条异常日志后，查看其前后的日志以分析问题根因。\n\n前置条件：需先使用 SearchLog 工具检索到目标日志，从返回结果的 Results 中获取 Time、PkgId、PkgLogId 三个必填参数。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "TopicId": {
+            "type": "string",
+            "description": "要检索分析的日志主题ID，仅能指定一个日志主题"
+          },
+          "Time": {
+            "type": "number",
+            "description": "日志时间，单位ms。通过 SearchLog 工具检索原始日志时，Results 结构体中会返回 Time 字段。"
+          },
+          "PkgId": {
+            "type": "string",
+            "description": "日志上报请求包的ID。通过 SearchLog 工具检索原始日志时，Results 结构体中会返回 PkgId 字段。"
+          },
+          "PkgLogId": {
+            "type": "number",
+            "description": "请求包内日志的ID。通过 SearchLog 工具检索原始日志时，Results 结构体中会返回 PkgLogId 字段。"
+          },
+          "PrevLogs": {
+            "type": "number",
+            "default": 10,
+            "description": "向前获取的日志条数，默认 10。"
+          },
+          "NextLogs": {
+            "type": "number",
+            "default": 10,
+            "description": "向后获取的日志条数，默认 10。"
+          },
+          "Query": {
+            "type": "string",
+            "description": "检索语句，对日志上下文进行过滤，不支持SQL语句。"
+          },
+          "From": {
+            "type": "number",
+            "description": "查询起始时间，Unix时间戳（毫秒单位），可选。应当先调用 ConvertTimestampToTimeString 工具获取当前时间(不传timestamp参数就是获取当前时间)，基于时间字符串计算好From、To参数后，再调用 ConvertTimeStringToTimestamp 工具获取时间戳。To减去From的时间范围建议不要过大，建议默认近15分钟，否则会导致返回的数据过多，影响性能。"
+          },
+          "To": {
+            "type": "number",
+            "description": "查询结束时间，Unix时间戳（毫秒单位），可选。应当先调用 ConvertTimestampToTimeString 工具获取当前时间(不传timestamp参数就是获取当前时间)，基于时间字符串计算好From、To参数后，再调用 ConvertTimeStringToTimestamp 工具获取时间戳。To减去From的时间范围建议不要过大，建议默认近15分钟，否则会导致返回的数据过多，影响性能。"
+          }
+        },
+        "required": [
+          "Region",
+          "TopicId",
+          "Time",
+          "PkgId",
+          "PkgLogId"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "TextToSearchLogQuery",
+      "description": "【CQL专家】AI 智能生成 CLS CQL 查询语句。将自然语言描述转换为可直接用于 SearchLog 或 DescribeLogHistogram 的 CQL 语句。\n\n核心优势：\n1. 自动适配日志主题索引配置，字段名称 100% 准确\n2. 严格遵循 CQL 语法规范，生成的语句保证可执行\n3. 查询性能经过优化，执行效率高\n4. 支持从简单过滤到复杂聚合的所有查询场景\n5. 自动进行语法校验，确保语句正确性\n\n警告：如果不使用本工具生成 CQL，直接手写一定会出现以下问题：\n- 字段名称错误，导致查询无结果\n- 语法不符合 CQL 规范，导致查询失败\n- 统计逻辑错误，导致结果不符合预期\n\n典型应用场景：\n- 简单过滤：\"查询 ERROR 级别日志\" → level:'error'\n- 字段统计：\"查看 IP 分布\" → * | SELECT IP, count(*) AS cnt GROUP BY IP ORDER BY cnt DESC\n- 复杂聚合：\"按小时统计各状态码数量\" → * | SELECT histogram(__TIMESTAMP__, INTERVAL 1 HOUR) AS hour, status_code, count(*) GROUP BY hour, status_code\n- 多维分析：\"按地域和业务分组，统计错误数>100的\" → level:ERROR | SELECT region, service, count(*) AS error_count GROUP BY region, service HAVING error_count > 100",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Text": {
+            "type": "string",
+            "description": "用户的自然语言查询描述，支持中文和英文。如：查询日志条数、Get error logs distribution over time。"
+          },
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "TopicId": {
+            "type": "string",
+            "description": "要检索分析的日志主题ID，仅能指定一个日志主题"
+          }
+        },
+        "required": [
+          "Text",
+          "Region",
+          "TopicId"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "DescribeIndex",
+      "description": "获取 CLS 日志主题索引配置。查询指定日志主题的索引配置信息，包括键值索引、元数据索引（TAG）和全文索引的详细配置。\n索引配置决定了日志哪些字段可以被搜索和分析，是日志检索和分析的基础配置。\n\n使用场景：生成检索语句时，推荐优先使用 TextToSearchLogQuery 工具（自动适配索引配置）。仅在需要手写 CQL 查询时，才使用本工具了解日志主题有哪些可检索字段及其类型。\n\n返回字段包含：字段名及其 type（类型）、sql_flag（是否支持 SQL 分析）、description（字段描述）；__TAG__（元数据索引）；__FULLTEXT__（全文索引）。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "TopicId": {
+            "type": "string",
+            "description": "日志主题 ID，需要查询索引配置的日志主题标识符。"
+          }
+        },
+        "required": [
+          "Region",
+          "TopicId"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "DescribeLogHistogram",
+      "description": "获取 CLS 日志直方图数据。查询指定日志主题在指定时间范围内的日志分布直方图，统计各时间段内匹配查询条件的日志数量。\n\n重要：本工具仅返回时间（BTime）和计数（Count）两个维度，无法做多字段聚合分析。\n- 如果日志主题支持 SQL 分析（标准存储），应优先使用 SearchLog 工具通过管道符 | 进行时间分组统计，功能更强大\n- 本工具适用于不支持 SQL 分析的日志主题（如低频存储主题），或只需快速查看日志量时间趋势的场景\n\nQuery 参数使用 CQL 语法，建议先使用 TextToSearchLogQuery 生成。\n\n返回信息包含：Interval（时间间隔）、TotalCount（总日志条数）、HistogramInfos（各时间段的 BTime 起始时间和 Count 日志计数）。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "TopicId": {
+            "type": "string",
+            "description": "日志主题 ID，需要查询直方图的日志主题标识符。"
+          },
+          "From": {
+            "type": "number",
+            "description": "查询起始时间，Unix时间戳（毫秒单位）。应当先调用 ConvertTimestampToTimeString 工具获取当前时间(不传timestamp参数就是获取当前时间)，基于时间字符串计算好From、To参数后，再调用 ConvertTimeStringToTimestamp 工具获取时间戳。To减去From的时间范围建议不要过大，建议默认近15分钟，否则会导致返回的数据过多，影响性能。"
+          },
+          "To": {
+            "type": "number",
+            "description": "查询结束时间，Unix时间戳（毫秒单位）。应当先调用 ConvertTimestampToTimeString 工具获取当前时间(不传timestamp参数就是获取当前时间)，基于时间字符串计算好From、To参数后，再调用 ConvertTimeStringToTimestamp 工具获取时间戳。To减去From的时间范围建议不要过大，建议默认近15分钟，否则会导致返回的数据过多，影响性能。"
+          },
+          "Query": {
+            "type": "string",
+            "description": "CQL 查询语句，用于过滤日志。使用 * 查询所有日志。"
+          },
+          "Interval": {
+            "type": "number",
+            "description": "统计时间间隔，单位毫秒。常用值：60000（1分钟）、300000（5分钟）、600000（10分钟）。不传则系统自动计算。"
+          }
+        },
+        "required": [
+          "Region",
+          "TopicId",
+          "From",
+          "To",
+          "Query"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "QueryMetric",
+      "description": "针对指标主题，查询指定时刻指标的最新值（瞬时查询）。使用 PromQL 语法对指标主题中的数据进行查询。注意：若该时刻向前推5分钟内均无指标数据，则无相应查询结果。\n\nPromQL 语法示例：\n- 简单查询：ETLProcessingTraffic\n- 速率计算：rate(http_requests_total[5m])\n- 聚合查询：sum(cpu_usage) by (instance)\n- 参考文档：https://cloud.tencent.com/document/product/614/90334",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "TopicId": {
+            "type": "string",
+            "description": "指标主题ID，通过 DescribeTopics 工具并指定 BizType 为 1 获取指标主题 ID。"
+          },
+          "Query": {
+            "type": "string",
+            "description": "查询语句，必须使用 PromQL 语法，如 access_evaluation_duration_bucket。注意：本参数仅接受 PromQL，严禁传入 CQL/SQL 语法（例如 *、SELECT、WHERE 等日志检索语句），否则会报错。参考文档：https://cloud.tencent.com/document/product/614/90334"
+          },
+          "Time": {
+            "type": "number",
+            "description": "查询时间，秒级 Unix 时间戳。为空时代表当前时间戳。如需指定时间，应当先调用 ConvertTimestampToTimeString 工具获取当前时间（不传 timestamp 参数即获取当前时间），基于时间字符串计算好目标时间后，再调用 ConvertTimeStringToTimestamp 工具并指定 unit 为 \"seconds\" 直接获取秒级时间戳传入。"
+          }
+        },
+        "required": [
+          "Region",
+          "TopicId",
+          "Query"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "QueryRangeMetric",
+      "description": "针对指标主题，查询指定时间范围内指标的变化趋势（范围查询）。使用 PromQL 语法对指标主题中的数据进行时序查询，返回区间内的时序数据。\n\nstep 参数建议：根据查询时间范围合理设置数据点密度\n- 1 小时内：step=60（每分钟）\n- 1 天内：step=300（每 5 分钟）\n- 1 周内：step=3600（每小时）\n- 1 月内：step=86400（每天）",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "TopicId": {
+            "type": "string",
+            "description": "指标主题ID，通过 DescribeTopics 工具并指定 BizType 为 1 获取指标主题 ID。"
+          },
+          "Query": {
+            "type": "string",
+            "description": "查询语句，必须使用 PromQL 语法，如 access_evaluation_duration_bucket。注意：本参数仅接受 PromQL，严禁传入 CQL/SQL 语法（例如 *、SELECT、WHERE 等日志检索语句），否则会报错。参考文档：https://cloud.tencent.com/document/product/614/90334"
+          },
+          "Start": {
+            "type": "number",
+            "description": "查询起始时间，秒级 Unix 时间戳。应当先调用 ConvertTimestampToTimeString 工具获取当前时间（不传 timestamp 参数即获取当前时间），基于时间字符串计算好目标时间后，再调用 ConvertTimeStringToTimestamp 工具并指定 unit 为 \"seconds\" 直接获取秒级时间戳传入。End减去Start的时间范围建议不要过大，建议默认近15分钟，否则会导致返回过多数据，影响性能。"
+          },
+          "End": {
+            "type": "number",
+            "description": "查询结束时间，秒级 Unix 时间戳。应当先调用 ConvertTimestampToTimeString 工具获取当前时间（不传 timestamp 参数即获取当前时间），基于时间字符串计算好目标时间后，再调用 ConvertTimeStringToTimestamp 工具并指定 unit 为 \"seconds\" 直接获取秒级时间戳传入。End减去Start的时间范围建议不要过大，建议默认近15分钟，否则会导致返回过多数据，影响性能。"
+          },
+          "Step": {
+            "type": "number",
+            "description": "查询时间间隔，单位秒。例如 60 表示每 60 秒一个数据点。"
+          }
+        },
+        "required": [
+          "Region",
+          "TopicId",
+          "Query",
+          "Start",
+          "End",
+          "Step"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "DescribeAlarms",
+      "description": "获取 CLS 告警策略列表。查询指定地域的告警策略列表，支持按告警策略启用状态等条件过滤和分页。\n\n支持的过滤条件（Filters 参数）：\n- name: 按告警策略名称过滤\n- alarmId: 按告警策略 ID 过滤\n- topicId: 按监控对象的日志主题 ID 过滤\n- enable: 按启用状态过滤（1=启用，0=禁用），如 [{Key: 'enable', Values: ['1']}]",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "Filters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Key": {
+                  "type": "string",
+                  "description": "过滤条件的键"
+                },
+                "Values": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "过滤条件的值列表"
+                }
+              },
+              "required": [
+                "Key",
+                "Values"
+              ],
+              "additionalProperties": false
+            },
+            "description": "过滤条件列表，每个过滤条件包含 Key 和 Values 字段。"
+          },
+          "Offset": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "分页偏移量，从 0 开始，默认为 0"
+          },
+          "Limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "description": "单页返回的数量，最大 100，默认 20"
+          }
+        },
+        "required": [
+          "Region"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "DescribeAlertRecordHistory",
+      "description": "获取 CLS 告警历史记录。查询指定时间范围内的告警历史记录，包含告警触发、恢复等事件的详细信息，用于分析告警趋势和排查告警问题。\n\n支持的过滤条件（Filters 参数）：\n- alarmId: 按告警策略 ID 过滤\n- alarmName: 按告警策略名称过滤\n- topicId: 按日志主题 ID 过滤\n- status: 按告警状态过滤（0-未恢复，1-已恢复）\n\n返回信息包含：TotalCount（总数）、Records 列表（每条记录含 RecordId、AlarmId、AlarmName、TopicId、TopicName、Region、Trigger、TriggerCount、AlarmLevel、Status、CreateTime、Duration、NotifyStatus）。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "From": {
+            "type": "number",
+            "description": "查询起始时间，Unix时间戳（毫秒单位）。应当先调用 ConvertTimestampToTimeString 工具获取当前时间(不传timestamp参数就是获取当前时间)，基于时间字符串计算好From、To参数后，再调用 ConvertTimeStringToTimestamp 工具获取时间戳。To减去From的时间范围建议不要过大，建议默认近15分钟，否则会导致返回的数据过多，影响性能。"
+          },
+          "To": {
+            "type": "number",
+            "description": "查询结束时间，Unix时间戳（毫秒单位）。应当先调用 ConvertTimestampToTimeString 工具获取当前时间(不传timestamp参数就是获取当前时间)，基于时间字符串计算好From、To参数后，再调用 ConvertTimeStringToTimestamp 工具获取时间戳。To减去From的时间范围建议不要过大，建议默认近15分钟，否则会导致返回的数据过多，影响性能。"
+          },
+          "Filters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Key": {
+                  "type": "string",
+                  "description": "过滤条件的键"
+                },
+                "Values": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "过滤条件的值列表"
+                }
+              },
+              "required": [
+                "Key",
+                "Values"
+              ],
+              "additionalProperties": false
+            },
+            "description": "过滤条件列表，每个过滤条件包含 Key 和 Values 字段。"
+          },
+          "Offset": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "分页偏移量，从 0 开始，默认为 0"
+          },
+          "Limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "description": "单页返回的数量，最大 100，默认 20"
+          }
+        },
+        "required": [
+          "Region",
+          "From",
+          "To"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "GetAlarmLog",
+      "description": "获取 CLS 告警执行详情日志。查询指定时间范围内的告警策略执行详情，使用方式类似 SearchLog，通过 Query 参数传入检索分析语句。\n\n常用查询语句（直接作为 Query 参数传入）：\n\n1. 查询执行详情列表（最常用）：\n   NOT condition_evaluate_result:\"Skip\" AND condition_evaluate_result:[* TO *] | SELECT __TIMESTAMP__ as timestamp, alert_id, alert_name, monitored_object, topic_type, trigger, condition_evaluate_result, notification_send_result, notify_type, silent, record_id, record_group_id, summary_cn ORDER BY timestamp DESC LIMIT 1000\n\n2. 按告警策略过滤执行详情：\n   alert_id:\"alarm-xxxx\" AND NOT condition_evaluate_result:\"Skip\" AND condition_evaluate_result:[* TO *] | SELECT __TIMESTAMP__ as timestamp, alert_id, alert_name, monitored_object, trigger, condition_evaluate_result, notification_send_result, notify_type, silent, summary_cn ORDER BY timestamp DESC LIMIT 1000\n\n3. 按监控对象过滤执行详情：\n   monitored_object:\"topic-id-xxxx\" AND NOT condition_evaluate_result:\"Skip\" AND condition_evaluate_result:[* TO *] | SELECT __TIMESTAMP__ as timestamp, alert_id, alert_name, monitored_object, trigger, condition_evaluate_result, notification_send_result, notify_type, silent, summary_cn ORDER BY timestamp DESC LIMIT 1000\n\n4. 查询执行失败的记录：\n   condition_evaluate_result:\"ProcessError\" | SELECT __TIMESTAMP__ as timestamp, alert_id, alert_name, monitored_object, trigger, condition_evaluate_result, summary_cn ORDER BY timestamp DESC LIMIT 1000\n\n5. 查询通知失败的记录：\n   (notification_send_result:\"SendFail\" OR notification_send_result:\"SendPartFail\") | SELECT __TIMESTAMP__ as timestamp, alert_id, alert_name, monitored_object, notification_send_result, summary_cn ORDER BY timestamp DESC LIMIT 1000\n\n6. 统计各告警策略执行次数 Top 50：\n   NOT condition_evaluate_result:\"Skip\" AND condition_evaluate_result:[* TO *] | SELECT alert_id, alert_name, count(*) AS total, count_if(condition_evaluate_result='ProcessError') AS failure_count, count_if(notification_send_result!='NotSend') AS notify_total, count_if(notification_send_result='SendFail' OR notification_send_result='SendPartFail') AS notify_failure_count GROUP BY alert_id, alert_name ORDER BY total DESC LIMIT 50\n\n常用过滤字段及枚举值：\n- alert_id: 告警策略ID\n- monitored_object: 监控对象（日志主题ID）\n- condition_evaluate_result: QueryResultMatch(满足) / QueryResultUnmatch(不满足) / ProcessError(执行失败) / Skip(跳过)\n- notification_send_result: SendSuccess(成功) / SendFail(失败) / SendPartFail(部分失败) / NotSend(未发送)\n\n分页说明：首次不传 Context；若返回 ListOver 为 false，用返回的 Context 获取后续数据。Context 有效期 1 小时，翻页时请勿修改其他参数，总计最多获取 1 万条。SQL 分析结果的分页请使用 LIMIT/OFFSET。\n\n返回信息：SQL 分析时返回 AnalysisRecords；非 SQL 查询时返回 Results 列表（每条含 Time、LogJson）、Context（分页标识）、ListOver（是否查询完毕）。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "From": {
+            "type": "number",
+            "description": "查询起始时间，Unix时间戳（毫秒单位）。应当先调用 ConvertTimestampToTimeString 工具获取当前时间(不传timestamp参数就是获取当前时间)，基于时间字符串计算好From、To参数后，再调用 ConvertTimeStringToTimestamp 工具获取时间戳。To减去From的时间范围建议不要过大，建议默认近15分钟，否则会导致返回的数据过多，影响性能。"
+          },
+          "To": {
+            "type": "number",
+            "description": "查询结束时间，Unix时间戳（毫秒单位）。应当先调用 ConvertTimestampToTimeString 工具获取当前时间(不传timestamp参数就是获取当前时间)，基于时间字符串计算好From、To参数后，再调用 ConvertTimeStringToTimestamp 工具获取时间戳。To减去From的时间范围建议不要过大，建议默认近15分钟，否则会导致返回的数据过多，影响性能。"
+          },
+          "Query": {
+            "type": "string",
+            "description": "检索分析语句，支持 CLS 查询语法。使用 * 查询所有告警执行详情，支持管道符 | 进行 SQL 分析。"
+          },
+          "Limit": {
+            "type": "number",
+            "default": 100,
+            "description": "单次返回条数，最大 1000，默认 100。"
+          },
+          "Context": {
+            "type": "string",
+            "description": "上下文标识符，用于分页查询获取后续数据。有效期 1 小时，翻页时请勿修改其他参数。"
+          },
+          "Sort": {
+            "type": "string",
+            "default": "desc",
+            "description": "排序方式：asc（升序）、desc（降序），默认 desc。"
+          }
+        },
+        "required": [
+          "Region",
+          "From",
+          "To",
+          "Query"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "DescribeAlarmNotices",
+      "description": "获取 CLS 通知渠道组列表。查询指定地域下的通知渠道组列表，通知渠道组用于配置告警通知的接收方式和接收人，包括邮件、短信、电话、企业微信等。\n\n支持的过滤条件（Filters 参数）：\n- name: 按通知渠道组名称过滤\n- alarmNoticeId: 按通知渠道组 ID 过滤\n\n返回信息包含：AlarmNoticeId、Name、NoticeReceivers、WebCallbacks、CreateTime、UpdateTime 等。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "Filters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Key": {
+                  "type": "string",
+                  "description": "过滤条件的键"
+                },
+                "Values": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "过滤条件的值列表"
+                }
+              },
+              "required": [
+                "Key",
+                "Values"
+              ],
+              "additionalProperties": false
+            },
+            "description": "过滤条件列表，每个过滤条件包含 Key 和 Values 字段。"
+          },
+          "Offset": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "分页偏移量，从 0 开始，默认为 0"
+          },
+          "Limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "description": "单页返回的数量，最大 100，默认 20"
+          }
+        },
+        "required": [
+          "Region"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "DescribeAlarmShields",
+      "description": "获取 CLS 告警屏蔽规则列表。查询指定通知渠道组下的告警屏蔽规则，屏蔽规则用于在特定时间段内屏蔽告警通知，避免维护期间产生大量告警噪音。\n\n应用场景：\n1. 查看某个通知渠道组下配置的所有屏蔽规则\n2. 查询当前生效的屏蔽规则（按状态过滤）\n3. 审计和管理告警屏蔽配置\n\n支持的过滤条件（Filters 参数）：\n- shieldId: 按屏蔽规则 ID 过滤，如 [{Key: 'shieldId', Values: ['shield-xxx']}]\n- name: 按屏蔽规则名称过滤，如 [{Key: 'name', Values: ['维护屏蔽']}]\n- status: 按状态过滤（enabled=启用，disabled=禁用），如 [{Key: 'status', Values: ['enabled']}]",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "AlarmNoticeId": {
+            "type": "string",
+            "description": "通知渠道组 ID，必填参数。可通过 DescribeAlarmNotices 工具获取。"
+          },
+          "Filters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Key": {
+                  "type": "string",
+                  "description": "过滤条件的键"
+                },
+                "Values": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "过滤条件的值列表"
+                }
+              },
+              "required": [
+                "Key",
+                "Values"
+              ],
+              "additionalProperties": false
+            },
+            "description": "过滤条件列表，每个过滤条件包含 Key 和 Values 字段。"
+          },
+          "Offset": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "分页偏移量，从 0 开始，默认为 0"
+          },
+          "Limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "description": "单页返回的数量，最大 100，默认 20"
+          }
+        },
+        "required": [
+          "Region",
+          "AlarmNoticeId"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "DescribeNoticeContents",
+      "description": "获取 CLS 通知内容模板列表。查询指定地域下的通知内容模板，模板定义告警触发和恢复时的消息内容，支持邮件、短信、企业微信、Webhook 等渠道。\n\n支持的过滤条件（Filters 参数）：\n- name: 按模板名称过滤\n- noticeContentId: 按模板 ID 过滤\n\n返回信息包含：NoticeContentId、Name、Type、NoticeContents（各渠道内容配置）、CreateTime、UpdateTime 等。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "Filters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Key": {
+                  "type": "string",
+                  "description": "过滤条件的键"
+                },
+                "Values": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "过滤条件的值列表"
+                }
+              },
+              "required": [
+                "Key",
+                "Values"
+              ],
+              "additionalProperties": false
+            },
+            "description": "过滤条件列表，每个过滤条件包含 Key 和 Values 字段。"
+          },
+          "Offset": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "分页偏移量，从 0 开始，默认为 0"
+          },
+          "Limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "description": "单页返回的数量，最大 100，默认 20"
+          }
+        },
+        "required": [
+          "Region"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "DescribeWebCallbacks",
+      "description": "获取 CLS 告警回调配置列表。查询指定地域下的 Webhook 回调配置，用于在告警触发或恢复时向指定 URL 发送 HTTP 通知，常用于与第三方监控系统或自动化运维系统集成。\n\n支持的过滤条件（Filters 参数）：\n- name: 按回调配置名称过滤\n- callbackId: 按回调配置 ID 过滤\n\n返回信息包含：CallbackId、Name、Url、Method、Headers、Body、CreateTime、UpdateTime 等。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "Filters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Key": {
+                  "type": "string",
+                  "description": "过滤条件的键"
+                },
+                "Values": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "过滤条件的值列表"
+                }
+              },
+              "required": [
+                "Key",
+                "Values"
+              ],
+              "additionalProperties": false
+            },
+            "description": "过滤条件列表，每个过滤条件包含 Key 和 Values 字段。"
+          },
+          "Offset": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "分页偏移量，从 0 开始，默认为 0"
+          },
+          "Limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "description": "单页返回的数量，最大 100，默认 20"
+          }
+        },
+        "required": [
+          "Region"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "GetAlarmDetail",
+      "description": "通过告警详情 URL 获取 CLS 告警的详细信息。从告警通知中的 URL 提取并解析告警信息，支持短链接和长链接格式。\n\n支持的 URL 格式：\n1. 短链接：https://alarm.cls.tencentcs.com/WeNZ5sSP\n2. 短链接：https://mc.tencent.com/xxx\n3. 长链接：https://ap-guangzhou-monitor.cls.tencentcs.com/cls_no_login?action=GetAlertDetailPage#/alert?RecordId=xxx\n\n返回 Markdown 格式的告警详细信息，包含：\n- 告警基本信息（名称、ID、地域）\n- 告警详细数据（监控对象、触发时间、持续时间、触发条件）\n- 触发语句（CQL 查询）\n- 多维分析结果（字段分布、查询结果表格）\n\n应用场景：直接粘贴告警通知中的 URL 即可获取完整告警信息，用于快速排查和分析。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "AlarmDetailUrl": {
+            "type": "string",
+            "description": "告警详情 URL，支持短链接和长链接格式。"
+          }
+        },
+        "required": [
+          "AlarmDetailUrl"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "DescribeTopics",
+      "description": "按名称搜索日志主题或指标主题信息，返回主题 ID、名称、保留周期等信息。\n\n支持的过滤条件：\n- TopicId：按主题 ID 过滤（精确匹配）\n- TopicName：按主题名称过滤（默认模糊匹配）\n- LogsetId：按日志集 ID 过滤（精确匹配）\n- LogsetName：按日志集名称过滤（默认模糊匹配）\n\nPreciseSearch 控制模糊/精确匹配：0=两者均模糊（默认），1=TopicName 精确，2=LogsetName 精确，3=两者均精确。\n\n返回信息包含：TopicId、TopicName、LogsetId、LogsetName、Region、StorageType（hot/cold）、Period。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "TopicId": {
+            "type": "string",
+            "description": "按主题 ID 过滤（精确匹配）。"
+          },
+          "TopicName": {
+            "type": "string",
+            "description": "按主题名称过滤。默认模糊匹配；设置 PreciseSearch=1 或 3 可切换为精确匹配。"
+          },
+          "LogsetId": {
+            "type": "string",
+            "description": "按日志集 ID 过滤（精确匹配）。"
+          },
+          "LogsetName": {
+            "type": "string",
+            "description": "按日志集名称过滤。默认模糊匹配；设置 PreciseSearch=2 或 3 可切换为精确匹配。"
+          },
+          "PreciseSearch": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3,
+            "default": 0,
+            "description": "控制 TopicName / LogsetName 的精确/模糊匹配：0=两者均模糊（默认），1=TopicName 精确，2=LogsetName 精确，3=两者均精确。对 TopicId / LogsetId 无效（始终精确匹配）。"
+          },
+          "Offset": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "分页偏移量，从 0 开始，默认为 0"
+          },
+          "Limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "description": "单页返回的数量，最大 100，默认 20"
+          },
+          "BizType": {
+            "type": "integer",
+            "default": 0,
+            "description": "主题类型。0：日志主题（默认值）；1：指标主题。查询指标主题时需传入 1。"
+          }
+        },
+        "required": [
+          "Region"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "DescribeLogsets",
+      "description": "获取 CLS 日志集列表。查询指定地域下的日志集，支持按日志集名称、日志集 ID 过滤。\n\n日志集是日志主题的容器，用于区分不同项目。当多个项目存在同名日志主题时，可通过日志集区分。\n\n支持的过滤条件：\n- LogsetName：按日志集名称过滤（模糊匹配）\n- LogsetId：按日志集 ID 过滤（精确匹配）\n返回信息包含：LogsetId（日志集 ID）、LogsetName（日志集名称）、Region（地域）、CreateTime（创建时间）、TopicCount（日志主题数目）、MetricTopicCount（指标主题数目）。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "string",
+            "description": "地域信息，必选，如：ap-guangzhou。"
+          },
+          "LogsetId": {
+            "type": "string",
+            "description": "按日志集 ID 过滤（精确匹配）。"
+          },
+          "LogsetName": {
+            "type": "string",
+            "description": "按日志集名称过滤。模糊匹配。"
+          },
+          "Offset": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "分页偏移量，从 0 开始，默认为 0"
+          },
+          "Limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "description": "单页返回的数量，最大 100，默认 20"
+          }
+        },
+        "required": [
+          "Region"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "GetRegionCodeByName",
+      "description": "按地域名称搜索腾讯云地域参数代码（如\"广州\"→\"ap-guangzhou\"），支持中文和英文名称模糊匹配。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "searchText": {
+            "type": "string",
+            "description": "地域名称，如 Hong Kong 或 广州"
+          },
+          "language": {
+            "type": "string",
+            "default": "zh-CN",
+            "description": "搜索文本的语言，\"zh-CN\"（中文，默认）或 \"en-US\"（英文）"
+          }
+        },
+        "required": [
+          "searchText"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "ConvertTimeStringToTimestamp",
+      "description": "将时间字符串转换为毫秒或秒级时间戳。常用于为 SearchLog、DescribeLogHistogram 等工具的 From/To 参数准备时间戳。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "timeString": {
+            "type": "string",
+            "description": "要转换的时间字符串，如 2026-01-07T02:34:53.623Z。强烈建议使用 ISO 8601 格式（YYYY-MM-DDTHH:mm:ss.sssZ）。若非 ISO 8601 格式，必须同时提供 timeFormat 参数。"
+          },
+          "timeFormat": {
+            "type": "string",
+            "default": "YYYY-MM-DDTHH:mm:ss.sssZ",
+            "description": "时间格式，如 YYYY-MM-DDTHH:mm:ss.sssZ。默认 ISO 8601 格式。若 timeString 非 ISO 8601 格式则必须提供。"
+          },
+          "timeZone": {
+            "type": "string",
+            "default": "Asia/Singapore",
+            "description": "时区，如 Asia/Shanghai。若 timeString 不含时区偏移信息则必须提供。"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "milliseconds",
+              "seconds"
+            ],
+            "default": "milliseconds",
+            "description": "返回时间戳的单位。\"milliseconds\"（毫秒，默认）或 \"seconds\"（秒）。"
+          }
+        },
+        "required": [
+          "timeString"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "ConvertTimestampToTimeString",
+      "description": "将时间戳转换为时间字符串。不传 timestamp 参数时返回当前时间，常用于获取当前时间后计算 SearchLog 等工具所需的时间范围。",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "number",
+            "description": "要转换的时间戳。不传则返回当前时间。单位由 unit 参数决定。"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "milliseconds",
+              "seconds"
+            ],
+            "default": "milliseconds",
+            "description": "输入时间戳的单位。\"milliseconds\"（毫秒，默认）或 \"seconds\"（秒）。"
+          },
+          "timeFormat": {
+            "type": "string",
+            "default": "YYYY-MM-DDTHH:mm:ss.sssZ",
+            "description": "输出时间格式，如 YYYY-MM-DDTHH:mm:ss.sssZ。默认 ISO 8601 格式。"
+          },
+          "timeZone": {
+            "type": "string",
+            "default": "Asia/Singapore",
+            "description": "输出时区，如 Asia/Shanghai。默认使用系统时区。"
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    }
+  ]
+}

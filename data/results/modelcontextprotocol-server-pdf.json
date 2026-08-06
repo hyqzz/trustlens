@@ -1,0 +1,54 @@
+{
+  "name": "@modelcontextprotocol/server-pdf",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786009405.567886,
+  "engine_version": "0.1.0",
+  "ok": false,
+  "error": "等待 initialize 响应超时（进程已退出，退出码 1） | stderr: 7/node_modules/@modelcontextprotocol/server-pdf/dist/index.js:34418:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  code: 'EADDRINUSE',\n  errno: -4091,\n  syscall: 'listen',\n  address: '::',\n  port: 3001\n}",
+  "total_score": 25.0,
+  "grade": "F",
+  "dimensions": {
+    "functionality": {
+      "value": 0.0,
+      "findings": [
+        {
+          "severity": "critical",
+          "code": "FUNC-HANDSHAKE",
+          "message": "协议握手失败"
+        }
+      ],
+      "details": {}
+    },
+    "reliability": {
+      "value": 0.0,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-NONE",
+          "message": "无可测调用"
+        }
+      ],
+      "details": {}
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 0.0,
+      "findings": [
+        {
+          "severity": "info",
+          "code": "COMPAT-NONE",
+          "message": "未执行跨模型评估"
+        }
+      ],
+      "details": {}
+    }
+  },
+  "tools": []
+}

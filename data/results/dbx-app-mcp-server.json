@@ -1,0 +1,495 @@
+{
+  "name": "@dbx-app/mcp-server",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786009127.1009772,
+  "engine_version": "0.1.0",
+  "ok": true,
+  "error": "",
+  "total_score": 64.0,
+  "grade": "C",
+  "dimensions": {
+    "functionality": {
+      "value": 40.0,
+      "findings": [],
+      "details": {
+        "tools_total": 12,
+        "tools_callable": 0
+      }
+    },
+    "reliability": {
+      "value": 40.0,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-FAIL",
+          "message": "调用失败率 100%"
+        }
+      ],
+      "details": {
+        "avg_latency_s": 0.002,
+        "failure_rate": 1.0,
+        "attempts": 10
+      }
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "success_rate": 1.0,
+        "models": [
+          "claude",
+          "deepseek",
+          "gpt",
+          "qwen"
+        ],
+        "verdicts": 48
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "dbx_add_connection",
+      "description": "Add a new database connection to DBX",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "required": [
+          "name",
+          "db_type",
+          "host"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "db_type": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "port": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "uint16",
+            "minimum": 0,
+            "maximum": 65535
+          },
+          "username": {
+            "type": "string",
+            "default": ""
+          },
+          "password": {
+            "type": "string",
+            "default": ""
+          },
+          "database": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ssl": {
+            "type": "boolean",
+            "default": false
+          },
+          "driver_profile": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "dbx_close_session",
+      "description": "Close a stateful query session and release its pinned backend connection",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "required": [
+          "session_id"
+        ],
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "description": "Session ID returned by dbx_open_session",
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "dbx_describe_table",
+      "description": "Get column definitions for a table",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "required": [
+          "table"
+        ],
+        "type": "object",
+        "properties": {
+          "connection_id": {
+            "description": "Unique ID of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "connection_name": {
+            "description": "Name of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "table": {
+            "description": "Table name",
+            "type": "string"
+          },
+          "database": {
+            "description": "Database name",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "schema": {
+            "description": "Schema name",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "dbx_execute_and_show",
+      "description": "Execute a SQL query in DBX desktop app UI and show results there. Requires DBX to be running.",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "required": [
+          "sql"
+        ],
+        "type": "object",
+        "properties": {
+          "connection_id": {
+            "description": "Unique ID of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "connection_name": {
+            "description": "Name of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sql": {
+            "type": "string"
+          },
+          "database": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "dbx_execute_query",
+      "description": "Execute a SQL query on a database connection (max 100 rows returned)",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "required": [
+          "sql"
+        ],
+        "type": "object",
+        "properties": {
+          "connection_id": {
+            "description": "Unique ID of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "connection_name": {
+            "description": "Name of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "database": {
+            "description": "Database name",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sql": {
+            "description": "SQL query to execute",
+            "type": "string"
+          },
+          "session_id": {
+            "description": "Session ID from dbx_open_session. When set, the query runs on the session's pinned connection, preserving USE/SET and other session state across calls.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "dbx_execute_redis_command",
+      "description": "Execute a Redis command on a Redis connection",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "required": [
+          "command"
+        ],
+        "type": "object",
+        "properties": {
+          "connection_id": {
+            "description": "Unique ID of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "connection_name": {
+            "description": "Name of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "db": {
+            "description": "Redis logical database number",
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "uint32",
+            "minimum": 0
+          },
+          "command": {
+            "description": "Redis command to execute, for example GET mykey or INFO",
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "dbx_get_schema_context",
+      "description": "Get compact table and column context for writing SQL",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {
+          "connection_id": {
+            "description": "Unique ID of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "connection_name": {
+            "description": "Name of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "database": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "schema": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "tables": {
+            "description": "Specific table names to include",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "max_tables": {
+            "description": "Maximum number of tables to include, from 1 to 20",
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "uint",
+            "minimum": 0
+          }
+        },
+        "type": "object"
+      }
+    },
+    {
+      "name": "dbx_list_connections",
+      "description": "List database connections configured in DBX. Returns connection IDs, names, database types, endpoints, and selected databases.",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object"
+      }
+    },
+    {
+      "name": "dbx_list_tables",
+      "description": "List tables and views for a database connection",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {
+          "connection_id": {
+            "description": "Unique ID of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "connection_name": {
+            "description": "Name of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "database": {
+            "description": "Database name",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "schema": {
+            "description": "Schema name",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      }
+    },
+    {
+      "name": "dbx_open_session",
+      "description": "Open a stateful query session pinned to a single backend connection. Returns a session ID for dbx_execute_query: USE, SET CATALOG, session variables and temporary tables persist across calls within the session. Close with dbx_close_session when done; idle sessions expire after 30 minutes.",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {
+          "connection_id": {
+            "description": "Unique ID of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "connection_name": {
+            "description": "Name of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "database": {
+            "description": "Database name",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      }
+    },
+    {
+      "name": "dbx_open_table",
+      "description": "Open a table in DBX desktop app. Requires DBX to be running.",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "required": [
+          "table"
+        ],
+        "type": "object",
+        "properties": {
+          "connection_id": {
+            "description": "Unique ID of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "connection_name": {
+            "description": "Name of the DBX connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "table": {
+            "type": "string"
+          },
+          "database": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "schema": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "dbx_remove_connection",
+      "description": "Remove a database connection from DBX",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "required": [
+          "connection_name"
+        ],
+        "type": "object",
+        "properties": {
+          "connection_name": {
+            "type": "string"
+          },
+          "connection_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

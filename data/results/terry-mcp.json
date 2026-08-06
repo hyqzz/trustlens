@@ -1,0 +1,71 @@
+{
+  "name": "terry-mcp",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786011753.883069,
+  "engine_version": "0.1.0",
+  "ok": true,
+  "error": "",
+  "total_score": 100.0,
+  "grade": "A",
+  "dimensions": {
+    "functionality": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "tools_total": 1,
+        "tools_callable": 1
+      }
+    },
+    "reliability": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "avg_latency_s": 0.054,
+        "failure_rate": 0.0,
+        "attempts": 2
+      }
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "success_rate": 1.0,
+        "models": [
+          "claude",
+          "deepseek",
+          "gpt",
+          "qwen"
+        ],
+        "verdicts": 4
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "create",
+      "description": "Create a new task in Terry with a message",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "The task message to create in Terry."
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    }
+  ]
+}

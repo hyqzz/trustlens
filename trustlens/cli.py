@@ -71,17 +71,27 @@ def cmd_check(args) -> int:
 
 
 def cmd_evaluate_all(args) -> int:
+    from concurrent.futures import ThreadPoolExecutor
+
     servers = _load_servers()
-    print(f"开始评测 {len(servers)} 个能力单元…")
-    failed = 0
-    for s in servers:
+    print(f"开始评测 {len(servers)} 个能力单元（并发 {args.workers}）…")
+
+    def _run(s: dict):
         r = evaluate_server(s["name"], _resolve_command(s), s.get("type", "mcp-server"),
                             s.get("source", ""), timeout=args.timeout)
-        _print_report(r)
         report_mod.save_report(r)
-        if not r.ok:
-            failed += 1
-    print(f"\n完成：{len(servers) - failed}/{len(servers)} 成功")
+        return r
+
+    results = []
+    with ThreadPoolExecutor(max_workers=args.workers) as ex:
+        futures = [ex.submit(_run, s) for s in servers]
+        for i, f in enumerate(futures, 1):
+            r = f.result()
+            _print_report(r)
+            print(f"[{i}/{len(servers)}]")
+            results.append(r)
+    failed = sum(1 for r in results if not r.ok)
+    print(f"\n完成：{len(results) - failed}/{len(results)} 成功")
     return 0
 
 
@@ -108,7 +118,8 @@ def main(argv: list[str] | None = None) -> int:
     p_check.set_defaults(func=cmd_check)
 
     p_all = sub.add_parser("evaluate-all", help="评测清单中的全部服务器")
-    p_all.add_argument("--timeout", type=float, default=15.0)
+    p_all.add_argument("--timeout", type=float, default=90.0, help="单请求超时秒数")
+    p_all.add_argument("--workers", type=int, default=4, help="并发评测数")
     p_all.set_defaults(func=cmd_evaluate_all)
 
     p_site = sub.add_parser("build-site", help="生成静态排行榜网站")

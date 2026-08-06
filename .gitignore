@@ -7,11 +7,16 @@ dist/
 .venv/
 venv/
 .pytest_cache/
-site/dist/
 .DS_Store
 Thumbs.db
 
+# 评测副产物（被测服务器可能写入工作区）
 trustlens-probe
-
 probe.sqlite
 memory.json
+*.xlsx
+logs/
+%SystemDrive%/
+deploy/_*.json
+deploy/_*.js
+deploy/*.log

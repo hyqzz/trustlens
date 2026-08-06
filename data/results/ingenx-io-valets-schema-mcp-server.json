@@ -1,0 +1,226 @@
+{
+  "name": "@ingenx-io/valets-schema-mcp-server",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786009225.4838808,
+  "engine_version": "0.1.0",
+  "ok": true,
+  "error": "",
+  "total_score": 79.3,
+  "grade": "B",
+  "dimensions": {
+    "functionality": {
+      "value": 58.0,
+      "findings": [],
+      "details": {
+        "tools_total": 10,
+        "tools_callable": 3
+      }
+    },
+    "reliability": {
+      "value": 76.0,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-FAIL",
+          "message": "调用失败率 40%"
+        }
+      ],
+      "details": {
+        "avg_latency_s": 0.028,
+        "failure_rate": 0.4,
+        "attempts": 10
+      }
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "success_rate": 1.0,
+        "models": [
+          "claude",
+          "deepseek",
+          "gpt",
+          "qwen"
+        ],
+        "verdicts": 40
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "schema_overview",
+      "description": "Get a compact index of the entire Valets data model — every model and enum with a one-line summary. Start here, then call get_schema(name) for full detail. Pass { full: true } for the verbose summary (large; may exceed client output limits).",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "full": {
+            "description": "Return the full verbose llms.txt summary (~37k tokens) inline instead of the compact index. Default false.",
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    {
+      "name": "snapshot_info",
+      "description": "Report the provenance and freshness of the schema data this server is serving: when the snapshot was generated, how old it is, the package version, and whether it is stale. Call this to VERIFY you are reasoning against a current contract before drawing conclusions from the schema — a bundled snapshot can be arbitrarily old and is otherwise indistinguishable from a fresh one (GH#174).",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "get_schema",
+      "description": "Get the JSON Schema definition for a specific model or enum. Use kebab-case names (e.g. 'order', 'payment-status', 'customer-payment').",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Schema name in kebab-case (e.g. 'order', 'payment-method', 'customer-payment-allocation')"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    {
+      "name": "get_doc",
+      "description": "Get the raw Markdown documentation for a schema page. Use slugs like 'models/order', 'enums/payment-status', 'decisions/summary'.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "Document slug (e.g. 'models/order', 'enums/payment-method', 'decisions/summary')"
+          }
+        },
+        "required": [
+          "slug"
+        ]
+      }
+    },
+    {
+      "name": "search_docs",
+      "description": "Search across all documentation pages for a keyword or phrase. Results are ranked so that definitions (field/property headings, schema tables) come first and example-JSON lines last; field hits are reported as `Model:field`. Returns the top matches with their best matching line.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search keyword or phrase (e.g. 'paymentMethod', 'loyalty', 'immutable')"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "list_decisions",
+      "description": "List all data model decisions (D00-D37+) with their status and summary.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "get_decision",
+      "description": "Get full details for a specific data model decision by ID (e.g. 'D12', 'D22').",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Decision ID (e.g. 'D01', 'D12', 'D22')"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "get_openapi",
+      "description": "Get the OpenAPI 3.1 spec. Filter to a single component schema by name (PascalCase, e.g. 'Order'). With no component, returns a compact index of available component names — NOT the whole spec, which is ~88k tokens and exceeds client limits. Pass { full: true } to get the entire spec inline.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "component": {
+            "description": "PascalCase component name to extract (e.g. 'Order', 'OrderCreate', 'PaymentMethod')",
+            "type": "string"
+          },
+          "full": {
+            "description": "Return the entire OpenAPI spec (~88k tokens) inline. Default false → component index when no component is given.",
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_guidance",
+      "description": "Get use-case recipes showing which MCP tools to call and in what order. Call with no arguments for an index of all recipes, or pass a slug to get the full recipe detail.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "slug": {
+            "description": "Recipe slug (e.g. 'write-model-code', 'field-history', 'whatsapp-conversation-display'). Omit to list all recipes.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "validate_document",
+      "description": "Validate a candidate document against the CANONICAL Zod schema for a model (D72). This is a real oracle, not a shape check: it runs the same Zod schema the backend runs, so cross-field .refine() rules are enforced (signed quantity, WhatsApp kind⇄payload exclusivity, price/priceDelta XOR, …) — rules the published JSON Schema physically cannot carry. Returns { valid, errors: [{ path, message, code }], strippedKeys }; code 'custom' is a cross-field rule. IMPORTANT (GH#221): the read schema STRIPS unknown keys rather than rejecting them (capture-first, D62 — a live document may carry an un-modelled field), so a document with fields the model does not declare still returns valid:true. `strippedKeys` lists any such dropped fields (dot / [i] paths); a NON-EMPTY strippedKeys means those fields are NOT in the contract and would not persist as declared — treat it as invalid for a WRITE. Only variant 'read' (the full stored document shape) is supported — 'create' and 'update' return an explicit not-supported error rather than a misleading verdict; use get_openapi('OrderCreate' / 'OrderUpdate') for the write shapes.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Model name in kebab-case, as get_schema uses (e.g. 'order', 'customer-payment', 'product-variant')"
+          },
+          "document": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {},
+            "description": "The candidate document to validate (a JSON object)"
+          },
+          "variant": {
+            "description": "Which shape to validate against. Default 'read'. 'create'/'update' are NOT yet supported — see the tool description.",
+            "type": "string",
+            "enum": [
+              "read",
+              "create",
+              "update"
+            ]
+          }
+        },
+        "required": [
+          "model",
+          "document"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "name": "@ehrocks/fe-mcp-server",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786009163.9189806,
+  "engine_version": "0.1.0",
+  "ok": true,
+  "error": "",
+  "total_score": 54.0,
+  "grade": "D",
+  "dimensions": {
+    "functionality": {
+      "value": 40.0,
+      "findings": [],
+      "details": {
+        "tools_total": 1,
+        "tools_callable": 0
+      }
+    },
+    "reliability": {
+      "value": 0.0,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-FAIL",
+          "message": "调用失败率 100%"
+        }
+      ],
+      "details": {
+        "avg_latency_s": 5.133,
+        "failure_rate": 1.0,
+        "attempts": 2
+      }
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "success_rate": 1.0,
+        "models": [
+          "claude",
+          "deepseek",
+          "gpt",
+          "qwen"
+        ],
+        "verdicts": 4
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "search_hero_design_component_examples",
+      "description": "Retrieve Hero Design System examples, patterns, and references using natural language.\n\nDescribe the UI behavior, component, or pattern you need. Covers component selection guidance, JSX code examples, design patterns, and use cases across @hero-design/react. Not a prop API reference — use the component library docs for precise prop signatures.\n\nCommon queries: button loading state, form validation error, dropdown with search, empty state, date picker range, modal confirmation dialog, toast notification.\n\nReturns for each match:\n- Component name and similarity score\n- Component and example descriptions\n- Code example (JSX)\n- Technical details, design patterns, and props context when available",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The search query describing what you're looking for in the component examples. Be specific about what aspects you're interested in (code, usage, props, patterns, etc.)"
+          },
+          "limit": {
+            "type": "string",
+            "default": "5",
+            "description": "Maximum number of distinct component examples to return (1–5)"
+          },
+          "threshold": {
+            "type": "string",
+            "default": "0.4",
+            "description": "Minimum similarity score (0.0 to 0.99) for returned examples. Lower values return more results but might be less relevant"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    }
+  ]
+}

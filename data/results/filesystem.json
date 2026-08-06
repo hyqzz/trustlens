@@ -2,33 +2,33 @@
   "name": "filesystem",
   "server_type": "mcp-server",
   "source": "official-reference",
-  "evaluated_at": 1785987634.8987265,
+  "evaluated_at": 1786008847.2629898,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 68.5,
-  "grade": "C",
+  "total_score": 82.0,
+  "grade": "B",
   "dimensions": {
     "functionality": {
-      "value": 44.3,
+      "value": 57.1,
       "findings": [],
       "details": {
         "tools_total": 14,
-        "tools_callable": 1
+        "tools_callable": 4
       }
     },
     "reliability": {
-      "value": 52.0,
+      "value": 88.0,
       "findings": [
         {
           "severity": "warning",
           "code": "REL-FAIL",
-          "message": "调用失败率 80%"
+          "message": "调用失败率 20%"
         }
       ],
       "details": {
-        "avg_latency_s": 0.001,
-        "failure_rate": 0.8,
+        "avg_latency_s": 0.003,
+        "failure_rate": 0.2,
         "attempts": 10
       }
     },

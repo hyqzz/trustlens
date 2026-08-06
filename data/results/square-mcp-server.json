@@ -1,0 +1,129 @@
+{
+  "name": "square-mcp-server",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786011686.116048,
+  "engine_version": "0.1.0",
+  "ok": true,
+  "error": "",
+  "total_score": 64.0,
+  "grade": "C",
+  "dimensions": {
+    "functionality": {
+      "value": 40.0,
+      "findings": [],
+      "details": {
+        "tools_total": 3,
+        "tools_callable": 0
+      }
+    },
+    "reliability": {
+      "value": 40.0,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-FAIL",
+          "message": "调用失败率 100%"
+        }
+      ],
+      "details": {
+        "avg_latency_s": 0.0,
+        "failure_rate": 1.0,
+        "attempts": 6
+      }
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "success_rate": 1.0,
+        "models": [
+          "claude",
+          "deepseek",
+          "gpt",
+          "qwen"
+        ],
+        "verdicts": 12
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "make_api_request",
+      "description": "Unified tool for all Square API operations. Be sure to get types before calling. Available services:\n  applepay, bankaccounts, bookingcustomattributes, bookings, cards, cashdrawers, catalog, checkout, customercustomattributes, customergroups, customersegments, customers, devices, disputes, events, giftcardactivities, giftcards, inventory, invoices, labor, locationcustomattributes, locations, loyalty, merchantcustomattributes, merchants, oauth, ordercustomattributes, orders, payments, payouts, refunds, sites, snippets, subscriptions, team, terminal, vendors, webhooksubscriptions.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string",
+            "description": "The Square API service category (e.g., 'catalog', 'payments')"
+          },
+          "method": {
+            "type": "string",
+            "description": "The API method to call (e.g., 'list', 'create')"
+          },
+          "request": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": true,
+            "description": "The request object for the API call."
+          }
+        },
+        "required": [
+          "service",
+          "method"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "get_type_info",
+      "description": "Get type information for a Square API method. You must call this before calling the make_api_request tool.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string",
+            "description": "The Square API service category (e.g., 'catalog', 'payments')"
+          },
+          "method": {
+            "type": "string",
+            "description": "The API method to call (e.g., 'list', 'create')"
+          }
+        },
+        "required": [
+          "service",
+          "method"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "get_service_info",
+      "description": "Get information about a Square API service. Call me before trying to get type info",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string",
+            "description": "The Square API service category (e.g., 'catalog', 'payments')"
+          }
+        },
+        "required": [
+          "service"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    }
+  ]
+}

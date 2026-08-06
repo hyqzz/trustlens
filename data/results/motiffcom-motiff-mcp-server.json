@@ -1,0 +1,105 @@
+{
+  "name": "@motiffcom/motiff-mcp-server",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786009481.9169803,
+  "engine_version": "0.1.0",
+  "ok": true,
+  "error": "",
+  "total_score": 62.5,
+  "grade": "C",
+  "dimensions": {
+    "functionality": {
+      "value": 40.0,
+      "findings": [],
+      "details": {
+        "tools_total": 2,
+        "tools_callable": 0
+      }
+    },
+    "reliability": {
+      "value": 33.9,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-FAIL",
+          "message": "调用失败率 100%"
+        }
+      ],
+      "details": {
+        "avg_latency_s": 1.184,
+        "failure_rate": 1.0,
+        "attempts": 4
+      }
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "success_rate": 1.0,
+        "models": [
+          "claude",
+          "deepseek",
+          "gpt",
+          "qwen"
+        ],
+        "verdicts": 8
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "get_motiff_node",
+      "description": "\nGet a node from motiff, the result is a complete and high-fidelity HTML page which implements the design of the node. Users may use the html to create a UI component.\nmotiff is a vector design tool, where each node represents a part or whole of a UI design.\nUser might provide a URL like https://api.motiff.com/file/{docId}?nodeId={nodeId}&type=design.\n\n# motiff NODE HTML USER GUIDE\nYou will receive HTML code representing a motiff design node with inline CSS. The user may ask you to generate UI components based on a motiff Node's HTML, and you need to follow the rules below.\n\n# KEY PRINCIPLES\n1. Exact visual reproduction is the top priority - preserve all colors, spacing, typography, and layout details\n2. Maintain all original content and styling, especially within <style> tags\n3. Only after achieving perfect visual fidelity, implement responsive behavior\n4. Break down the HTML into several reasonable small components, then combine and use them.\n\n# COMPONENT INTEGRATION\n1. Respect the existing tech stack and code style\n2. Analyze all style files before making changes\n3. Preserve all functionality while implementing the design\n\n# Some issues to note\n1. Preserve all image URLs and inline CSS effects. do not generate new images or SVGs, do not create SVG in the code.\n   <example>\n    For an HTML element like this:\n    <div style=\"background-image: url('https://xxx.svg');\"></div>\n    In a generated React component, you should change it to:\n    <div style={{backgroundImage: \"url('https://xxx.svg')\"}}>\n   </example>\n2. All fonts referenced in the HTML are already owned by the user, so do not import web fonts (googlefonts) through URLs anywhere.\n",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "docId": {
+            "type": "string"
+          },
+          "nodeId": {
+            "type": "string"
+          },
+          "isDebug": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "docId",
+          "nodeId"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "get_motiff_node_screenshot",
+      "description": "\nGet a screenshot from a motiff design node. Returns the image as base64 encoded data.\nmotiff is a vector design tool, where each node represents a part or whole of a UI design.\nUser might provide a URL like https://api.motiff.com/file/{docId}?nodeId={nodeId}&type=design.\n\nThis tool helps users:\n1. Get a visual representation of a design node\n2. Share design mockups with stakeholders\n3. Compare designs across different iterations\n\nThe result will be a base64 encoded image that can be used directly in applications.\n",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "docId": {
+            "type": "string"
+          },
+          "nodeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "docId",
+          "nodeId"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    }
+  ]
+}

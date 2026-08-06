@@ -1,11 +1,12 @@
 # TrustLens
 
-> **Agent 能力生态的信任基准** —— 自动化实测 MCP Server / Agent Skills 等"能力单元"，发布公开、可审计的质量与信任评分。
+> **智码星 ICodeStar · Agent 能力生态的信任基准** —— 自动化实测 MCP Server / Agent Skills 等"能力单元"，发布公开、可审计的质量与信任评分。
 >
 > Trust benchmark for the agent capability ecosystem: automated, evidence-based trust scores for MCP servers and agent skills.
 
-[![weekly evaluation](https://github.com/hyqzz/trustlens/actions/workflows/evaluate.yml/badge.svg)](https://github.com/hyqzz/trustlens/actions/workflows/evaluate.yml)
 [![leaderboard](https://img.shields.io/badge/leaderboard-live-brightgreen)](https://trustlens.icodestar.net/)
+[![weekly evaluation](https://github.com/hyqzz/trustlens/actions/workflows/evaluate.yml/badge.svg)](https://github.com/hyqzz/trustlens/actions/workflows/evaluate.yml)
+[![tests](https://github.com/hyqzz/trustlens/actions/workflows/test.yml/badge.svg)](https://github.com/hyqzz/trustlens/actions/workflows/test.yml)
 
 ## 为什么需要 TrustLens
 
@@ -21,10 +22,10 @@ TrustLens 是 Agent 世界的"质检局"：装任何工具之前，先查分。
 
 ```bash
 # 无需安装，直接在仓库根目录运行（零第三方依赖）
-python -m trustlens list                      # 查看待评测清单
+python -m trustlens list                      # 查看待评测清单（120+ 个真实服务器）
 python -m trustlens check <server-name>       # 评测一个服务器并给出信任分
-python -m trustlens evaluate-all              # 跑完整评测（写入 data/results/）
-python -m trustlens build-site                # 生成静态排行榜网站到 site/dist/
+python -m trustlens evaluate-all              # 跑完整评测（并发 4，写入 data/results/）
+python -m trustlens build-site                # 生成交互式排行榜网站到 site/dist/
 
 # 或者安装后使用 CLI
 pip install -e .
@@ -50,7 +51,7 @@ trustlens check <server-name>
 
 ## 安全说明
 
-TrustLens 需要运行不可信的第三方代码进行评测。所有评测在**剥离环境变量的隔离进程**中执行；CI 中评测任务不持有任何密钥。详见 `docs/SECURITY.md`。
+TrustLens 需要运行不可信的第三方代码进行评测。所有评测在**剥离环境变量的隔离进程**中执行；CI 中评测任务不持有任何密钥。浏览器自动化等重型/易挂起类别已按 `enabled: false` 暂缓评测（待按工具类型生成合理探针的方法论升级后恢复）。详见 `docs/SECURITY.md`。
 
 ## License
 

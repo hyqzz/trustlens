@@ -1,0 +1,54 @@
+{
+  "name": "@vapi-ai/mcp-server",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786010864.9944792,
+  "engine_version": "0.1.0",
+  "ok": false,
+  "error": "等待 initialize 响应超时（进程已退出，退出码 1）",
+  "total_score": 25.0,
+  "grade": "F",
+  "dimensions": {
+    "functionality": {
+      "value": 0.0,
+      "findings": [
+        {
+          "severity": "critical",
+          "code": "FUNC-HANDSHAKE",
+          "message": "协议握手失败"
+        }
+      ],
+      "details": {}
+    },
+    "reliability": {
+      "value": 0.0,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-NONE",
+          "message": "无可测调用"
+        }
+      ],
+      "details": {}
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 0.0,
+      "findings": [
+        {
+          "severity": "info",
+          "code": "COMPAT-NONE",
+          "message": "未执行跨模型评估"
+        }
+      ],
+      "details": {}
+    }
+  },
+  "tools": []
+}

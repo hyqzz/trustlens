@@ -2,7 +2,7 @@
   "name": "mock-echo",
   "server_type": "mcp-server",
   "source": "builtin-fixture",
-  "evaluated_at": 1785987630.4989657,
+  "evaluated_at": 1786008847.2623181,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",

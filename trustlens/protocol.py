@@ -52,10 +52,18 @@ class ProtocolError(Exception):
 
 
 class McpStdioClient:
-    """与一个 MCP Server 子进程通信。环境变量默认剥离（防密钥泄露给不可信代码）。"""
+    """与一个 MCP Server 子进程通信。环境变量默认剥离（防密钥泄露给不可信代码）。
 
-    def __init__(self, command: list[str], env: dict | None = None, timeout: float = 15.0):
+    hard_timeout 是整机看门狗：某些被测进程会卡死且不再读 stdin，
+    此时 stdin.write 会永久阻塞（绕过请求超时）——看门狗到点强制杀进程树，
+    写端管道随之破裂，阻塞的写被解封（BrokenPipeError）。
+    """
+
+    def __init__(self, command: list[str], env: dict | None = None, timeout: float = 15.0,
+                 hard_timeout: float = 240.0):
         self._timeout = timeout
+        self._hard_timeout = hard_timeout
+        self._done = threading.Event()
         safe_env = env if env is not None else _safe_env()
         self._proc = subprocess.Popen(
             resolve_command(command),
@@ -73,6 +81,28 @@ class McpStdioClient:
         self._reader.start()
         self._err_reader = threading.Thread(target=self._err_loop, daemon=True)
         self._err_reader.start()
+        self._watchdog = threading.Thread(target=self._watchdog_loop, daemon=True)
+        self._watchdog.start()
+
+    def _watchdog_loop(self) -> None:
+        if not self._done.wait(self._hard_timeout):
+            self._kill_tree()
+
+    def _kill_tree(self) -> None:
+        """强杀整个进程树（npx/uvx 会再拉起子进程，需连同一起杀）。"""
+        pid = self._proc.pid
+        try:
+            if sys.platform == "win32":
+                subprocess.run(["taskkill", "/T", "/F", "/PID", str(pid)],
+                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            else:
+                os.killpg(pid, 9)
+        except Exception:
+            pass
+        try:
+            self._proc.kill()
+        except Exception:
+            pass
 
     def _read_loop(self) -> None:
         assert self._proc.stdout is not None
@@ -102,17 +132,37 @@ class McpStdioClient:
         self._id += 1
         return self._id
 
+    def _send(self, payload: str) -> None:
+        """非阻塞写入：子进程不再读 stdin 时，直接 write 会永久阻塞（管道写满）。
+
+        改为在守护线程里写 + join 超时：超时则强杀进程树并报错，
+        worker 线程永不卡死。这是评测不可信进程的关键护栏。
+        """
+        assert self._proc.stdin is not None
+        err: list[Exception] = []
+
+        def _do_write() -> None:
+            try:
+                self._proc.stdin.write(payload)
+                self._proc.stdin.flush()
+            except Exception as e:  # BrokenPipeError / OSError / ValueError
+                err.append(e)
+
+        t = threading.Thread(target=_do_write, daemon=True)
+        t.start()
+        t.join(self._timeout)
+        if t.is_alive():
+            self._kill_tree()
+            raise ProtocolError("写入服务器进程超时（进程无响应，已强制终止）")
+        if err:
+            raise ProtocolError(f"无法写入服务器进程: {err[0]}")
+
     def _request(self, method: str, params: dict | None = None, timeout: float | None = None) -> dict:
         rid = self._next_id()
         msg: dict[str, Any] = {"jsonrpc": "2.0", "id": rid, "method": method}
         if params is not None:
             msg["params"] = params
-        assert self._proc.stdin is not None
-        try:
-            self._proc.stdin.write(json.dumps(msg) + "\n")
-            self._proc.stdin.flush()
-        except (BrokenPipeError, OSError) as e:
-            raise ProtocolError(f"无法写入服务器进程: {e}") from e
+        self._send(json.dumps(msg) + "\n")
 
         deadline = time.monotonic() + (timeout or self._timeout)
         while True:
@@ -137,9 +187,7 @@ class McpStdioClient:
             return resp.get("result", {})
 
     def _notify(self, method: str) -> None:
-        assert self._proc.stdin is not None
-        self._proc.stdin.write(json.dumps({"jsonrpc": "2.0", "method": method}) + "\n")
-        self._proc.stdin.flush()
+        self._send(json.dumps({"jsonrpc": "2.0", "method": method}) + "\n")
 
     # ---- MCP 语义方法 ----
 
@@ -169,6 +217,7 @@ class McpStdioClient:
         return result, time.monotonic() - start
 
     def close(self) -> None:
+        self._done.set()
         try:
             if self._proc.stdin:
                 self._proc.stdin.close()

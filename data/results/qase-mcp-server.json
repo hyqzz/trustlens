@@ -1,0 +1,921 @@
+{
+  "name": "@qase/mcp-server",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786009675.6651442,
+  "engine_version": "0.1.0",
+  "ok": true,
+  "error": "",
+  "total_score": 68.6,
+  "grade": "C",
+  "dimensions": {
+    "functionality": {
+      "value": 44.6,
+      "findings": [],
+      "details": {
+        "tools_total": 13,
+        "tools_callable": 1
+      }
+    },
+    "reliability": {
+      "value": 52.0,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-FAIL",
+          "message": "调用失败率 80%"
+        }
+      ],
+      "details": {
+        "avg_latency_s": 0.002,
+        "failure_rate": 0.8,
+        "attempts": 10
+      }
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "success_rate": 1.0,
+        "models": [
+          "claude",
+          "deepseek",
+          "gpt",
+          "qwen"
+        ],
+        "verdicts": 52
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "qase_project_context",
+      "description": "Get full project context in one call: project details, suites tree, milestones, environments, custom fields, and users. Cached for 5 minutes. Use this as the first call when starting work with a project — it seeds all the metadata the LLM needs without making 6 separate list calls.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 10,
+            "pattern": "^[A-Z0-9_]+$",
+            "description": "Project code (2-10 uppercase letters, numbers, or underscores)"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "qase_get",
+      "description": "Get any Qase entity by type and ID. Supports field projection via the `fields` parameter. For project-scoped entities (case, suite, run, result, plan, defect, milestone, environment, shared_step, shared_parameter, configuration), `code` is required. For global entities (user, author, attachment, custom_field), `code` can be omitted.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "entity": {
+            "type": "string",
+            "enum": [
+              "case",
+              "suite",
+              "run",
+              "result",
+              "plan",
+              "defect",
+              "milestone",
+              "environment",
+              "shared_step",
+              "shared_parameter",
+              "configuration",
+              "attachment",
+              "author",
+              "user",
+              "custom_field"
+            ],
+            "description": "Entity type to fetch"
+          },
+          "code": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 10,
+            "pattern": "^[A-Z0-9_]+$",
+            "description": "Project code (required for most entities)"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "description": "Entity ID (positive integer)"
+              },
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 255,
+                "description": "Hash identifier"
+              }
+            ],
+            "description": "Entity ID (number) or hash (string)"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional field projection — only return these top-level fields. Pass [\"*\"] for all fields."
+          }
+        },
+        "required": [
+          "entity",
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "qql_search",
+      "description": "Search entities using Qase Query Language (QQL) with powerful filtering and cross-project queries",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000,
+            "description": "QQL query expression. Examples:\n- entity = \"case\" and project = \"DEMO\" and status = \"Actual\"\n- entity = \"defect\" and severity = \"blocker\" and status = \"open\"\n- entity = \"result\" and status = \"failed\" and created >= now(\"-7d\")\n- entity = \"run\" and milestone ~ \"Sprint 12\"\nSee QQL documentation for full syntax and examples."
+          },
+          "limit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 100,
+            "description": "Maximum number of results to return (default: 10, max: 100)"
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Number of results to skip for pagination"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "qql_help",
+      "description": "Get help and examples for Qase Query Language (QQL) syntax",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "enum": [
+              "syntax",
+              "entities",
+              "operators",
+              "functions",
+              "examples"
+            ],
+            "description": "Specific help topic, or omit for general overview"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "qase_case_upsert",
+      "description": "Create or update a test case. If `id` is provided, updates the existing case; if omitted, creates a new one. Enum fields (priority, severity, type, etc.) accept both labels (\"high\", \"blocker\") and numeric IDs — the server normalizes automatically.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 10,
+            "pattern": "^[A-Z0-9_]+$",
+            "description": "Project code (2-10 uppercase letters, numbers, or underscores)"
+          },
+          "id": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "description": "Case ID — if provided, updates the case; if omitted, creates a new one"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Test case title"
+          },
+          "description": {
+            "type": "string"
+          },
+          "preconditions": {
+            "type": "string"
+          },
+          "postconditions": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "description": "Severity label or numeric ID"
+          },
+          "priority": {
+            "type": "string",
+            "description": "Priority label or numeric ID (0=not set, 1=high, 2=medium, 3=low)"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type label or numeric ID"
+          },
+          "layer": {
+            "type": "string",
+            "description": "Layer label or numeric ID"
+          },
+          "behavior": {
+            "type": "string",
+            "description": "Behavior label or numeric ID"
+          },
+          "automation": {
+            "type": "string",
+            "description": "Automation status (label, slug, or numeric ID: 0=Manual / is-not-automated, 1=To be automated, 2=Automated)"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status label or numeric ID"
+          },
+          "is_flaky": {
+            "type": "boolean"
+          },
+          "suite_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          "milestone_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "description": "Step action (classic steps)"
+                },
+                "expected_result": {
+                  "type": "string",
+                  "description": "Expected result"
+                },
+                "data": {
+                  "type": "string",
+                  "description": "Test data"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "Gherkin scenario text (when steps_type is \"gherkin\")"
+                },
+                "attachments": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Attachment hashes"
+                },
+                "steps": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "description": "Step action (classic steps)"
+                      },
+                      "expected_result": {
+                        "type": "string",
+                        "description": "Expected result"
+                      },
+                      "data": {
+                        "type": "string",
+                        "description": "Test data"
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Gherkin scenario text (when steps_type is \"gherkin\")"
+                      },
+                      "attachments": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Attachment hashes"
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "description": "Nested substeps. Same structure as parent steps, supports further nesting."
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "steps_type": {
+            "type": "string",
+            "enum": [
+              "classic",
+              "gherkin"
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "custom_field": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "code",
+          "title"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "qase_run_upsert",
+      "description": "Create or update a test run. If `id` is provided, updates; if omitted, creates.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 10,
+            "pattern": "^[A-Z0-9_]+$",
+            "description": "Project code (2-10 uppercase letters, numbers, or underscores)"
+          },
+          "id": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "description": "Run ID — if provided, this is an update (note: Qase API has limited run update support)"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Run title"
+          },
+          "description": {
+            "type": "string"
+          },
+          "environment_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          "milestone_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          "plan_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "description": "Test plan to base run on"
+          },
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "exclusiveMinimum": 0
+            },
+            "description": "Case IDs to include"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "is_autotest": {
+            "type": "boolean"
+          },
+          "start_time": {
+            "type": "string",
+            "description": "RFC3339 start time"
+          },
+          "end_time": {
+            "type": "string",
+            "description": "RFC3339 end time"
+          },
+          "custom_field": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "code",
+          "title"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "qase_result_record",
+      "description": "Record one or more test results into a run. Accepts an array of results — a single entry uses the single-result API, multiple entries use bulk. Each result must include a status; case_id is recommended.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 10,
+            "pattern": "^[A-Z0-9_]+$",
+            "description": "Project code (2-10 uppercase letters, numbers, or underscores)"
+          },
+          "run_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "description": "Run ID to record results into"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "case_id": {
+                  "type": "integer",
+                  "exclusiveMinimum": 0
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "passed",
+                    "failed",
+                    "blocked",
+                    "skipped",
+                    "invalid"
+                  ]
+                },
+                "comment": {
+                  "type": "string"
+                },
+                "stacktrace": {
+                  "type": "string"
+                },
+                "time_ms": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "defect": {
+                  "type": "boolean"
+                },
+                "steps": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "position": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "passed",
+                          "failed",
+                          "blocked",
+                          "skipped"
+                        ]
+                      },
+                      "comment": {
+                        "type": "string"
+                      },
+                      "attachments": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "required": [
+                      "position",
+                      "status"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "attachments": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "custom_field": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              },
+              "required": [
+                "status"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "description": "One or more results to record"
+          }
+        },
+        "required": [
+          "code",
+          "run_id",
+          "results"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "qase_defect_upsert",
+      "description": "Create or update a defect. If `id` is provided, updates (including status changes and resolve). If omitted, creates a new defect. Set `status: \"resolved\"` to resolve an existing defect.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 10,
+            "pattern": "^[A-Z0-9_]+$",
+            "description": "Project code (2-10 uppercase letters, numbers, or underscores)"
+          },
+          "id": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "description": "Defect ID — if provided, updates; if omitted, creates"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Defect title"
+          },
+          "actual_result": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "undefined",
+              "blocker",
+              "critical",
+              "major",
+              "normal",
+              "minor",
+              "trivial"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "in_progress",
+              "resolved",
+              "invalid"
+            ],
+            "description": "Set to \"resolved\" to resolve the defect"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "custom_field": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "code",
+          "title"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "qase_ci_report",
+      "description": "Report CI/CD test results in one call: creates a run, records all results, and optionally completes the run. Replaces the 3-4 step manual workflow of create_run → bulk_create_results → complete_run. Designed for CI pipeline integration.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 10,
+            "pattern": "^[A-Z0-9_]+$",
+            "description": "Project code (2-10 uppercase letters, numbers, or underscores)"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Run title (e.g., \"CI Build #1234\")"
+          },
+          "environment_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "case_id": {
+                  "type": "integer",
+                  "exclusiveMinimum": 0
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "passed",
+                    "failed",
+                    "blocked",
+                    "skipped",
+                    "invalid"
+                  ]
+                },
+                "comment": {
+                  "type": "string"
+                },
+                "time_ms": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "stacktrace": {
+                  "type": "string"
+                },
+                "defect": {
+                  "type": "boolean"
+                },
+                "attachments": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "case_id",
+                "status"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "description": "Test results to record"
+          },
+          "complete": {
+            "type": "boolean",
+            "default": true,
+            "description": "Complete the run after recording results (default: true)"
+          },
+          "is_autotest": {
+            "type": "boolean",
+            "default": true,
+            "description": "Mark as automated run (default: true)"
+          }
+        },
+        "required": [
+          "code",
+          "title",
+          "results"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "qase_triage_defect",
+      "description": "Create a defect from a test failure and optionally link it to failed results. Streamlines the triage workflow: create defect → link to failing tests.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 10,
+            "pattern": "^[A-Z0-9_]+$",
+            "description": "Project code (2-10 uppercase letters, numbers, or underscores)"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Defect title"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "undefined",
+              "blocker",
+              "critical",
+              "major",
+              "normal",
+              "minor",
+              "trivial"
+            ]
+          },
+          "actual_result": {
+            "type": "string",
+            "description": "Observed behavior"
+          },
+          "description": {
+            "type": "string"
+          },
+          "run_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "description": "Run containing the failed results"
+          },
+          "failed_result_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Result hashes to link to this defect (from the run)"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "custom_field": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "code",
+          "title"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "qase_regression_run",
+      "description": "Set up a regression test run in one call. Accepts case selection by suite IDs, explicit case IDs, or plan ID. Creates the run and adds all matching cases. Replaces the multi-step workflow of find cases → create run → add cases.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 10,
+            "pattern": "^[A-Z0-9_]+$",
+            "description": "Project code (2-10 uppercase letters, numbers, or underscores)"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Run title"
+          },
+          "description": {
+            "type": "string"
+          },
+          "environment_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          "milestone_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          "plan_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "description": "Create run from an existing test plan"
+          },
+          "suite_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "exclusiveMinimum": 0
+            },
+            "description": "Include cases from these suites"
+          },
+          "include_cases": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "exclusiveMinimum": 0
+            },
+            "description": "Explicit case IDs to include"
+          }
+        },
+        "required": [
+          "code",
+          "title"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "qase_discover_tools",
+      "description": "Search for and activate additional Qase tools. By default, only core tools are visible. Use this to find tools for specific needs: deletions, milestone management, attachments, etc. Found tools are automatically activated and become available for use.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query to find tools by name or description. Examples: \"delete\", \"milestone\", \"attachment\", \"suite\""
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "read",
+              "write",
+              "delete",
+              "composite",
+              "all"
+            ],
+            "description": "Filter by tool category"
+          },
+          "activate": {
+            "type": "boolean",
+            "default": true,
+            "description": "If true (default), found tools are activated and become available for use"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "qase_api",
+      "description": "Direct Qase REST API call for endpoints not covered by other tools. Pass the HTTP method, path (starting with /v1/), and optional body/query. See https://developers.qase.io for API reference. Use this as an escape hatch when the dedicated tools do not cover your use case.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "type": "string",
+            "enum": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ],
+            "default": "GET",
+            "description": "HTTP method"
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "description": "API path starting with /v1/ (e.g., \"/v1/project/DEMO/run\")"
+          },
+          "body": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Request body for POST/PUT/PATCH"
+          },
+          "query": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Query parameters"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

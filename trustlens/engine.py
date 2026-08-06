@@ -45,7 +45,7 @@ def evaluate_server(name: str, command: list[str], server_type: str = "mcp-serve
     providers = providers if providers is not None else default_providers()
 
     try:
-        client = McpStdioClient(command, timeout=timeout)
+        client = McpStdioClient(command, timeout=timeout, hard_timeout=max(300.0, timeout * 3))
     except OSError as e:
         return _finalize_failure(report, f"无法启动服务器进程: {e}")
 

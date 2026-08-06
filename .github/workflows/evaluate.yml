@@ -35,8 +35,24 @@ jobs:
 
       - uses: astral-sh/setup-uv@v5
 
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles('data/servers.json') }}
+          restore-keys: |
+            npm-${{ runner.os }}-
+
+      - name: Cache uv
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/uv
+          key: uv-${{ runner.os }}-${{ hashFiles('data/servers.json') }}
+          restore-keys: |
+            uv-${{ runner.os }}-
+
       - name: Run evaluation (no secrets in this job)
-        run: python -m trustlens evaluate-all --timeout 120
+        run: python -m trustlens evaluate-all --timeout 150 --workers 4
 
       - name: Build static site
         run: python -m trustlens build-site

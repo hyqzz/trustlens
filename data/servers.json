@@ -1,12 +1,14 @@
 {
-  "$comment": "待评测的能力单元清单。command/args 为可复现的启动方式；source 为来源注册表。第一批为官方参考实现，第二批为高下载量热门服务器（均无需凭证即可运行）。",
+  "$comment": "真实 MCP 服务器清单（来源：npm/PyPI 注册表发现 + 官方实现），enabled:false 表示暂停评测。",
   "servers": [
     {
       "name": "mock-echo",
       "type": "mcp-server",
       "source": "builtin-fixture",
       "command": "{python}",
-      "args": ["tests/fixtures/mock_mcp_server.py"],
+      "args": [
+        "tests/fixtures/mock_mcp_server.py"
+      ],
       "note": "内置样例服务器：含正常工具与投毒工具，用于端到端自检与 CI 冒烟"
     },
     {
@@ -14,7 +16,10 @@
       "type": "mcp-server",
       "source": "official-reference",
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-everything"],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everything"
+      ],
       "note": "MCP 官方参考/测试服务器，覆盖全部协议特性"
     },
     {
@@ -22,7 +27,11 @@
       "type": "mcp-server",
       "source": "official-reference",
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "."
+      ],
       "note": "官方文件系统服务器（评测范围限定当前目录）"
     },
     {
@@ -30,7 +39,10 @@
       "type": "mcp-server",
       "source": "official-reference",
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
       "note": "官方知识图谱记忆服务器"
     },
     {
@@ -38,7 +50,10 @@
       "type": "mcp-server",
       "source": "official-reference",
       "command": "uvx",
-      "args": ["mcp-server-time", "--local-timezone=UTC"],
+      "args": [
+        "mcp-server-time",
+        "--local-timezone=UTC"
+      ],
       "note": "官方时间/时区转换服务器（Python）"
     },
     {
@@ -46,7 +61,9 @@
       "type": "mcp-server",
       "source": "official-reference",
       "command": "uvx",
-      "args": ["mcp-server-fetch"],
+      "args": [
+        "mcp-server-fetch"
+      ],
       "note": "官方网页抓取服务器（Python）"
     },
     {
@@ -54,7 +71,10 @@
       "type": "mcp-server",
       "source": "official-reference",
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
       "note": "官方序列化思考服务器，高下载量"
     },
     {
@@ -62,7 +82,10 @@
       "type": "mcp-server",
       "source": "upstash",
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"],
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
       "note": "Upstash 出品的文档检索服务器，生态内热门"
     },
     {
@@ -70,7 +93,10 @@
       "type": "mcp-server",
       "source": "microsoft",
       "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest"],
+      "args": [
+        "-y",
+        "@playwright/mcp@latest"
+      ],
       "note": "微软出品的浏览器自动化服务器，生态内高热度"
     },
     {
@@ -78,7 +104,10 @@
       "type": "mcp-server",
       "source": "community-popular",
       "command": "npx",
-      "args": ["-y", "@wonderwhy-er/desktop-commander@latest"],
+      "args": [
+        "-y",
+        "@wonderwhy-er/desktop-commander@latest"
+      ],
       "note": "社区高下载量的桌面操作服务器"
     },
     {
@@ -86,7 +115,11 @@
       "type": "mcp-server",
       "source": "official-reference",
       "command": "uvx",
-      "args": ["mcp-server-git", "--repository", "."],
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "."
+      ],
       "note": "官方 Git 仓库操作服务器（Python），评测范围限定当前仓库"
     },
     {
@@ -94,7 +127,11 @@
       "type": "mcp-server",
       "source": "official-reference",
       "command": "uvx",
-      "args": ["mcp-server-sqlite", "--db-path", "probe.sqlite"],
+      "args": [
+        "mcp-server-sqlite",
+        "--db-path",
+        "probe.sqlite"
+      ],
       "note": "官方 SQLite 服务器（Python），评测使用临时库文件"
     },
     {
@@ -102,7 +139,10 @@
       "type": "mcp-server",
       "source": "community-popular",
       "command": "npx",
-      "args": ["-y", "@negokaz/excel-mcp-server"],
+      "args": [
+        "-y",
+        "@negokaz/excel-mcp-server"
+      ],
       "note": "社区热门 Excel 操作服务器"
     },
     {
@@ -110,7 +150,10 @@
       "type": "mcp-server",
       "source": "community-popular",
       "command": "npx",
-      "args": ["-y", "mcp-server-commands"],
+      "args": [
+        "-y",
+        "mcp-server-commands"
+      ],
       "note": "社区 shell 命令执行服务器"
     },
     {
@@ -118,7 +161,10 @@
       "type": "mcp-server",
       "source": "official-reference",
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ],
       "enabled": false,
       "note": "暂缓评测：探针用哑参数调用浏览器工具会真实启动 Chromium 并挂起——哑探针对浏览器自动化类工具不公平，待评测方法论升级（按工具类型生成合理探针）后恢复"
     },
@@ -127,7 +173,9 @@
       "type": "mcp-server",
       "source": "community-popular",
       "command": "uvx",
-      "args": ["duckduckgo-mcp-server"],
+      "args": [
+        "duckduckgo-mcp-server"
+      ],
       "note": "社区 DuckDuckGo 搜索服务器（Python）"
     },
     {
@@ -135,8 +183,1063 @@
       "type": "mcp-server",
       "source": "community",
       "command": "uvx",
-      "args": ["mcp-weather"],
+      "args": [
+        "mcp-weather"
+      ],
       "note": "社区天气查询服务器（Python）"
+    },
+    {
+      "name": "@0xmonaco/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@0xmonaco/mcp-server"
+      ]
+    },
+    {
+      "name": "@abhiz123/todoist-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@abhiz123/todoist-mcp-server"
+      ]
+    },
+    {
+      "name": "@alchemy/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@alchemy/mcp-server"
+      ]
+    },
+    {
+      "name": "@amap/amap-maps-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@amap/amap-maps-mcp-server"
+      ]
+    },
+    {
+      "name": "@anyproto/anytype-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@anyproto/anytype-mcp"
+      ]
+    },
+    {
+      "name": "@arabold/docs-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@arabold/docs-mcp-server"
+      ]
+    },
+    {
+      "name": "@benborla29/mcp-server-mysql",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@benborla29/mcp-server-mysql"
+      ]
+    },
+    {
+      "name": "@bitwarden/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@bitwarden/mcp-server"
+      ]
+    },
+    {
+      "name": "@brave/brave-search-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@brave/brave-search-mcp-server"
+      ]
+    },
+    {
+      "name": "@circleci/mcp-server-circleci",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@circleci/mcp-server-circleci"
+      ]
+    },
+    {
+      "name": "@codefuturist/email-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@codefuturist/email-mcp"
+      ]
+    },
+    {
+      "name": "@contentful/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@contentful/mcp-server"
+      ]
+    },
+    {
+      "name": "@dbx-app/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@dbx-app/mcp-server"
+      ]
+    },
+    {
+      "name": "@doist/todoist-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@doist/todoist-mcp"
+      ]
+    },
+    {
+      "name": "@dynatrace-wwse/dynatrace-mcp-server-otel",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@dynatrace-wwse/dynatrace-mcp-server-otel"
+      ]
+    },
+    {
+      "name": "@ehrocks/fe-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ehrocks/fe-mcp-server"
+      ]
+    },
+    {
+      "name": "@enfyra/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@enfyra/mcp-server"
+      ],
+      "enabled": false,
+      "note": "暂缓评测：进程交互式阻塞（启动即等待 stdin 输入，不按 MCP 协议应答），硬挂起评测流水线；待按工具类型生成合理探针的方法论升级后恢复"
+    },
+    {
+      "name": "@esaio/esa-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@esaio/esa-mcp-server"
+      ]
+    },
+    {
+      "name": "@gongrzhe/server-gmail-autoauth-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@gongrzhe/server-gmail-autoauth-mcp"
+      ]
+    },
+    {
+      "name": "@ingenx-io/valets-schema-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ingenx-io/valets-schema-mcp-server"
+      ]
+    },
+    {
+      "name": "@iobroker/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@iobroker/mcp-server"
+      ]
+    },
+    {
+      "name": "@ivotoby/openapi-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ivotoby/openapi-mcp-server"
+      ]
+    },
+    {
+      "name": "@kintone/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@kintone/mcp-server"
+      ]
+    },
+    {
+      "name": "@lynx-js/docs-mcp-server-canary",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@lynx-js/docs-mcp-server-canary"
+      ]
+    },
+    {
+      "name": "@mapbox/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@mapbox/mcp-server"
+      ],
+      "enabled": false,
+      "note": "暂缓评测：进程交互式阻塞（启动即等待 stdin 输入，不按 MCP 协议应答），硬挂起评测流水线；待按工具类型生成合理探针的方法论升级后恢复"
+    },
+    {
+      "name": "@matillion/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@matillion/mcp-server"
+      ]
+    },
+    {
+      "name": "@microsoft/clarity-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@microsoft/clarity-mcp-server"
+      ]
+    },
+    {
+      "name": "@modelcontextprotocol/server-everything",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everything"
+      ]
+    },
+    {
+      "name": "@modelcontextprotocol/server-filesystem",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem"
+      ]
+    },
+    {
+      "name": "@modelcontextprotocol/server-memory",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
+    },
+    {
+      "name": "@modelcontextprotocol/server-pdf",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-pdf"
+      ]
+    },
+    {
+      "name": "@modelcontextprotocol/server-sequential-thinking",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    {
+      "name": "@motiffcom/motiff-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@motiffcom/motiff-mcp-server"
+      ]
+    },
+    {
+      "name": "@negokaz/excel-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@negokaz/excel-mcp-server"
+      ]
+    },
+    {
+      "name": "@nexus2520/bitbucket-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@nexus2520/bitbucket-mcp-server"
+      ]
+    },
+    {
+      "name": "@nexus2520/jira-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@nexus2520/jira-mcp-server"
+      ]
+    },
+    {
+      "name": "@nocobase/plugin-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@nocobase/plugin-mcp-server"
+      ]
+    },
+    {
+      "name": "@ohah/react-native-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ohah/react-native-mcp-server"
+      ]
+    },
+    {
+      "name": "@professional-wiki/mediawiki-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@professional-wiki/mediawiki-mcp-server"
+      ]
+    },
+    {
+      "name": "@qase/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@qase/mcp-server"
+      ]
+    },
+    {
+      "name": "@ragieai/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ragieai/mcp-server"
+      ]
+    },
+    {
+      "name": "@runpod/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@runpod/mcp-server"
+      ]
+    },
+    {
+      "name": "@siemens/element-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@siemens/element-mcp"
+      ]
+    },
+    {
+      "name": "@softeria/ms-365-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@softeria/ms-365-mcp-server"
+      ]
+    },
+    {
+      "name": "@superblocksteam/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@superblocksteam/mcp-server"
+      ]
+    },
+    {
+      "name": "@syntrologie/adapt-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@syntrologie/adapt-mcp"
+      ]
+    },
+    {
+      "name": "@taazkareem/clickup-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@taazkareem/clickup-mcp-server"
+      ]
+    },
+    {
+      "name": "@theia/ai-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@theia/ai-mcp-server"
+      ]
+    },
+    {
+      "name": "@tocharianou/mcp-server-kibana",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@tocharianou/mcp-server-kibana"
+      ]
+    },
+    {
+      "name": "@transcend-io/mcp-server-admin",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@transcend-io/mcp-server-admin"
+      ]
+    },
+    {
+      "name": "@transcend-io/mcp-server-assessment",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@transcend-io/mcp-server-assessment"
+      ]
+    },
+    {
+      "name": "@transcend-io/mcp-server-base",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@transcend-io/mcp-server-base"
+      ]
+    },
+    {
+      "name": "@transcend-io/mcp-server-consent",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@transcend-io/mcp-server-consent"
+      ]
+    },
+    {
+      "name": "@transcend-io/mcp-server-discovery",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@transcend-io/mcp-server-discovery"
+      ]
+    },
+    {
+      "name": "@transcend-io/mcp-server-docs",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@transcend-io/mcp-server-docs"
+      ]
+    },
+    {
+      "name": "@transcend-io/mcp-server-dsr",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@transcend-io/mcp-server-dsr"
+      ]
+    },
+    {
+      "name": "@transcend-io/mcp-server-inventory",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@transcend-io/mcp-server-inventory"
+      ]
+    },
+    {
+      "name": "@transcend-io/mcp-server-preferences",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@transcend-io/mcp-server-preferences"
+      ]
+    },
+    {
+      "name": "@transcend-io/mcp-server-workflows",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@transcend-io/mcp-server-workflows"
+      ]
+    },
+    {
+      "name": "@transloadit/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@transloadit/mcp-server"
+      ]
+    },
+    {
+      "name": "@tsmztech/mcp-server-salesforce",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@tsmztech/mcp-server-salesforce"
+      ]
+    },
+    {
+      "name": "@ui5/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ui5/mcp-server"
+      ]
+    },
+    {
+      "name": "@unthread-io/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@unthread-io/mcp-server"
+      ]
+    },
+    {
+      "name": "@upstash/context7-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
+    },
+    {
+      "name": "@upstash/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/mcp-server"
+      ]
+    },
+    {
+      "name": "@vapi-ai/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@vapi-ai/mcp-server"
+      ]
+    },
+    {
+      "name": "@variflight-ai/variflight-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@variflight-ai/variflight-mcp"
+      ]
+    },
+    {
+      "name": "@winor30/mcp-server-datadog",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@winor30/mcp-server-datadog"
+      ]
+    },
+    {
+      "name": "@xeroapi/xero-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@xeroapi/xero-mcp-server"
+      ]
+    },
+    {
+      "name": "@z_ai/mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@z_ai/mcp-server"
+      ]
+    },
+    {
+      "name": "@zapier/zapier-sdk-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@zapier/zapier-sdk-mcp"
+      ]
+    },
+    {
+      "name": "agentation-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "agentation-mcp"
+      ]
+    },
+    {
+      "name": "axe-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "axe-mcp-server"
+      ]
+    },
+    {
+      "name": "backlog-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "backlog-mcp-server"
+      ]
+    },
+    {
+      "name": "cls-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "cls-mcp-server"
+      ]
+    },
+    {
+      "name": "datadog-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "datadog-mcp-server"
+      ]
+    },
+    {
+      "name": "docusaurus-plugin-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "docusaurus-plugin-mcp-server"
+      ]
+    },
+    {
+      "name": "duckduckgo-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "duckduckgo-mcp-server"
+      ]
+    },
+    {
+      "name": "gezhe-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "gezhe-mcp-server"
+      ]
+    },
+    {
+      "name": "hostinger-api-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "hostinger-api-mcp"
+      ]
+    },
+    {
+      "name": "hourei-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "hourei-mcp-server"
+      ]
+    },
+    {
+      "name": "ifconfig-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "ifconfig-mcp"
+      ]
+    },
+    {
+      "name": "langsmith-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "langsmith-mcp-server"
+      ]
+    },
+    {
+      "name": "lsp-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "lsp-mcp-server"
+      ]
+    },
+    {
+      "name": "mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-server"
+      ]
+    },
+    {
+      "name": "next-devtools-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "next-devtools-mcp"
+      ]
+    },
+    {
+      "name": "polaris-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "polaris-mcp-server"
+      ]
+    },
+    {
+      "name": "ref-tools-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "ref-tools-mcp"
+      ]
+    },
+    {
+      "name": "serper-search-scrape-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "serper-search-scrape-mcp-server"
+      ]
+    },
+    {
+      "name": "shadcn-ui-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "shadcn-ui-mcp-server"
+      ]
+    },
+    {
+      "name": "slite-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "slite-mcp-server"
+      ]
+    },
+    {
+      "name": "square-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "square-mcp-server"
+      ]
+    },
+    {
+      "name": "storybook-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "storybook-mcp-server"
+      ]
+    },
+    {
+      "name": "targetprocess-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "targetprocess-mcp-server"
+      ]
+    },
+    {
+      "name": "tavily-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "tavily-mcp"
+      ]
+    },
+    {
+      "name": "terry-mcp",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "terry-mcp"
+      ]
+    },
+    {
+      "name": "tiny-http-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "tiny-http-mcp-server"
+      ]
+    },
+    {
+      "name": "touchdesigner-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "touchdesigner-mcp-server"
+      ]
+    },
+    {
+      "name": "whoop-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "whoop-mcp-server"
+      ]
+    },
+    {
+      "name": "youtube-data-mcp-server",
+      "type": "mcp-server",
+      "source": "registry-npm",
+      "command": "npx",
+      "args": [
+        "-y",
+        "youtube-data-mcp-server"
+      ]
+    },
+    {
+      "name": "server-time",
+      "type": "mcp-server",
+      "source": "official-reference",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-time"
+      ]
+    },
+    {
+      "name": "server-fetch",
+      "type": "mcp-server",
+      "source": "official-reference",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch"
+      ]
+    },
+    {
+      "name": "server-git",
+      "type": "mcp-server",
+      "source": "official-reference",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-git"
+      ]
+    },
+    {
+      "name": "server-sqlite",
+      "type": "mcp-server",
+      "source": "official-reference",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sqlite"
+      ]
+    },
+    {
+      "name": "mcp-server-math",
+      "type": "mcp-server",
+      "source": "registry-pypi",
+      "command": "uvx",
+      "args": [
+        "mcp-server-math"
+      ]
     }
   ]
 }

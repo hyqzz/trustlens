@@ -1,0 +1,97 @@
+{
+  "name": "ifconfig-mcp",
+  "server_type": "mcp-server",
+  "source": "registry-npm",
+  "evaluated_at": 1786011362.7795124,
+  "engine_version": "0.1.0",
+  "ok": true,
+  "error": "",
+  "total_score": 96.2,
+  "grade": "A",
+  "dimensions": {
+    "functionality": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "tools_total": 2,
+        "tools_callable": 2
+      }
+    },
+    "reliability": {
+      "value": 85.0,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-FAIL",
+          "message": "调用失败率 25%"
+        }
+      ],
+      "details": {
+        "avg_latency_s": 0.427,
+        "failure_rate": 0.25,
+        "attempts": 4
+      }
+    },
+    "security": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "critical": 0
+      }
+    },
+    "compatibility": {
+      "value": 100.0,
+      "findings": [],
+      "details": {
+        "success_rate": 1.0,
+        "models": [
+          "claude",
+          "deepseek",
+          "gpt",
+          "qwen"
+        ],
+        "verdicts": 8
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "get_location_ip",
+      "description": "Get user's external IP address and corresponding geographic location information",
+      "schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "get_location_by_ip",
+      "description": "Get location information for an IP address using ip-api.com",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "ip": {
+            "type": "string",
+            "description": "IP address to look up. If not provided, will use current IP."
+          },
+          "lang": {
+            "type": "string",
+            "description": "Language for the response. Default is zh-CN (Chinese).",
+            "enum": [
+              "en",
+              "de",
+              "es",
+              "pt-BR",
+              "fr",
+              "ja",
+              "zh-CN",
+              "ru"
+            ],
+            "default": "zh-CN"
+          }
+        },
+        "required": []
+      }
+    }
+  ]
+}
