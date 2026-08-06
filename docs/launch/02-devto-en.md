@@ -19,21 +19,22 @@ I took **122 real MCP servers published on npm/PyPI** (official reference implem
 
 | Grade | Count | Share | Meaning |
 |---|---|---|---|
-| A | 9 | 8% | Works out of the box |
-| B | 12 | 10% | Usable, minor issues |
-| C | 25 | 21% | Mediocre |
-| D | 7 | 6% | Risky |
-| **F** | **66** | **55%** | **Cannot be used** |
+| A | 1 | 1% | Works out of the box |
+| B | 13 | 11% | Usable, minor issues |
+| C | 13 | 11% | Mediocre |
+| D | 23 | 19% | Risky |
+| **F** | **69** | **58%** | **Cannot be used** |
 
-**More than half of public MCP servers, installed per their README with no extra credentials, never even complete a protocol handshake.** Failure modes:
+**More than half of public MCP servers, installed per their README with no extra credentials, never even complete a protocol handshake.** Failure modes (audited from each process's stderr):
 
-- **Startup hang / no response (55)**: the process starts but never completes initialize within 90s — many silently wait for undocumented config or interactive input
-- **Requires API credentials just to boot (7)**: crashes on a missing key the docs never mention
-- **SDK compatibility crash (3)**: official Python servers crash on import after the mcp SDK renamed `McpError` → `MCPError`
+- **Runtime crash / code error (30)**: the process dies within the handshake window (JS/Python stack, module load failure)
+- **Requires API credentials just to boot (15)**: crashes on a missing key the docs never mention
+- **Package resolution / compatibility (11)**: `npx` can't even find an executable entry, or deps fail to install
+- **Genuine startup hang (9)**: the process starts but never completes initialize within 90s — many silently wait for undocumented config or interactive input
 
 Three more (puppeteer, @enfyra, @mapbox) are paused pending methodology — they hard-hang the harness, which itself flags a gap: browser-automation tools need type-aware probes, not blind ones.
 
-**The good news:** `ref-tools-mcp`, `duckduckgo-search`, `ifconfig-mcp` score A or perfect. **"Popular" and "usable" are different things; "obscure" and "reliable" are different things too.**
+**The good ones exist:** `duckduckgo-search` (92.3) is the single A-grade — deservedly. Meanwhile the hugely popular official `filesystem` server scores just C (69.1) and `desktop-commander` sits at D (48.0). **"Popular" and "usable" are different things; "obscure" and "reliable" are different things too.**
 
 ## What TrustLens is
 
@@ -63,7 +64,7 @@ Every MCP server has a "model tool-call" score — not a static estimate, but **
 
 ## Roadmap & feedback wanted
 
-1. **Capability trust** (now): expand to the Skills ecosystem; real-model tool-call accuracy across GPT/Claude/Qwen/DeepSeek — **no public dataset exists for Chinese models today**
+1. **Capability trust** (now): **DeepSeek-V4 Flash** real tool-call accuracy is live (cheapest tier); planning to expand to multi-model comparison — **no public dataset exists for Chinese models today**
 2. **Behavior trust**: agent track-record reputation (W3C VC/DID, ERC-8004)
 3. **Transaction trust**: a credit layer for the agent economy
 

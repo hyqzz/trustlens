@@ -6,9 +6,9 @@ Show HN: I benchmarked 119 real MCP servers — 55% are unusable out of the box
 **Text:**
 The MCP ecosystem hit 60k+ public servers with essentially no quality signal. Research says 66% have security issues; 88% of enterprise agent pilots die before production. There's an app store but no review system.
 
-TrustLens is an open-source evaluation engine that actually runs each server in a sandbox: protocol handshake, static security scan (prompt injection / exfiltration / hardcoded creds), real probe calls with latency and failure tracking, multi-model compatibility. It outputs a 0–100 trust score with fully public evidence (JSON data committed to the repo; git history is the audit log).
+TrustLens is an open-source evaluation engine that actually runs each server in a sandbox: protocol handshake, static security scan (prompt injection / exfiltration / hardcoded creds), real probe calls with latency and failure tracking, real-model tool-call compatibility. It outputs a 0–100 trust score with fully public evidence (JSON data committed to the repo; git history is the audit log).
 
-I evaluated 119 real npm/PyPI MCP servers in a zero-credential environment. Result: **only 9 grade A (8%); 66 (55%) are F** — they never complete a handshake with the standard `npx -y <pkg>` start and no config. Failure modes: startup hang (55), crash on missing API key (7), SDK compat crash (3). A few official Python servers crash on import because the mcp SDK renamed McpError → MCPError.
+I evaluated 119 real npm/PyPI MCP servers in a zero-credential environment. Result: **only 1 earns an A; 69 (58%) are F** — they never complete a handshake with the standard `npx -y <pkg>` start and no config. Failure modes (audited from stderr): runtime crash (30), crash on missing API key (15), package resolution/compat failure (11), genuine hang (9).
 
 Leaderboard (bilingual EN/中文, searchable/filterable/paginated, auto-updated weekly by CI): https://trustlens.icodestar.net/en/
 Repo (Apache-2.0, zero-dependency Python): https://github.com/hyqzz/trustlens
