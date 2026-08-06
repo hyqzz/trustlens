@@ -1,7 +1,7 @@
-# I benchmarked 119 real MCP servers — 55% are unusable out of the box. So I built a "quality inspection" lab for the agent ecosystem.
+# I benchmarked 119 real MCP servers (55% unusable) + 110 Agent Skills. So I built a "quality inspection" lab for the agent ecosystem.
 
 > Project: https://github.com/hyqzz/trustlens
-> Live leaderboard (119 servers, searchable/filterable/paginated, auto-updated weekly): https://trustlens.icodestar.net/en/
+> Live leaderboard (119 MCP servers + 110 Skills, searchable/filterable/paginated, auto-updated weekly): https://trustlens.icodestar.net/en/
 
 ## The problem
 
@@ -37,11 +37,11 @@ Three more (puppeteer, @enfyra, @mapbox) are paused pending methodology — they
 
 ## What TrustLens is
 
-An open-source trust benchmark for the agent capability ecosystem:
+An open-source trust benchmark for the agent capability ecosystem — two evaluations, one UI:
 
-1. **Automated evaluation pipeline**: sandboxed deployment → protocol handshake → static security scan (prompt injection / exfiltration / hardcoded credentials) → real probe calls → multi-model compatibility → 0–100 trust score
-2. **Public leaderboard**: bilingual (EN/中文), **search, filter by grade/source, sort, paginate**, one inspection report per server
-3. **CLI**: check before you install
+1. **MCP server QA pipeline**: sandboxed deployment → protocol handshake → static security scan (prompt injection / exfiltration / hardcoded credentials) → real probe calls → **real tool-call evaluation by DeepSeek-V4 Flash** → 0–100 trust score
+2. **Agent Skills evaluation**: structure + security + LLM-measured actionability of each SKILL.md — **110 real Skills evaluated** (official and community repos on GitHub)
+3. **Public leaderboard**: bilingual (EN/中文), MCP + Skills tabs, **search, filter, sort, paginate**, one inspection report per server, auto-updated weekly
 
 ```bash
 python -m trustlens check <server-name>
@@ -49,11 +49,16 @@ python -m trustlens check <server-name>
 
 **All evaluation data is committed to the repo as JSON — git history is the audit log.** A trust product has to be transparent itself.
 
+## Why real-model tool-call measurement matters
+
+Every MCP server has a "model tool-call" score — not a static estimate, but **DeepSeek-V4 Flash actually reading each tool's definition and judging whether it would call it and could construct valid arguments.** Nobody has published this data: **for a given tool, can a model actually use it?**
+
 ## Methodology (stated plainly)
 
 - Servers run in **env-stripped, sandboxed processes** — they get **zero credentials**
-- **Out-of-the-box criterion**: start via the standard `npx -y <pkg>`, no config, no API key; handshake must complete within 90s
-- This is deliberate: **a server that needs you to hunt through docs for a key just to boot is unusable for most users**
+- **Out-of-the-box criterion**: start via the standard `npx -y <pkg>`, no config, no API key; handshake must complete within 90s. This is deliberate: **a server that needs you to hunt for a key just to boot is unusable for most users**
+- Model tool-call scores come from real calls by **DeepSeek-V4 Flash** (cheapest tier)
+- Skills: structure completeness + security scan + model actionability judgment
 - Pipeline re-runs weekly and publishes automatically
 
 ## Roadmap & feedback wanted
