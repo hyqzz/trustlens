@@ -2,7 +2,7 @@
   "name": "desktop-commander",
   "server_type": "mcp-server",
   "source": "community-popular",
-  "evaluated_at": 1785961395.3724368,
+  "evaluated_at": 1785982002.7509935,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -78,7 +78,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.01,
+        "avg_latency_s": 0.012,
         "failure_rate": 0.4,
         "attempts": 10
       }

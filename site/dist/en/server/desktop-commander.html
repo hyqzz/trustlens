@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>desktop-commander — TrustLens Inspection Report</title>
+<meta name="description" content="TrustLens measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores and a weekly leaderboard. Check before you install.">
+<link rel="canonical" href="https://trustlens.icodestar.net/en/server/desktop-commander.html">
+<link rel="alternate" hreflang="en" href="https://trustlens.icodestar.net/en/server/desktop-commander.html">
+<link rel="alternate" hreflang="zh-CN" href="https://trustlens.icodestar.net/server/desktop-commander.html">
+<link rel="alternate" hreflang="x-default" href="https://trustlens.icodestar.net/en/server/desktop-commander.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="desktop-commander — TrustLens Inspection Report">
+<meta property="og:description" content="TrustLens measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores and a weekly leaderboard. Check before you install.">
+<meta property="og:url" content="https://trustlens.icodestar.net/en/server/desktop-commander.html">
+<meta property="og:site_name" content="TrustLens">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="desktop-commander — TrustLens Inspection Report">
+<meta name="twitter:description" content="TrustLens measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores and a weekly leaderboard. Check before you install.">
+<style>
+:root{color-scheme:light dark}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;max-width:960px;margin:0 auto;padding:2rem 1rem;line-height:1.6}
+h1{margin-bottom:.2rem}
+.subtitle{opacity:.7;margin-top:0}
+table{width:100%;border-collapse:collapse;margin-top:1.5rem}
+th,td{padding:.6rem .8rem;text-align:left;border-bottom:1px solid #8884}
+th{white-space:nowrap}
+a{color:#4f8ef7;text-decoration:none}
+a:hover{text-decoration:underline}
+.score{font-weight:700;font-variant-numeric:tabular-nums}
+.grade{display:inline-block;min-width:1.6em;text-align:center;border-radius:.3em;padding:.05em .3em;color:#fff;font-weight:700}
+.gA{background:#2da44e}.gB{background:#6f9e1f}.gC{background:#bf8700}.gD{background:#cf6020}.gF{background:#cf222e}
+.dim{margin:.4rem 0}
+.dim b{display:inline-block;width:9em}
+.finding{font-size:.9em;opacity:.85;margin-left:1em}
+.crit{color:#cf222e}.warn{color:#bf8700}
+footer{margin-top:3rem;opacity:.6;font-size:.85rem}
+.badge{background:#4f8ef7;color:#fff;border-radius:.3em;padding:.1em .5em;font-size:.8em}
+.lang{float:right;font-size:.9em}
+.faq{margin-top:2.5rem}
+.faq h2{font-size:1.2rem}
+.faq details{margin:.5rem 0;border-bottom:1px solid #8884;padding:.4rem 0}
+.faq summary{cursor:pointer;font-weight:600}
+</style></head><body>
+<a class="lang" href="../../server/desktop-commander.html">中文</a>
+<p><a href="../">← Back to leaderboard</a></p>
+<h1>desktop-commander</h1>
+<p class="subtitle">Trust score <span class="score">53.2/100</span> · <span class="grade gD">D</span> Risky</p>
+
+<h2>Dimension breakdown</h2><div class="dim"><b>Functionality 0.0</b><div class="finding warn">[SCHEMA-BLOAT] 工具 read_file 描述过长（4381 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 write_file 描述过长（2718 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 write_pdf 描述过长（3079 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 list_directory 描述过长（2274 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 start_search 描述过长（6393 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 edit_block 描述过长（3701 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 start_process 描述过长（5053 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 read_process_output 描述过长（2186 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 interact_with_process 描述过长（3826 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 give_feedback_to_desktop_commander 描述过长（2039 字符，加剧上下文膨胀）</div></div><div class="dim"><b>Reliability 76.0</b><div class="finding warn">[REL-FAIL] 调用失败率 40%</div></div><div class="dim"><b>Security 100.0</b></div><div class="dim"><b>Compatibility 61.5</b></div>
+<h2>Tools (26)</h2><ul><li><code>get_config</code> — 
+                        Get the complete server configuration as JSON. Config includes fields for:
+                        - blockedCommands (array of blocked </li><li><code>set_config_value</code> — 
+                        Set a specific configuration value by key.
+                        
+                        WARNING: Should be used in a separate chat </li><li><code>read_file</code> — 
+                        Read contents from files and URLs.
+                        Read PDF files and extract content as markdown and images.
+                 </li><li><code>read_multiple_files</code> — 
+                        Read the contents of multiple files simultaneously.
+                        
+                        Each file&#x27;s content is returned wi</li><li><code>write_file</code> — 
+                        Write or append to file contents.
+
+                        IMPORTANT: DO NOT use this tool to create PDF files. Use &#x27;write_pdf&#x27; for all</li><li><code>write_pdf</code> — 
+                        Create a new PDF file or modify an existing one.
+
+                        THIS IS THE ONLY TOOL FOR CREATING AND MODIFYING PDF FILES.
+
+</li><li><code>create_directory</code> — 
+                        Create a new directory or ensure a directory exists.
+                        
+                        Can create multiple nested direct</li><li><code>list_directory</code> — 
+                        Get a detailed listing of all files and directories in a specified path.
+                        
+                        Use this inst</li><li><code>move_file</code> — 
+                        Move or rename files and directories.
+                        
+                        Can move files between directories and rename th</li><li><code>start_search</code> — 
+                        Start a streaming search that can return results progressively.
+                        
+                        SEARCH STRATEGY GUIDE:</li><li><code>get_more_search_results</code> — 
+                        Get more results from an active search with offset-based pagination.
+                        
+                        Supports partial </li><li><code>stop_search</code> — 
+                        Stop an active search.
+                        
+                        Stops the background search process gracefully. Use this when y</li><li><code>list_searches</code> — 
+                        List all active searches.
+                        
+                        Shows search IDs, search types, patterns, status, and runtim</li><li><code>get_file_info</code> — 
+                        Retrieve detailed metadata about a file or directory including:
+                        - size
+                        - creation time
+</li><li><code>edit_block</code> — 
+                        Apply surgical edits to files.
+
+                        BEST PRACTICE: Make multiple small, focused edits rather than one large edit.
+ </li><li><code>start_process</code> — 
+                        Start a new terminal process with intelligent state detection.
+                        
+                        PRIMARY TOOL FOR FILE A</li><li><code>read_process_output</code> — 
+                        Read output from a running process with file-like pagination support.
+                        
+                        Supports partial</li><li><code>interact_with_process</code> — 
+                        Send input to a running process and automatically receive the response.
+                        
+                        CRITICAL: THIS</li><li><code>force_terminate</code> — 
+                        Force terminate a running terminal session.
+                        
+                        This command can be referenced as &quot;DC: ...</li><li><code>list_sessions</code> — 
+                        List all active terminal sessions.
+                        
+                        Shows session status including:
+                   </li><li><code>list_processes</code> — 
+                        List all running processes.
+                        
+                        Returns process information including PID, command name, C</li><li><code>kill_process</code> — 
+                        Terminate a running process by PID.
+
+                        Use with caution as this will forcefully terminate the specified process.
+</li><li><code>get_usage_stats</code> — 
+                        Get usage statistics for debugging and analysis.
+                        
+                        Returns summary of tool usage, succes</li><li><code>get_recent_tool_calls</code> — 
+                        Get recent tool call history with their arguments and outputs.
+                        Returns chronological list of tool calls made du</li><li><code>give_feedback_to_desktop_commander</code> — 
+                        Open feedback form in browser to provide feedback about Desktop Commander.
+                        
+                        IMPORTANT: </li><li><code>get_prompts</code> — 
+                        Retrieve a specific Desktop Commander onboarding prompt by ID and execute it.
+                        
+                        SIMPLIFI</li></ul>
+<footer>Evaluated 2026-08-06 02:06 UTC · Engine v0.1.0 · Source: community-popular</footer>
+</body></html>

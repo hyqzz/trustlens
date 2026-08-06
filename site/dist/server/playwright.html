@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>playwright — TrustLens 质检报告</title>
+<meta name="description" content="TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
+<link rel="canonical" href="https://trustlens.icodestar.net/server/playwright.html">
+<link rel="alternate" hreflang="zh-CN" href="https://trustlens.icodestar.net/server/playwright.html">
+<link rel="alternate" hreflang="en" href="https://trustlens.icodestar.net/en/server/playwright.html">
+<link rel="alternate" hreflang="x-default" href="https://trustlens.icodestar.net/en/server/playwright.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="playwright — TrustLens 质检报告">
+<meta property="og:description" content="TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
+<meta property="og:url" content="https://trustlens.icodestar.net/server/playwright.html">
+<meta property="og:site_name" content="TrustLens">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="playwright — TrustLens 质检报告">
+<meta name="twitter:description" content="TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
+<style>
+:root{color-scheme:light dark}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;max-width:960px;margin:0 auto;padding:2rem 1rem;line-height:1.6}
+h1{margin-bottom:.2rem}
+.subtitle{opacity:.7;margin-top:0}
+table{width:100%;border-collapse:collapse;margin-top:1.5rem}
+th,td{padding:.6rem .8rem;text-align:left;border-bottom:1px solid #8884}
+th{white-space:nowrap}
+a{color:#4f8ef7;text-decoration:none}
+a:hover{text-decoration:underline}
+.score{font-weight:700;font-variant-numeric:tabular-nums}
+.grade{display:inline-block;min-width:1.6em;text-align:center;border-radius:.3em;padding:.05em .3em;color:#fff;font-weight:700}
+.gA{background:#2da44e}.gB{background:#6f9e1f}.gC{background:#bf8700}.gD{background:#cf6020}.gF{background:#cf222e}
+.dim{margin:.4rem 0}
+.dim b{display:inline-block;width:9em}
+.finding{font-size:.9em;opacity:.85;margin-left:1em}
+.crit{color:#cf222e}.warn{color:#bf8700}
+footer{margin-top:3rem;opacity:.6;font-size:.85rem}
+.badge{background:#4f8ef7;color:#fff;border-radius:.3em;padding:.1em .5em;font-size:.8em}
+.lang{float:right;font-size:.9em}
+.faq{margin-top:2.5rem}
+.faq h2{font-size:1.2rem}
+.faq details{margin:.5rem 0;border-bottom:1px solid #8884;padding:.4rem 0}
+.faq summary{cursor:pointer;font-weight:600}
+</style></head><body>
+<a class="lang" href="../en/server/playwright.html">English</a>
+<p><a href="../">← 返回排行榜</a></p>
+<h1>playwright</h1>
+<p class="subtitle">信任分 <span class="score">70.8/100</span> · <span class="grade gC">C</span> 及格</p>
+
+<h2>维度明细</h2><div class="dim"><b>功能性 45.0</b></div><div class="dim"><b>可靠性 60.4</b><div class="finding warn">[REL-FAIL] 调用失败率 60%</div></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>跨模型兼容 100.0</b></div>
+<h2>工具清单（24）</h2><ul><li><code>browser_close</code> — Close the page</li><li><code>browser_resize</code> — Resize the browser window</li><li><code>browser_console_messages</code> — Returns all console messages</li><li><code>browser_handle_dialog</code> — Handle a dialog</li><li><code>browser_evaluate</code> — Evaluate JavaScript expression on page or element</li><li><code>browser_file_upload</code> — Upload one or multiple files</li><li><code>browser_drop</code> — Drop files or MIME-typed data onto an element, as if dragged from outside the page. At least one of &quot;paths&quot; or &quot;data&quot; must be provided.</li><li><code>browser_find</code> — Search the accessibility snapshot of the current page for text or a regular expression. Returns matching snapshot nodes with a few lines of surrounding context </li><li><code>browser_fill_form</code> — Fill multiple form fields</li><li><code>browser_press_key</code> — Press a key on the keyboard</li><li><code>browser_type</code> — Type text into editable element</li><li><code>browser_navigate</code> — Navigate to a URL</li><li><code>browser_navigate_back</code> — Go back to the previous page in the history</li><li><code>browser_network_requests</code> — Returns a numbered list of network requests since loading the page. Use browser_network_request with the number to get full details.</li><li><code>browser_network_request</code> — Returns full details (headers and body) of a single network request, or a single part if `part` is set. Use the number from browser_network_requests.</li><li><code>browser_run_code_unsafe</code> — Run a Playwright code snippet. Unsafe: executes arbitrary JavaScript in the Playwright server process and is RCE-equivalent.</li><li><code>browser_take_screenshot</code> — Take a screenshot of the current page. You can&#x27;t perform actions based on the screenshot, use browser_snapshot for actions.</li><li><code>browser_snapshot</code> — Capture accessibility snapshot of the current page, this is better than screenshot</li><li><code>browser_click</code> — Perform click on a web page</li><li><code>browser_drag</code> — Perform drag and drop between two elements</li><li><code>browser_hover</code> — Hover over element on page</li><li><code>browser_select_option</code> — Select an option in a dropdown</li><li><code>browser_tabs</code> — List, create, close, or select a browser tab.</li><li><code>browser_wait_for</code> — Wait for text to appear or disappear or a specified time to pass</li></ul>
+<footer>评测于 2026-08-06 02:06 UTC · 引擎版本 0.1.0 · 来源 microsoft</footer>
+</body></html>

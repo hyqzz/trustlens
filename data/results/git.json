@@ -2,10 +2,10 @@
   "name": "git",
   "server_type": "mcp-server",
   "source": "official-reference",
-  "evaluated_at": 1785961412.7686799,
+  "evaluated_at": 1785982026.5329492,
   "engine_version": "0.1.0",
   "ok": false,
-  "error": "等待 initialize 响应超时（进程已退出，退出码 1） | stderr: edtoolcache/Python/3.11.15/x64/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/home/runner/.cache/uv/archive-v0/pll0STs_khTCzXEQ/lib/python3.11/site-packages/mcp_server_git/server.py\", line 321, in serve\n    @server.list_tools()\n     ^^^^^^^^^^^^^^^^^\nAttributeError: 'Server' object has no attribute 'list_tools'",
+  "error": "等待 initialize 响应超时（进程已退出，退出码 1） | stderr: edtoolcache/Python/3.11.15/x64/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/home/runner/.cache/uv/archive-v0/CV3FiVScyanEDSLJ/lib/python3.11/site-packages/mcp_server_git/server.py\", line 321, in serve\n    @server.list_tools()\n     ^^^^^^^^^^^^^^^^^\nAttributeError: 'Server' object has no attribute 'list_tools'",
   "total_score": 25.0,
   "grade": "F",
   "dimensions": {

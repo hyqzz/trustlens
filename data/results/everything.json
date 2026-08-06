@@ -2,7 +2,7 @@
   "name": "everything",
   "server_type": "mcp-server",
   "source": "official-reference",
-  "evaluated_at": 1785961131.9665444,
+  "evaluated_at": 1785981730.227843,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -27,7 +27,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.002,
+        "avg_latency_s": 0.032,
         "failure_rate": 0.2,
         "attempts": 10
       }
