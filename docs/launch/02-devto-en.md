@@ -19,11 +19,11 @@ I took **122 real MCP servers published on npm/PyPI** (official reference implem
 
 | Grade | Count | Share | Meaning |
 |---|---|---|---|
-| A | 1 | 1% | Works out of the box |
-| B | 13 | 11% | Usable, minor issues |
-| C | 13 | 11% | Mediocre |
+| A | 3 | 3% | Works out of the box |
+| B | 11 | 9% | Usable, minor issues |
+| C | 11 | 9% | Mediocre |
 | D | 23 | 19% | Risky |
-| **F** | **69** | **58%** | **Cannot be used** |
+| **F** | **71** | **60%** | **Cannot be used** |
 
 **More than half of public MCP servers, installed per their README with no extra credentials, never even complete a protocol handshake.** Failure modes (audited from each process's stderr):
 
@@ -34,7 +34,7 @@ I took **122 real MCP servers published on npm/PyPI** (official reference implem
 
 Three more (puppeteer, @enfyra, @mapbox) are paused pending methodology — they hard-hang the harness, which itself flags a gap: browser-automation tools need type-aware probes, not blind ones.
 
-**The good ones exist:** `duckduckgo-search` (92.3) is the single A-grade — deservedly. Meanwhile the hugely popular official `filesystem` server scores just C (69.1) and `desktop-commander` sits at D (48.0). **"Popular" and "usable" are different things; "obscure" and "reliable" are different things too.**
+**The good ones exist:** only 3 servers grade A — `ifconfig-mcp` and `ref-tools-mcp` (tied at the top) plus `@siemens/element-mcp`. Meanwhile the hugely popular official `filesystem` server scores just 54.6 (D) and `desktop-commander` sits at 48.0 (D). **"Popular" and "usable" are different things; "obscure" and "reliable" are different things too.**
 
 ## What TrustLens is
 

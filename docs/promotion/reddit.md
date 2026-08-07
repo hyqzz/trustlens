@@ -11,9 +11,9 @@ Like many of you, I've been installing MCP servers blind. There are 60k+ now, an
 So I built TrustLens: an evaluation engine that sandboxes each server, runs the MCP handshake, statically scans for prompt injection / data exfiltration / hardcoded credentials, makes real probe calls (latency + failure rate), and checks model tool-call compatibility. Output is a 0–100 trust score, and every byte of evidence is committed to the repo as JSON.
 
 I ran 119 real npm/PyPI servers through it in a zero-credential, out-of-the-box setup:
-- **Only 1 (1%) grades A.** 69 (58%) are F — never complete a handshake with the standard `npx -y <pkg>` and no config.
+- **Only 3 (3%) grade A.** 71 (60%) are F — never complete a handshake with the standard `npx -y <pkg>` and no config.
 - Failure modes (audited from stderr): runtime crash (30), crash on missing API key (15), package resolution/compat failure (11), genuine hang (9).
-- The good ones exist: duckduckgo-search (92.3) is the single A; the hugely popular official `filesystem` scores just 69.1 (C) and `desktop-commander` sits at 48.0 (D).
+- The good ones exist: ifconfig-mcp and ref-tools-mcp lead the 3 A-grades; meanwhile the hugely popular official `filesystem` scores just 54.6 (D) and `desktop-commander` sits at 48.0 (D).
 
 Leaderboard (EN/中文, search/filter/sort/pagination, weekly auto-update): https://trustlens.icodestar.net/en/
 Repo: https://github.com/hyqzz/trustlens (Apache-2.0, zero-dependency Python)
