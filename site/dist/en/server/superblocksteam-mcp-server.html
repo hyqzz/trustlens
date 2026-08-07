@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>@superblocksteam/mcp-server Inspection Report — TrustLens · ICodeStar</title>
+<meta name="description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link rel="canonical" href="https://trustlens.icodestar.net/en/server/superblocksteam-mcp-server.html">
+<link rel="alternate" hreflang="en" href="https://trustlens.icodestar.net/en/server/superblocksteam-mcp-server.html">
+<link rel="alternate" hreflang="zh-CN" href="https://trustlens.icodestar.net/server/superblocksteam-mcp-server.html">
+<link rel="alternate" hreflang="x-default" href="https://trustlens.icodestar.net/en/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="@superblocksteam/mcp-server Inspection Report — TrustLens · ICodeStar">
+<meta property="og:description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<meta property="og:url" content="https://trustlens.icodestar.net/en/server/superblocksteam-mcp-server.html">
+<meta property="og:site_name" content="TrustLens · ICodeStar">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="@superblocksteam/mcp-server Inspection Report — TrustLens · ICodeStar">
+<meta name="twitter:description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<script>
+function tlSetLang(){try{sessionStorage.setItem('tl-lang','1')}catch(e){}}
+(function(){try{if(sessionStorage.getItem('tl-lang'))return;
+var zh=/^zh([-_]|$)/i.test(navigator.language||navigator.userLanguage||'');
+if(zh!==false){location.replace('../../server/superblocksteam-mcp-server.html');}}catch(e){}})();
+</script>
+<style>
+:root{color-scheme:light dark;--accent:#4f8ef7;--accent2:#9b5cf6;--line:#8884;--bg-card:#8881}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif;
+     max-width:1060px;margin:0 auto;padding:0 1rem 2rem;line-height:1.6}
+.brandbar{display:flex;align-items:center;gap:.6rem;padding:.9rem 0;border-bottom:1px solid var(--line);margin-bottom:1.1rem;position:sticky;top:0;background:color-mix(in srgb,Canvas 92%,transparent);backdrop-filter:blur(6px);z-index:10}
+.brand-logo{font-size:1.4rem}
+.brand-name{font-weight:800;font-size:1.05rem;letter-spacing:.02em}
+.brand-name .en{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-sub{opacity:.55;font-size:.8rem;margin-left:.15rem}
+.nav{display:flex;gap:.4rem;margin:.4rem 0 .3rem;flex-wrap:wrap}
+.nav a{font-size:.88rem;border:1px solid var(--line);border-radius:1.4em;padding:.22em .95em;text-decoration:none}
+.nav a.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.nav a:hover:not(.on){border-color:var(--accent)}
+.method{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:.55rem;padding:.5rem .85rem;font-size:.83rem;opacity:.85;margin:.8rem 0}
+.method b{opacity:1}
+.lang{margin-left:auto;font-size:.86rem;border:1px solid var(--line);border-radius:1.2em;padding:.18em .85em;text-decoration:none}
+.lang:hover{text-decoration:none;background:var(--bg-card)}
+h1{margin:.3rem 0 .2rem;font-size:1.65rem}
+.subtitle{opacity:.72;margin-top:0}
+.badge{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-radius:.35em;padding:.12em .55em;font-size:.72rem;vertical-align:middle}
+
+/* 统计卡片 */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin:1.1rem 0}
+.stat{border:1px solid var(--line);border-radius:.7rem;padding:.6rem .8rem}
+.stat .v{font-size:1.45rem;font-weight:800;font-variant-numeric:tabular-nums}
+.stat .l{opacity:.65;font-size:.8rem}
+.stat .v.gA{color:#2da44e}.stat .v.gD{color:#cf6020}.stat .v.gF{color:#cf222e}
+.distbar{display:flex;height:.55rem;border-radius:.3rem;overflow:hidden;margin-top:.35rem}
+.distbar i{display:block;height:100%}
+
+/* 工具栏 */
+.toolbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.9rem 0;position:sticky;top:52px;background:color-mix(in srgb,Canvas 94%,transparent);backdrop-filter:blur(6px);padding:.5rem 0;z-index:9}
+.toolbar input[type=search]{flex:1 1 220px;min-width:160px;padding:.5rem .8rem;border:1px solid var(--line);border-radius:.6rem;background:Canvas;font:inherit}
+.toolbar select{padding:.5rem .6rem;border:1px solid var(--line);border-radius:.6rem;background:Canvas;font:inherit}
+.toolbar input:focus,.toolbar select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.chips{display:flex;gap:.35rem;flex-wrap:wrap}
+.chip{border:1px solid var(--line);border-radius:1.2em;padding:.22em .8em;cursor:pointer;font-size:.84rem;background:Canvas;user-select:none}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.resultcount{font-size:.84rem;opacity:.75;margin-left:auto;white-space:nowrap}
+
+/* 表格 */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:.7rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:680px}
+thead th{position:sticky;top:104px;background:Canvas;opacity:.75;font-weight:600;text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line);white-space:nowrap;z-index:5}
+tbody td{padding:.55rem .8rem;border-bottom:1px solid #8882;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:var(--bg-card)}
+.rank{opacity:.5;font-variant-numeric:tabular-nums;font-size:.85rem;width:3em}
+.name{font-weight:600}
+.name small{display:block;opacity:.5;font-weight:400;font-size:.78rem;max-width:26em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.score{font-weight:800;font-variant-numeric:tabular-nums;font-size:1.05rem}
+.grade{display:inline-block;min-width:1.7em;text-align:center;border-radius:.4em;padding:.1em .4em;color:#fff;font-weight:700;font-size:.82em}
+.gA{background:#2da44e}.gB{background:#6f9e1f}.gC{background:#bf8700}.gD{background:#cf6020}.gF{background:#cf222e}
+.src{opacity:.7;font-size:.8rem}
+.dims{font-size:.78rem;opacity:.7;white-space:nowrap}
+.dims b{font-variant-numeric:tabular-nums}
+
+/* 分页 */
+.pager{display:flex;gap:.4rem;align-items:center;justify-content:center;margin:1rem 0;flex-wrap:wrap}
+.pager button{border:1px solid var(--line);background:Canvas;border-radius:.5rem;padding:.35rem .75rem;cursor:pointer;font:inherit;font-size:.88rem}
+.pager button:hover:not(:disabled){border-color:var(--accent)}
+.pager button:disabled{opacity:.4;cursor:not-allowed}
+.pager .pg.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.empty{border:1px dashed var(--line);border-radius:.7rem;padding:2rem;text-align:center;opacity:.7;margin:1rem 0}
+
+/* 详情页维度 */
+.dim{margin:.5rem 0;padding:.55rem .8rem;border:1px solid var(--line);border-radius:.55rem}
+.dim b{display:inline-block;min-width:11em}
+.finding{font-size:.87em;opacity:.85;margin:.15rem 0 0 .4rem;word-break:break-all}
+.crit{color:#cf222e}.warn{color:#bf8700}
+footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opacity:.6;font-size:.85rem}
+.faq{margin-top:2rem}
+.faq h2{font-size:1.15rem}
+.faq details{margin:.5rem 0;border:1px solid var(--line);border-radius:.55rem;padding:.55rem .9rem}
+.faq summary{cursor:pointer;font-weight:600}
+.faq p{opacity:.85;margin:.4rem 0 .2rem}
+@media (max-width:640px){.toolbar{position:static}thead th{position:static}.dims{display:none}}
+</style></head><body>
+<div class="brandbar"><span class="brand-logo">🛡️</span><span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span><a class="lang" href="../../server/superblocksteam-mcp-server.html" onclick="tlSetLang()">中文</a></div>
+<p><a href="../">← Back to leaderboard</a></p>
+<h1>@superblocksteam/mcp-server</h1>
+<p class="subtitle">Trust score <span class="score">39.6/100</span> · <span class="grade gF">F</span> Broken</p>
+
+<h2>Dimension breakdown</h2><div class="dim"><b>Func 40.0</b></div><div class="dim"><b>Rel 0.0</b><div class="finding warn">[REL-FAIL] 调用失败率 100%</div></div><div class="dim"><b>Sec 100.0</b></div><div class="dim"><b>Tool-call 3.7</b></div>
+<h2>Tools (54)</h2><ul><li><code>aggregate_audit_events</code> — Compute aggregated metrics over v2 audit events (OCSF) for the current organization. Returns a single numeric value and optional grouped breakdown.
+
+Metrics: &#x27;c</li><li><code>assign_builder_seat</code> — Assign a builder seat to a user by user_id.</li><li><code>checkout_application</code> — Check out a Superblocks application to a caller-provided directory or a temporary directory and return the checkout path. You can optionally provide commit_id t</li><li><code>create_folder</code> — Create a folder in the current organization.</li><li><code>create_integration</code> — Create a new integration. Pass the integration payload expected by the integrations API.</li><li><code>delete_folder</code> — Delete a folder by folder ID.</li><li><code>delete_group_org_role</code> — Remove a group&#x27;s organization-level role assignment by assignment record ID. This uses the dedicated org group role endpoint, not the generic RBAC assignment AP</li><li><code>delete_integration</code> — Delete an integration by ID.</li><li><code>deploy_application</code> — Deploy a Superblocks application. Supports either app_url or application_id plus base_url. Optionally pass commit_id to deploy a specific commit, or pass branch</li><li><code>find_apps_by_integration</code> — Find applications using a specific integration ID by querying server-side integration usage metadata.</li><li><code>find_apps_by_package</code> — Find apps whose package usage index contains a package dependency. Supports filtering by deployed/non-deployed commits, declared or resolved version, and depend</li><li><code>get_application_access</code> — List all users and groups that have access to a Superblocks application, including their roles and permissions. Provide either app_url or application_id plus ba</li><li><code>get_application_commit_history</code> — Fetch a paginated, reverse-chronological application commit history, including autosaves, commit metadata, committer details, and DBFS directory hashes when ava</li><li><code>get_application_deployment_history</code> — Fetch the deployment timeline for a Superblocks application. Returns deploy and undeploy events in reverse chronological order, including who performed each act</li><li><code>get_application_structure</code> — Fetch a Superblocks application structure summary. For Clark AI Apps this returns a bounded checkout tree and temp path. Provide either app_url or application_i</li><li><code>get_application_summary</code> — Fetch a Superblocks application summary, including the owning organization ID, app mode, deployed commit ID when available, and resolved environment. Provide ei</li><li><code>get_audit_events</code> — Fetch v2 audit events (OCSF) for the current organization in a time range, with cursor pagination and OCSF filters. Use list_audit_event_types to discover all a</li><li><code>get_auth_status</code> — Check whether the current user is authenticated for a Superblocks environment derived from either an app_url or a base_url.</li><li><code>get_billing_plan_summary</code> — Get the current billing plan summary including credit allocation, usage, billing cycle dates, and deployed application counts. Requires billing:manage permissio</li><li><code>get_billing_usage_daily</code> — Get daily AI credit usage for a date range. Returns one row per day with the total credits consumed. Requires billing:manage permission.</li><li><code>get_billing_usage_records</code> — Get AI credit billing usage records for a date range. App filters scope app-attributed ledger records and app aggregates; per-user records remain date-scoped un</li><li><code>get_chat_messages</code> — Fetch persisted builder/editor user chat messages for a Superblocks application. Supports bounded pagination with an opaque cursor and optional filtering by sen</li><li><code>get_current_user</code> — Get details about the currently authenticated Superblocks user for a given base_url.</li><li><code>get_integration</code> — Get a Superblocks integration by ID, including configuration metadata when available.</li><li><code>get_integration_access</code> — List all users and groups that have access to a Superblocks integration, including their roles and permissions. Provide integration_id plus base_url.</li><li><code>get_job_access</code> — List users and groups that have access to a scheduled job, including role and permission details.</li><li><code>get_knowledge</code> — Get a single knowledge entry (fact) by ID, including its full content. Knowledge entries are persistent notes and instructions that Clark uses when building app</li><li><code>get_user_permissions</code> — Get all resources a user can access and their role on each, including assignments inherited through groups. Returns RBAC assignments across applications, integr</li><li><code>get_workflow_access</code> — List users and groups that have access to a workflow, including role and permission details.</li><li><code>grant_resource_access</code> — Create RBAC assignments for a resource (roles or direct permissions). Organization scope is always the authenticated user&#x27;s current organization (matches server</li><li><code>list_applications</code> — List all Superblocks applications the current user can access. Supports filtering by creation/update date range, name substring, creator email, deploy status, a</li><li><code>list_audit_event_types</code> — Returns the full catalog of audit event types emitted by Superblocks. Use this to discover valid class_uid, resource_type, and operation values for filtering wi</li><li><code>list_billing_usage_limits</code> — List configured AI usage limits for the current organization, including per-user/default user limits and the enterprise org-wide overage limit when available. R</li><li><code>list_builder_seats</code> — List builder seats for the current organization.</li><li><code>list_distinct_packages_in_org</code> — List the distinct set of packages declared across every application in the current org&#x27;s package usage index. Inverse of find_apps_by_package: returns one row p</li><li><code>list_folders</code> — List folders in the current organization, including IDs and metadata.</li><li><code>list_integrations</code> — List all integrations (data sources, APIs, secret stores) configured in the current organization. Optionally filter by kind, creator email, or name substring.</li><li><code>list_knowledge</code> — List knowledge entries (facts) for the current organization. Knowledge entries are persistent notes and instructions that Clark uses when building apps. Support</li><li><code>list_organization_agents</code> — List non-deactivated agents for the authenticated user&#x27;s current organization. Organization scope matches auth (same as other MCP tools); organization_id is opt</li><li><code>list_packages_by_app</code> — List package dependencies indexed for a Superblocks application. Mirrors `find_apps_by_package` against the same usage index but pivots on the app: given an app</li><li><code>list_rbac_assignments</code> — List RBAC assignments for a resource by resource_type and resource_id (for example apps, integrations, workflows, jobs).</li><li><code>list_roles</code> — List available RBAC roles for an organization, including their UUIDs. Use these role UUIDs as assignment_id when calling grant_resource_access. Optionally filte</li><li><code>list_users</code> — List all users in a Superblocks organization with their status, type, and org-level role assignments. Useful for access audits, user inventories, and governance</li><li><code>list_users_by_role</code> — List users in a Superblocks organization filtered by org role name (e.g. Admin, Developer, End-User). Returns only users whose org-level role assignment matches</li><li><code>revoke_resource_access</code> — Delete a single RBAC assignment by assignment record ID.</li><li><code>unassign_builder_seat</code> — Unassign a builder seat for a user by user_id.</li><li><code>undeploy_application</code> — Take a deployed Superblocks application offline. The app becomes inaccessible to all users until redeployed. Supports either app_url or application_id plus base</li><li><code>update_folder</code> — Update a folder name by folder ID.</li><li><code>update_group_org_role</code> — Change a group&#x27;s organization-level role (e.g. Admin, Developer, End-User). This uses the dedicated org group role endpoint, not the generic RBAC assignment API</li><li><code>update_integration</code> — Update an integration by ID. Pass the integration payload expected by the integrations API.</li><li><code>update_org_billing_usage_limit</code> — Set the enterprise org-wide overage AI usage limit. Provide either credit_limit or amount_limit_cents. Requires billing:manage permission and an enterprise plan</li><li><code>update_resource_access</code> — Update a single RBAC assignment by assignment record ID.</li><li><code>update_user_billing_usage_limit</code> — Set a per-user AI usage limit override, or omit user_id to set the default per-user usage limit for the organization. Provide either credit_limit or amount_limi</li><li><code>update_user_org_role</code> — Change a user&#x27;s organization-level role (e.g. Admin, Developer, End-User). This uses the dedicated org user role endpoint, not the generic RBAC assignment API. </li></ul>
+<footer>Evaluated 2026-08-06 09:49 UTC · Engine v0.1.0 · Source: registry-npm</footer>
+</body></html>

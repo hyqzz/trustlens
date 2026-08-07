@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>@microsoft/clarity-mcp-server Inspection Report — TrustLens · ICodeStar</title>
+<meta name="description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link rel="canonical" href="https://trustlens.icodestar.net/en/server/microsoft-clarity-mcp-server.html">
+<link rel="alternate" hreflang="en" href="https://trustlens.icodestar.net/en/server/microsoft-clarity-mcp-server.html">
+<link rel="alternate" hreflang="zh-CN" href="https://trustlens.icodestar.net/server/microsoft-clarity-mcp-server.html">
+<link rel="alternate" hreflang="x-default" href="https://trustlens.icodestar.net/en/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="@microsoft/clarity-mcp-server Inspection Report — TrustLens · ICodeStar">
+<meta property="og:description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<meta property="og:url" content="https://trustlens.icodestar.net/en/server/microsoft-clarity-mcp-server.html">
+<meta property="og:site_name" content="TrustLens · ICodeStar">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="@microsoft/clarity-mcp-server Inspection Report — TrustLens · ICodeStar">
+<meta name="twitter:description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<script>
+function tlSetLang(){try{sessionStorage.setItem('tl-lang','1')}catch(e){}}
+(function(){try{if(sessionStorage.getItem('tl-lang'))return;
+var zh=/^zh([-_]|$)/i.test(navigator.language||navigator.userLanguage||'');
+if(zh!==false){location.replace('../../server/microsoft-clarity-mcp-server.html');}}catch(e){}})();
+</script>
+<style>
+:root{color-scheme:light dark;--accent:#4f8ef7;--accent2:#9b5cf6;--line:#8884;--bg-card:#8881}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif;
+     max-width:1060px;margin:0 auto;padding:0 1rem 2rem;line-height:1.6}
+.brandbar{display:flex;align-items:center;gap:.6rem;padding:.9rem 0;border-bottom:1px solid var(--line);margin-bottom:1.1rem;position:sticky;top:0;background:color-mix(in srgb,Canvas 92%,transparent);backdrop-filter:blur(6px);z-index:10}
+.brand-logo{font-size:1.4rem}
+.brand-name{font-weight:800;font-size:1.05rem;letter-spacing:.02em}
+.brand-name .en{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-sub{opacity:.55;font-size:.8rem;margin-left:.15rem}
+.nav{display:flex;gap:.4rem;margin:.4rem 0 .3rem;flex-wrap:wrap}
+.nav a{font-size:.88rem;border:1px solid var(--line);border-radius:1.4em;padding:.22em .95em;text-decoration:none}
+.nav a.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.nav a:hover:not(.on){border-color:var(--accent)}
+.method{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:.55rem;padding:.5rem .85rem;font-size:.83rem;opacity:.85;margin:.8rem 0}
+.method b{opacity:1}
+.lang{margin-left:auto;font-size:.86rem;border:1px solid var(--line);border-radius:1.2em;padding:.18em .85em;text-decoration:none}
+.lang:hover{text-decoration:none;background:var(--bg-card)}
+h1{margin:.3rem 0 .2rem;font-size:1.65rem}
+.subtitle{opacity:.72;margin-top:0}
+.badge{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-radius:.35em;padding:.12em .55em;font-size:.72rem;vertical-align:middle}
+
+/* 统计卡片 */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin:1.1rem 0}
+.stat{border:1px solid var(--line);border-radius:.7rem;padding:.6rem .8rem}
+.stat .v{font-size:1.45rem;font-weight:800;font-variant-numeric:tabular-nums}
+.stat .l{opacity:.65;font-size:.8rem}
+.stat .v.gA{color:#2da44e}.stat .v.gD{color:#cf6020}.stat .v.gF{color:#cf222e}
+.distbar{display:flex;height:.55rem;border-radius:.3rem;overflow:hidden;margin-top:.35rem}
+.distbar i{display:block;height:100%}
+
+/* 工具栏 */
+.toolbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.9rem 0;position:sticky;top:52px;background:color-mix(in srgb,Canvas 94%,transparent);backdrop-filter:blur(6px);padding:.5rem 0;z-index:9}
+.toolbar input[type=search]{flex:1 1 220px;min-width:160px;padding:.5rem .8rem;border:1px solid var(--line);border-radius:.6rem;background:Canvas;font:inherit}
+.toolbar select{padding:.5rem .6rem;border:1px solid var(--line);border-radius:.6rem;background:Canvas;font:inherit}
+.toolbar input:focus,.toolbar select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.chips{display:flex;gap:.35rem;flex-wrap:wrap}
+.chip{border:1px solid var(--line);border-radius:1.2em;padding:.22em .8em;cursor:pointer;font-size:.84rem;background:Canvas;user-select:none}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.resultcount{font-size:.84rem;opacity:.75;margin-left:auto;white-space:nowrap}
+
+/* 表格 */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:.7rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:680px}
+thead th{position:sticky;top:104px;background:Canvas;opacity:.75;font-weight:600;text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line);white-space:nowrap;z-index:5}
+tbody td{padding:.55rem .8rem;border-bottom:1px solid #8882;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:var(--bg-card)}
+.rank{opacity:.5;font-variant-numeric:tabular-nums;font-size:.85rem;width:3em}
+.name{font-weight:600}
+.name small{display:block;opacity:.5;font-weight:400;font-size:.78rem;max-width:26em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.score{font-weight:800;font-variant-numeric:tabular-nums;font-size:1.05rem}
+.grade{display:inline-block;min-width:1.7em;text-align:center;border-radius:.4em;padding:.1em .4em;color:#fff;font-weight:700;font-size:.82em}
+.gA{background:#2da44e}.gB{background:#6f9e1f}.gC{background:#bf8700}.gD{background:#cf6020}.gF{background:#cf222e}
+.src{opacity:.7;font-size:.8rem}
+.dims{font-size:.78rem;opacity:.7;white-space:nowrap}
+.dims b{font-variant-numeric:tabular-nums}
+
+/* 分页 */
+.pager{display:flex;gap:.4rem;align-items:center;justify-content:center;margin:1rem 0;flex-wrap:wrap}
+.pager button{border:1px solid var(--line);background:Canvas;border-radius:.5rem;padding:.35rem .75rem;cursor:pointer;font:inherit;font-size:.88rem}
+.pager button:hover:not(:disabled){border-color:var(--accent)}
+.pager button:disabled{opacity:.4;cursor:not-allowed}
+.pager .pg.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.empty{border:1px dashed var(--line);border-radius:.7rem;padding:2rem;text-align:center;opacity:.7;margin:1rem 0}
+
+/* 详情页维度 */
+.dim{margin:.5rem 0;padding:.55rem .8rem;border:1px solid var(--line);border-radius:.55rem}
+.dim b{display:inline-block;min-width:11em}
+.finding{font-size:.87em;opacity:.85;margin:.15rem 0 0 .4rem;word-break:break-all}
+.crit{color:#cf222e}.warn{color:#bf8700}
+footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opacity:.6;font-size:.85rem}
+.faq{margin-top:2rem}
+.faq h2{font-size:1.15rem}
+.faq details{margin:.5rem 0;border:1px solid var(--line);border-radius:.55rem;padding:.55rem .9rem}
+.faq summary{cursor:pointer;font-weight:600}
+.faq p{opacity:.85;margin:.4rem 0 .2rem}
+@media (max-width:640px){.toolbar{position:static}thead th{position:static}.dims{display:none}}
+</style></head><body>
+<div class="brandbar"><span class="brand-logo">🛡️</span><span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span><a class="lang" href="../../server/microsoft-clarity-mcp-server.html" onclick="tlSetLang()">中文</a></div>
+<p><a href="../">← Back to leaderboard</a></p>
+<h1>@microsoft/clarity-mcp-server</h1>
+<p class="subtitle">Trust score <span class="score">73.0/100</span> · <span class="grade gC">C</span> Fair</p>
+
+<h2>Dimension breakdown</h2><div class="dim"><b>Func 80.0</b></div><div class="dim"><b>Rel 80.0</b><div class="finding warn">[REL-FAIL] 调用失败率 33%</div></div><div class="dim"><b>Sec 100.0</b></div><div class="dim"><b>Tool-call 0.0</b></div>
+<h2>Tools (3)</h2><ul><li><code>query-analytics-dashboard</code> — Fetch Microsoft Clarity analytics data using a simplified natural language search query. The query should be focused on one specific data retrieval or aggregati</li><li><code>list-session-recordings</code> — List Microsoft Clarity session recordings based on specified filters. The filters allow you to narrow down the recordings by various criteria such as URLs, devi</li><li><code>query-documentation-resources</code> — Retrieve Microsoft Clarity documentation snippets for finding answers to user questions including step-by-step screenshots for setup guides, features, usage, tr</li></ul>
+<footer>Evaluated 2026-08-06 09:43 UTC · Engine v0.1.0 · Source: registry-npm</footer>
+</body></html>

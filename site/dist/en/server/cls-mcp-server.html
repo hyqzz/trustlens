@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>cls-mcp-server Inspection Report — TrustLens · ICodeStar</title>
+<meta name="description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link rel="canonical" href="https://trustlens.icodestar.net/en/server/cls-mcp-server.html">
+<link rel="alternate" hreflang="en" href="https://trustlens.icodestar.net/en/server/cls-mcp-server.html">
+<link rel="alternate" hreflang="zh-CN" href="https://trustlens.icodestar.net/server/cls-mcp-server.html">
+<link rel="alternate" hreflang="x-default" href="https://trustlens.icodestar.net/en/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="cls-mcp-server Inspection Report — TrustLens · ICodeStar">
+<meta property="og:description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<meta property="og:url" content="https://trustlens.icodestar.net/en/server/cls-mcp-server.html">
+<meta property="og:site_name" content="TrustLens · ICodeStar">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cls-mcp-server Inspection Report — TrustLens · ICodeStar">
+<meta name="twitter:description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<script>
+function tlSetLang(){try{sessionStorage.setItem('tl-lang','1')}catch(e){}}
+(function(){try{if(sessionStorage.getItem('tl-lang'))return;
+var zh=/^zh([-_]|$)/i.test(navigator.language||navigator.userLanguage||'');
+if(zh!==false){location.replace('../../server/cls-mcp-server.html');}}catch(e){}})();
+</script>
+<style>
+:root{color-scheme:light dark;--accent:#4f8ef7;--accent2:#9b5cf6;--line:#8884;--bg-card:#8881}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif;
+     max-width:1060px;margin:0 auto;padding:0 1rem 2rem;line-height:1.6}
+.brandbar{display:flex;align-items:center;gap:.6rem;padding:.9rem 0;border-bottom:1px solid var(--line);margin-bottom:1.1rem;position:sticky;top:0;background:color-mix(in srgb,Canvas 92%,transparent);backdrop-filter:blur(6px);z-index:10}
+.brand-logo{font-size:1.4rem}
+.brand-name{font-weight:800;font-size:1.05rem;letter-spacing:.02em}
+.brand-name .en{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-sub{opacity:.55;font-size:.8rem;margin-left:.15rem}
+.nav{display:flex;gap:.4rem;margin:.4rem 0 .3rem;flex-wrap:wrap}
+.nav a{font-size:.88rem;border:1px solid var(--line);border-radius:1.4em;padding:.22em .95em;text-decoration:none}
+.nav a.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.nav a:hover:not(.on){border-color:var(--accent)}
+.method{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:.55rem;padding:.5rem .85rem;font-size:.83rem;opacity:.85;margin:.8rem 0}
+.method b{opacity:1}
+.lang{margin-left:auto;font-size:.86rem;border:1px solid var(--line);border-radius:1.2em;padding:.18em .85em;text-decoration:none}
+.lang:hover{text-decoration:none;background:var(--bg-card)}
+h1{margin:.3rem 0 .2rem;font-size:1.65rem}
+.subtitle{opacity:.72;margin-top:0}
+.badge{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-radius:.35em;padding:.12em .55em;font-size:.72rem;vertical-align:middle}
+
+/* 统计卡片 */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin:1.1rem 0}
+.stat{border:1px solid var(--line);border-radius:.7rem;padding:.6rem .8rem}
+.stat .v{font-size:1.45rem;font-weight:800;font-variant-numeric:tabular-nums}
+.stat .l{opacity:.65;font-size:.8rem}
+.stat .v.gA{color:#2da44e}.stat .v.gD{color:#cf6020}.stat .v.gF{color:#cf222e}
+.distbar{display:flex;height:.55rem;border-radius:.3rem;overflow:hidden;margin-top:.35rem}
+.distbar i{display:block;height:100%}
+
+/* 工具栏 */
+.toolbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.9rem 0;position:sticky;top:52px;background:color-mix(in srgb,Canvas 94%,transparent);backdrop-filter:blur(6px);padding:.5rem 0;z-index:9}
+.toolbar input[type=search]{flex:1 1 220px;min-width:160px;padding:.5rem .8rem;border:1px solid var(--line);border-radius:.6rem;background:Canvas;font:inherit}
+.toolbar select{padding:.5rem .6rem;border:1px solid var(--line);border-radius:.6rem;background:Canvas;font:inherit}
+.toolbar input:focus,.toolbar select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.chips{display:flex;gap:.35rem;flex-wrap:wrap}
+.chip{border:1px solid var(--line);border-radius:1.2em;padding:.22em .8em;cursor:pointer;font-size:.84rem;background:Canvas;user-select:none}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.resultcount{font-size:.84rem;opacity:.75;margin-left:auto;white-space:nowrap}
+
+/* 表格 */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:.7rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:680px}
+thead th{position:sticky;top:104px;background:Canvas;opacity:.75;font-weight:600;text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line);white-space:nowrap;z-index:5}
+tbody td{padding:.55rem .8rem;border-bottom:1px solid #8882;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:var(--bg-card)}
+.rank{opacity:.5;font-variant-numeric:tabular-nums;font-size:.85rem;width:3em}
+.name{font-weight:600}
+.name small{display:block;opacity:.5;font-weight:400;font-size:.78rem;max-width:26em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.score{font-weight:800;font-variant-numeric:tabular-nums;font-size:1.05rem}
+.grade{display:inline-block;min-width:1.7em;text-align:center;border-radius:.4em;padding:.1em .4em;color:#fff;font-weight:700;font-size:.82em}
+.gA{background:#2da44e}.gB{background:#6f9e1f}.gC{background:#bf8700}.gD{background:#cf6020}.gF{background:#cf222e}
+.src{opacity:.7;font-size:.8rem}
+.dims{font-size:.78rem;opacity:.7;white-space:nowrap}
+.dims b{font-variant-numeric:tabular-nums}
+
+/* 分页 */
+.pager{display:flex;gap:.4rem;align-items:center;justify-content:center;margin:1rem 0;flex-wrap:wrap}
+.pager button{border:1px solid var(--line);background:Canvas;border-radius:.5rem;padding:.35rem .75rem;cursor:pointer;font:inherit;font-size:.88rem}
+.pager button:hover:not(:disabled){border-color:var(--accent)}
+.pager button:disabled{opacity:.4;cursor:not-allowed}
+.pager .pg.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.empty{border:1px dashed var(--line);border-radius:.7rem;padding:2rem;text-align:center;opacity:.7;margin:1rem 0}
+
+/* 详情页维度 */
+.dim{margin:.5rem 0;padding:.55rem .8rem;border:1px solid var(--line);border-radius:.55rem}
+.dim b{display:inline-block;min-width:11em}
+.finding{font-size:.87em;opacity:.85;margin:.15rem 0 0 .4rem;word-break:break-all}
+.crit{color:#cf222e}.warn{color:#bf8700}
+footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opacity:.6;font-size:.85rem}
+.faq{margin-top:2rem}
+.faq h2{font-size:1.15rem}
+.faq details{margin:.5rem 0;border:1px solid var(--line);border-radius:.55rem;padding:.55rem .9rem}
+.faq summary{cursor:pointer;font-weight:600}
+.faq p{opacity:.85;margin:.4rem 0 .2rem}
+@media (max-width:640px){.toolbar{position:static}thead th{position:static}.dims{display:none}}
+</style></head><body>
+<div class="brandbar"><span class="brand-logo">🛡️</span><span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span><a class="lang" href="../../server/cls-mcp-server.html" onclick="tlSetLang()">中文</a></div>
+<p><a href="../">← Back to leaderboard</a></p>
+<h1>cls-mcp-server</h1>
+<p class="subtitle">Trust score <span class="score">51.8/100</span> · <span class="grade gD">D</span> Risky</p>
+
+<h2>Dimension breakdown</h2><div class="dim"><b>Func 35.0</b><div class="finding warn">[SCHEMA-BLOAT] 工具 GetAlarmLog 描述过长（2535 字符，加剧上下文膨胀）</div></div><div class="dim"><b>Rel 40.0</b><div class="finding warn">[REL-FAIL] 调用失败率 100%</div></div><div class="dim"><b>Sec 100.0</b></div><div class="dim"><b>Tool-call 30.0</b></div>
+<h2>Tools (20)</h2><ul><li><code>SearchLog</code> — 搜索CLS日志内容。在指定日志主题和时间范围内搜索日志，支持复杂查询语法和统计分析。
+
+重要：务必先使用 TextToSearchLogQuery 工具生成 CQL 查询语句！
+TextToSearchLogQuery 能自动适配日志主题索引配置，确保字段名称准确、语法正确。
+警告：如果不使用 TextToSearch</li><li><code>DescribeLogContext</code> — 获取指定日志的上下文内容（前后 N 条日志）。用于在定位到某条异常日志后，查看其前后的日志以分析问题根因。
+
+前置条件：需先使用 SearchLog 工具检索到目标日志，从返回结果的 Results 中获取 Time、PkgId、PkgLogId 三个必填参数。</li><li><code>TextToSearchLogQuery</code> — 【CQL专家】AI 智能生成 CLS CQL 查询语句。将自然语言描述转换为可直接用于 SearchLog 或 DescribeLogHistogram 的 CQL 语句。
+
+核心优势：
+1. 自动适配日志主题索引配置，字段名称 100% 准确
+2. 严格遵循 CQL 语法规范，生成的语句保证可执行
+3. 查询性能经过</li><li><code>DescribeIndex</code> — 获取 CLS 日志主题索引配置。查询指定日志主题的索引配置信息，包括键值索引、元数据索引（TAG）和全文索引的详细配置。
+索引配置决定了日志哪些字段可以被搜索和分析，是日志检索和分析的基础配置。
+
+使用场景：生成检索语句时，推荐优先使用 TextToSearchLogQuery 工具（自动适配索引配置）。仅在需要手写 </li><li><code>DescribeLogHistogram</code> — 获取 CLS 日志直方图数据。查询指定日志主题在指定时间范围内的日志分布直方图，统计各时间段内匹配查询条件的日志数量。
+
+重要：本工具仅返回时间（BTime）和计数（Count）两个维度，无法做多字段聚合分析。
+- 如果日志主题支持 SQL 分析（标准存储），应优先使用 SearchLog 工具通过管道符 | 进行时间</li><li><code>QueryMetric</code> — 针对指标主题，查询指定时刻指标的最新值（瞬时查询）。使用 PromQL 语法对指标主题中的数据进行查询。注意：若该时刻向前推5分钟内均无指标数据，则无相应查询结果。
+
+PromQL 语法示例：
+- 简单查询：ETLProcessingTraffic
+- 速率计算：rate(http_requests_total[5m]</li><li><code>QueryRangeMetric</code> — 针对指标主题，查询指定时间范围内指标的变化趋势（范围查询）。使用 PromQL 语法对指标主题中的数据进行时序查询，返回区间内的时序数据。
+
+step 参数建议：根据查询时间范围合理设置数据点密度
+- 1 小时内：step=60（每分钟）
+- 1 天内：step=300（每 5 分钟）
+- 1 周内：step=3600</li><li><code>DescribeAlarms</code> — 获取 CLS 告警策略列表。查询指定地域的告警策略列表，支持按告警策略启用状态等条件过滤和分页。
+
+支持的过滤条件（Filters 参数）：
+- name: 按告警策略名称过滤
+- alarmId: 按告警策略 ID 过滤
+- topicId: 按监控对象的日志主题 ID 过滤
+- enable: 按启用状态过滤（1=</li><li><code>DescribeAlertRecordHistory</code> — 获取 CLS 告警历史记录。查询指定时间范围内的告警历史记录，包含告警触发、恢复等事件的详细信息，用于分析告警趋势和排查告警问题。
+
+支持的过滤条件（Filters 参数）：
+- alarmId: 按告警策略 ID 过滤
+- alarmName: 按告警策略名称过滤
+- topicId: 按日志主题 ID 过滤
+- s</li><li><code>GetAlarmLog</code> — 获取 CLS 告警执行详情日志。查询指定时间范围内的告警策略执行详情，使用方式类似 SearchLog，通过 Query 参数传入检索分析语句。
+
+常用查询语句（直接作为 Query 参数传入）：
+
+1. 查询执行详情列表（最常用）：
+   NOT condition_evaluate_result:&quot;Skip&quot; AN</li><li><code>DescribeAlarmNotices</code> — 获取 CLS 通知渠道组列表。查询指定地域下的通知渠道组列表，通知渠道组用于配置告警通知的接收方式和接收人，包括邮件、短信、电话、企业微信等。
+
+支持的过滤条件（Filters 参数）：
+- name: 按通知渠道组名称过滤
+- alarmNoticeId: 按通知渠道组 ID 过滤
+
+返回信息包含：AlarmNoti</li><li><code>DescribeAlarmShields</code> — 获取 CLS 告警屏蔽规则列表。查询指定通知渠道组下的告警屏蔽规则，屏蔽规则用于在特定时间段内屏蔽告警通知，避免维护期间产生大量告警噪音。
+
+应用场景：
+1. 查看某个通知渠道组下配置的所有屏蔽规则
+2. 查询当前生效的屏蔽规则（按状态过滤）
+3. 审计和管理告警屏蔽配置
+
+支持的过滤条件（Filters 参数）：
+-</li><li><code>DescribeNoticeContents</code> — 获取 CLS 通知内容模板列表。查询指定地域下的通知内容模板，模板定义告警触发和恢复时的消息内容，支持邮件、短信、企业微信、Webhook 等渠道。
+
+支持的过滤条件（Filters 参数）：
+- name: 按模板名称过滤
+- noticeContentId: 按模板 ID 过滤
+
+返回信息包含：NoticeCont</li><li><code>DescribeWebCallbacks</code> — 获取 CLS 告警回调配置列表。查询指定地域下的 Webhook 回调配置，用于在告警触发或恢复时向指定 URL 发送 HTTP 通知，常用于与第三方监控系统或自动化运维系统集成。
+
+支持的过滤条件（Filters 参数）：
+- name: 按回调配置名称过滤
+- callbackId: 按回调配置 ID 过滤
+
+返回</li><li><code>GetAlarmDetail</code> — 通过告警详情 URL 获取 CLS 告警的详细信息。从告警通知中的 URL 提取并解析告警信息，支持短链接和长链接格式。
+
+支持的 URL 格式：
+1. 短链接：https://alarm.cls.tencentcs.com/WeNZ5sSP
+2. 短链接：https://mc.tencent.com/xxx
+3. 长</li><li><code>DescribeTopics</code> — 按名称搜索日志主题或指标主题信息，返回主题 ID、名称、保留周期等信息。
+
+支持的过滤条件：
+- TopicId：按主题 ID 过滤（精确匹配）
+- TopicName：按主题名称过滤（默认模糊匹配）
+- LogsetId：按日志集 ID 过滤（精确匹配）
+- LogsetName：按日志集名称过滤（默认模糊匹配）
+
+</li><li><code>DescribeLogsets</code> — 获取 CLS 日志集列表。查询指定地域下的日志集，支持按日志集名称、日志集 ID 过滤。
+
+日志集是日志主题的容器，用于区分不同项目。当多个项目存在同名日志主题时，可通过日志集区分。
+
+支持的过滤条件：
+- LogsetName：按日志集名称过滤（模糊匹配）
+- LogsetId：按日志集 ID 过滤（精确匹配）
+返回</li><li><code>GetRegionCodeByName</code> — 按地域名称搜索腾讯云地域参数代码（如&quot;广州&quot;→&quot;ap-guangzhou&quot;），支持中文和英文名称模糊匹配。</li><li><code>ConvertTimeStringToTimestamp</code> — 将时间字符串转换为毫秒或秒级时间戳。常用于为 SearchLog、DescribeLogHistogram 等工具的 From/To 参数准备时间戳。</li><li><code>ConvertTimestampToTimeString</code> — 将时间戳转换为时间字符串。不传 timestamp 参数时返回当前时间，常用于获取当前时间后计算 SearchLog 等工具所需的时间范围。</li></ul>
+<footer>Evaluated 2026-08-06 10:13 UTC · Engine v0.1.0 · Source: registry-npm</footer>
+</body></html>

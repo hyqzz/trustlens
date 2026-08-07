@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>targetprocess-mcp-server 质检报告 — TrustLens · 智码星</title>
+<meta name="description" content="智码星 ICodeStar 出品的 TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link rel="canonical" href="https://trustlens.icodestar.net/server/targetprocess-mcp-server.html">
+<link rel="alternate" hreflang="zh-CN" href="https://trustlens.icodestar.net/server/targetprocess-mcp-server.html">
+<link rel="alternate" hreflang="en" href="https://trustlens.icodestar.net/en/server/targetprocess-mcp-server.html">
+<link rel="alternate" hreflang="x-default" href="https://trustlens.icodestar.net/en/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="targetprocess-mcp-server 质检报告 — TrustLens · 智码星">
+<meta property="og:description" content="智码星 ICodeStar 出品的 TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
+<meta property="og:url" content="https://trustlens.icodestar.net/server/targetprocess-mcp-server.html">
+<meta property="og:site_name" content="TrustLens · ICodeStar">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="targetprocess-mcp-server 质检报告 — TrustLens · 智码星">
+<meta name="twitter:description" content="智码星 ICodeStar 出品的 TrustLens 实测 MCP Server 与 Agent Skills 的功能性、可靠性、安全性与跨模型兼容性，发布 0–100 信任分与每周排行榜。装 Agent 工具之前先查分。">
+<script>
+function tlSetLang(){try{sessionStorage.setItem('tl-lang','1')}catch(e){}}
+(function(){try{if(sessionStorage.getItem('tl-lang'))return;
+var zh=/^zh([-_]|$)/i.test(navigator.language||navigator.userLanguage||'');
+if(zh!==true){location.replace('../en/server/targetprocess-mcp-server.html');}}catch(e){}})();
+</script>
+<style>
+:root{color-scheme:light dark;--accent:#4f8ef7;--accent2:#9b5cf6;--line:#8884;--bg-card:#8881}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif;
+     max-width:1060px;margin:0 auto;padding:0 1rem 2rem;line-height:1.6}
+.brandbar{display:flex;align-items:center;gap:.6rem;padding:.9rem 0;border-bottom:1px solid var(--line);margin-bottom:1.1rem;position:sticky;top:0;background:color-mix(in srgb,Canvas 92%,transparent);backdrop-filter:blur(6px);z-index:10}
+.brand-logo{font-size:1.4rem}
+.brand-name{font-weight:800;font-size:1.05rem;letter-spacing:.02em}
+.brand-name .en{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-sub{opacity:.55;font-size:.8rem;margin-left:.15rem}
+.nav{display:flex;gap:.4rem;margin:.4rem 0 .3rem;flex-wrap:wrap}
+.nav a{font-size:.88rem;border:1px solid var(--line);border-radius:1.4em;padding:.22em .95em;text-decoration:none}
+.nav a.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.nav a:hover:not(.on){border-color:var(--accent)}
+.method{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:.55rem;padding:.5rem .85rem;font-size:.83rem;opacity:.85;margin:.8rem 0}
+.method b{opacity:1}
+.lang{margin-left:auto;font-size:.86rem;border:1px solid var(--line);border-radius:1.2em;padding:.18em .85em;text-decoration:none}
+.lang:hover{text-decoration:none;background:var(--bg-card)}
+h1{margin:.3rem 0 .2rem;font-size:1.65rem}
+.subtitle{opacity:.72;margin-top:0}
+.badge{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-radius:.35em;padding:.12em .55em;font-size:.72rem;vertical-align:middle}
+
+/* 统计卡片 */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin:1.1rem 0}
+.stat{border:1px solid var(--line);border-radius:.7rem;padding:.6rem .8rem}
+.stat .v{font-size:1.45rem;font-weight:800;font-variant-numeric:tabular-nums}
+.stat .l{opacity:.65;font-size:.8rem}
+.stat .v.gA{color:#2da44e}.stat .v.gD{color:#cf6020}.stat .v.gF{color:#cf222e}
+.distbar{display:flex;height:.55rem;border-radius:.3rem;overflow:hidden;margin-top:.35rem}
+.distbar i{display:block;height:100%}
+
+/* 工具栏 */
+.toolbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.9rem 0;position:sticky;top:52px;background:color-mix(in srgb,Canvas 94%,transparent);backdrop-filter:blur(6px);padding:.5rem 0;z-index:9}
+.toolbar input[type=search]{flex:1 1 220px;min-width:160px;padding:.5rem .8rem;border:1px solid var(--line);border-radius:.6rem;background:Canvas;font:inherit}
+.toolbar select{padding:.5rem .6rem;border:1px solid var(--line);border-radius:.6rem;background:Canvas;font:inherit}
+.toolbar input:focus,.toolbar select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.chips{display:flex;gap:.35rem;flex-wrap:wrap}
+.chip{border:1px solid var(--line);border-radius:1.2em;padding:.22em .8em;cursor:pointer;font-size:.84rem;background:Canvas;user-select:none}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.resultcount{font-size:.84rem;opacity:.75;margin-left:auto;white-space:nowrap}
+
+/* 表格 */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:.7rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:680px}
+thead th{position:sticky;top:104px;background:Canvas;opacity:.75;font-weight:600;text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line);white-space:nowrap;z-index:5}
+tbody td{padding:.55rem .8rem;border-bottom:1px solid #8882;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:var(--bg-card)}
+.rank{opacity:.5;font-variant-numeric:tabular-nums;font-size:.85rem;width:3em}
+.name{font-weight:600}
+.name small{display:block;opacity:.5;font-weight:400;font-size:.78rem;max-width:26em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.score{font-weight:800;font-variant-numeric:tabular-nums;font-size:1.05rem}
+.grade{display:inline-block;min-width:1.7em;text-align:center;border-radius:.4em;padding:.1em .4em;color:#fff;font-weight:700;font-size:.82em}
+.gA{background:#2da44e}.gB{background:#6f9e1f}.gC{background:#bf8700}.gD{background:#cf6020}.gF{background:#cf222e}
+.src{opacity:.7;font-size:.8rem}
+.dims{font-size:.78rem;opacity:.7;white-space:nowrap}
+.dims b{font-variant-numeric:tabular-nums}
+
+/* 分页 */
+.pager{display:flex;gap:.4rem;align-items:center;justify-content:center;margin:1rem 0;flex-wrap:wrap}
+.pager button{border:1px solid var(--line);background:Canvas;border-radius:.5rem;padding:.35rem .75rem;cursor:pointer;font:inherit;font-size:.88rem}
+.pager button:hover:not(:disabled){border-color:var(--accent)}
+.pager button:disabled{opacity:.4;cursor:not-allowed}
+.pager .pg.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.empty{border:1px dashed var(--line);border-radius:.7rem;padding:2rem;text-align:center;opacity:.7;margin:1rem 0}
+
+/* 详情页维度 */
+.dim{margin:.5rem 0;padding:.55rem .8rem;border:1px solid var(--line);border-radius:.55rem}
+.dim b{display:inline-block;min-width:11em}
+.finding{font-size:.87em;opacity:.85;margin:.15rem 0 0 .4rem;word-break:break-all}
+.crit{color:#cf222e}.warn{color:#bf8700}
+footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opacity:.6;font-size:.85rem}
+.faq{margin-top:2rem}
+.faq h2{font-size:1.15rem}
+.faq details{margin:.5rem 0;border:1px solid var(--line);border-radius:.55rem;padding:.55rem .9rem}
+.faq summary{cursor:pointer;font-weight:600}
+.faq p{opacity:.85;margin:.4rem 0 .2rem}
+@media (max-width:640px){.toolbar{position:static}thead th{position:static}.dims{display:none}}
+</style></head><body>
+<div class="brandbar"><span class="brand-logo">🛡️</span><span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span><a class="lang" href="../en/server/targetprocess-mcp-server.html" onclick="tlSetLang()">English</a></div>
+<p><a href="../">← 返回排行榜</a></p>
+<h1>targetprocess-mcp-server</h1>
+<p class="subtitle">信任分 <span class="score">61.5/100</span> · <span class="grade gC">C</span> 及格</p>
+
+<h2>维度明细</h2><div class="dim"><b>功能性 33.3</b><div class="finding warn">[SCHEMA-BLOAT] 工具 create_formatted_user_story 描述过长（2507 字符，加剧上下文膨胀）</div><div class="finding warn">[SCHEMA-BLOAT] 工具 create_formatted_feature 描述过长（4595 字符，加剧上下文膨胀）</div></div><div class="dim"><b>可靠性 88.0</b><div class="finding warn">[REL-FAIL] 调用失败率 20%</div></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>模型调用 19.2</b></div>
+<h2>工具清单（73）</h2><ul><li><code>get_user_story_content</code> — Get tp card (user story) content by specified id, e.g. 145789</li><li><code>get_current_releases</code> — Get current releases</li><li><code>get_release_user_stories</code> — Get release user stories</li><li><code>get_release_bugs</code> — Get release bugs</li><li><code>get_release_features</code> — Get release features</li><li><code>get_release_user_stories_with_description</code> — Get release user stories with description in the response.
+      Note: this is slower than &quot;get_release_user_stories_names&quot; tool,
+      but if user wants to get</li><li><code>get_release_open_bugs</code> — Get release active bugs (bugs that are not closed, done, passed, ready to deploy)</li><li><code>get_release_open_user_stories</code> — Get release active user stories (user stories that are not closed, done, passed, ready to deploy)</li><li><code>search_tp_cards</code> — Searches TP cards (UserStories or Bugs) by keyword or phrase or partial keyphrase in Card Description e.g. &quot;Text Element&quot;, &quot;Font field&quot;
+    NOTE: after results </li><li><code>get_bug_content</code> — Get tp card (bug) content by specified id, e.g. 145789</li><li><code>get_user_by_id</code> — Get user by id</li><li><code>get_users</code> — Get all users</li><li><code>add_comment_with_user</code> — Adds provided content as a comment to the specified tp card by id, e.g. 145789 and mentions the user in the comment
+    CRITICAL WORKFLOW:
+      1) call &#x27;get_us</li><li><code>add_comment</code> — Adds provided content as a comment to the specified tp card by id, e.g. 145789</li><li><code>get_user_story_comments</code> — Get comments for a TP user story by its ID</li><li><code>get_bug_comments</code> — Get comments for a TP bug by its ID</li><li><code>create_bug_based_on_card</code> — Create a new bug card based on provided card id that summarizes the problem in concise, descriptive manner answering questions What? Where? When?, and content e</li><li><code>update_bug</code> — Update a bug card with data proded from user input.
+      NOTE: pass only the fields that user wants to update.
+      CRITICAL WORKFLOW: Before calling this too</li><li><code>update_user_story_state</code> — Update a user story card sub state with data provided from user input.
+    CRITICAL WORKFLOW: Before calling this tool, you MUST follow these steps:
+      1) ca</li><li><code>update_user_story</code> — Update a user story card with data provided from user input.
+      NOTE: pass only the fields that user wants to update.
+      CRITICAL WORKFLOW: Before calling</li><li><code>create_bug</code> — Create a new bug card that summarizes the problem in concise, descriptive manner answering questions &quot;What? Where? When?&quot; and content explaining what happened i</li><li><code>create_user_story</code> — Create a new user story in Targetprocess.
+      CRITICAL WORKFLOW: Before calling this tool, IF the user specified a sprint/iteration by name, call &quot;get_team_it</li><li><code>create_formatted_user_story</code> — Create a new user story in Targetprocess with a structured, template-driven description, assembled from discrete sections and stored as HTML.
+      Fill in each</li><li><code>create_formatted_feature</code> — Create a new Feature in Targetprocess with a structured, template-driven description (feature-level TDRE), assembled from discrete sections and stored as HTML.
+</li><li><code>create_feature</code> — Create a new Feature in Targetprocess.</li><li><code>update_feature</code> — Update a feature card with data provided from user input.
+      NOTE: pass only the fields that user wants to update.
+      CRITICAL WORKFLOW: Before calling th</li><li><code>create_epic</code> — Create a new Epic in Targetprocess.</li><li><code>get_epic_content</code> — Get a Targetprocess Epic by ID, including its description, state, and progress.</li><li><code>update_epic</code> — Update a Targetprocess Epic. Pass only the fields to change.</li><li><code>get_epic_features</code> — Get all Features belonging to a Targetprocess Epic.</li><li><code>create_test_plan</code> — Create a new test plan linked to a UserStory, Bug, or Feature. Name and Project are required by the API; Description, StartDate, and EndDate are optional.</li><li><code>get_not_covered_user_stories_in_feature</code> — Get user stories for a TP feature by its ID that are not covered by any tests</li><li><code>get_feature_user_stories</code> — Get user stories for a TP feature by its ID</li><li><code>get_feature_content</code> — Get a Targetprocess Feature by ID, including description, state, and progress</li><li><code>get_feature_comments</code> — Get comments for a TP feature by its ID</li><li><code>get_assignment_roles</code> — Returns all available assignment roles (e.g. Business Analyst, Developer) with their IDs.</li><li><code>assign_role</code> — Assigns a user to a specific role on a single TP card (User Story, Bug, etc.).</li><li><code>assign_role_to_feature</code> — Assigns a user to a specific role on every user story within a given feature.</li><li><code>get_user_story_bugs</code> — Get bugs linked to a TP user story by its ID</li><li><code>get_projects</code> — Get all Targetprocess projects</li><li><code>get_teams_and_team_assignments</code> — Get all Targetprocess teams and team assignments</li><li><code>get_teams</code> — Get all Targetprocess teams</li><li><code>get_team_iterations</code> — Get Targetprocess team iterations (sprints), optionally filtered by team. Use this to resolve a sprint/iteration name to an ID before calling create_user_story,</li><li><code>get_logged_in_user</code> — Get logged in user</li><li><code>get_user_story_test_cases</code> — Fetches a TP UserStory Linked Test Plan and fetches its Test Cases by provided card ID.</li><li><code>write_test_cases</code> — Fetches a TP card (UserStory, Bug, or Feature) content by ID.
+      CRITICAL WORKFLOW — after receiving the card content, you MUST:
+        1) Thoroughly analyz</li><li><code>add_test_cases_to_test_plan</code> — Adds generated test cases to a test plan linked to a TP card (UserStory, Bug, or Feature).</li><li><code>get_process_workflows</code> — Get all Targetprocess process workflows</li><li><code>get_processes</code> — Get all Targetprocess processes</li><li><code>get_bug_workflows</code> — Get all Targetprocess bug workflows</li><li><code>get_user_story_workflows</code> — Get all Targetprocess user story workflows, with sub-states</li><li><code>get_card_current_status</code> — Get the EntityState, TeamState, and assigned teams for a TP card (UserStory, Bug, or Feature) by ID</li><li><code>get_card_relations</code> — Get all relations (Dependency, Blocker, Relation, Link, Duplicate) for a TP card (UserStory, Bug, Feature, etc.) by its ID.
+      Each relation shows the relate</li><li><code>get_relation_types</code> — Get all relation types available in this Targetprocess instance (id + name). Use this to find the correct relationType name for &quot;create_card_relation&quot;.</li><li><code>create_card_relation</code> — Create a relation between two TP cards (UserStory, Bug, Feature, etc.).
+      The Master is the source of the relation and the Slave is the target — e.g. for a </li><li><code>delete_card_relation</code> — Delete (remove) a relation between two TP cards by the relation&#x27;s own ID — not the card IDs.
+      To find the relationId, call &quot;get_card_relations&quot; for one of </li><li><code>delete_card</code> — Delete (remove) a Targetprocess card by its ID. Works on Bugs, User Stories, Features, and Epics.
+      IF the type is uncertain, resolve it first via &quot;search_t</li><li><code>get_in_progress_tasks_and_bugs</code> — Get all Tasks and Bugs currently in &quot;In Progress&quot; state assigned to a given user ID</li><li><code>create_task</code> — Create a new task linked to a user story.</li><li><code>get_commit_message</code> — Returns the formatted commit message string for a given task or bug ID.
+Formats:
+- Task on a user story: &quot;F#&lt;featureId&gt; US#&lt;userStoryId&gt; T#&lt;taskId&gt; &lt;title&gt;&quot;
+- B</li><li><code>list_my_user_stories</code> — List User Stories assigned to me. Use this to get an overview of current work. Optionally filter by state.</li><li><code>list_my_bugs</code> — List Bugs assigned to me. Optionally filter by state.</li><li><code>log_time</code> — Log time spent working on a Task, User Story, or Bug. Call this after completing a task or at the end of a work session.</li><li><code>get_my_time_logs</code> — Get recent time log entries submitted by me.</li><li><code>get_version</code> — Returns the current version of the MCP server from package.json.</li><li><code>get_test_plan_by_id</code> — Get a Targetprocess Test Plan by its ID, including name, plain-text description, state, and linked card.</li><li><code>get_test_plan_test_cases_by_id</code> — Get test cases belonging to a Targetprocess Test Plan by plan ID, including cases in nested child test plans/containers. Returns id, name, plain-text descriptio</li><li><code>get_test_plan_test_cases_with_steps_by_id</code> — Get test cases belonging to a Targetprocess Test Plan by plan ID, including nested child test plans/containers and each test case steps.</li><li><code>get_test_case_by_id</code> — Get a single Targetprocess Test Case by its ID, including plain-text description and its steps.</li><li><code>update_test_case_by_id</code> — Update a Targetprocess Test Case by its ID. Supports name and description only.</li><li><code>add_test_case_step_by_id</code> — Add a new step to a Targetprocess Test Case. Despite tool name consistency, this takes testCaseId, not a step ID.</li><li><code>update_test_case_step_by_id</code> — Update a Targetprocess Test Step by its ID. Supports description and result only.</li><li><code>delete_test_case_step_by_id</code> — Delete a Targetprocess Test Step by its ID.</li></ul>
+<footer>评测于 2026-08-06 10:22 UTC · 引擎版本 0.1.0 · 来源 registry-npm</footer>
+</body></html>

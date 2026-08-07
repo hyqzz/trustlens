@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hostinger-api-mcp Inspection Report — TrustLens · ICodeStar</title>
+<meta name="description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link rel="canonical" href="https://trustlens.icodestar.net/en/server/hostinger-api-mcp.html">
+<link rel="alternate" hreflang="en" href="https://trustlens.icodestar.net/en/server/hostinger-api-mcp.html">
+<link rel="alternate" hreflang="zh-CN" href="https://trustlens.icodestar.net/server/hostinger-api-mcp.html">
+<link rel="alternate" hreflang="x-default" href="https://trustlens.icodestar.net/en/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="hostinger-api-mcp Inspection Report — TrustLens · ICodeStar">
+<meta property="og:description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<meta property="og:url" content="https://trustlens.icodestar.net/en/server/hostinger-api-mcp.html">
+<meta property="og:site_name" content="TrustLens · ICodeStar">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hostinger-api-mcp Inspection Report — TrustLens · ICodeStar">
+<meta name="twitter:description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<script>
+function tlSetLang(){try{sessionStorage.setItem('tl-lang','1')}catch(e){}}
+(function(){try{if(sessionStorage.getItem('tl-lang'))return;
+var zh=/^zh([-_]|$)/i.test(navigator.language||navigator.userLanguage||'');
+if(zh!==false){location.replace('../../server/hostinger-api-mcp.html');}}catch(e){}})();
+</script>
+<style>
+:root{color-scheme:light dark;--accent:#4f8ef7;--accent2:#9b5cf6;--line:#8884;--bg-card:#8881}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif;
+     max-width:1060px;margin:0 auto;padding:0 1rem 2rem;line-height:1.6}
+.brandbar{display:flex;align-items:center;gap:.6rem;padding:.9rem 0;border-bottom:1px solid var(--line);margin-bottom:1.1rem;position:sticky;top:0;background:color-mix(in srgb,Canvas 92%,transparent);backdrop-filter:blur(6px);z-index:10}
+.brand-logo{font-size:1.4rem}
+.brand-name{font-weight:800;font-size:1.05rem;letter-spacing:.02em}
+.brand-name .en{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-sub{opacity:.55;font-size:.8rem;margin-left:.15rem}
+.nav{display:flex;gap:.4rem;margin:.4rem 0 .3rem;flex-wrap:wrap}
+.nav a{font-size:.88rem;border:1px solid var(--line);border-radius:1.4em;padding:.22em .95em;text-decoration:none}
+.nav a.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.nav a:hover:not(.on){border-color:var(--accent)}
+.method{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:.55rem;padding:.5rem .85rem;font-size:.83rem;opacity:.85;margin:.8rem 0}
+.method b{opacity:1}
+.lang{margin-left:auto;font-size:.86rem;border:1px solid var(--line);border-radius:1.2em;padding:.18em .85em;text-decoration:none}
+.lang:hover{text-decoration:none;background:var(--bg-card)}
+h1{margin:.3rem 0 .2rem;font-size:1.65rem}
+.subtitle{opacity:.72;margin-top:0}
+.badge{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-radius:.35em;padding:.12em .55em;font-size:.72rem;vertical-align:middle}
+
+/* 统计卡片 */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin:1.1rem 0}
+.stat{border:1px solid var(--line);border-radius:.7rem;padding:.6rem .8rem}
+.stat .v{font-size:1.45rem;font-weight:800;font-variant-numeric:tabular-nums}
+.stat .l{opacity:.65;font-size:.8rem}
+.stat .v.gA{color:#2da44e}.stat .v.gD{color:#cf6020}.stat .v.gF{color:#cf222e}
+.distbar{display:flex;height:.55rem;border-radius:.3rem;overflow:hidden;margin-top:.35rem}
+.distbar i{display:block;height:100%}
+
+/* 工具栏 */
+.toolbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.9rem 0;position:sticky;top:52px;background:color-mix(in srgb,Canvas 94%,transparent);backdrop-filter:blur(6px);padding:.5rem 0;z-index:9}
+.toolbar input[type=search]{flex:1 1 220px;min-width:160px;padding:.5rem .8rem;border:1px solid var(--line);border-radius:.6rem;background:Canvas;font:inherit}
+.toolbar select{padding:.5rem .6rem;border:1px solid var(--line);border-radius:.6rem;background:Canvas;font:inherit}
+.toolbar input:focus,.toolbar select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.chips{display:flex;gap:.35rem;flex-wrap:wrap}
+.chip{border:1px solid var(--line);border-radius:1.2em;padding:.22em .8em;cursor:pointer;font-size:.84rem;background:Canvas;user-select:none}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.resultcount{font-size:.84rem;opacity:.75;margin-left:auto;white-space:nowrap}
+
+/* 表格 */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:.7rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:680px}
+thead th{position:sticky;top:104px;background:Canvas;opacity:.75;font-weight:600;text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line);white-space:nowrap;z-index:5}
+tbody td{padding:.55rem .8rem;border-bottom:1px solid #8882;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:var(--bg-card)}
+.rank{opacity:.5;font-variant-numeric:tabular-nums;font-size:.85rem;width:3em}
+.name{font-weight:600}
+.name small{display:block;opacity:.5;font-weight:400;font-size:.78rem;max-width:26em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.score{font-weight:800;font-variant-numeric:tabular-nums;font-size:1.05rem}
+.grade{display:inline-block;min-width:1.7em;text-align:center;border-radius:.4em;padding:.1em .4em;color:#fff;font-weight:700;font-size:.82em}
+.gA{background:#2da44e}.gB{background:#6f9e1f}.gC{background:#bf8700}.gD{background:#cf6020}.gF{background:#cf222e}
+.src{opacity:.7;font-size:.8rem}
+.dims{font-size:.78rem;opacity:.7;white-space:nowrap}
+.dims b{font-variant-numeric:tabular-nums}
+
+/* 分页 */
+.pager{display:flex;gap:.4rem;align-items:center;justify-content:center;margin:1rem 0;flex-wrap:wrap}
+.pager button{border:1px solid var(--line);background:Canvas;border-radius:.5rem;padding:.35rem .75rem;cursor:pointer;font:inherit;font-size:.88rem}
+.pager button:hover:not(:disabled){border-color:var(--accent)}
+.pager button:disabled{opacity:.4;cursor:not-allowed}
+.pager .pg.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.empty{border:1px dashed var(--line);border-radius:.7rem;padding:2rem;text-align:center;opacity:.7;margin:1rem 0}
+
+/* 详情页维度 */
+.dim{margin:.5rem 0;padding:.55rem .8rem;border:1px solid var(--line);border-radius:.55rem}
+.dim b{display:inline-block;min-width:11em}
+.finding{font-size:.87em;opacity:.85;margin:.15rem 0 0 .4rem;word-break:break-all}
+.crit{color:#cf222e}.warn{color:#bf8700}
+footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opacity:.6;font-size:.85rem}
+.faq{margin-top:2rem}
+.faq h2{font-size:1.15rem}
+.faq details{margin:.5rem 0;border:1px solid var(--line);border-radius:.55rem;padding:.55rem .9rem}
+.faq summary{cursor:pointer;font-weight:600}
+.faq p{opacity:.85;margin:.4rem 0 .2rem}
+@media (max-width:640px){.toolbar{position:static}thead th{position:static}.dims{display:none}}
+</style></head><body>
+<div class="brandbar"><span class="brand-logo">🛡️</span><span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span><a class="lang" href="../../server/hostinger-api-mcp.html" onclick="tlSetLang()">中文</a></div>
+<p><a href="../">← Back to leaderboard</a></p>
+<h1>hostinger-api-mcp</h1>
+<p class="subtitle">Trust score <span class="score">40.5/100</span> · <span class="grade gD">D</span> Risky</p>
+
+<h2>Dimension breakdown</h2><div class="dim"><b>Func 40.0</b></div><div class="dim"><b>Rel 0.0</b><div class="finding warn">[REL-FAIL] 调用失败率 100%</div></div><div class="dim"><b>Sec 100.0</b></div><div class="dim"><b>Tool-call 10.0</b></div>
+<h2>Tools (289)</h2><ul><li><code>agencyHosting_deployNodeStaticWebsite</code> — Deploy a node-static Agency Plan (h5g) website from an archive file. WARNING: this overwrites the website&#x27;s existing contents and cannot be undone — always conf</li><li><code>agencyHosting_deployPhpApplication</code> — Deploy a PHP (or other non-build) Agency Plan (h5g) website from an archive file. WARNING: this overwrites the website&#x27;s existing contents and cannot be undone </li><li><code>hosting_importWordpressWebsite</code> — Import a WordPress website from an archive file to a hosting server. This tool uploads a website archive (zip, tar, tar.gz, etc.) and a database dump (.sql file</li><li><code>hosting_deployWordpressPlugin</code> — Deploy a WordPress plugin from a directory to a hosting server. This tool uploads all plugin files and triggers plugin deployment.</li><li><code>hosting_deployWordpressTheme</code> — Deploy a WordPress theme from a directory to a hosting server. This tool uploads all theme files and triggers theme deployment. The uploaded theme can optionall</li><li><code>hosting_deployJsApplication</code> — Deploy a JavaScript application from an archive file to a hosting server. IMPORTANT: the archive must ONLY contain application source files, not the build outpu</li><li><code>hosting_deployStaticWebsite</code> — Deploy a static website from an archive file to a hosting server. IMPORTANT: This tool only works for static websites with no build process. The archive must co</li><li><code>hosting_listJsDeployments</code> — List javascript application deployments for checking their status. Use this tool when customer asks for the status of the deployment. This tool retrieves a pagi</li><li><code>hosting_showJsDeploymentLogs</code> — Retrieve logs for a specified JavaScript application deployment for debugging purposes in case of failure.</li><li><code>agency-hosting_listAvailableDatacentersForAnAgencyPlanOrderV1</code> — Lists the datacenters available for provisioning a new website on the given Agency Plan
+hosting order.
+
+Each datacenter includes a `pinger_url` you can ping fro</li><li><code>agency-hosting_changeAgencyPlanWebsiteDomainV1</code> — Changes the primary domain for an Agency Plan website.
+
+Provide the current domain in the path and the new domain in the request body.
+Set domain to null to rev</li><li><code>agency-hosting_linkDomainToAgencyPlanWebsiteV1</code> — Links a domain to the specified Agency Plan website so it can serve traffic for that domain.</li><li><code>agency-hosting_listAgencyPlanDomainsV1</code> — Returns a paginated list of domains associated with Agency Plan websites accessible to the authenticated client.
+
+Use the website_uuids filter to narrow results</li><li><code>agency-hosting_unlinkDomainFromAgencyPlanWebsiteV1</code> — Unlinks a domain from the specified Agency Plan website.
+
+The website stops serving traffic on this domain immediately.
+
+Website files and database are preserve</li><li><code>agency-hosting_importAgencyPlanWebsiteFromArchiveV1</code> — Imports an Agency Plan website from an already-uploaded archive.
+
+Upload the archive to the website&#x27;s root directory via file browser first, then provide its
+fi</li><li><code>agency-hosting_listAgencyPlanOrdersV1</code> — Returns a paginated list of Agency Plan orders accessible to the authenticated client.</li><li><code>agency-hosting_provisionANewAgencyPlanWebsiteV1</code> — Provisions a new website on one of your Agency Plan hosting orders.
+
+Choose the datacenter, stack (`flavor`), and PHP version for the site. Optionally attach
+yo</li><li><code>agency-hosting_getAgencyPlanWebsiteSetupStatusV1</code> — Returns the current status of an Agency Plan website setup started via the setups
+endpoint.
+
+Poll this endpoint using the `setup_uuid` returned from the provisi</li><li><code>agency-hosting_buildAgencyPlanWebsiteNodeJSAssetsV1</code> — Builds and deploys a Node.js application for an Agency Plan website from an already-uploaded archive.
+
+Upload the archive to file browser first, then provide it</li><li><code>agency-hosting_clearAgencyPlanWebsiteCacheV1</code> — Clears cache for all domains associated with an Agency Plan website, including its preview domain.
+
+This operation clears all cache types for the website.</li><li><code>agency-hosting_listAgencyPlanWebsiteCronJobsV1</code> — Returns a paginated list of cron jobs configured for an Agency Plan website.
+
+Each entry includes the schedule expression and the command executed on that sched</li><li><code>agency-hosting_createAgencyPlanWebsiteCronJobV1</code> — Creates a cron job for an Agency Plan website from a schedule expression and a command.
+
+Returns the created cron job, including its uuid, which is required to </li><li><code>agency-hosting_deleteAgencyPlanWebsiteCronJobV1</code> — Permanently deletes the cron job identified by its uuid from an Agency Plan website.
+
+The operation is idempotent: deleting a cron job that does not exist succe</li><li><code>agency-hosting_listAgencyPlanWebsiteDatabasesV1</code> — Returns a paginated list of MySQL databases created for an Agency Plan website.
+
+Each entry includes the database&#x27;s non-system users.</li><li><code>agency-hosting_createAgencyPlanWebsiteDatabaseV1</code> — Creates a MySQL database with a dedicated user for an Agency Plan website.
+
+The database name, username, and password must all be provided by the caller.</li><li><code>agency-hosting_deleteAgencyPlanWebsiteDatabaseV1</code> — Permanently deletes a MySQL database and all its data from an Agency Plan website, including its users.
+
+The operation is idempotent: deleting a database that d</li><li><code>agency-hosting_createAgencyPlanWebsiteDatabaseUserV1</code> — Creates a user for an existing database on an Agency Plan website.
+
+Each database supports a single non-system user; creating a user for a database that already</li><li><code>agency-hosting_deleteAgencyPlanWebsiteDatabaseUserV1</code> — Permanently deletes a database user from an Agency Plan website database, revoking all access it had.
+
+The operation is idempotent: deleting a user that does no</li><li><code>agency-hosting_getAgencyPlanWebsiteDetailsV1</code> — Retrieves detailed information about a specific Agency Plan website, including configuration,
+status, metadata, hosting plan details, and resource quotas.</li><li><code>agency-hosting_deleteAgencyPlanWebsiteV1</code> — Deletes an Agency Plan website and schedules cleanup of its resources.
+
+This action is irreversible. Website files, databases, and linked domains are removed.</li><li><code>agency-hosting_listRunningAgencyPlanWebsiteProcessesV1</code> — Lists active and recently completed asynchronous processes for an Agency Plan website.
+
+Each process has a unique ID (for tracking), a type, and a status (runni</li><li><code>agency-hosting_changeAgencyPlanWebsiteWordPressCoreVersionV1</code> — Changes the installed WordPress core version on an Agency Plan website to one of the versions available for installation.</li><li><code>agency-hosting_getAgencyPlanWebsiteWordPressSettingsV1</code> — Returns the current WordPress settings for an Agency Plan website: installed core version,
+LiteSpeed Cache plugin status, object cache status, and maintenance m</li><li><code>agency-hosting_listAvailableWordPressVersionsForAnAgencyPlanWebsiteV1</code> — Lists the WordPress core versions available for installation on an Agency Plan website.</li><li><code>billing_getCatalogItemListV1</code> — Retrieve catalog items available for order.
+
+Prices in catalog items is displayed as cents (without floating point),
+e.g: float `17.99` is displayed as integer </li><li><code>billing_createPurchaseOrderV1</code> — Create a purchase order for any Hostinger product.
+
+This unified endpoint places an order for one or more catalog items and
+works across all Hostinger products,</li><li><code>billing_setDefaultPaymentMethodV1</code> — Set the default payment method for your account.
+
+Use this endpoint to configure the primary payment method for future orders.</li><li><code>billing_deletePaymentMethodV1</code> — Delete a payment method from your account.
+
+Use this endpoint to remove unused payment methods from user accounts.</li><li><code>billing_getPaymentMethodListV1</code> — Retrieve available payment methods that can be used for placing new orders.
+
+If you want to add new payment method,
+please use [hPanel](https://hpanel.hostinger</li><li><code>billing_getSubscriptionListV1</code> — Retrieve a list of all subscriptions associated with your account.
+
+Use this endpoint to monitor active services and billing status.</li><li><code>billing_disableAutoRenewalV1</code> — Disable auto-renewal for a subscription.
+
+Use this endpoint when disable auto-renewal for a subscription.</li><li><code>billing_enableAutoRenewalV1</code> — Enable auto-renewal for a subscription.
+
+Use this endpoint when enable auto-renewal for a subscription.</li><li><code>billing_renewSubscriptionV1</code> — Create a renewal order for an existing Hostinger subscription.
+
+This endpoint places a renewal order for a single subscription, leveraging
+the existing billing </li><li><code>DNS_getDNSSnapshotV1</code> — Retrieve particular DNS snapshot with contents of DNS zone records.
+
+Use this endpoint to view historical DNS configurations for domains.</li><li><code>DNS_getDNSSnapshotListV1</code> — Retrieve DNS snapshots for a domain.
+
+Use this endpoint to view available DNS backup points for restoration.</li><li><code>DNS_restoreDNSSnapshotV1</code> — Restore DNS zone to the selected snapshot.
+
+Use this endpoint to revert domain DNS to a previous configuration.</li><li><code>DNS_getDNSRecordsV1</code> — Retrieve DNS zone records for a specific domain.
+
+Use this endpoint to view current DNS configuration for domain management.</li><li><code>DNS_updateDNSRecordsV1</code> — Update DNS records for the selected domain.
+
+Using `overwrite = true` will replace existing records with the provided ones. 
+Otherwise existing records will be </li><li><code>DNS_deleteDNSRecordsV1</code> — Delete DNS records for the selected domain.
+
+To filter which records to delete, add the `name` of the record and `type` to the filter. 
+Multiple filters can be </li><li><code>DNS_resetDNSRecordsV1</code> — Reset DNS zone to the default records.
+
+Use this endpoint to restore domain DNS to original configuration.</li><li><code>DNS_validateDNSRecordsV1</code> — Validate DNS records prior to update for the selected domain.
+
+If the validation is successful, the response will contain `200 Success` code.
+If there is valida</li><li><code>v2_getDomainVerificationsDIRECT</code> — Retrieve a list of pending and completed domain verifications.</li><li><code>domains_checkDomainAvailabilityV1</code> — Check availability of domain names across multiple TLDs.
+
+Multiple TLDs can be checked at once.
+If you want alternative domains with response, provide only one </li><li><code>domains_getDomainForwardingV1</code> — Retrieve domain forwarding data.
+
+Use this endpoint to view current redirect configuration for domains.</li><li><code>domains_updateDomainForwardingV1</code> — Update domain forwarding configuration.
+
+Use this endpoint to modify existing redirect configuration for domains.</li><li><code>domains_deleteDomainForwardingV1</code> — Delete domain forwarding data.
+
+Use this endpoint to remove redirect configuration from domains.</li><li><code>domains_createDomainForwardingV1</code> — Create domain forwarding configuration.
+
+Use this endpoint to set up domain redirects to other URLs.</li><li><code>domains_getPendingIRTPVerificationV1</code> — Retrieve a pending IRTP verification for a domain.
+
+Both the old and new registrant must confirm it before the WHOIS change takes effect.
+
+Use this endpoint to </li><li><code>domains_cancelPendingIRTPVerificationV1</code> — Cancel a pending IRTP verification.
+
+Use this endpoint to back out of a WHOIS change that is stuck waiting on registrant confirmation,
+for example when the conf</li><li><code>domains_getIncomingDomainMoveV1</code> — Retrieve the incoming move for a specified domain.
+
+Returns 404 when no account is moving this domain to you.
+
+Use this endpoint to check whether a domain addre</li><li><code>domains_acceptIncomingDomainMoveV1</code> — Accept an incoming move for a specified domain.
+
+The provided WHOIS profiles become the contacts of the domain, so they must belong
+to your account and satisfy </li><li><code>domains_rejectIncomingDomainMoveV1</code> — Reject an incoming move for a specified domain.
+
+The domain stays in the account which initiated the move.
+Moves you have already accepted cannot be rejected an</li><li><code>domains_getIncomingDomainMoveListV1</code> — Retrieve all domains other Hostinger accounts are moving to your account.
+
+Moves of every status are returned, including the ones which already completed.
+
+Use </li><li><code>domains_getOutgoingDomainMoveV1</code> — Retrieve the outgoing move for a specified domain.
+
+Returns 404 when the domain has no move in progress.
+
+Use this endpoint to track the status of a move you ha</li><li><code>domains_startOutgoingDomainMoveV1</code> — Initiate a move of a specified domain to another Hostinger account.
+
+The receiving account has to already exist and accept the move before the domain changes ha</li><li><code>domains_cancelOutgoingDomainMoveV1</code> — Cancel an outgoing move for a specified domain.
+
+The move can only be cancelled while the receiving account has not accepted it yet.
+The domain stays in your ac</li><li><code>domains_getOutgoingDomainMoveListV1</code> — Retrieve all domains you are moving to other Hostinger accounts.
+
+Only moves which have not completed yet are returned.
+
+Use this endpoint to track moves you ha</li><li><code>domains_getDomainAuthorizationCodeV1</code> — Retrieve the authorization (EPP) code for a specified domain so it can be transferred
+away from Hostinger to another registrar.
+
+Requesting a new code invalidat</li><li><code>domains_enableDomainLockV1</code> — Enable domain lock for the domain.
+
+When domain lock is enabled,
+the domain cannot be transferred to another registrar without first disabling the lock.
+
+Use th</li><li><code>domains_disableDomainLockV1</code> — Disable domain lock for the domain.
+
+Domain lock needs to be disabled before transferring the domain to another registrar.
+
+Use this endpoint to prepare domains</li><li><code>domains_getDomainDetailsV1</code> — Retrieve detailed information for specified domain.
+
+Use this endpoint to view comprehensive domain configuration and status.</li><li><code>domains_getDomainListV1</code> — Retrieve all domains associated with your account.
+
+Use this endpoint to view user&#x27;s domain portfolio.</li><li><code>domains_purchaseNewDomainV1</code> — Purchase and register a new domain name.
+
+If registration fails, login to [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
+
+If no p</li><li><code>domains_enablePrivacyProtectionV1</code> — Enable privacy protection for the domain.
+
+When privacy protection is enabled, domain owner&#x27;s personal information is hidden from public WHOIS database.
+
+Use th</li><li><code>domains_disablePrivacyProtectionV1</code> — Disable privacy protection for the domain.
+
+When privacy protection is disabled, domain owner&#x27;s personal information is visible in public WHOIS database.
+
+Use t</li><li><code>domains_getDomainRenewalInformationV1</code> — Retrieve renewal information for a specified domain, including its status and current
+expiration date.
+
+Use this endpoint to build renewal automation and expiry</li><li><code>domains_updateDomainNameserversV1</code> — Set nameservers for a specified domain.
+
+Be aware, that improper nameserver configuration can lead to the domain being unresolvable or unavailable.
+
+Use this en</li><li><code>domains_getTransferV1</code> — Retrieve the transfer for a specified domain.
+
+Use this endpoint to track an incoming or outgoing registrar transfer and its status.</li><li><code>domains_getTransferListV1</code> — Retrieve all domain transfers in your portfolio.
+
+Use this endpoint to monitor incoming and outgoing registrar transfers across your domains.</li><li><code>domains_changeWHOISProfileForDomainV1</code> — Change WHOIS contact profile for a domain.
+
+Repoints the given contact roles to a new WHOIS profile and submits the change to the registry.
+The profile currentl</li><li><code>domains_setWHOISProfileAsDefaultV1</code> — Set WHOIS contact profile as default.
+
+The default profile is pre-selected for the TLD it belongs to when registering new domains.
+
+Use this endpoint to avoid p</li><li><code>domains_unsetDefaultWHOISProfileV1</code> — Unset WHOIS contact profile as default.
+
+The profile itself is kept, it is only no longer pre-selected for its TLD.
+
+Use this endpoint to stop reusing contact i</li><li><code>domains_getWHOISProfileV1</code> — Retrieve a WHOIS contact profile.
+
+Use this endpoint to view domain registration contact information.</li><li><code>domains_deleteWHOISProfileV1</code> — Delete WHOIS contact profile.
+
+Use this endpoint to remove unused contact profiles from account.</li><li><code>domains_getWHOISProfileListV1</code> — Retrieve WHOIS contact profiles.
+
+Use this endpoint to view available contact profiles for domain registration.</li><li><code>domains_createWHOISProfileV1</code> — Create WHOIS contact profile.
+
+Use this endpoint to add new contact information for domain registration.</li><li><code>domains_getWHOISProfileUsageV1</code> — Retrieve domain list where provided WHOIS contact profile is used.
+
+Use this endpoint to view which domains use specific contact profiles.</li><li><code>ecommerce_getCustomStorefrontSetupInstructionsV1</code> — Retrieve step-by-step setup instructions, formatted as Markdown, for connecting a custom sales
+channel to your store and keeping your catalog, orders, shipping </li><li><code>ecommerce_enableManualPaymentMethodV1</code> — Enable a manual payment method so the store can accept orders without an online payment provider.</li><li><code>ecommerce_createDigitalProductV1</code> — Create a published digital product with a single variant and an optional external download link.</li><li><code>ecommerce_createPhysicalProductV1</code> — Create a published physical product with a single variant priced in the store currency.</li><li><code>ecommerce_listSalesChannelsV1</code> — List a store&#x27;s active sales channels with their full metadata.</li><li><code>ecommerce_createCustomSalesChannelV1</code> — Create a custom sales channel for a store. Build your own frontend and keep your catalog,
+orders, shipping and payments in sync through the Ecommerce API.</li><li><code>ecommerce_updateSalesChannelV1</code> — Update a custom sales channel. The merchant-facing `name` and the public `url`
+(returned as the channel `domain`) can be changed. Pass `null` to clear a value.</li><li><code>ecommerce_setStoreShippingV1</code> — Set the flat-rate shipping price for a store, creating the shipping zone if it does not exist yet.</li><li><code>ecommerce_deleteStoreV1</code> — Soft-delete a store owned by your account.
+
+The underlying store data is preserved; only the store is marked as deleted.</li><li><code>ecommerce_getStoresV1</code> — Retrieve the stores associated with your account.</li><li><code>ecommerce_createStoreV1</code> — Create a new store for your account.
+
+A primary sales channel is created alongside the store.</li><li><code>ecommerce_getStoreMetadataV1</code> — Get a store&#x27;s readiness metadata: whether payment methods and shipping are configured,
+plus its default currency. Useful to verify prerequisites before building</li><li><code>horizons_createWebsiteV1</code> — Create new Hostinger Horizons website from the given message.\n
+Use this tool when user asks you to create a website, landing page, blog
+or any other type of ap</li><li><code>horizons_getWebsiteV1</code> — Get a link for the user to edit their website in Hostinger Horizons interface.\n
+Use this tool when user wants to modify, edit or add new features to an existin</li><li><code>hosting_clearWebsiteCacheV1</code> — Permanently clears all server-side cache for the website at once. Use it when content was
+updated and needs to be visible immediately, or after making major cha</li><li><code>hosting_toggleCachelessModeV1</code> — Turns development (cacheless) mode on or off, based on the enabled flag. When enabled, nothing
+is cached, effectively turning off all caching for the website; u</li><li><code>hosting_toggleWebsiteCacheV1</code> — Turns server-side caching for the website on or off, based on the enabled flag. Enable it for
+faster page loads, reduced server load, and improved user experien</li><li><code>hosting_listAccountCronJobsV1</code> — Returns the list of cron jobs configured for the specified account, including their schedule and command.</li><li><code>hosting_createAccountCronJobV1</code> — Creates a cron job for the specified account from a schedule expression and a command.
+
+Returns the created cron job, including its uid, which is required to de</li><li><code>hosting_deleteAccountCronJobV1</code> — Permanently deletes the cron job identified by its uid.
+
+The uid is returned by the list cron jobs endpoint.</li><li><code>hosting_getCronJobOutputV1</code> — Returns the output captured from the last execution of the cron job identified by its uid.
+
+The uid is returned by the list cron jobs endpoint.</li><li><code>hosting_changeDatabasePasswordV1</code> — Changes the password for the specified database user.
+
+The database name must be the full name returned by the list databases endpoint.
+The password must also b</li><li><code>hosting_listAccountDatabasesV1</code> — Returns a paginated list of databases for the specified account.
+
+Use the domain and is_assigned filters to find databases assigned to a specific domain.</li><li><code>hosting_createAccountDatabaseV1</code> — Creates a database with a database user and password for the specified account.
+
+The database name and user are automatically prefixed with the account username</li><li><code>hosting_deleteAccountDatabaseV1</code> — Permanently deletes a database and its remote connections.
+
+The database name must be the full name returned by the list databases endpoint.</li><li><code>hosting_createDatabaseRemoteConnectionV1</code> — Allows a remote host to connect to the specified database.
+
+Provide an IPv4/IPv6 address, or &quot;%&quot; to allow any host. The database name must be
+the full name retu</li><li><code>hosting_deleteDatabaseRemoteConnectionV1</code> — Permanently removes a remote-access rule, revoking the given host&#x27;s remote access to the database.
+
+Identify the rule with the required ip query parameter (the </li><li><code>hosting_listDatabaseRemoteConnectionsV1</code> — Returns the remote-access rules for the specified account: the remote hosts
+(IPv4/IPv6 addresses, or &quot;%&quot; for any host) allowed to connect to the account databas</li><li><code>hosting_repairDatabaseV1</code> — Repairs corrupted database tables asynchronously.
+
+Use when database errors, crashes, or corruption are reported.
+The database name must be the full name return</li><li><code>hosting_getPhpMyAdminLinkV1</code> — Returns a direct sign-on link to phpMyAdmin for the specified database.
+
+Use this when a visual database interface is needed for SQL queries, imports, exports, </li><li><code>hosting_listAvailableDatacentersV1</code> — Retrieve a list of datacenters available for setting up hosting plans
+based on available datacenter capacity and hosting plan of your order.
+The first item in t</li><li><code>hosting_generateAFreeSubdomainV1</code> — Generate a unique free subdomain that can be used for hosting services without purchasing custom domains.
+Free subdomains allow you to start using hosting servi</li><li><code>hosting_listWebsiteParkedDomainsV1</code> — Retrieve all parked or alias domains created under the selected website.
+
+Use this endpoint to inspect parked domain configuration for a specific website,
+inclu</li><li><code>hosting_createWebsiteParkedDomainV1</code> — Create a parked or alias domain for the selected website.
+
+Provide a domain name or IP address to park on the website so it serves the same content
+as the paren</li><li><code>hosting_deleteWebsiteParkedDomainV1</code> — Delete an existing parked or alias domain from the selected website.
+
+Use this endpoint to remove parked domains that are no longer needed.</li><li><code>hosting_listWebsiteSubdomainsV1</code> — Retrieve all subdomains created under the selected website.
+
+Use this endpoint to inspect subdomain configuration for a specific website,
+including the parent d</li><li><code>hosting_createWebsiteSubdomainV1</code> — Create a new subdomain for the selected website.
+
+Provide a subdomain prefix and, optionally, a custom directory or the
+website public directory to use as the s</li><li><code>hosting_deleteWebsiteSubdomainV1</code> — Delete an existing subdomain from the selected website.
+
+Use this endpoint to remove subdomains that are no longer needed.</li><li><code>hosting_verifyDomainOwnershipV1</code> — Verify ownership of a single domain and return the verification status.
+
+Use this endpoint to check if a domain is accessible for you before using it for new we</li><li><code>hosting_listNodeJSBuildsV1</code> — Retrieve a paginated list of Node.js build processes for a specific website.
+
+Each build represents a single run of the Node.js build pipeline. Use the `states`</li><li><code>hosting_createNodeJSBuildFromArchiveV1</code> — Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
+
+This is the recommended single-step approach for deploying a Node.</li><li><code>hosting_getNodeJSBuildLogsV1</code> — Retrieve logs from a specific Node.js build process.
+
+To stream live output while a build is running, poll this endpoint repeatedly
+while the build state is `ru</li><li><code>hosting_restartNode_jsApplicationV1</code> — Restarts the Node.js server process for the website. Does not rebuild or redeploy the
+application. Use it to apply environment or configuration changes, or to r</li><li><code>hosting_listNode_jsVulnerabilitiesV1</code> — Lists known npm package vulnerabilities detected on a Node.js website, enriched with
+advisory metadata (severity, CVSS score, CVE, advisory URL). Results are so</li><li><code>hosting_patchNode_jsVulnerabilitiesV1</code> — Patches the selected Node.js vulnerabilities by updating the affected package versions
+in `package.json` and opening a GitHub pull request in the connected repo</li><li><code>hosting_listOrdersV1</code> — Retrieve a paginated list of orders accessible to the authenticated client.
+
+This endpoint returns orders of your hosting accounts as well as orders
+of other cl</li><li><code>hosting_resetPHPExtensionsV1</code> — Resets all PHP extensions of the website to their default state.
+
+Use it to recover from extension conflicts or restore the original configuration.</li><li><code>hosting_getPHPDetailsV1</code> — Returns the full PHP configuration for the website: current version, available versions
+(supported and unsupported), enabled/disabled extensions, options with t</li><li><code>hosting_getPHPInfoV1</code> — Returns the full phpinfo page (HTML) for the website.
+
+Use it to debug PHP issues or inspect the complete PHP environment of the website.</li><li><code>hosting_updatePHPExtensionsV1</code> — Enables or disables PHP extensions (modules) for the website.
+
+Use the Get PHP details endpoint to check the current extension states before changing them.</li><li><code>hosting_updatePHPOptionsV1</code> — Updates PHP options for the website (e.g. `memory_limit`, `max_execution_time`, `upload_max_filesize`).
+Only provide the options you want to change, inside the </li><li><code>hosting_updatePHPVersionV1</code> — Changes the PHP version of the website.
+
+Use the Get PHP details endpoint to see the versions available for the website.</li><li><code>hosting_listWebsitesV1</code> — Retrieve a paginated list of websites (main and addon types) accessible to the authenticated client.
+
+This endpoint returns websites from your hosting accounts </li><li><code>hosting_createWebsiteV1</code> — Create a new website for the authenticated client.
+
+Provide the domain name and associated order ID to create a new website.
+The datacenter_code parameter is re</li><li><code>hosting_deleteWebsiteV1</code> — Permanently deletes a website and all of its data. This action is destructive
+and cannot be undone. Always ask the user for explicit confirmation before
+calling</li><li><code>mail_createAliasV1</code> — Create an alias for the given mailbox. The alias address is formed
+from the given local part and the domain of the mailbox. Messages
+sent to the alias are deliv</li><li><code>mail_deleteAliasV1</code> — Delete an alias. Messages sent to the alias address are no longer
+delivered to the mailbox.</li><li><code>mail_listAliasesV1</code> — Retrieve a paginated list of aliases across all mailboxes of a mail
+order.</li><li><code>mail_createAPITokenV1</code> — Create an API token for the given mail order. The token grants access
+to the [Hostinger Email API](https://api.mail.hostinger.com/), where
+you can provision and</li><li><code>mail_revokeAPITokenV1</code> — Revoke an API token. The token immediately loses access to the
+[Hostinger Email API](https://api.mail.hostinger.com/). This action
+cannot be undone.</li><li><code>mail_listAPITokensV1</code> — Retrieve a paginated list of
+[Hostinger Email API](https://api.mail.hostinger.com/) tokens across
+all your mail orders, optionally filtered by order. Plaintext </li><li><code>mail_createAutoreplyV1</code> — Create an automatic reply for the given mailbox. A mailbox can have
+only one autoreply. Omit `starts_at` to activate the autoreply
+immediately and omit `ends_at</li><li><code>mail_updateAutoreplyV1</code> — Replace the autoreply with the given content and schedule. Omitted
+optional fields are cleared: omit `starts_at` to activate the
+autoreply immediately and omit </li><li><code>mail_deleteAutoreplyV1</code> — Delete the autoreply of a mailbox. The mailbox stops sending
+automatic replies immediately.</li><li><code>mail_listAutorepliesV1</code> — Retrieve a paginated list of autoreplies across all mailboxes of a
+mail order.</li><li><code>mail_createCatchAllV1</code> — Create a catch-all that routes all messages sent to unknown addresses
+of the domain to the given mailbox. The mailbox address receives a
+confirmation email and </li><li><code>mail_deleteCatchAllV1</code> — Delete a catch-all. Messages sent to unknown addresses of the domain
+are no longer routed to the mailbox.</li><li><code>mail_listCatchAllsV1</code> — Retrieve a paginated list of catch-alls across all mailboxes of a
+mail order.</li><li><code>mail_resendCatchAllConfirmationV1</code> — Resend the confirmation email to the mailbox address of an
+unconfirmed catch-all.</li><li><code>mail_createForwarderV1</code> — Create a forwarder from the given mailbox to the destination address.
+The destination receives a confirmation email and forwarding becomes
+active only after it </li><li><code>mail_deleteForwarderV1</code> — Delete a forwarder. The mailbox stops forwarding messages to the
+destination address immediately.</li><li><code>mail_listForwardersV1</code> — Retrieve a paginated list of forwarders across all mailboxes of a
+mail order.</li><li><code>mail_resendForwarderConfirmationV1</code> — Resend the confirmation email to the destination address of an
+unconfirmed forwarder.</li><li><code>mail_updateForwarderKeepCopySettingV1</code> — Enable or disable keeping a copy of forwarded messages in the
+mailbox.</li><li><code>mail_listAccessLogsV1</code> — Retrieve paginated access logs for the domain attached to the given
+mail order. Supports filtering by account, date range, protocol,
+status, and deletion flag. </li><li><code>mail_listActionLogsV1</code> — Retrieve paginated account action logs (administrative and user
+actions) for the given mail order. Supports filtering by account,
+date range, and status. Result</li><li><code>mail_listInboundLogsV1</code> — Retrieve paginated inbound (received mail) delivery logs for the
+domain attached to the given mail order. Supports filtering by
+account, date range, status, sen</li><li><code>mail_listMailboxActionLogsV1</code> — Retrieve paginated mailbox action logs (message and mailbox events)
+for a mailbox in the given mail order. The mailbox email must belong
+to the order&#x27;s domain. </li><li><code>mail_listOutboundLogsV1</code> — Retrieve paginated outbound (sent mail) delivery logs for the domain
+attached to the given mail order. Supports filtering by account, date
+range, status, sender</li><li><code>mail_listMailboxesV1</code> — Retrieve a paginated list of mailboxes belonging to a mail order.
+
+Use this endpoint to monitor mailboxes of your mail service, including
+their status, enabled </li><li><code>mail_createMailboxV1</code> — Create a mailbox under the given mail order. The full email address is
+composed from the given local part and the domain of the order.</li><li><code>mail_deleteMailboxV1</code> — Delete a mailbox. The mailbox is soft-deleted and stays restorable
+for a limited period before it is permanently removed.</li><li><code>mail_changeMailboxPasswordV1</code> — Change the password of a mailbox.</li><li><code>mail_listOrdersV1</code> — Retrieve a paginated list of mail orders associated with your account.
+
+Use this endpoint to monitor your mail services, including their status,
+plan, attached </li><li><code>mail_getOrderPlanV1</code> — Retrieve the plan the given mail order was purchased with, including
+domain-level and mailbox-level quotas, limits, and protocol
+availability.</li><li><code>mail_createWebhookV1</code> — Create a webhook for the given mailbox. The generated secret is
+returned only in this response and is sent as a bearer token with
+every delivery.</li><li><code>mail_listWebhookDeliveryLogsV1</code> — Retrieve a paginated list of webhook delivery logs for the given mail
+order, including delivery outcome, duration, and retry counts.
+Supports filtering by mailb</li><li><code>mail_getWebhookV1</code> — Retrieve the details of a single webhook. The webhook secret is never
+included; it is returned only when a webhook is created or its secret
+is regenerated.</li><li><code>mail_deleteWebhookV1</code> — Permanently delete a webhook. This action cannot be undone. After
+deletion the URL no longer receives event notifications.</li><li><code>mail_updateWebhookV1</code> — Partially update a webhook. Only the fields included in the request
+body are changed; omitted fields retain their current values. Pass
+`&quot;description&quot;: null` to </li><li><code>mail_listWebhooksV1</code> — Retrieve a paginated list of webhooks belonging to the given mail
+order. Supports filtering by mailbox and status. The webhook secret
+is never included; it is r</li><li><code>mail_regenerateWebhookSecretV1</code> — Regenerate the secret of a webhook. The previous secret is
+immediately invalidated. The new secret is returned only in this
+response and is sent as a bearer tok</li><li><code>mail_testWebhookV1</code> — Send a test delivery to the webhook URL and return the result. Test
+requests are rate limited upstream.</li><li><code>reach_deleteAContactV1</code> — Delete a contact with the specified UUID.
+
+This endpoint permanently removes a contact from the email marketing system.</li><li><code>reach_listContactGroupsV1</code> — Get a list of all contact groups.
+
+This endpoint returns a list of contact groups that can be used to organize contacts.</li><li><code>reach_listContactsV1</code> — Get a list of contacts, optionally filtered by group and subscription status.
+
+This endpoint returns a paginated list of contacts with their basic information.
+</li><li><code>reach_createANewContactV1</code> — Create a new contact in the email marketing system.
+
+This endpoint allows you to create a new contact with basic information like name, email, and surname.
+
+If </li><li><code>reach_listSegmentsV1</code> — Get a list of all contact segments.
+
+This endpoint returns a list of contact segments that can be used to organize contacts.</li><li><code>reach_createANewContactSegmentV1</code> — Create a new contact segment.
+
+This endpoint allows creating a new contact segment that can be used to organize contacts.
+The segment can be configured with spe</li><li><code>reach_listProfileSegmentContactsV1</code> — Retrieve contacts associated with a specific segment for a given profile.
+
+This endpoint allows you to fetch and filter contacts that belong to a particular seg</li><li><code>reach_listSegmentContactsV1</code> — Retrieve contacts associated with a specific segment.
+
+This endpoint allows you to fetch and filter contacts that belong to a particular segment,
+identified by </li><li><code>reach_getSegmentDetailsV1</code> — Get details of a specific segment.
+
+This endpoint retrieves information about a single segment identified by UUID.
+Segments are used to organize and group conta</li><li><code>reach_createNewContactsV1</code> — Create a new contact in the email marketing system.
+
+This endpoint allows you to create a new contact with basic information like name, email, and surname.
+
+If </li><li><code>reach_getProfileDomainDNSStatusV1</code> — Retrieve the DNS configuration status for a profile&#x27;s domain.
+
+This endpoint reports the state of MX, SPF, DKIM and DMARC records, including the
+actual records </li><li><code>reach_listProfilesV1</code> — This endpoint returns all profiles available to the client, including their basic information.</li><li><code>VPS_getDataCenterListV1</code> — Retrieve all available data centers.
+
+Use this endpoint to view location options before deploying VPS instances.</li><li><code>VPS_getProjectContainersV1</code> — Retrieves a list of all containers belonging to a specific Docker Compose project on the virtual machine. 
+
+This endpoint returns detailed information about eac</li><li><code>VPS_getProjectContentsV1</code> — Retrieves the complete project information including the docker-compose.yml
+file contents, project metadata, and current deployment status.
+
+This endpoint provi</li><li><code>VPS_deleteProjectV1</code> — Completely removes a Docker Compose project from the virtual machine, stopping all containers and cleaning up 
+associated resources including networks, volumes,</li><li><code>VPS_getProjectListV1</code> — Retrieves a list of all Docker Compose projects currently deployed on the virtual machine. 
+
+This endpoint returns basic information about each project includin</li><li><code>VPS_createNewProjectV1</code> — Deploy new project from docker-compose.yaml contents or download contents from URL. 
+
+URL can be Github repository url in format https://github.com/[user]/[repo</li><li><code>VPS_getProjectLogsV1</code> — Retrieves aggregated log entries from all services within a Docker Compose project. 
+
+This endpoint returns recent log output from each container, organized by </li><li><code>VPS_restartProjectV1</code> — Restarts all services in a Docker Compose project by stopping and starting
+containers in the correct dependency order.
+
+This operation preserves data volumes an</li><li><code>VPS_startProjectV1</code> — Starts all services in a Docker Compose project that are currently stopped. 
+
+This operation brings up containers in the correct dependency order as defined in </li><li><code>VPS_stopProjectV1</code> — Stops all running services in a Docker Compose project while preserving
+container configurations and data volumes.
+
+This operation gracefully shuts down contain</li><li><code>VPS_updateProjectV1</code> — Updates a Docker Compose project by pulling the latest image versions and
+recreating containers with new configurations.
+
+This operation preserves data volumes </li><li><code>VPS_activateFirewallV1</code> — Activate a firewall for a specified virtual machine.
+
+Only one firewall can be active for a virtual machine at a time.
+
+Use this endpoint to apply firewall rule</li><li><code>VPS_deactivateFirewallV1</code> — Deactivate a firewall for a specified virtual machine.
+
+Use this endpoint to remove firewall protection from VPS instances.</li><li><code>VPS_getFirewallDetailsV1</code> — Retrieve firewall by its ID and rules associated with it.
+
+Use this endpoint to view specific firewall configuration and rules.</li><li><code>VPS_deleteFirewallV1</code> — Delete a specified firewall.
+
+Any virtual machine that has this firewall activated will automatically have it deactivated.
+
+Use this endpoint to remove unused f</li><li><code>VPS_getFirewallListV1</code> — Retrieve all available firewalls.
+
+Use this endpoint to view existing firewall configurations.</li><li><code>VPS_createNewFirewallV1</code> — Create a new firewall.
+
+Use this endpoint to set up new firewall configurations for VPS security.</li><li><code>VPS_updateFirewallRuleV1</code> — Update a specific firewall rule from a specified firewall.
+
+Any virtual machine that has this firewall activated will lose sync with the firewall
+and will have </li><li><code>VPS_deleteFirewallRuleV1</code> — Delete a specific firewall rule from a specified firewall.
+
+Any virtual machine that has this firewall activated will lose sync with the firewall
+and will have </li><li><code>VPS_createFirewallRuleV1</code> — Create new firewall rule for a specified firewall.
+
+By default, the firewall drops all incoming traffic,
+which means you must add accept rules for all ports you</li><li><code>VPS_syncFirewallV1</code> — Sync a firewall for a specified virtual machine.
+
+Firewall can lose sync with virtual machine if the firewall has new rules added, removed or updated.
+
+Use this</li><li><code>VPS_getPostInstallScriptV1</code> — Retrieve post-install script by its ID.
+
+Use this endpoint to view specific automation script details.</li><li><code>VPS_updatePostInstallScriptV1</code> — Update a specific post-install script.
+
+Use this endpoint to modify existing automation scripts.</li><li><code>VPS_deletePostInstallScriptV1</code> — Delete a post-install script from your account.
+       
+Use this endpoint to remove unused automation scripts.</li><li><code>VPS_getPostInstallScriptsV1</code> — Retrieve post-install scripts associated with your account.
+
+Use this endpoint to view available automation scripts for VPS deployment.</li><li><code>VPS_createPostInstallScriptV1</code> — Add a new post-install script to your account, which can then be used after virtual machine installation.
+
+The script contents will be saved to the file `/post_</li><li><code>VPS_attachPublicKeyV1</code> — Attach existing public keys from your account to a specified virtual machine.
+
+Multiple keys can be attached to a single virtual machine.
+
+Use this endpoint to </li><li><code>VPS_deletePublicKeyV1</code> — Delete a public key from your account. 
+
+**Deleting public key from account does not remove it from virtual machine** 
+       
+Use this endpoint to remove unuse</li><li><code>VPS_getPublicKeysV1</code> — Retrieve public keys associated with your account.
+
+Use this endpoint to view available SSH keys for VPS authentication.</li><li><code>VPS_createPublicKeyV1</code> — Add a new public key to your account.
+
+Use this endpoint to register SSH keys for VPS authentication.</li><li><code>VPS_getTemplateDetailsV1</code> — Retrieve detailed information about a specific OS template for virtual machines.
+
+Use this endpoint to view specific template specifications before deployment.</li><li><code>VPS_getTemplatesV1</code> — Retrieve available OS templates for virtual machines.
+
+Use this endpoint to view operating system options before creating or recreating VPS instances.</li><li><code>VPS_getActionDetailsV1</code> — Retrieve detailed information about a specific action performed on a specified virtual machine.
+
+Use this endpoint to monitor specific VPS operation status and </li><li><code>VPS_getActionsV1</code> — Retrieve actions performed on a specified virtual machine.
+
+Actions are operations or events that have been executed on the virtual
+machine, such as starting, s</li><li><code>VPS_getAttachedPublicKeysV1</code> — Retrieve public keys attached to a specified virtual machine.
+
+Use this endpoint to view SSH keys configured for specific VPS instances.</li><li><code>VPS_getBackupsV1</code> — Retrieve backups for a specified virtual machine.
+
+Use this endpoint to view available backup points for VPS data recovery.</li><li><code>VPS_restoreBackupV1</code> — Restore a backup for a specified virtual machine.
+
+The system will then initiate the restore process, which may take some time depending on the size of the back</li><li><code>VPS_setHostnameV1</code> — Set hostname for a specified virtual machine.
+
+Changing hostname does not update PTR record automatically.
+If you want your virtual machine to be reachable by a</li><li><code>VPS_resetHostnameV1</code> — Reset hostname and PTR record of a specified virtual machine to default value.
+
+Use this endpoint to restore default hostname configuration for VPS instances.</li><li><code>VPS_getVirtualMachineDetailsV1</code> — Retrieve detailed information about a specified virtual machine.
+
+Use this endpoint to view comprehensive VPS configuration and status.</li><li><code>VPS_getVirtualMachinesV1</code> — Retrieve all available virtual machines.
+
+Use this endpoint to view available VPS instances.</li><li><code>VPS_purchaseNewVirtualMachineV1</code> — Purchase and setup a new virtual machine.
+
+If virtual machine setup fails for any reason, login to
+[hPanel](https://hpanel.hostinger.com/) and complete the setu</li><li><code>VPS_getScanMetricsV1</code> — Retrieve scan metrics for the [Monarx](https://www.monarx.com/) malware scanner
+installed on a specified virtual machine.
+
+The scan metrics provide detailed inf</li><li><code>VPS_installMonarxV1</code> — Install the Monarx malware scanner on a specified virtual machine.
+
+[Monarx](https://www.monarx.com/) is a security tool designed to detect and
+prevent malware </li><li><code>VPS_uninstallMonarxV1</code> — Uninstall the Monarx malware scanner on a specified virtual machine.
+
+If Monarx is not installed, the request will still be processed without any effect.
+
+Use t</li><li><code>VPS_getMetricsV1</code> — Retrieve historical metrics for a specified virtual machine.
+
+It includes the following metrics: 
+- CPU usage
+- Memory usage
+- Disk usage
+- Network usage
+- Upti</li><li><code>VPS_setNameserversV1</code> — Set nameservers for a specified virtual machine.
+
+Be aware, that improper nameserver configuration can lead to the virtual
+machine being unable to resolve domai</li><li><code>VPS_createPTRRecordV1</code> — Create or update a PTR (Pointer) record for a specified virtual machine.
+
+Use this endpoint to configure reverse DNS lookup for VPS IP addresses.</li><li><code>VPS_deletePTRRecordV1</code> — Delete a PTR (Pointer) record for a specified virtual machine.
+
+Once deleted, reverse DNS lookups to the virtual machine&#x27;s IP address will
+no longer return the </li><li><code>VPS_setPanelPasswordV1</code> — Set panel password for a specified virtual machine.
+
+If virtual machine does not use panel OS, the request will still be processed without any effect.
+Requireme</li><li><code>VPS_startRecoveryModeV1</code> — Initiate recovery mode for a specified virtual machine.
+
+Recovery mode is a special state that allows users to perform system rescue operations, 
+such as repair</li><li><code>VPS_stopRecoveryModeV1</code> — Stop recovery mode for a specified virtual machine.
+
+If virtual machine is not in recovery mode, this operation will fail.
+
+Use this endpoint to exit system res</li><li><code>VPS_recreateVirtualMachineV1</code> — Recreate a virtual machine from scratch.
+
+The recreation process involves reinstalling the operating system and
+resetting the virtual machine to its initial sta</li><li><code>VPS_restartVirtualMachineV1</code> — Restart a specified virtual machine by fully stopping and starting it.
+
+If the virtual machine was stopped, it will be started.
+
+Use this endpoint to reboot VPS</li><li><code>VPS_setRootPasswordV1</code> — Set root password for a specified virtual machine.
+
+Requirements for password are same as in the [recreate virtual machine
+endpoint](/#tag/vps-virtual-machine/P</li><li><code>VPS_setupPurchasedVirtualMachineV1</code> — Setup newly purchased virtual machine with `initial` state.
+
+Use this endpoint to configure and initialize purchased VPS instances.</li><li><code>VPS_getSnapshotV1</code> — Retrieve snapshot for a specified virtual machine.
+
+Use this endpoint to view current VPS snapshot information.</li><li><code>VPS_createSnapshotV1</code> — Create a snapshot of a specified virtual machine.
+
+A snapshot captures the state and data of the virtual machine at a specific point in time, 
+allowing users to</li><li><code>VPS_deleteSnapshotV1</code> — Delete a snapshot of a specified virtual machine.
+
+Use this endpoint to remove VPS snapshots.</li><li><code>VPS_restoreSnapshotV1</code> — Restore a specified virtual machine to a previous state using a snapshot.
+
+Restoring from a snapshot allows users to revert the virtual machine to that state,
+w</li><li><code>VPS_startVirtualMachineV1</code> — Start a specified virtual machine.
+
+If the virtual machine is already running, the request will still be processed without any effect.
+
+Use this endpoint to pow</li><li><code>VPS_stopVirtualMachineV1</code> — Stop a specified virtual machine.
+
+If the virtual machine is already stopped, the request will still be processed without any effect.
+
+This is a compute-only po</li><li><code>hosting_showAIOptionStatusV1</code> — Show the current AI option status for the Hostinger Tools plugin on the
+specified WordPress installation. Filter by `option` to return a single
+option, or omit </li><li><code>hosting_setAIOptionStatusV1</code> — Enable or disable an AI option for the Hostinger Tools plugin on the specified
+WordPress installation.
+
+Provide the WordPress installation (software) identifier</li><li><code>hosting_checkIfWordPressInstallationsAreValidV1</code> — Check whether one or more WordPress installations are valid and working
+correctly. Detects broken installations caused by missing files, broken
+plugins, themes </li><li><code>hosting_deleteWordPressInstallationV1</code> — Delete the specified WordPress installation, with optional file and database
+removal. This removes all associated components including plugins, themes,
+staging </li><li><code>hosting_detectWordPressInstallationsV1</code> — Trigger a background scan to detect WordPress installations for the account.
+
+This operation is asynchronous: a successful response only means the scan has
+been</li><li><code>hosting_installWordPressV1</code> — Install WordPress on an existing website.
+
+The website must already exist before calling this endpoint. To create a new
+website first, use POST /api/hosting/v1/</li><li><code>hosting_listWordPressInstallationsV1</code> — List WordPress installations accessible to the authenticated client.
+
+Use this endpoint to discover existing WordPress installations and to poll
+for installatio</li><li><code>hosting_listAvailableWordPressCoreUpdatesV1</code> — List available WordPress core updates for the specified installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+be obtained </li><li><code>hosting_getInstallationJWTTokenV1</code> — Return a JWT token used to authenticate requests against the specified
+WordPress installation, including its MCP (Model Context Protocol) endpoint.
+
+Provide the</li><li><code>hosting_showWordPressCoreVersionV1</code> — Show the WordPress core version for the specified installation, along with
+known vulnerabilities affecting it.
+
+Provide the WordPress installation (software) id</li><li><code>hosting_updateWordPressCoreV1</code> — Update the WordPress core for the specified installation (minor update or a
+specific version).
+
+Provide the WordPress installation (software) identifier in the </li><li><code>hosting_purgeLiteSpeedCacheV1</code> — Purge the LiteSpeed Cache for the specified WordPress installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+be obtained fr</li><li><code>hosting_showLiteSpeedCacheStatusV1</code> — Show the LiteSpeed Cache status for the specified WordPress installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+be obtai</li><li><code>hosting_createLoginLinksV1</code> — Create temporary auto-login links for the specified WordPress installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+be obt</li><li><code>hosting_showMaintenanceStatusV1</code> — Show the maintenance mode status for the specified WordPress installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+be obta</li><li><code>hosting_toggleMaintenanceModeV1</code> — Enable or disable maintenance mode for the specified WordPress installation,
+based on the `enabled` flag.
+
+Provide the WordPress installation (software) identif</li><li><code>hosting_showMemcachedObjectCacheStatusV1</code> — Show the Memcached object cache status for the specified WordPress
+installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+b</li><li><code>hosting_toggleMemcachedObjectCacheV1</code> — Activate or deactivate the Memcached object cache for the specified WordPress
+installation, based on the `enabled` flag.
+
+Provide the WordPress installation (so</li><li><code>hosting_activateWordPressPluginV1</code> — Activate an installed plugin on a WordPress installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+be obtained from GET /ap</li><li><code>hosting_deactivateWordPressPluginV1</code> — Deactivate an installed plugin on a WordPress installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+be obtained from GET /</li><li><code>hosting_installWordPressPluginsV1</code> — Install one or more plugins on an existing WordPress installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+be obtained fro</li><li><code>hosting_listAvailableWordPressPluginsV1</code> — List plugins recommended for installation on a WordPress installation that are
+not yet installed.
+
+Provide the WordPress installation (software) identifier in t</li><li><code>hosting_listInstalledWordPressPluginsV1</code> — List plugins installed on a WordPress installation, including their status,
+available updates and known vulnerabilities.
+
+Provide the WordPress installation (so</li><li><code>hosting_searchWordPressPluginsV1</code> — Search the WordPress.org plugin directory for plugins available to install.
+
+Use the returned `slug` values with
+POST /api/hosting/v1/accounts/{username}/wordpr</li><li><code>hosting_listSuggestedWordPressPluginsV1</code> — List curated plugin suggestions grouped by website type.
+
+Use the returned `slug` values with
+POST /api/hosting/v1/accounts/{username}/wordpress/{software}/plug</li><li><code>hosting_checkIfWooCommerceIsInstalledV1</code> — Check whether WooCommerce is installed on any WordPress installation of a
+domain. Optionally filter by domain to scope the check.</li><li><code>hosting_uninstallWordPressPluginsV1</code> — Uninstall one or more plugins from a WordPress installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+be obtained from GET </li><li><code>hosting_updateHostingerWordPressPluginV1</code> — Update a Hostinger plugin to its latest version on a WordPress installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+be ob</li><li><code>hosting_updateWordPressPluginsV1</code> — Update one or more installed plugins to their latest version on a WordPress
+installation.
+
+Provide the WordPress installation (software) identifier in the path.</li><li><code>hosting_activateWordPressThemeV1</code> — Activate an installed theme on a WordPress installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+be obtained from GET /api</li><li><code>hosting_installWordPressThemeV1</code> — Install a theme on an existing WordPress installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+be obtained from GET /api/h</li><li><code>hosting_listInstalledWordPressThemesV1</code> — List themes installed on a WordPress installation, including their status,
+available updates and known vulnerabilities.
+
+Provide the WordPress installation (sof</li><li><code>hosting_listWordPressThemesV1</code> — List WordPress themes available to install.
+
+Use the returned `slug` values with
+POST /api/hosting/v1/accounts/{username}/wordpress/{software}/themes/install.</li><li><code>hosting_uninstallWordPressThemesV1</code> — Uninstall one or more themes from a WordPress installation.
+
+Provide the WordPress installation (software) identifier in the path. It can
+be obtained from GET /</li><li><code>hosting_updateWordPressThemesV1</code> — Update one or more installed themes to their latest version on a WordPress
+installation.
+
+Provide the WordPress installation (software) identifier in the path. </li></ul>
+<footer>Evaluated 2026-08-06 10:15 UTC · Engine v0.1.0 · Source: registry-npm</footer>
+</body></html>

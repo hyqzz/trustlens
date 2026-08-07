@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>@softeria/ms-365-mcp-server Inspection Report — TrustLens · ICodeStar</title>
+<meta name="description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link rel="canonical" href="https://trustlens.icodestar.net/en/server/softeria-ms-365-mcp-server.html">
+<link rel="alternate" hreflang="en" href="https://trustlens.icodestar.net/en/server/softeria-ms-365-mcp-server.html">
+<link rel="alternate" hreflang="zh-CN" href="https://trustlens.icodestar.net/server/softeria-ms-365-mcp-server.html">
+<link rel="alternate" hreflang="x-default" href="https://trustlens.icodestar.net/en/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="@softeria/ms-365-mcp-server Inspection Report — TrustLens · ICodeStar">
+<meta property="og:description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<meta property="og:url" content="https://trustlens.icodestar.net/en/server/softeria-ms-365-mcp-server.html">
+<meta property="og:site_name" content="TrustLens · ICodeStar">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="@softeria/ms-365-mcp-server Inspection Report — TrustLens · ICodeStar">
+<meta name="twitter:description" content="TrustLens by ICodeStar measures functionality, reliability, security and cross-model compatibility of MCP servers and agent skills, publishing 0-100 trust scores on a weekly leaderboard. Check before you install.">
+<script>
+function tlSetLang(){try{sessionStorage.setItem('tl-lang','1')}catch(e){}}
+(function(){try{if(sessionStorage.getItem('tl-lang'))return;
+var zh=/^zh([-_]|$)/i.test(navigator.language||navigator.userLanguage||'');
+if(zh!==false){location.replace('../../server/softeria-ms-365-mcp-server.html');}}catch(e){}})();
+</script>
+<style>
+:root{color-scheme:light dark;--accent:#4f8ef7;--accent2:#9b5cf6;--line:#8884;--bg-card:#8881}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif;
+     max-width:1060px;margin:0 auto;padding:0 1rem 2rem;line-height:1.6}
+.brandbar{display:flex;align-items:center;gap:.6rem;padding:.9rem 0;border-bottom:1px solid var(--line);margin-bottom:1.1rem;position:sticky;top:0;background:color-mix(in srgb,Canvas 92%,transparent);backdrop-filter:blur(6px);z-index:10}
+.brand-logo{font-size:1.4rem}
+.brand-name{font-weight:800;font-size:1.05rem;letter-spacing:.02em}
+.brand-name .en{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-sub{opacity:.55;font-size:.8rem;margin-left:.15rem}
+.nav{display:flex;gap:.4rem;margin:.4rem 0 .3rem;flex-wrap:wrap}
+.nav a{font-size:.88rem;border:1px solid var(--line);border-radius:1.4em;padding:.22em .95em;text-decoration:none}
+.nav a.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.nav a:hover:not(.on){border-color:var(--accent)}
+.method{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:.55rem;padding:.5rem .85rem;font-size:.83rem;opacity:.85;margin:.8rem 0}
+.method b{opacity:1}
+.lang{margin-left:auto;font-size:.86rem;border:1px solid var(--line);border-radius:1.2em;padding:.18em .85em;text-decoration:none}
+.lang:hover{text-decoration:none;background:var(--bg-card)}
+h1{margin:.3rem 0 .2rem;font-size:1.65rem}
+.subtitle{opacity:.72;margin-top:0}
+.badge{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-radius:.35em;padding:.12em .55em;font-size:.72rem;vertical-align:middle}
+
+/* 统计卡片 */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin:1.1rem 0}
+.stat{border:1px solid var(--line);border-radius:.7rem;padding:.6rem .8rem}
+.stat .v{font-size:1.45rem;font-weight:800;font-variant-numeric:tabular-nums}
+.stat .l{opacity:.65;font-size:.8rem}
+.stat .v.gA{color:#2da44e}.stat .v.gD{color:#cf6020}.stat .v.gF{color:#cf222e}
+.distbar{display:flex;height:.55rem;border-radius:.3rem;overflow:hidden;margin-top:.35rem}
+.distbar i{display:block;height:100%}
+
+/* 工具栏 */
+.toolbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.9rem 0;position:sticky;top:52px;background:color-mix(in srgb,Canvas 94%,transparent);backdrop-filter:blur(6px);padding:.5rem 0;z-index:9}
+.toolbar input[type=search]{flex:1 1 220px;min-width:160px;padding:.5rem .8rem;border:1px solid var(--line);border-radius:.6rem;background:Canvas;font:inherit}
+.toolbar select{padding:.5rem .6rem;border:1px solid var(--line);border-radius:.6rem;background:Canvas;font:inherit}
+.toolbar input:focus,.toolbar select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.chips{display:flex;gap:.35rem;flex-wrap:wrap}
+.chip{border:1px solid var(--line);border-radius:1.2em;padding:.22em .8em;cursor:pointer;font-size:.84rem;background:Canvas;user-select:none}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.resultcount{font-size:.84rem;opacity:.75;margin-left:auto;white-space:nowrap}
+
+/* 表格 */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:.7rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:680px}
+thead th{position:sticky;top:104px;background:Canvas;opacity:.75;font-weight:600;text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line);white-space:nowrap;z-index:5}
+tbody td{padding:.55rem .8rem;border-bottom:1px solid #8882;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:var(--bg-card)}
+.rank{opacity:.5;font-variant-numeric:tabular-nums;font-size:.85rem;width:3em}
+.name{font-weight:600}
+.name small{display:block;opacity:.5;font-weight:400;font-size:.78rem;max-width:26em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.score{font-weight:800;font-variant-numeric:tabular-nums;font-size:1.05rem}
+.grade{display:inline-block;min-width:1.7em;text-align:center;border-radius:.4em;padding:.1em .4em;color:#fff;font-weight:700;font-size:.82em}
+.gA{background:#2da44e}.gB{background:#6f9e1f}.gC{background:#bf8700}.gD{background:#cf6020}.gF{background:#cf222e}
+.src{opacity:.7;font-size:.8rem}
+.dims{font-size:.78rem;opacity:.7;white-space:nowrap}
+.dims b{font-variant-numeric:tabular-nums}
+
+/* 分页 */
+.pager{display:flex;gap:.4rem;align-items:center;justify-content:center;margin:1rem 0;flex-wrap:wrap}
+.pager button{border:1px solid var(--line);background:Canvas;border-radius:.5rem;padding:.35rem .75rem;cursor:pointer;font:inherit;font-size:.88rem}
+.pager button:hover:not(:disabled){border-color:var(--accent)}
+.pager button:disabled{opacity:.4;cursor:not-allowed}
+.pager .pg.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.empty{border:1px dashed var(--line);border-radius:.7rem;padding:2rem;text-align:center;opacity:.7;margin:1rem 0}
+
+/* 详情页维度 */
+.dim{margin:.5rem 0;padding:.55rem .8rem;border:1px solid var(--line);border-radius:.55rem}
+.dim b{display:inline-block;min-width:11em}
+.finding{font-size:.87em;opacity:.85;margin:.15rem 0 0 .4rem;word-break:break-all}
+.crit{color:#cf222e}.warn{color:#bf8700}
+footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opacity:.6;font-size:.85rem}
+.faq{margin-top:2rem}
+.faq h2{font-size:1.15rem}
+.faq details{margin:.5rem 0;border:1px solid var(--line);border-radius:.55rem;padding:.55rem .9rem}
+.faq summary{cursor:pointer;font-weight:600}
+.faq p{opacity:.85;margin:.4rem 0 .2rem}
+@media (max-width:640px){.toolbar{position:static}thead th{position:static}.dims{display:none}}
+</style></head><body>
+<div class="brandbar"><span class="brand-logo">🛡️</span><span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span><a class="lang" href="../../server/softeria-ms-365-mcp-server.html" onclick="tlSetLang()">中文</a></div>
+<p><a href="../">← Back to leaderboard</a></p>
+<h1>@softeria/ms-365-mcp-server</h1>
+<p class="subtitle">Trust score <span class="score">63.9/100</span> · <span class="grade gC">C</span> Fair</p>
+
+<h2>Dimension breakdown</h2><div class="dim"><b>Func 41.3</b></div><div class="dim"><b>Rel 88.0</b><div class="finding warn">[REL-FAIL] 调用失败率 20%</div></div><div class="dim"><b>Sec 100.0</b></div><div class="dim"><b>Tool-call 16.0</b></div>
+<h2>Tools (188)</h2><ul><li><code>login</code> — Authenticate with Microsoft account</li><li><code>logout</code> — Log out from Microsoft account</li><li><code>verify-login</code> — Check current Microsoft authentication status</li><li><code>list-accounts</code> — List all Microsoft accounts configured in this server. Use this to discover available account emails before making tool calls. Reflects accounts added mid-sessi</li><li><code>select-account</code> — Select a Microsoft account as the default. Accepts email address (e.g. user@outlook.com) or account ID. Use list-accounts to discover available accounts.</li><li><code>remove-account</code> — Remove a Microsoft account from the cache. Accepts email address (e.g. user@outlook.com) or account ID. Use list-accounts to discover available accounts.</li><li><code>graph-batch</code> — Combine up to 20 Graph requests into a single HTTP call. Body: { requests: [{ id: &#x27;1&#x27;, method: &#x27;GET&#x27;|&#x27;POST&#x27;|&#x27;PATCH&#x27;|&#x27;DELETE&#x27;, url: &#x27;/me/messages?$top=5&#x27;, header</li><li><code>get-drive-item</code> — All items contained in the drive. Read-only. Nullable.
+
+💡 TIP: Gets metadata for a file or folder: name, size, lastModifiedDateTime, createdBy, webUrl, file (mi</li><li><code>move-rename-onedrive-item</code> — Update the navigation property items in drives
+
+💡 TIP: Move and/or rename a file or folder. To move, provide parentReference with the target folder&#x27;s id. To ren</li><li><code>delete-onedrive-file</code> — Delete navigation property items for drives</li><li><code>list-folder-files</code> — Return a collection of DriveItems in the children relationship of a DriveItem. DriveItems with a non-null folder or package facet can have one or more child Dri</li><li><code>create-onedrive-folder</code> — Create new navigation property to children for drives
+
+💡 TIP: Creates a new folder inside the specified drive item. Body must include name (string) and folder (</li><li><code>upload-file-content</code> — The content stream, if the item represents a file.
+
+💡 TIP: Body is a base64-encoded string of the file bytes; the server decodes it before PUT. Max 4MB inline (</li><li><code>copy-drive-item</code> — Invoke action copy
+
+💡 TIP: Asynchronously copy a file or folder to a new location and/or name. Body: { parentReference: { driveId: &#x27;...&#x27;, id: &#x27;...&#x27; }, name?: &#x27;N</li><li><code>create-drive-item-share-link</code> — Create a link to share a driveItem driveItem. The createLink action creates a new sharing link if the specified link type doesn&#x27;t already exist for the calling </li><li><code>create-upload-session</code> — Invoke action createUploadSession
+
+💡 TIP: For large file uploads (no size limit). Returns a pre-authenticated uploadUrl for direct PUT of file bytes. For new fi</li><li><code>get-drive-delta</code> — Track changes in a driveItem and its children over time. Your app begins by calling delta without any parameters.
+The service starts enumerating the drive&#x27;s hie</li><li><code>share-drive-item</code> — Send a sharing invitation for a driveItem. A sharing invitation provides permissions to the recipients and, optionally, sends them an email to notify them that </li><li><code>list-drive-item-permissions</code> — The set of permissions for the item. Read-only. Nullable.
+
+💡 TIP: Lists all permissions (sharing links, direct access, inherited) on a file or folder. Each perm</li><li><code>delete-drive-item-permission</code> — Delete navigation property permissions for drives
+
+💡 TIP: Removes a specific permission from a file or folder. Only permissions that are not inherited can be de</li><li><code>create-drive-item-preview</code> — Invoke action preview
+
+💡 TIP: Generate a short-lived embeddable preview URL for a file (Office docs, PDFs, images). Body: { page?: number | string, zoom?: numbe</li><li><code>list-drive-item-thumbnails</code> — Collection of thumbnailSet objects associated with the item. For more information, see getting thumbnails. Read-only. Nullable.
+
+💡 TIP: Lists thumbnail sets for</li><li><code>list-drive-item-versions</code> — The list of previous versions of the item. For more info, see getting previous versions. Read-only. Nullable.
+
+💡 TIP: Lists version history of a file. Each vers</li><li><code>list-excel-tables</code> — Represents a collection of tables associated with the workbook. Read-only.
+
+💡 TIP: Lists all named tables in a workbook. Each table has id, name, showHeaders, s</li><li><code>get-excel-table</code> — Represents a collection of tables associated with the workbook. Read-only.
+
+💡 TIP: Gets a specific table by name or ID. Returns table properties including colum</li><li><code>list-excel-table-rows</code> — The list of all the rows in the table. Read-only.
+
+💡 TIP: Lists all rows in a table. Each row has index and values (array of cell values). Use $top and $skip fo</li><li><code>add-excel-table-rows</code> — Create new navigation property to rows for drives
+
+💡 TIP: Adds rows to a table. Body: { values: [[&#x27;col1val&#x27;, &#x27;col2val&#x27;, &#x27;col3val&#x27;], [&#x27;row2col1&#x27;, &#x27;row2col2&#x27;, &#x27;ro</li><li><code>update-excel-table-row</code> — Update a single row in a formal Excel table by zero-based row index. Body: { values: [[...]] } with one inner array matching the column count.
+
+💡 TIP: Update a </li><li><code>delete-excel-table-row</code> — Delete a single row from a formal Excel table by zero-based row index.
+
+💡 TIP: Delete a single row from a formal Excel table by zero-based row index.</li><li><code>list-excel-worksheets</code> — Represents a collection of worksheets associated with the workbook. Read-only.</li><li><code>create-excel-chart</code> — Creates a new chart.</li><li><code>sort-excel-range</code> — Update the navigation property sort in drives</li><li><code>get-excel-range</code> — Invoke function range</li><li><code>update-excel-range</code> — Set cell values, formulas, or number format on any range — does NOT require the worksheet to be a formal Excel table. Body: { values: [[&#x27;v1&#x27;,&#x27;v2&#x27;,&#x27;v3&#x27;]] } for a</li><li><code>clear-excel-range</code> — Invoke action clear
+
+💡 TIP: Clear cell contents and/or formatting on the given range. Body: { applyTo: &#x27;All&#x27; | &#x27;Formats&#x27; | &#x27;Contents&#x27; }. &#x27;Contents&#x27; wipes values</li><li><code>delete-excel-range</code> — Invoke action delete
+
+💡 TIP: Delete cells at the given range, shifting remaining content. Body: { shift: &#x27;Up&#x27; } or { shift: &#x27;Left&#x27; }. Use &#x27;Up&#x27; to delete entire </li><li><code>get-excel-range-format</code> — Returns a format object, encapsulating the range&#x27;s font, fill, borders, alignment, and other properties. Read-only.
+
+💡 TIP: Reads a range&#x27;s format: alignment, w</li><li><code>format-excel-range</code> — Update the navigation property format in drives
+
+💡 TIP: Apply rangeFormat properties to a specific range. Required path param &#x27;address&#x27; (e.g. &#x27;A1:E5&#x27; or &#x27;Sheet1</li><li><code>format-excel-range-border</code> — Sets one border side. The {sideIndex} path param selects which side: EdgeTop, EdgeBottom, EdgeLeft, EdgeRight, InsideVertical, InsideHorizontal, DiagonalDown, o</li><li><code>format-excel-range-fill</code> — Set the background fill color of a range&#x27;s cells.
+
+💡 TIP: Set the background fill color of a range&#x27;s cells.</li><li><code>format-excel-range-font</code> — Set font formatting on a range: bold, italic, underline, size, color, and font name.
+
+💡 TIP: Set font formatting on a range: bold, italic, underline, size, colo</li><li><code>insert-excel-range</code> — Invoke action insert
+
+💡 TIP: Insert blank cells at the given range, shifting existing content. Body: { shift: &#x27;Down&#x27; } or { shift: &#x27;Right&#x27; }. Use &#x27;Down&#x27; to inse</li><li><code>merge-excel-range</code> — Invoke action merge
+
+💡 TIP: Merge the cells in the given range into a single cell. Body: { across: false } merges the entire range into one cell; { across: true</li><li><code>unmerge-excel-range</code> — Invoke action unmerge
+
+💡 TIP: Unmerge any merged cells within the given range back into individual cells. No request body. Inverse of merge-excel-range.</li><li><code>create-excel-table</code> — Create a new table. The range source address determines the worksheet under which the table will be added. If the table can&#x27;t be added (for example, because the</li><li><code>get-excel-used-range</code> — Invoke function usedRange
+
+💡 TIP: Get the smallest range that encompasses any cells with values or formatting on the worksheet. Returns address, values, formula</li><li><code>get-drive-root-item</code> — The root folder of the drive. Read-only.</li><li><code>search-onedrive-files</code> — Search the hierarchy of items for items matching a query.
+You can search within a folder hierarchy, a whole drive, or files shared with the current user.
+
+💡 TIP</li><li><code>get-current-user</code> — Retrieve the properties and relationships of user object. This operation returns by default only a subset of the more commonly used properties for each user. Th</li><li><code>list-my-calendar-permissions</code> — The permissions of the users with whom the calendar is shared.
+
+💡 TIP: Lists share recipients and delegates on the user&#x27;s primary calendar. Returns calendarPerm</li><li><code>create-my-calendar-permission</code> — Create a calendarPermission resource to specify the identity and role of the user with whom the specified calendar is being shared or delegated.
+
+💡 TIP: Shares </li><li><code>update-my-calendar-permission</code> — Update the navigation property calendarPermissions in me
+
+💡 TIP: Changes the role (permission level) granted to an existing share recipient or delegate. Body: {</li><li><code>delete-my-calendar-permission</code> — Delete navigation property calendarPermissions for me
+
+💡 TIP: Revokes a calendar share or delegate access. Get the permission id via list-my-calendar-permission</li><li><code>list-calendars</code> — Get all the user&#x27;s calendars (/calendars navigation property), get the calendars from the default calendar group or from a specific calendar group.</li><li><code>create-calendar</code> — Create a new calendar for a user.
+
+💡 TIP: Creates a new personal calendar. Body: { name: &#x27;My Calendar&#x27;, color: &#x27;auto&#x27; }. Available colors: auto, lightBlue, ligh</li><li><code>update-calendar</code> — Update the navigation property calendars in me
+
+💡 TIP: Updates a calendar&#x27;s properties. Body: { name: &#x27;New Name&#x27;, color: &#x27;lightBlue&#x27; }. Cannot update the defaul</li><li><code>delete-calendar</code> — Delete a calendar other than the default calendar.
+
+💡 TIP: Deletes a calendar and all its events. The default calendar cannot be deleted. This action cannot be </li><li><code>get-specific-calendar-view</code> — The calendar view for the calendar. Navigation property. Read-only.
+
+💡 TIP: Returns expanded recurring event instances (not just seriesMaster) within a date ran</li><li><code>list-specific-calendar-events</code> — The events in the calendar. Navigation property. Read-only.
+
+💡 TIP: WARNING: Does NOT expand recurring events — only returns seriesMaster. Use get-specific-cale</li><li><code>create-specific-calendar-event</code> — Use this API to create a new event in a calendar. The calendar can be one for a user, or the default calendar of a Microsoft 365 group.
+
+💡 TIP: CRITICAL: Do not</li><li><code>get-specific-calendar-event</code> — The events in the calendar. Navigation property. Read-only.</li><li><code>update-specific-calendar-event</code> — Update the navigation property events in me
+
+💡 TIP: CRITICAL: Do not try to guess the email address of the recipients. Use the list-users tool to find the email</li><li><code>delete-specific-calendar-event</code> — Delete navigation property events for me
+
+💡 TIP: Deleting a seriesMaster deletes ALL occurrences. To cancel a single occurrence, use the specific instance ID.</li><li><code>list-calendar-event-instances</code> — The occurrences of a recurring series, if the event is a series master. This property includes occurrences that are part of the recurrence pattern, and exceptio</li><li><code>get-calendar-view</code> — Get the occurrences, exceptions, and single instances of events in a calendar view defined by a time range, from the user&#x27;s default calendar,
+or from some other</li><li><code>list-calendar-view-delta</code> — Get a set of event resources that have been added, deleted, or updated in a calendarView (a range of events defined by start and end dates) of the user&#x27;s primar</li><li><code>list-contact-folders</code> — Get the contact folder collection in the default Contacts folder of the signed-in user.
+
+💡 TIP: Lists the user&#x27;s Outlook contact folders (the named buckets that</li><li><code>create-contact-folder</code> — Create a new contactFolder under the user&#x27;s default contacts folder. You can also create a new contactfolder as a child of any specified contact folder.
+
+💡 TIP:</li><li><code>update-contact-folder</code> — Update the properties of contactfolder object.
+
+💡 TIP: Updates a contact folder. Body: { displayName?: &#x27;New name&#x27;, parentFolderId?: &#x27;&lt;id&gt;&#x27; } — both displayName </li><li><code>delete-contact-folder</code> — Delete contactFolder other than the default contactFolder.
+
+💡 TIP: Deletes a contact folder. The default &#x27;Contacts&#x27; folder cannot be deleted — Graph returns an </li><li><code>list-contact-folder-child-folders</code> — Get a collection of child folders under the specified contact folder.
+
+💡 TIP: Lists immediate sub-folders under a given contact folder. Returns id, displayName,</li><li><code>create-contact-child-folder</code> — Create a new contactFolder as a child of a specified folder.  You can also create a new contactFolder under the user&#x27;s default contact folder.
+
+💡 TIP: Creates a</li><li><code>list-contact-folder-contacts</code> — Get a contact collection from the default Contacts folder of the signed-in user (.../me/contacts), or from the specified contact folder.
+
+💡 TIP: Lists contacts </li><li><code>create-contact-in-folder</code> — Add a contact to the root Contacts folder or to the contacts endpoint of another contact folder.
+
+💡 TIP: Creates a contact inside a specific folder (instead of </li><li><code>list-outlook-contacts</code> — Get a contact collection from the default contacts folder of the signed-in user. There are two scenarios where an app can get contacts in another user&#x27;s contact</li><li><code>create-outlook-contact</code> — Add a contact to the root Contacts folder or to the contacts endpoint of another contact folder.</li><li><code>get-outlook-contact</code> — Retrieve the properties and relationships of a contact object. There are two scenarios where an app can get a contact in another user&#x27;s contact folder:</li><li><code>update-outlook-contact</code> — Update the properties of a contact object.
+
+💡 TIP: emailAddresses array is replaced entirely — include all addresses, not just new ones.</li><li><code>delete-outlook-contact</code> — Delete a contact.</li><li><code>list-drives</code> — Retrieve the list of Drive resources available for a target User, Group, or Site.</li><li><code>list-calendar-events</code> — Get a list of event objects in the user&#x27;s mailbox. The list contains single
+instance meetings and series masters. To get expanded event instances, you can get t</li><li><code>create-calendar-event</code> — Create (schedule) a new calendar event — a meeting or appointment — on the user&#x27;s calendar. Set subject, start/end times, time zone, location, body, and attende</li><li><code>get-calendar-event</code> — Get the properties and relationships of the specified event object. Currently, this operation returns event bodies in only HTML format. There are two scenarios </li><li><code>update-calendar-event</code> — Update the properties of the event object.
+
+💡 TIP: CRITICAL: Do not try to guess the email address of the recipients. Use the list-users tool to find the email </li><li><code>delete-calendar-event</code> — Removes the specified event from the containing calendar.  If the event is a meeting, deleting the event on the organizer&#x27;s calendar sends a cancellation messag</li><li><code>accept-calendar-event</code> — Accept the specified event in a user calendar.
+
+💡 TIP: Accepts a meeting invitation. Optional body: { sendResponse: true, comment: &#x27;I will attend.&#x27; }. Set sendR</li><li><code>cancel-calendar-event</code> — This action allows the organizer of a meeting to send a cancellation message and cancel the event.  The action moves the event to the Deleted Items folder. The </li><li><code>decline-calendar-event</code> — Decline invitation to the specified event in a user calendar. If the event allows proposals for new times, on declining the event, an invitee can choose to sugg</li><li><code>dismiss-calendar-event-reminder</code> — Dismiss a reminder that has been triggered for an event in a user calendar.
+
+💡 TIP: Dismisses a triggered event reminder so it won&#x27;t re-fire. No request body re</li><li><code>forward-calendar-event</code> — This action allows the organizer or attendee of a meeting event to forward the
+meeting request to a new recipient. If the meeting event is forwarded from an att</li><li><code>snooze-calendar-event-reminder</code> — Postpone a reminder for an event in a user calendar until a new time.
+
+💡 TIP: Postpones a triggered event reminder. Body: { NewReminderTime: { dateTime (ISO 860</li><li><code>tentatively-accept-calendar-event</code> — Tentatively accept the specified event in a user calendar. If the event allows proposals for new times, on responding tentative to the event, an invitee can cho</li><li><code>list-calendar-events-delta</code> — Get a set of event resources that have been added, deleted, or updated in a calendarView (a range of events defined by start and end dates) of the user&#x27;s primar</li><li><code>get-mail-tips</code> — Get the MailTips of one or more recipients as available to the signed-in user. Note that by making a POST call to the getMailTips action, you can request specif</li><li><code>list-focused-inbox-overrides</code> — Get the overrides that a user has set up to always classify messages from certain senders in specific ways. Each override corresponds to an SMTP address of a se</li><li><code>create-focused-inbox-override</code> — Create an override for a sender identified by an SMTP address. Future messages from that SMTP address will be consistently classified
+as specified in the overri</li><li><code>update-focused-inbox-override</code> — Change the classifyAs field of an override as specified. You cannot use PATCH to change any other fields in an inferenceClassificationOverride instance. If an o</li><li><code>delete-focused-inbox-override</code> — Delete an override specified by its ID.
+
+💡 TIP: Deletes a Focused Inbox override. Future messages from that sender revert to the Outlook ML classifier&#x27;s default</li><li><code>get-mailbox-settings</code> — Get the user&#x27;s mailboxSettings. You can view all mailbox settings, or get specific settings. Users can set the following settings for their mailboxes through an</li><li><code>update-mailbox-settings</code> — Enable, configure, or disable one or more of the following settings as part of a user&#x27;s mailboxSettings: When updating the preferred date or time format for a u</li><li><code>list-mail-folders</code> — Get the mail folder collection directly under the root folder of the signed-in user. The returned collection includes any mail search folders directly under the</li><li><code>create-mail-folder</code> — Use this API to create a new mail folder in the root folder of the user&#x27;s mailbox. If you intend a new folder to be hidden, you must set the isHidden property t</li><li><code>update-mail-folder</code> — Update the properties of mailfolder object.
+
+💡 TIP: Renames a mail folder by updating its displayName. Use list-mail-folders to find the folder ID.</li><li><code>delete-mail-folder</code> — Delete the specified mailFolder. The folder can be a mailSearchFolder. You can specify a mail folder by its folder ID, or by its well-known folder name, if one </li><li><code>list-mail-child-folders</code> — Get the folder collection under the specified folder. You can use the .../me/mailFolders shortcut to get the top-level
+folder collection and navigate to another</li><li><code>create-mail-child-folder</code> — Use this API to create a new child mailFolder. If you intend a new folder to be hidden, you must set the isHidden property to true on creation.
+
+💡 TIP: Creates </li><li><code>list-mail-rules</code> — Get all the messageRule objects defined for the user&#x27;s inbox.
+
+💡 TIP: Lists all message rules for a mail folder. Use the Inbox folder ID (get it from list-mail-</li><li><code>create-mail-rule</code> — Create a messageRule object by specifying a set of conditions and actions. Outlook carries out those actions if an incoming message in the user&#x27;s Inbox meets th</li><li><code>update-mail-rule</code> — Change writable properties on a messageRule object and save the changes.
+
+💡 TIP: Updates an existing message rule. Use the Inbox folder ID (get it from list-mai</li><li><code>delete-mail-rule</code> — Delete the specified messageRule object.
+
+💡 TIP: Deletes a message rule permanently. Use the Inbox folder ID (get it from list-mail-folders) for inbox rules.</li><li><code>list-mail-folder-messages</code> — Get all the messages in the specified user&#x27;s mailbox, or those messages in a specified folder in the mailbox.
+
+💡 TIP: List read search Outlook emails within a s</li><li><code>list-mail-folder-messages-delta</code> — Get a set of messages added, deleted, or updated in a specified folder. A delta function call for messages in a folder is similar to a GET request, except that </li><li><code>list-mail-messages</code> — List, search, and filter Outlook email messages in the signed-in user&#x27;s mailbox across all folders. Returns message metadata (subject, from, receivedDateTime, i</li><li><code>create-draft-email</code> — Create a draft Outlook email message in the signed-in user&#x27;s Drafts folder. Set subject, body, toRecipients, ccRecipients, and importance. The draft is saved, n</li><li><code>get-mail-message</code> — Get a single Outlook email message by its message ID, including full subject, sender, recipients, body, and attachment flags. Use list-mail-messages first to ob</li><li><code>update-mail-message</code> — Update an existing Outlook email message by its message ID — for example mark it read or unread (isRead), flag it (flag), change its categories, importance, or </li><li><code>delete-mail-message</code> — Delete an Outlook email message by its message ID. This is a soft delete that moves the message to Deleted Items.
+
+💡 TIP: Soft delete — moves to Deleted Items. </li><li><code>get-mail-message-mime</code> — Download the raw MIME source (RFC 822 .eml content) of an Outlook email message by its message ID. Returns the complete original message including headers and e</li><li><code>list-mail-attachments</code> — Retrieve a list of attachment objects.
+
+💡 TIP: Lists attachments on a message: id, name, contentType, size, isInline. To download the bytes, call download-bytes</li><li><code>add-mail-attachment</code> — Use this API to create a new Attachment. An attachment can be one of the following types: All these types of attachment resources are derived from the attachmen</li><li><code>delete-mail-attachment</code> — Delete navigation property attachments for me</li><li><code>create-mail-attachment-upload-session</code> — Create an upload session that allows an app to iteratively upload ranges of a file, so as to attach the file to the specified Outlook item. The item can be a me</li><li><code>copy-mail-message</code> — Copy a message to a folder within the user&#x27;s mailbox.
+
+💡 TIP: Copies a message to another mail folder. Body: { DestinationId: &#x27;&lt;mailFolder-id or well-known name</li><li><code>create-forward-draft</code> — Invoke action createForward
+
+💡 TIP: Create a forward draft (does not send). Useful when user wants to review before sending.</li><li><code>create-reply-draft</code> — Create a draft to reply to the sender of a message in either JSON or MIME format. When using JSON format:
+- Specify either a comment or the body property of the</li><li><code>create-reply-all-draft</code> — Create a draft to reply to the sender and all recipients of a message in either JSON or MIME format. When using JSON format:
+- Specify either a comment or the b</li><li><code>forward-mail-message</code> — Forward a message using either JSON or MIME format. When using JSON format, you can:
+- Specify either a comment or the body property of the message parameter. S</li><li><code>move-mail-message</code> — Move a message to another folder within the specified user&#x27;s mailbox. This creates a new copy of the message in the destination folder and removes the original </li><li><code>reply-mail-message</code> — Reply to the sender of a message using either JSON or MIME format. When using JSON format:
+* Specify either a comment or the body property of the message parame</li><li><code>reply-all-mail-message</code> — Reply to all recipients of a message using either JSON or MIME format. When using JSON format:
+- Specify either a comment or the body property of the message pa</li><li><code>send-draft-message</code> — Send an existing draft message. The draft message can be a new message draft, reply draft, reply-all draft, or a forward draft. This method saves the message in</li><li><code>list-onenote-notebooks</code> — Retrieve a list of notebook objects.</li><li><code>create-onenote-notebook</code> — Create a new OneNote notebook.
+
+💡 TIP: Creates a new OneNote notebook. Body: { displayName: &#x27;Notebook Name&#x27; }. The name must be unique across the user&#x27;s noteboo</li><li><code>list-onenote-notebook-sections</code> — Retrieve a list of onenoteSection objects from the specified notebook.</li><li><code>create-onenote-section</code> — Create a new onenoteSection in the specified notebook.
+
+💡 TIP: Creates a new section in a notebook. Body: { displayName: &#x27;Section Name&#x27; }.</li><li><code>list-onenote-pages</code> — Retrieve a list of page objects.
+
+💡 TIP: Lists all OneNote pages across every notebook and section the user has access to — transverse alternative to walking no</li><li><code>create-onenote-page</code> — Create a new OneNote page in the default section of the default notebook. To create a page in a different section in the default notebook, you can use the secti</li><li><code>delete-onenote-page</code> — Delete a OneNote page.
+
+💡 TIP: Deletes a OneNote page permanently. This cannot be undone.</li><li><code>get-onenote-page-content</code> — The page&#x27;s HTML content.</li><li><code>list-onenote-section-groups</code> — Retrieve a list of sectionGroup objects.
+
+💡 TIP: Lists all OneNote section groups (subfolders inside notebooks that contain their own sections and nested sectio</li><li><code>list-all-onenote-sections</code> — Retrieve a list of onenoteSection objects.
+
+💡 TIP: Lists all sections across all notebooks. Use list-onenote-notebook-sections to list sections within a specifi</li><li><code>list-onenote-section-pages</code> — Retrieve a list of page objects from the specified section.</li><li><code>create-onenote-section-page</code> — Create a new page in the specified section.
+
+💡 TIP: Body must be a full HTML document (with &lt;html&gt;&lt;head&gt;&lt;title&gt;...&lt;/title&gt;&lt;/head&gt;&lt;body&gt;...&lt;/body&gt;&lt;/html&gt;). Parti</li><li><code>list-outlook-categories</code> — Get all the categories that have been defined for a user.
+
+💡 TIP: Lists the user&#x27;s Outlook categories (colored labels) used to tag messages, events, contacts, a</li><li><code>create-outlook-category</code> — Create an outlookCategory object in the user&#x27;s master list of categories.
+
+💡 TIP: Creates a new Outlook category. Body: { displayName (unique), color (one of: n</li><li><code>list-supported-languages</code> — Get the list of locales and languages that are supported for the user, as configured on the user&#x27;s mailbox server. When setting up an Outlook client, the user s</li><li><code>list-supported-time-zones</code> — Get the list of time zones that are supported for the user, as configured on the user&#x27;s mailbox server. You can explicitly specify to have time zones returned i</li><li><code>upload-my-profile-photo</code> — Update the photo for the specified contact, group, team, or user in a tenant. The size of the photo you can update to is limited to 4 MB. You can use either PAT</li><li><code>list-planner-tasks</code> — Retrieve a list of plannertask objects assigned to a User.
+
+💡 TIP: Priority values: 0=Urgent, 1=Important, 3=Medium, 5=Low, 9=unset.</li><li><code>send-mail</code> — Send the message specified in the request body using either JSON or MIME format. When using JSON format, you can include a file attachment in the same sendMail </li><li><code>list-todo-task-lists</code> — Get a list of the todoTaskList objects and their properties.
+
+💡 TIP: Lists all To Do task lists. Returns todoTaskList-id needed for all task operations. The def</li><li><code>create-todo-task-list</code> — Create a new lists object.
+
+💡 TIP: Creates a new Microsoft To Do task list (the named buckets shown in the To Do app sidebar). Body: { displayName: &#x27;My new list</li><li><code>update-todo-task-list</code> — Update the properties of a todoTaskList object.
+
+💡 TIP: Renames a Microsoft To Do task list. Body: { displayName: &#x27;New name&#x27; }. Only displayName is writable. Bu</li><li><code>delete-todo-task-list</code> — Deletes a todoTaskList object.
+
+💡 TIP: Deletes a Microsoft To Do task list. Built-in lists (Flagged emails, the default Tasks list) cannot be deleted — the API </li><li><code>list-todo-tasks</code> — Get the todoTask resources from the tasks navigation property of a specified todoTaskList.
+
+💡 TIP: Lists tasks in a To Do list. Requires todoTaskList-id — use l</li><li><code>create-todo-task</code> — Create a new task object in a specified todoTaskList.
+
+💡 TIP: Creates a new task in a Microsoft To Do list. Body: { title: &quot;...&quot; }; optional dueDateTime, remind</li><li><code>get-todo-task</code> — Read the properties and relationships of a todoTask object.
+
+💡 TIP: Returns a single To Do task. NOTE: $select is NOT supported — do not pass select parameter, </li><li><code>update-todo-task</code> — Update the properties of a todoTask object.
+
+💡 TIP: Updates a Microsoft To Do task. Use this to mark a to-do item complete or done (body: { status: &quot;completed&quot; </li><li><code>delete-todo-task</code> — Delete a todoTask object.</li><li><code>list-todo-linked-resources</code> — Get information of one or more items in a partner application, based on which a specified task was created. The information is represented in a linkedResource o</li><li><code>create-todo-linked-resource</code> — Create a linkedResource object to associate a specified task with an item in a partner application. For example, you can associate a task with an email item in </li><li><code>delete-todo-linked-resource</code> — Delete a linkedResource object.
+
+💡 TIP: Removes a linked resource from a To Do task.</li><li><code>create-planner-bucket</code> — Create a new plannerBucket object.</li><li><code>get-planner-bucket</code> — Retrieve the properties and relationships of a plannerBucket object.
+
+💡 TIP: Response includes @odata.etag — required as If-Match for update-planner-bucket and </li><li><code>update-planner-bucket</code> — Update the properties of plannerbucket object.
+
+💡 TIP: CRITICAL: Requires If-Match header with ETag from get-planner-bucket (use includeHeaders=true).</li><li><code>delete-planner-bucket</code> — Delete plannerBucket.
+
+💡 TIP: CRITICAL: Requires If-Match header with ETag from get-planner-bucket (use includeHeaders=true).</li><li><code>get-planner-plan</code> — Retrieve the properties and relationships of a plannerplan object.</li><li><code>list-plan-buckets</code> — Retrieve a list of plannerBucket objects contained by a plannerPlan object.</li><li><code>list-plan-tasks</code> — Retrieve a list of plannerTask objects associated with a plannerPlan object.
+
+💡 TIP: Priority values: 0=Urgent, 1=Important, 3=Medium, 5=Low, 9=unset.</li><li><code>create-planner-task</code> — Create a new plannerTask.</li><li><code>get-planner-task</code> — Retrieve the properties and relationships of plannerTask object.
+
+💡 TIP: Response includes @odata.etag — save it, required as If-Match header for update-planner</li><li><code>update-planner-task</code> — Update the properties of plannerTask object.
+
+💡 TIP: CRITICAL: Requires If-Match header with the task&#x27;s @odata.etag value, otherwise returns 412 Precondition Fa</li><li><code>get-planner-task-details</code> — Retrieve the properties and relationships of a plannerTaskDetails object.
+
+💡 TIP: Response includes @odata.etag — required for update-planner-task-details. Use </li><li><code>update-planner-task-details</code> — Update the properties of plannerTaskDetails object.
+
+💡 TIP: CRITICAL: Requires If-Match header with ETag from get-planner-task-details (use includeHeaders=true)</li><li><code>list-subscriptions</code> — Retrieve the properties and relationships of webhook subscriptions, based on the app ID, the user, and the user&#x27;s role with a tenant. The content of the respons</li><li><code>create-subscription</code> — Subscribes a listener application to receive change notifications when the requested type of changes occur to the specified resource in Microsoft Graph. To iden</li><li><code>get-subscription</code> — Retrieve the properties and relationships of a subscription. See the table in the Permissions section for the list of resources that support subscribing to chan</li><li><code>update-subscription</code> — Renew a subscription by extending its expiry time. The table in the Permissions section lists the resources that support subscribing to change notifications. Su</li><li><code>delete-subscription</code> — Delete a subscription. For the list of resources that support subscribing to change notifications, see the table in the Permissions section.
+
+💡 TIP: Deletes a w</li><li><code>reauthorize-subscription</code> — Reauthorize a subscription when you receive a reauthorizationRequired challenge.
+
+💡 TIP: Reauthorizes a subscription after receiving a &#x27;reauthorizationRequired&#x27;</li><li><code>get-my-profile</code> — [beta] Retrieve the properties and relationships of a profile object for a given user. The profile resource exposes various rich properties that are descriptive</li><li><code>list-planner-task-messages</code> — [beta] Retrieve a list of plannerTaskChatMessage objects associated with a plannerTask.
+
+💡 TIP: Lists messages in a Planner task&#x27;s chat — the modern Planner &#x27;ta</li><li><code>create-planner-task-message</code> — [beta] Create a new plannerTaskChatMessage on a plannerTask.
+
+💡 TIP: Posts a message to a Planner task&#x27;s chat (the modern &#x27;task chat&#x27;, not the legacy conversati</li><li><code>delete-planner-task-message</code> — [beta] Delete a plannerTaskChatMessage object.
+
+💡 TIP: Deletes a message from a Planner task&#x27;s chat. No request body; If-Match is optional if you want condition</li><li><code>parse-teams-url</code> — Converts any Teams meeting URL format (short /meet/, full /meetup-join/, or recap ?threadId=) into a standard joinWebUrl. Use this before list-online-meetings w</li><li><code>download-bytes</code> — Download binary content from Microsoft Graph and return it as base64. Single tool for any binary read: drive file content, mail attachment, profile photo, Teams</li><li><code>download-bytes-to-file</code> — Write authenticated Microsoft Graph byte content to a local file on the server, returning { path, contentType, bytesWritten } instead of base64. The only out-of</li><li><code>get-download-url</code> — Resolve a short-lived, pre-authenticated download URL for Microsoft Graph binary content that exposes one (drive/SharePoint file content). The returned URL stre</li></ul>
+<footer>Evaluated 2026-08-06 09:49 UTC · Engine v0.1.0 · Source: registry-npm</footer>
+</body></html>
