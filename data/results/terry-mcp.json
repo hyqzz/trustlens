@@ -2,7 +2,7 @@
   "name": "terry-mcp",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786011753.883069,
+  "evaluated_at": 1786064432.9554317,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -21,7 +21,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.054,
+        "avg_latency_s": 0.009,
         "failure_rate": 0.0,
         "attempts": 2
       }

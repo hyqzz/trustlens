@@ -2,7 +2,7 @@
   "name": "@microsoft/clarity-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786009398.6358867,
+  "evaluated_at": 1786064409.8813584,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -27,7 +27,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.002,
+        "avg_latency_s": 0.004,
         "failure_rate": 0.3333333333333333,
         "attempts": 6
       }

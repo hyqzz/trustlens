@@ -2,33 +2,33 @@
   "name": "filesystem",
   "server_type": "mcp-server",
   "source": "official-reference",
-  "evaluated_at": 1786008847.2629898,
+  "evaluated_at": 1786064401.513387,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 69.1,
-  "grade": "C",
+  "total_score": 54.6,
+  "grade": "D",
   "dimensions": {
     "functionality": {
-      "value": 57.1,
+      "value": 44.3,
       "findings": [],
       "details": {
         "tools_total": 14,
-        "tools_callable": 4
+        "tools_callable": 1
       }
     },
     "reliability": {
-      "value": 88.0,
+      "value": 52.0,
       "findings": [
         {
           "severity": "warning",
           "code": "REL-FAIL",
-          "message": "调用失败率 20%"
+          "message": "调用失败率 80%"
         }
       ],
       "details": {
-        "avg_latency_s": 0.003,
-        "failure_rate": 0.2,
+        "avg_latency_s": 0.002,
+        "failure_rate": 0.8,
         "attempts": 10
       }
     },
@@ -40,10 +40,10 @@
       }
     },
     "compatibility": {
-      "value": 14.3,
+      "value": 7.1,
       "findings": [],
       "details": {
-        "success_rate": 0.143,
+        "success_rate": 0.071,
         "models": [
           "deepseek"
         ],

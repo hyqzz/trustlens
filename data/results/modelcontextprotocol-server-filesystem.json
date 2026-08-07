@@ -2,7 +2,7 @@
   "name": "@modelcontextprotocol/server-filesystem",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786009402.3035393,
+  "evaluated_at": 1786064410.5636868,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",

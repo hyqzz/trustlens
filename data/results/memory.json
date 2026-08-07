@@ -2,11 +2,11 @@
   "name": "memory",
   "server_type": "mcp-server",
   "source": "official-reference",
-  "evaluated_at": 1786008847.2629898,
+  "evaluated_at": 1786064401.5143282,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 77.3,
+  "total_score": 75.7,
   "grade": "B",
   "dimensions": {
     "functionality": {
@@ -21,7 +21,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.001,
+        "avg_latency_s": 0.003,
         "failure_rate": 0.0,
         "attempts": 10
       }
@@ -34,10 +34,10 @@
       }
     },
     "compatibility": {
-      "value": 11.1,
+      "value": 0.0,
       "findings": [],
       "details": {
-        "success_rate": 0.111,
+        "success_rate": 0.0,
         "models": [
           "deepseek"
         ],

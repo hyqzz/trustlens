@@ -109,9 +109,9 @@ footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opaci
 <div class="brandbar"><span class="brand-logo">🛡️</span><span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span><a class="lang" href="../../server/cls-mcp-server.html" onclick="tlSetLang()">中文</a></div>
 <p><a href="../">← Back to leaderboard</a></p>
 <h1>cls-mcp-server</h1>
-<p class="subtitle">Trust score <span class="score">51.8/100</span> · <span class="grade gD">D</span> Risky</p>
+<p class="subtitle">Trust score <span class="score">50.2/100</span> · <span class="grade gD">D</span> Risky</p>
 
-<h2>Dimension breakdown</h2><div class="dim"><b>Func 35.0</b><div class="finding warn">[SCHEMA-BLOAT] 工具 GetAlarmLog 描述过长（2535 字符，加剧上下文膨胀）</div></div><div class="dim"><b>Rel 40.0</b><div class="finding warn">[REL-FAIL] 调用失败率 100%</div></div><div class="dim"><b>Sec 100.0</b></div><div class="dim"><b>Tool-call 30.0</b></div>
+<h2>Dimension breakdown</h2><div class="dim"><b>Func 35.0</b><div class="finding warn">[SCHEMA-BLOAT] 工具 GetAlarmLog 描述过长（2535 字符，加剧上下文膨胀）</div></div><div class="dim"><b>Rel 40.0</b><div class="finding warn">[REL-FAIL] 调用失败率 100%</div></div><div class="dim"><b>Sec 100.0</b></div><div class="dim"><b>Tool-call 20.0</b></div>
 <h2>Tools (20)</h2><ul><li><code>SearchLog</code> — 搜索CLS日志内容。在指定日志主题和时间范围内搜索日志，支持复杂查询语法和统计分析。
 
 重要：务必先使用 TextToSearchLogQuery 工具生成 CQL 查询语句！
@@ -202,5 +202,5 @@ step 参数建议：根据查询时间范围合理设置数据点密度
 - LogsetName：按日志集名称过滤（模糊匹配）
 - LogsetId：按日志集 ID 过滤（精确匹配）
 返回</li><li><code>GetRegionCodeByName</code> — 按地域名称搜索腾讯云地域参数代码（如&quot;广州&quot;→&quot;ap-guangzhou&quot;），支持中文和英文名称模糊匹配。</li><li><code>ConvertTimeStringToTimestamp</code> — 将时间字符串转换为毫秒或秒级时间戳。常用于为 SearchLog、DescribeLogHistogram 等工具的 From/To 参数准备时间戳。</li><li><code>ConvertTimestampToTimeString</code> — 将时间戳转换为时间字符串。不传 timestamp 参数时返回当前时间，常用于获取当前时间后计算 SearchLog 等工具所需的时间范围。</li></ul>
-<footer>Evaluated 2026-08-06 10:13 UTC · Engine v0.1.0 · Source: registry-npm</footer>
+<footer>Evaluated 2026-08-07 01:00 UTC · Engine v0.1.0 · Source: registry-npm</footer>
 </body></html>

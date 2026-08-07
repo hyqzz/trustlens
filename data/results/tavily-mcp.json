@@ -2,11 +2,11 @@
   "name": "tavily-mcp",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786011747.8224268,
+  "evaluated_at": 1786064432.9327176,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 77.8,
+  "total_score": 80.8,
   "grade": "B",
   "dimensions": {
     "functionality": {
@@ -27,7 +27,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.43,
+        "avg_latency_s": 0.337,
         "failure_rate": 0.2,
         "attempts": 10
       }
@@ -40,10 +40,10 @@
       }
     },
     "compatibility": {
-      "value": 0.0,
+      "value": 20.0,
       "findings": [],
       "details": {
-        "success_rate": 0.0,
+        "success_rate": 0.2,
         "models": [
           "deepseek"
         ],

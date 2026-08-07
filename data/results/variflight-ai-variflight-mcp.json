@@ -2,7 +2,7 @@
   "name": "@variflight-ai/variflight-mcp",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786010872.0768187,
+  "evaluated_at": 1786064421.153247,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -27,7 +27,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.022,
+        "avg_latency_s": 0.138,
         "failure_rate": 1.0,
         "attempts": 10
       }

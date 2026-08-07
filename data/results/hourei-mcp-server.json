@@ -2,12 +2,12 @@
   "name": "hourei-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786011353.6684847,
+  "evaluated_at": 1786064424.5119257,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 59.3,
-  "grade": "D",
+  "total_score": 60.5,
+  "grade": "C",
   "dimensions": {
     "functionality": {
       "value": 60.0,
@@ -18,7 +18,7 @@
       }
     },
     "reliability": {
-      "value": 53.1,
+      "value": 58.0,
       "findings": [
         {
           "severity": "warning",
@@ -27,7 +27,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 1.271,
+        "avg_latency_s": 0.723,
         "failure_rate": 0.6666666666666666,
         "attempts": 6
       }

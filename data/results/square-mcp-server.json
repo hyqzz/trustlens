@@ -2,7 +2,7 @@
   "name": "square-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786011686.116048,
+  "evaluated_at": 1786064431.8409097,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -27,7 +27,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.0,
+        "avg_latency_s": 0.002,
         "failure_rate": 1.0,
         "attempts": 6
       }

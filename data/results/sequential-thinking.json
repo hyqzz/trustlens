@@ -2,12 +2,12 @@
   "name": "sequential-thinking",
   "server_type": "mcp-server",
   "source": "official-reference",
-  "evaluated_at": 1786008848.9411767,
+  "evaluated_at": 1786064401.5565174,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 62.2,
-  "grade": "C",
+  "total_score": 47.2,
+  "grade": "D",
   "dimensions": {
     "functionality": {
       "value": 35.0,
@@ -33,7 +33,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.0,
+        "avg_latency_s": 0.004,
         "failure_rate": 1.0,
         "attempts": 2
       }
@@ -46,10 +46,10 @@
       }
     },
     "compatibility": {
-      "value": 100.0,
+      "value": 0.0,
       "findings": [],
       "details": {
-        "success_rate": 1.0,
+        "success_rate": 0.0,
         "models": [
           "deepseek"
         ],

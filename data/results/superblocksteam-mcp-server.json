@@ -2,7 +2,7 @@
   "name": "@superblocksteam/mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786009771.2232883,
+  "evaluated_at": 1786064414.5600126,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -29,7 +29,7 @@
       "details": {
         "avg_latency_s": null,
         "failure_rate": 1.0,
-        "attempts": 10
+        "attempts": 2
       }
     },
     "security": {

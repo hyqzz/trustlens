@@ -2,7 +2,7 @@
   "name": "@alchemy/mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786008947.6214328,
+  "evaluated_at": 1786064406.8227375,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -27,7 +27,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.27,
+        "avg_latency_s": 0.024,
         "failure_rate": 0.8,
         "attempts": 10
       }

@@ -2,7 +2,7 @@
   "name": "@professional-wiki/mediawiki-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786009669.6171677,
+  "evaluated_at": 1786064412.2400143,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -27,7 +27,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.336,
+        "avg_latency_s": 0.081,
         "failure_rate": 0.6,
         "attempts": 10
       }

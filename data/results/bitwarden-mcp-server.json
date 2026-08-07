@@ -2,11 +2,11 @@
   "name": "@bitwarden/mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786009042.3166902,
+  "evaluated_at": 1786064408.0070324,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 51.8,
+  "total_score": 51.3,
   "grade": "D",
   "dimensions": {
     "functionality": {
@@ -27,7 +27,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.103,
+        "avg_latency_s": 0.002,
         "failure_rate": 1.0,
         "attempts": 10
       }
@@ -40,10 +40,10 @@
       }
     },
     "compatibility": {
-      "value": 18.6,
+      "value": 15.3,
       "findings": [],
       "details": {
-        "success_rate": 0.186,
+        "success_rate": 0.153,
         "models": [
           "deepseek"
         ],

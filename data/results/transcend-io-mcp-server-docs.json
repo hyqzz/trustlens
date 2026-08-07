@@ -2,11 +2,11 @@
   "name": "@transcend-io/mcp-server-docs",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786010501.5274978,
+  "evaluated_at": 1786064416.9469252,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 74.5,
+  "total_score": 67.0,
   "grade": "C",
   "dimensions": {
     "functionality": {
@@ -27,7 +27,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.442,
+        "avg_latency_s": 0.13,
         "failure_rate": 0.5,
         "attempts": 4
       }
@@ -40,10 +40,10 @@
       }
     },
     "compatibility": {
-      "value": 50.0,
+      "value": 0.0,
       "findings": [],
       "details": {
-        "success_rate": 0.5,
+        "success_rate": 0.0,
         "models": [
           "deepseek"
         ],

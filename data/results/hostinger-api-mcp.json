@@ -2,18 +2,18 @@
   "name": "hostinger-api-mcp",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786011324.0546453,
+  "evaluated_at": 1786064424.1805396,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 40.5,
+  "total_score": 40.4,
   "grade": "D",
   "dimensions": {
     "functionality": {
       "value": 40.0,
       "findings": [],
       "details": {
-        "tools_total": 289,
+        "tools_total": 308,
         "tools_callable": 0
       }
     },
@@ -29,7 +29,7 @@
       "details": {
         "avg_latency_s": null,
         "failure_rate": 1.0,
-        "attempts": 10
+        "attempts": 2
       }
     },
     "security": {
@@ -40,14 +40,14 @@
       }
     },
     "compatibility": {
-      "value": 10.0,
+      "value": 9.4,
       "findings": [],
       "details": {
-        "success_rate": 0.1,
+        "success_rate": 0.094,
         "models": [
           "deepseek"
         ],
-        "verdicts": 289
+        "verdicts": 308
       }
     }
   },
@@ -1740,6 +1740,49 @@
       }
     },
     {
+      "name": "domains_claimFreeDomainV1",
+      "description": "Claim a free domain available on your account and register it.\n\nUnlike purchasing a domain, this consumes a free domain you already have,\nso no payment method is required.\n\nA successful response means the domain is registered. If registration fails, login to\n[hPanel](https://hpanel.hostinger.com/) and check domain registration status.\n\nIf no WHOIS information is provided, default contact information for that TLD will be used.\nBefore making request, ensure WHOIS information for desired TLD exists in your account.\n\nSome TLDs require `additional_details` to be provided and these will be validated before claiming.\n\nRequests which cannot be fulfilled are rejected with an error code in the response body,\nfor example `2037` when no free domain is available.\n\nUse this endpoint to register a domain using a free domain from your account.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "Domain name"
+          },
+          "domain_contacts": {
+            "type": "object",
+            "description": "Domain contact information",
+            "properties": {
+              "owner_id": {
+                "type": "integer",
+                "description": "Owner contact WHOIS record ID"
+              },
+              "admin_id": {
+                "type": "integer",
+                "description": "Administrative contact WHOIS record ID"
+              },
+              "billing_id": {
+                "type": "integer",
+                "description": "Billing contact WHOIS record ID"
+              },
+              "tech_id": {
+                "type": "integer",
+                "description": "Technical contact WHOIS record ID"
+              }
+            }
+          },
+          "additional_details": {
+            "type": "object",
+            "description": "Additional registration data, possible values depends on TLD",
+            "properties": {}
+          }
+        },
+        "required": [
+          "domain"
+        ]
+      }
+    },
+    {
       "name": "domains_enableDomainLockV1",
       "description": "Enable domain lock for the domain.\n\nWhen domain lock is enabled,\nthe domain cannot be transferred to another registrar without first disabling the lock.\n\nUse this endpoint to secure domains against unauthorized transfers.",
       "schema": {
@@ -1935,6 +1978,53 @@
           "domain",
           "ns1",
           "ns2"
+        ]
+      }
+    },
+    {
+      "name": "domains_claimFreeDomainTransferV1",
+      "description": "Claim a free domain transfer available on your account and start the transfer.\n\nUnlike purchasing a transfer, this consumes a free domain transfer you already have,\nso no payment method is required.\n\nBefore making request, unlock the domain at the current registrar and get its authorization\ncode. The transfer is validated first, so domains which cannot be transferred are rejected\nbefore the free domain transfer is consumed.\n\nA successful response means the transfer has been started. Completion depends on the current\nregistrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).\n\nIf no WHOIS information is provided, default contact information for that TLD will be used.\nBefore making request, ensure WHOIS information for desired TLD exists in your account.\n\nRequests which cannot be fulfilled are rejected with an error code in the response body.\n\nUse this endpoint to transfer a domain using a free domain transfer from your account.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "Domain name"
+          },
+          "auth_code": {
+            "type": "string",
+            "description": "Authorization code from the current registrar"
+          },
+          "domain_contacts": {
+            "type": "object",
+            "description": "Domain contact information",
+            "properties": {
+              "owner_id": {
+                "type": "integer",
+                "description": "Owner contact WHOIS record ID"
+              },
+              "admin_id": {
+                "type": "integer",
+                "description": "Administrative contact WHOIS record ID"
+              },
+              "billing_id": {
+                "type": "integer",
+                "description": "Billing contact WHOIS record ID"
+              },
+              "tech_id": {
+                "type": "integer",
+                "description": "Technical contact WHOIS record ID"
+              }
+            }
+          },
+          "should_keep_ns": {
+            "type": "boolean",
+            "description": "Keep the existing nameservers of the domain"
+          }
+        },
+        "required": [
+          "domain",
+          "auth_code"
         ]
       }
     },
@@ -4670,7 +4760,7 @@
     },
     {
       "name": "reach_deleteAContactV1",
-      "description": "Delete a contact with the specified UUID.\n\nThis endpoint permanently removes a contact from the email marketing system.",
+      "description": "Delete a contact with the specified UUID.\n\nThis endpoint permanently removes a contact from the email marketing system.\n\n**Deprecated.** This endpoint cannot target a profile, so it always falls back to the\nclient's default profile and cannot delete contacts of any other profile. Use\n`DELETE /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}` instead.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4685,6 +4775,131 @@
       }
     },
     {
+      "name": "reach_deleteAContactFieldV1",
+      "description": "Delete a custom contact field.\n\nEvery value contacts hold for the field is deleted with it, and for the choice types so\nare its options. The contacts themselves are not affected.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "fieldUuid": {
+            "type": "string",
+            "description": "Contact field uuid parameter"
+          }
+        },
+        "required": [
+          "profileUuid",
+          "fieldUuid"
+        ]
+      }
+    },
+    {
+      "name": "reach_updateAContactFieldV1",
+      "description": "Rename a custom contact field and, for the choice types, replace its option set.\n\nOptions carrying a uuid are kept and relabelled, options without one are created, and any\nexisting option left out of the list is deleted along with the values contacts hold for\nit. The field type and slug cannot be changed.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "fieldUuid": {
+            "type": "string",
+            "description": "Contact field uuid parameter"
+          },
+          "label": {
+            "type": "string",
+            "description": "label parameter"
+          },
+          "options": {
+            "type": "array",
+            "description": "Replaces the option set when provided. Entries carrying a uuid are kept and relabelled, entries without one are created, and any existing option missing from the list is deleted along with the values contacts hold for it.",
+            "items": {
+              "type": "object",
+              "description": "options parameter",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "uuid parameter"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "label parameter"
+                }
+              },
+              "required": [
+                "label"
+              ]
+            }
+          }
+        },
+        "required": [
+          "profileUuid",
+          "fieldUuid",
+          "label"
+        ]
+      }
+    },
+    {
+      "name": "reach_listContactFieldsV1",
+      "description": "Get the custom contact fields defined in a profile.\n\nCustom fields let you store your own attributes on contacts. The returned uuids are what\nyou pass to the contact update endpoint to set values, and choice fields also list the\noptions available to pick from.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          }
+        },
+        "required": [
+          "profileUuid"
+        ]
+      }
+    },
+    {
+      "name": "reach_createAContactFieldV1",
+      "description": "Define a new custom contact field in a profile.\n\nThe `slug` is derived from the label and, like the field type, cannot be changed later.\nUse the returned uuid to set values on contacts.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "type": {
+            "type": "string",
+            "description": "Immutable once the field exists",
+            "enum": [
+              "text",
+              "number",
+              "date",
+              "single_choice",
+              "multi_choice"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "description": "label parameter"
+          },
+          "options": {
+            "type": "array",
+            "description": "Required for single_choice and multi_choice, ignored for the scalar types. Labels must be unique regardless of casing.",
+            "items": {
+              "type": "string",
+              "description": "options parameter"
+            }
+          }
+        },
+        "required": [
+          "profileUuid",
+          "type",
+          "label"
+        ]
+      }
+    },
+    {
       "name": "reach_listContactGroupsV1",
       "description": "Get a list of all contact groups.\n\nThis endpoint returns a list of contact groups that can be used to organize contacts.",
       "schema": {
@@ -4695,7 +4910,7 @@
     },
     {
       "name": "reach_listContactsV1",
-      "description": "Get a list of contacts, optionally filtered by group and subscription status.\n\nThis endpoint returns a paginated list of contacts with their basic information.\nYou can filter contacts by group UUID and subscription status.",
+      "description": "Get a list of contacts, optionally filtered by group and subscription status.\n\nThis endpoint returns a paginated list of contacts with their basic information.\nYou can filter contacts by group UUID and subscription status.\n\n**Deprecated.** This endpoint cannot target a profile, so it always falls back to the\nclient's default profile and cannot list contacts of any other profile. Use\n`GET /api/reach/v1/profiles/{profileUuid}/contacts` instead, which also replaces the\ngroup filter with a tag filter.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4708,7 +4923,9 @@
             "description": "Filter contacts by subscription status",
             "enum": [
               "subscribed",
-              "unsubscribed"
+              "unsubscribed",
+              "confirmed",
+              "pending"
             ]
           },
           "page": {
@@ -4747,6 +4964,265 @@
           }
         },
         "required": [
+          "email"
+        ]
+      }
+    },
+    {
+      "name": "reach_getContactDetailsV1",
+      "description": "Get the full details of a single contact.\n\nAlongside the contact's own attributes this returns the tags assigned to it and the\nvalues it holds for the profile's custom contact fields.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "contactUuid": {
+            "type": "string",
+            "description": "Contact uuid parameter"
+          }
+        },
+        "required": [
+          "profileUuid",
+          "contactUuid"
+        ]
+      }
+    },
+    {
+      "name": "reach_deleteAProfileContactV1",
+      "description": "Permanently delete a contact from a profile.\n\nThe contact is removed together with its custom field values and tag assignments.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "contactUuid": {
+            "type": "string",
+            "description": "Contact uuid parameter"
+          }
+        },
+        "required": [
+          "profileUuid",
+          "contactUuid"
+        ]
+      }
+    },
+    {
+      "name": "reach_updateAContactV1",
+      "description": "Update a contact's attributes and custom field values.\n\nOnly the properties present in the request body are changed, so a partial body is enough\nto change a single attribute. Sending a property as `null` clears it.\n\nThe response carries the contact's core attributes. Read back its tags, custom field\nvalues, source and note with `GET /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}`.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "contactUuid": {
+            "type": "string",
+            "description": "Contact uuid parameter"
+          },
+          "email": {
+            "type": "string",
+            "description": "email parameter"
+          },
+          "name": {
+            "type": "string",
+            "description": "name parameter"
+          },
+          "surname": {
+            "type": "string",
+            "description": "surname parameter"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone number in E.164 format (leading \"+\" then 7-15 digits)"
+          },
+          "subscription_status": {
+            "type": "string",
+            "description": "subscription_status parameter",
+            "enum": [
+              "subscribed",
+              "unsubscribed",
+              "confirmed",
+              "pending"
+            ]
+          },
+          "note": {
+            "type": "string",
+            "description": "note parameter"
+          },
+          "fields": {
+            "type": "array",
+            "description": "Set custom field values. Omit to leave untouched, send an empty array to clear them all.",
+            "items": {
+              "type": "object",
+              "description": "fields parameter",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "uuid parameter"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "For the scalar field types"
+                },
+                "selected_option_uuids": {
+                  "type": "array",
+                  "description": "For the choice field types",
+                  "items": {
+                    "type": "string",
+                    "description": "selected_option_uuids parameter"
+                  }
+                }
+              },
+              "required": [
+                "uuid"
+              ]
+            }
+          }
+        },
+        "required": [
+          "profileUuid",
+          "contactUuid"
+        ]
+      }
+    },
+    {
+      "name": "reach_createContactsInBulkV1",
+      "description": "Create many contacts in a profile in a single call.\n\nThe contacts are imported in the background, so a success response means the import was\naccepted rather than finished. Contacts whose email already exists in the profile are\nleft as they are. If double opt-in is enabled, new contacts start off pending and are\nsent a confirmation email.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "contacts": {
+            "type": "array",
+            "description": "contacts parameter",
+            "items": {
+              "type": "object",
+              "description": "contacts parameter",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "email parameter"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "name parameter"
+                },
+                "surname": {
+                  "type": "string",
+                  "description": "surname parameter"
+                },
+                "phone": {
+                  "type": "string",
+                  "description": "Phone number in E.164 format (leading \"+\" then 7-15 digits)"
+                }
+              },
+              "required": [
+                "email"
+              ]
+            }
+          },
+          "tag_uuids": {
+            "type": "array",
+            "description": "Existing tags to attach to every created contact",
+            "items": {
+              "type": "string",
+              "description": "tag_uuids parameter"
+            }
+          },
+          "note": {
+            "type": "string",
+            "description": "Note applied to every created contact"
+          }
+        },
+        "required": [
+          "profileUuid",
+          "contacts"
+        ]
+      }
+    },
+    {
+      "name": "reach_listProfileContactsV1",
+      "description": "Get a paginated list of contacts belonging to a profile.\n\nContacts can be filtered by subscription status, by tag, and by an email search term.\nThe `meta.total` field of the response is the number of contacts matching the filters,\nso calling this endpoint without filters gives the profile's total contact count.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "subscription_status": {
+            "type": "string",
+            "description": "Filter contacts by subscription status",
+            "enum": [
+              "subscribed",
+              "unsubscribed",
+              "confirmed",
+              "pending"
+            ]
+          },
+          "tag_uuid": {
+            "type": "string",
+            "description": "Filter contacts by tag UUID"
+          },
+          "search": {
+            "type": "string",
+            "description": "Search contacts by email"
+          },
+          "page": {
+            "type": "integer",
+            "description": "Page number"
+          },
+          "per_page": {
+            "type": "integer",
+            "description": "Number of items per page"
+          }
+        },
+        "required": [
+          "profileUuid"
+        ]
+      }
+    },
+    {
+      "name": "reach_createNewContactsV1",
+      "description": "Create a new contact in the email marketing system.\n\nThis endpoint allows you to create a new contact with basic information like name, email, and surname.\n\nIf double opt-in is enabled, the contact will be created with a pending status\nand a confirmation email will be sent.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "email": {
+            "type": "string",
+            "description": "email parameter"
+          },
+          "name": {
+            "type": "string",
+            "description": "name parameter"
+          },
+          "surname": {
+            "type": "string",
+            "description": "surname parameter"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone number in E.164 format (leading \"+\" then 7-15 digits)"
+          },
+          "note": {
+            "type": "string",
+            "description": "note parameter"
+          }
+        },
+        "required": [
+          "profileUuid",
           "email"
         ]
       }
@@ -4926,8 +5402,8 @@
       }
     },
     {
-      "name": "reach_createNewContactsV1",
-      "description": "Create a new contact in the email marketing system.\n\nThis endpoint allows you to create a new contact with basic information like name, email, and surname.\n\nIf double opt-in is enabled, the contact will be created with a pending status\nand a confirmation email will be sent.",
+      "name": "reach_assignAContactToATagV1",
+      "description": "Assign a tag to a single contact.\n\nUnlike the bulk endpoint this is applied immediately rather than queued. Assigning a tag\nthe contact already carries succeeds without duplicating it.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4935,30 +5411,187 @@
             "type": "string",
             "description": "Profile uuid parameter"
           },
-          "email": {
+          "tagUuid": {
             "type": "string",
-            "description": "email parameter"
+            "description": "Tag uuid parameter"
           },
-          "name": {
+          "contactUuid": {
             "type": "string",
-            "description": "name parameter"
-          },
-          "surname": {
-            "type": "string",
-            "description": "surname parameter"
-          },
-          "phone": {
-            "type": "string",
-            "description": "Phone number in E.164 format (leading \"+\" then 7-15 digits)"
-          },
-          "note": {
-            "type": "string",
-            "description": "note parameter"
+            "description": "Contact uuid parameter"
           }
         },
         "required": [
           "profileUuid",
-          "email"
+          "tagUuid",
+          "contactUuid"
+        ]
+      }
+    },
+    {
+      "name": "reach_removeAContactFromATagV1",
+      "description": "Remove a tag from a single contact.\n\nUnlike the bulk endpoint this is applied immediately rather than queued. Neither the tag\nnor the contact is deleted.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "tagUuid": {
+            "type": "string",
+            "description": "Tag uuid parameter"
+          },
+          "contactUuid": {
+            "type": "string",
+            "description": "Contact uuid parameter"
+          }
+        },
+        "required": [
+          "profileUuid",
+          "tagUuid",
+          "contactUuid"
+        ]
+      }
+    },
+    {
+      "name": "reach_assignContactsToATagV1",
+      "description": "Assign a tag to many contacts at once.\n\nPass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact\nin the profile. The work is queued, so a success response means it was accepted rather than\nfinished. Contacts that already carry the tag are left alone.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "tagUuid": {
+            "type": "string",
+            "description": "Tag uuid parameter"
+          },
+          "contact_uuids": {
+            "type": "array",
+            "description": "Contacts to apply the change to. Required unless all_contacts is true.",
+            "items": {
+              "type": "string",
+              "description": "contact_uuids parameter"
+            }
+          },
+          "all_contacts": {
+            "type": "boolean",
+            "description": "Apply to every contact in the profile"
+          }
+        },
+        "required": [
+          "profileUuid",
+          "tagUuid"
+        ]
+      }
+    },
+    {
+      "name": "reach_removeContactsFromATagV1",
+      "description": "Remove a tag from many contacts at once.\n\nPass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact\nin the profile. The work is queued, so a success response means it was accepted rather than\nfinished. The tag itself and the contacts are not deleted.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "tagUuid": {
+            "type": "string",
+            "description": "Tag uuid parameter"
+          }
+        },
+        "required": [
+          "profileUuid",
+          "tagUuid"
+        ]
+      }
+    },
+    {
+      "name": "reach_deleteATagV1",
+      "description": "Delete a tag and remove it from every contact carrying it.\n\nThe contacts themselves are not deleted. This is idempotent: deleting a tag that does not\nexist in the profile still succeeds.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "tagUuid": {
+            "type": "string",
+            "description": "Tag uuid parameter"
+          }
+        },
+        "required": [
+          "profileUuid",
+          "tagUuid"
+        ]
+      }
+    },
+    {
+      "name": "reach_renameATagV1",
+      "description": "Rename a tag.\n\nThe contacts assigned to the tag are unaffected. Names are unique within a profile, so\nrenaming a tag to a name that is already taken is rejected.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "tagUuid": {
+            "type": "string",
+            "description": "Tag uuid parameter"
+          },
+          "value": {
+            "type": "string",
+            "description": "New tag name"
+          }
+        },
+        "required": [
+          "profileUuid",
+          "tagUuid",
+          "value"
+        ]
+      }
+    },
+    {
+      "name": "reach_listProfileTagsV1",
+      "description": "Get all tags defined in a profile.\n\nTags are the way contacts are grouped in Reach, and can be used to filter the contact\nlist or to build segments.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          }
+        },
+        "required": [
+          "profileUuid"
+        ]
+      }
+    },
+    {
+      "name": "reach_createOrFindTagsV1",
+      "description": "Create tags in a profile.\n\nNames that already exist in the profile are not duplicated: the existing tag is returned\ninstead, so the call is safe to repeat. Every tag in the request is returned, whether it\nwas created now or already existed.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "profileUuid": {
+            "type": "string",
+            "description": "Profile uuid parameter"
+          },
+          "names": {
+            "type": "array",
+            "description": "names parameter",
+            "items": {
+              "type": "string",
+              "description": "names parameter"
+            }
+          }
+        },
+        "required": [
+          "profileUuid",
+          "names"
         ]
       }
     },

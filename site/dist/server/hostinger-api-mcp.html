@@ -109,10 +109,10 @@ footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opaci
 <div class="brandbar"><span class="brand-logo">🛡️</span><span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span><a class="lang" href="../en/server/hostinger-api-mcp.html" onclick="tlSetLang()">English</a></div>
 <p><a href="../">← 返回排行榜</a></p>
 <h1>hostinger-api-mcp</h1>
-<p class="subtitle">信任分 <span class="score">40.5/100</span> · <span class="grade gD">D</span> 风险</p>
+<p class="subtitle">信任分 <span class="score">40.4/100</span> · <span class="grade gD">D</span> 风险</p>
 
-<h2>维度明细</h2><div class="dim"><b>功能性 40.0</b></div><div class="dim"><b>可靠性 0.0</b><div class="finding warn">[REL-FAIL] 调用失败率 100%</div></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>模型调用 10.0</b></div>
-<h2>工具清单（289）</h2><ul><li><code>agencyHosting_deployNodeStaticWebsite</code> — Deploy a node-static Agency Plan (h5g) website from an archive file. WARNING: this overwrites the website&#x27;s existing contents and cannot be undone — always conf</li><li><code>agencyHosting_deployPhpApplication</code> — Deploy a PHP (or other non-build) Agency Plan (h5g) website from an archive file. WARNING: this overwrites the website&#x27;s existing contents and cannot be undone </li><li><code>hosting_importWordpressWebsite</code> — Import a WordPress website from an archive file to a hosting server. This tool uploads a website archive (zip, tar, tar.gz, etc.) and a database dump (.sql file</li><li><code>hosting_deployWordpressPlugin</code> — Deploy a WordPress plugin from a directory to a hosting server. This tool uploads all plugin files and triggers plugin deployment.</li><li><code>hosting_deployWordpressTheme</code> — Deploy a WordPress theme from a directory to a hosting server. This tool uploads all theme files and triggers theme deployment. The uploaded theme can optionall</li><li><code>hosting_deployJsApplication</code> — Deploy a JavaScript application from an archive file to a hosting server. IMPORTANT: the archive must ONLY contain application source files, not the build outpu</li><li><code>hosting_deployStaticWebsite</code> — Deploy a static website from an archive file to a hosting server. IMPORTANT: This tool only works for static websites with no build process. The archive must co</li><li><code>hosting_listJsDeployments</code> — List javascript application deployments for checking their status. Use this tool when customer asks for the status of the deployment. This tool retrieves a pagi</li><li><code>hosting_showJsDeploymentLogs</code> — Retrieve logs for a specified JavaScript application deployment for debugging purposes in case of failure.</li><li><code>agency-hosting_listAvailableDatacentersForAnAgencyPlanOrderV1</code> — Lists the datacenters available for provisioning a new website on the given Agency Plan
+<h2>维度明细</h2><div class="dim"><b>功能性 40.0</b></div><div class="dim"><b>可靠性 0.0</b><div class="finding warn">[REL-FAIL] 调用失败率 100%</div></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>模型调用 9.4</b></div>
+<h2>工具清单（308）</h2><ul><li><code>agencyHosting_deployNodeStaticWebsite</code> — Deploy a node-static Agency Plan (h5g) website from an archive file. WARNING: this overwrites the website&#x27;s existing contents and cannot be undone — always conf</li><li><code>agencyHosting_deployPhpApplication</code> — Deploy a PHP (or other non-build) Agency Plan (h5g) website from an archive file. WARNING: this overwrites the website&#x27;s existing contents and cannot be undone </li><li><code>hosting_importWordpressWebsite</code> — Import a WordPress website from an archive file to a hosting server. This tool uploads a website archive (zip, tar, tar.gz, etc.) and a database dump (.sql file</li><li><code>hosting_deployWordpressPlugin</code> — Deploy a WordPress plugin from a directory to a hosting server. This tool uploads all plugin files and triggers plugin deployment.</li><li><code>hosting_deployWordpressTheme</code> — Deploy a WordPress theme from a directory to a hosting server. This tool uploads all theme files and triggers theme deployment. The uploaded theme can optionall</li><li><code>hosting_deployJsApplication</code> — Deploy a JavaScript application from an archive file to a hosting server. IMPORTANT: the archive must ONLY contain application source files, not the build outpu</li><li><code>hosting_deployStaticWebsite</code> — Deploy a static website from an archive file to a hosting server. IMPORTANT: This tool only works for static websites with no build process. The archive must co</li><li><code>hosting_listJsDeployments</code> — List javascript application deployments for checking their status. Use this tool when customer asks for the status of the deployment. This tool retrieves a pagi</li><li><code>hosting_showJsDeploymentLogs</code> — Retrieve logs for a specified JavaScript application deployment for debugging purposes in case of failure.</li><li><code>agency-hosting_listAvailableDatacentersForAnAgencyPlanOrderV1</code> — Lists the datacenters available for provisioning a new website on the given Agency Plan
 hosting order.
 
 Each datacenter includes a `pinger_url` you can ping fro</li><li><code>agency-hosting_changeAgencyPlanWebsiteDomainV1</code> — Changes the primary domain for an Agency Plan website.
@@ -248,7 +248,10 @@ Only moves which have not completed yet are returned.
 Use this endpoint to track moves you ha</li><li><code>domains_getDomainAuthorizationCodeV1</code> — Retrieve the authorization (EPP) code for a specified domain so it can be transferred
 away from Hostinger to another registrar.
 
-Requesting a new code invalidat</li><li><code>domains_enableDomainLockV1</code> — Enable domain lock for the domain.
+Requesting a new code invalidat</li><li><code>domains_claimFreeDomainV1</code> — Claim a free domain available on your account and register it.
+
+Unlike purchasing a domain, this consumes a free domain you already have,
+so no payment method i</li><li><code>domains_enableDomainLockV1</code> — Enable domain lock for the domain.
 
 When domain lock is enabled,
 the domain cannot be transferred to another registrar without first disabling the lock.
@@ -280,7 +283,9 @@ Use this endpoint to build renewal automation and expiry</li><li><code>domains_u
 
 Be aware, that improper nameserver configuration can lead to the domain being unresolvable or unavailable.
 
-Use this en</li><li><code>domains_getTransferV1</code> — Retrieve the transfer for a specified domain.
+Use this en</li><li><code>domains_claimFreeDomainTransferV1</code> — Claim a free domain transfer available on your account and start the transfer.
+
+Unlike purchasing a transfer, this consumes a free domain transfer you already h</li><li><code>domains_getTransferV1</code> — Retrieve the transfer for a specified domain.
 
 Use this endpoint to track an incoming or outgoing registrar transfer and its status.</li><li><code>domains_getTransferListV1</code> — Retrieve all domain transfers in your portfolio.
 
@@ -459,12 +464,43 @@ immediately invalidated. The new secret is returned only in this
 response and is sent as a bearer tok</li><li><code>mail_testWebhookV1</code> — Send a test delivery to the webhook URL and return the result. Test
 requests are rate limited upstream.</li><li><code>reach_deleteAContactV1</code> — Delete a contact with the specified UUID.
 
-This endpoint permanently removes a contact from the email marketing system.</li><li><code>reach_listContactGroupsV1</code> — Get a list of all contact groups.
+This endpoint permanently removes a contact from the email marketing system.
+
+**Deprecated.** This endpoint cannot ta</li><li><code>reach_deleteAContactFieldV1</code> — Delete a custom contact field.
+
+Every value contacts hold for the field is deleted with it, and for the choice types so
+are its options. The contacts themselves</li><li><code>reach_updateAContactFieldV1</code> — Rename a custom contact field and, for the choice types, replace its option set.
+
+Options carrying a uuid are kept and relabelled, options without one are creat</li><li><code>reach_listContactFieldsV1</code> — Get the custom contact fields defined in a profile.
+
+Custom fields let you store your own attributes on contacts. The returned uuids are what
+you pass to the co</li><li><code>reach_createAContactFieldV1</code> — Define a new custom contact field in a profile.
+
+The `slug` is derived from the label and, like the field type, cannot be changed later.
+Use the returned uuid t</li><li><code>reach_listContactGroupsV1</code> — Get a list of all contact groups.
 
 This endpoint returns a list of contact groups that can be used to organize contacts.</li><li><code>reach_listContactsV1</code> — Get a list of contacts, optionally filtered by group and subscription status.
 
 This endpoint returns a paginated list of contacts with their basic information.
 </li><li><code>reach_createANewContactV1</code> — Create a new contact in the email marketing system.
+
+This endpoint allows you to create a new contact with basic information like name, email, and surname.
+
+If </li><li><code>reach_getContactDetailsV1</code> — Get the full details of a single contact.
+
+Alongside the contact&#x27;s own attributes this returns the tags assigned to it and the
+values it holds for the profile&#x27;s</li><li><code>reach_deleteAProfileContactV1</code> — Permanently delete a contact from a profile.
+
+The contact is removed together with its custom field values and tag assignments.</li><li><code>reach_updateAContactV1</code> — Update a contact&#x27;s attributes and custom field values.
+
+Only the properties present in the request body are changed, so a partial body is enough
+to change a sin</li><li><code>reach_createContactsInBulkV1</code> — Create many contacts in a profile in a single call.
+
+The contacts are imported in the background, so a success response means the import was
+accepted rather tha</li><li><code>reach_listProfileContactsV1</code> — Get a paginated list of contacts belonging to a profile.
+
+Contacts can be filtered by subscription status, by tag, and by an email search term.
+The `meta.total`</li><li><code>reach_createNewContactsV1</code> — Create a new contact in the email marketing system.
 
 This endpoint allows you to create a new contact with basic information like name, email, and surname.
 
@@ -481,11 +517,31 @@ This endpoint allows you to fetch and filter contacts that belong to a particula
 identified by </li><li><code>reach_getSegmentDetailsV1</code> — Get details of a specific segment.
 
 This endpoint retrieves information about a single segment identified by UUID.
-Segments are used to organize and group conta</li><li><code>reach_createNewContactsV1</code> — Create a new contact in the email marketing system.
+Segments are used to organize and group conta</li><li><code>reach_assignAContactToATagV1</code> — Assign a tag to a single contact.
 
-This endpoint allows you to create a new contact with basic information like name, email, and surname.
+Unlike the bulk endpoint this is applied immediately rather than queued. Assigning a tag
+the contact already carries succeeds</li><li><code>reach_removeAContactFromATagV1</code> — Remove a tag from a single contact.
 
-If </li><li><code>reach_getProfileDomainDNSStatusV1</code> — Retrieve the DNS configuration status for a profile&#x27;s domain.
+Unlike the bulk endpoint this is applied immediately rather than queued. Neither the tag
+nor the contact is deleted.</li><li><code>reach_assignContactsToATagV1</code> — Assign a tag to many contacts at once.
+
+Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+in the profile. The work is </li><li><code>reach_removeContactsFromATagV1</code> — Remove a tag from many contacts at once.
+
+Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+in the profile. The work i</li><li><code>reach_deleteATagV1</code> — Delete a tag and remove it from every contact carrying it.
+
+The contacts themselves are not deleted. This is idempotent: deleting a tag that does not
+exist in t</li><li><code>reach_renameATagV1</code> — Rename a tag.
+
+The contacts assigned to the tag are unaffected. Names are unique within a profile, so
+renaming a tag to a name that is already taken is rejected</li><li><code>reach_listProfileTagsV1</code> — Get all tags defined in a profile.
+
+Tags are the way contacts are grouped in Reach, and can be used to filter the contact
+list or to build segments.</li><li><code>reach_createOrFindTagsV1</code> — Create tags in a profile.
+
+Names that already exist in the profile are not duplicated: the existing tag is returned
+instead, so the call is safe to repeat. Ever</li><li><code>reach_getProfileDomainDNSStatusV1</code> — Retrieve the DNS configuration status for a profile&#x27;s domain.
 
 This endpoint reports the state of MX, SPF, DKIM and DMARC records, including the
 actual records </li><li><code>reach_listProfilesV1</code> — This endpoint returns all profiles available to the client, including their basic information.</li><li><code>VPS_getDataCenterListV1</code> — Retrieve all available data centers.
@@ -758,5 +814,5 @@ be obtained from GET /</li><li><code>hosting_updateWordPressThemesV1</code> — 
 installation.
 
 Provide the WordPress installation (software) identifier in the path. </li></ul>
-<footer>评测于 2026-08-06 10:15 UTC · 引擎版本 0.1.0 · 来源 registry-npm</footer>
+<footer>评测于 2026-08-07 01:00 UTC · 引擎版本 0.1.0 · 来源 registry-npm</footer>
 </body></html>

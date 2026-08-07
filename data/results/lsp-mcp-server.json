@@ -2,11 +2,11 @@
   "name": "lsp-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786011370.546628,
+  "evaluated_at": 1786064430.3504782,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 50.0,
+  "total_score": 50.5,
   "grade": "D",
   "dimensions": {
     "functionality": {
@@ -27,7 +27,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.0,
+        "avg_latency_s": 0.001,
         "failure_rate": 1.0,
         "attempts": 10
       }
@@ -40,10 +40,10 @@
       }
     },
     "compatibility": {
-      "value": 6.9,
+      "value": 10.3,
       "findings": [],
       "details": {
-        "success_rate": 0.069,
+        "success_rate": 0.103,
         "models": [
           "deepseek"
         ],

@@ -2,11 +2,11 @@
   "name": "@transloadit/mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786010768.005176,
+  "evaluated_at": 1786064418.208272,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 83.3,
+  "total_score": 81.2,
   "grade": "B",
   "dimensions": {
     "functionality": {
@@ -21,7 +21,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.002,
+        "avg_latency_s": 0.005,
         "failure_rate": 0.0,
         "attempts": 10
       }
@@ -34,10 +34,10 @@
       }
     },
     "compatibility": {
-      "value": 28.6,
+      "value": 14.3,
       "findings": [],
       "details": {
-        "success_rate": 0.286,
+        "success_rate": 0.143,
         "models": [
           "deepseek"
         ],

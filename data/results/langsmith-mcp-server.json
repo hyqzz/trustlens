@@ -2,12 +2,12 @@
   "name": "langsmith-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786011368.8353515,
+  "evaluated_at": 1786064429.5663965,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 60.4,
-  "grade": "C",
+  "total_score": 58.4,
+  "grade": "D",
   "dimensions": {
     "functionality": {
       "value": 44.0,
@@ -27,7 +27,7 @@
         }
       ],
       "details": {
-        "avg_latency_s": 0.002,
+        "avg_latency_s": 0.001,
         "failure_rate": 0.8,
         "attempts": 10
       }
@@ -40,10 +40,10 @@
       }
     },
     "compatibility": {
-      "value": 46.7,
+      "value": 33.3,
       "findings": [],
       "details": {
-        "success_rate": 0.467,
+        "success_rate": 0.333,
         "models": [
           "deepseek"
         ],
