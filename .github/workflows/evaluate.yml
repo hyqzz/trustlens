@@ -88,7 +88,7 @@ jobs:
           if [ -z "$OPENCODE_API_KEY" ]; then
             echo "OPENCODE_API_KEY 未配置，跳过模型兼容评测"
           else
-            python -m trustlens model-compat --real --workers 6
+            python -m trustlens model-compat --real --workers 10
           fi
 
       - name: Build static site
