@@ -2,11 +2,11 @@
   "name": "touchdesigner-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786157746.8649912,
+  "evaluated_at": 1786185168.1778972,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 65.1,
+  "total_score": 68.3,
   "grade": "C",
   "dimensions": {
     "functionality": {
@@ -14,14 +14,15 @@
       "findings": [],
       "details": {
         "tools_total": 14,
-        "tools_callable": 0
+        "tools_callable": 0,
+        "tools_probed": 5
       }
     },
     "reliability": {
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.003,
+        "avg_latency_s": 0.005,
         "failure_rate": 0.0,
         "attempts": 10
       }
@@ -34,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 7.1,
+      "value": 28.6,
       "findings": [],
       "details": {
-        "success_rate": 0.071,
+        "success_rate": 0.286,
         "models": [
           "deepseek"
         ],

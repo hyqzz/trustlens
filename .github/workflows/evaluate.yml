@@ -3,8 +3,8 @@ name: weekly evaluation
 # 每周定时评测能力单元并发布排行榜。
 # 安全设计：
 #   - evaluate-all 执行不可信第三方代码，该步骤【不持有任何密钥】
-#   - model-compat 不执行服务器代码（只读已存结果 + 调模型 API），
-#     密钥以【步骤级 env】注入，且在该步骤内没有不可信代码运行
+#   - gen-probes / model-compat 不执行服务器代码（只读已存结果 + 调模型 API），
+#     密钥以【步骤级 env】注入，且在这些步骤内没有不可信代码运行
 #   - 提交信息不含 [skip ci]——pages 发布在本工作流内完成
 
 on:
@@ -74,6 +74,22 @@ jobs:
           xargs -P 12 -n 1 -a /tmp/npx_pkgs.txt \
             bash -c 'timeout --kill-after=15s 120 npx -y "$0" --version >/dev/null 2>&1 || true'
 
+      # 智能探针：用 DeepSeek-V4 Flash 从【已评测结果】的工具 schema 生成真实调用参数，
+      # 使功能性维度反映真实可用性（纯 dummy 参数会让文件/HTTP 类工具被误判不可用）。
+      # 安全级别与 model-compat 相同：本步骤持 key，但只读结果 + 调模型 API，
+      # 【不执行任何不可信服务器代码】；工具元数据可能投毒 prompt，
+      # 模型输出经正则安全护栏清洗后才落盘（data/probes.json）。
+      - name: Generate smart probe args (no untrusted code)
+        env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+        timeout-minutes: 30
+        run: |
+          if [ -z "$OPENCODE_API_KEY" ]; then
+            echo "OPENCODE_API_KEY 未配置，跳过智能探针生成（evaluate 将退化为 dummy 参数）"
+          else
+            python -m trustlens gen-probes --real --workers 10
+          fi
+
       # 只重测健康服务器（已失败的保持原样）。缓存被预暖后，本步骤基本只花纯评测时间。
       - name: Run evaluation (no secrets in this step)
         timeout-minutes: 90
@@ -98,7 +114,7 @@ jobs:
         run: |
           git config user.name "trustlens-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add -A data/results/ data/skills/ site/dist/
+          git add -A data/results/ data/skills/ site/dist/ data/probes.json
           git diff --cached --quiet || git commit -m "data+site: weekly evaluation and site build"
           git push
 

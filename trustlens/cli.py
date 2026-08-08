@@ -1,16 +1,28 @@
-"""CLI：trustlens check / evaluate-all / build-site / list。"""
+"""CLI：trustlens check / evaluate-all / gen-probes / build-site / list。"""
 from __future__ import annotations
 
 import argparse
 import json
 import sys
+import time
 from pathlib import Path
 
 from . import report as report_mod
-from .engine import evaluate_server
+from .engine import MAX_TOOLS_TO_CALL, evaluate_server, slugify
 from .models import ServerReport
 
 SERVERS_FILE = Path("data/servers.json")
+PROBES_FILE = Path("data/probes.json")
+
+
+def _load_probes(path: Path = PROBES_FILE) -> dict:
+    """读回智能探针（server-slug → {tool: {"args": {...}} | {"__skip__": True}}）。"""
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8")).get("probes", {})
+    except json.JSONDecodeError:
+        return {}
 
 
 def _load_servers(path: Path = SERVERS_FILE) -> list[dict]:
@@ -52,12 +64,14 @@ def cmd_list(_args) -> int:
 
 
 def cmd_check(args) -> int:
+    probes_by_slug = _load_probes()
     servers = {s["name"]: s for s in _load_servers()}
     if args.name in servers:
         s = servers[args.name]
         command = _resolve_command(s)
         r = evaluate_server(args.name, command, s.get("type", "mcp-server"),
-                            s.get("source", ""), timeout=args.timeout)
+                            s.get("source", ""), timeout=args.timeout,
+                            probe_args=probes_by_slug.get(slugify(args.name)))
     else:
         # 支持直接评测任意命令：trustlens check --cmd "npx -y some-server"
         if not args.cmd:
@@ -73,7 +87,6 @@ def cmd_check(args) -> int:
 
 def _existing_report(name: str):
     """读取已有评测结果（无则返回 None）。"""
-    from .engine import slugify
     path = report_mod.RESULTS_DIR / f"{slugify(name)}.json"
     if path.exists():
         try:
@@ -81,6 +94,57 @@ def _existing_report(name: str):
         except (json.JSONDecodeError, KeyError, TypeError):
             return None
     return None
+
+
+def cmd_gen_probes(args) -> int:
+    """用真实模型为已评测服务器生成智能探针参数（只读已有结果，不执行服务器代码）。
+
+    与 model-compat 同级安全：本步骤持 key，但无不可信代码运行。
+    工具元数据来自不可信服务器（可能投毒 prompt），模型输出经正则安全护栏清洗后才落盘；
+    API 失败的工具不写条目 → 评测时回退 dummy 参数。
+    """
+    from concurrent.futures import ThreadPoolExecutor
+
+    from . import llm
+
+    providers = llm.default_providers(use_real=args.real)
+    if not providers or isinstance(providers[0], llm.MockProvider):
+        print("错误：未启用真实模型。设置 OPENCODE_API_KEY（推荐）并加 --real。", file=sys.stderr)
+        return 2
+    provider = providers[0]
+    reports = [r for r in report_mod.load_all() if r.tools]
+    if not reports:
+        print("警告：暂无已评测且有工具的结果，无法生成探针。", file=sys.stderr)
+    print(f"用 {provider.name} 为 {len(reports)} 个服务器生成智能探针（并发 {args.workers}）…")
+
+    api_errors = 0
+
+    def _gen(r):
+        nonlocal api_errors
+        out: dict = {}
+        # 只生成评测实际会探测的前 MAX_TOOLS_TO_CALL 个工具：既省调用，也把
+        # CI 的 gen-probes 步长压在 30min 超时内（每工具一次真实模型调用）。
+        for tool in r.tools[:MAX_TOOLS_TO_CALL]:
+            pa, err = provider.probe_args(tool)
+            if err:
+                api_errors += 1
+                continue  # API 失败：不写条目 → 评测时回退 dummy
+            out[tool.name] = {"args": pa} if pa else {"__skip__": True}
+        return slugify(r.name), out
+
+    probes: dict = {}
+    with ThreadPoolExecutor(max_workers=args.workers) as ex:
+        for slug, out in ex.map(_gen, reports):
+            if out:
+                probes[slug] = out
+    payload = {"generated_at": time.time(), "engine": provider.name, "probes": probes}
+    out_path = Path(args.output) if args.output else PROBES_FILE
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    total_tools = sum(len(v) for v in probes.values())
+    print(f"完成：{len(probes)} 个服务器 / {total_tools} 个工具探针 → {out_path}"
+          f"（API 错误 {api_errors} 次已回退 dummy）")
+    return 0
 
 
 def cmd_evaluate_all(args) -> int:
@@ -97,11 +161,14 @@ def cmd_evaluate_all(args) -> int:
                 continue
             keep.append(s)
         servers = keep
-    print(f"开始评测 {len(servers)} 个能力单元（并发 {args.workers}，跳过已有失败 {skipped}）…")
+    probes_by_slug = _load_probes()
+    print(f"开始评测 {len(servers)} 个能力单元（并发 {args.workers}，跳过已有失败 {skipped}，"
+          f"智能探针 {len(probes_by_slug)} 个服务器）…")
 
     def _run(s: dict):
         r = evaluate_server(s["name"], _resolve_command(s), s.get("type", "mcp-server"),
-                            s.get("source", ""), timeout=args.timeout, quick=args.quick)
+                            s.get("source", ""), timeout=args.timeout, quick=args.quick,
+                            probe_args=probes_by_slug.get(slugify(s["name"])))
         report_mod.save_report(r)
         return r
 
@@ -198,6 +265,13 @@ def main(argv: list[str] | None = None) -> int:
     p_mc.add_argument("--real", action="store_true", help="使用真实模型（需配置 API key）")
     p_mc.add_argument("--workers", type=int, default=6, help="并发数")
     p_mc.set_defaults(func=cmd_model_compat)
+
+    p_gp = sub.add_parser("gen-probes",
+                          help="用真实模型生成智能探针参数（只读已有结果，不执行服务器代码）")
+    p_gp.add_argument("--real", action="store_true", help="使用真实模型（需配置 API key）")
+    p_gp.add_argument("--workers", type=int, default=8, help="并发数")
+    p_gp.add_argument("--output", help="探针文件输出路径（默认 data/probes.json）")
+    p_gp.set_defaults(func=cmd_gen_probes)
 
     p_site = sub.add_parser("build-site", help="生成静态排行榜网站")
     p_site.set_defaults(func=cmd_build_site)

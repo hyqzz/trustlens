@@ -2,26 +2,27 @@
   "name": "square-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786157741.2589386,
+  "evaluated_at": 1786185157.6849313,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 64.0,
-  "grade": "C",
+  "total_score": 78.0,
+  "grade": "B",
   "dimensions": {
     "functionality": {
-      "value": 40.0,
+      "value": 80.0,
       "findings": [],
       "details": {
         "tools_total": 3,
-        "tools_callable": 0
+        "tools_callable": 2,
+        "tools_probed": 3
       }
     },
     "reliability": {
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.0,
+        "avg_latency_s": 0.151,
         "failure_rate": 0.0,
         "attempts": 6
       }

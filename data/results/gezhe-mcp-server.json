@@ -2,7 +2,7 @@
   "name": "gezhe-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786157732.7782278,
+  "evaluated_at": 1786185145.3771517,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -14,7 +14,8 @@
       "findings": [],
       "details": {
         "tools_total": 1,
-        "tools_callable": 0
+        "tools_callable": 0,
+        "tools_probed": 1
       }
     },
     "reliability": {

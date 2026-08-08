@@ -2,11 +2,11 @@
   "name": "duckduckgo-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786157730.9601142,
+  "evaluated_at": 1786185140.5807467,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 62.7,
+  "total_score": 62.5,
   "grade": "C",
   "dimensions": {
     "functionality": {
@@ -14,14 +14,15 @@
       "findings": [],
       "details": {
         "tools_total": 1,
-        "tools_callable": 0
+        "tools_callable": 0,
+        "tools_probed": 1
       }
     },
     "reliability": {
-      "value": 94.7,
+      "value": 94.1,
       "findings": [],
       "details": {
-        "avg_latency_s": 1.094,
+        "avg_latency_s": 1.164,
         "failure_rate": 0.0,
         "attempts": 2
       }

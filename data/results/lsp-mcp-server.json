@@ -2,7 +2,7 @@
   "name": "lsp-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786157736.7712502,
+  "evaluated_at": 1786185152.582399,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -14,7 +14,8 @@
       "findings": [],
       "details": {
         "tools_total": 29,
-        "tools_callable": 0
+        "tools_callable": 0,
+        "tools_probed": 5
       }
     },
     "reliability": {

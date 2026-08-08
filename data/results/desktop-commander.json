@@ -2,15 +2,15 @@
   "name": "desktop-commander",
   "server_type": "mcp-server",
   "source": "community-popular",
-  "evaluated_at": 1786157689.139725,
+  "evaluated_at": 1786185056.0336843,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 53.5,
-  "grade": "D",
+  "total_score": 71.5,
+  "grade": "C",
   "dimensions": {
     "functionality": {
-      "value": 0.0,
+      "value": 50.0,
       "findings": [
         {
           "severity": "warning",
@@ -65,16 +65,17 @@
       ],
       "details": {
         "tools_total": 26,
-        "tools_callable": 3
+        "tools_callable": 4,
+        "tools_probed": 4
       }
     },
     "reliability": {
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.039,
+        "avg_latency_s": 0.105,
         "failure_rate": 0.0,
-        "attempts": 10
+        "attempts": 8
       }
     },
     "security": {
@@ -85,10 +86,10 @@
       }
     },
     "compatibility": {
-      "value": 23.1,
+      "value": 26.9,
       "findings": [],
       "details": {
-        "success_rate": 0.231,
+        "success_rate": 0.269,
         "models": [
           "deepseek"
         ],

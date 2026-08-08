@@ -2,11 +2,11 @@
   "name": "hostinger-api-mcp",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786157733.1479278,
+  "evaluated_at": 1786185146.2718718,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 40.3,
+  "total_score": 40.5,
   "grade": "D",
   "dimensions": {
     "functionality": {
@@ -14,7 +14,8 @@
       "findings": [],
       "details": {
         "tools_total": 314,
-        "tools_callable": 0
+        "tools_callable": 0,
+        "tools_probed": 1
       }
     },
     "reliability": {
@@ -40,10 +41,10 @@
       }
     },
     "compatibility": {
-      "value": 8.6,
+      "value": 9.9,
       "findings": [],
       "details": {
-        "success_rate": 0.086,
+        "success_rate": 0.099,
         "models": [
           "deepseek"
         ],

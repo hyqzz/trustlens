@@ -12,40 +12,6 @@
       "note": "内置样例服务器：含正常工具与投毒工具，用于端到端自检与 CI 冒烟"
     },
     {
-      "name": "everything",
-      "type": "mcp-server",
-      "source": "official-reference",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-everything"
-      ],
-      "note": "MCP 官方参考/测试服务器，覆盖全部协议特性"
-    },
-    {
-      "name": "filesystem",
-      "type": "mcp-server",
-      "source": "official-reference",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "."
-      ],
-      "note": "官方文件系统服务器（评测范围限定当前目录）"
-    },
-    {
-      "name": "memory",
-      "type": "mcp-server",
-      "source": "official-reference",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-memory"
-      ],
-      "note": "官方知识图谱记忆服务器"
-    },
-    {
       "name": "time",
       "type": "mcp-server",
       "source": "official-reference",
@@ -65,28 +31,6 @@
         "mcp-server-fetch"
       ],
       "note": "官方网页抓取服务器（Python）"
-    },
-    {
-      "name": "sequential-thinking",
-      "type": "mcp-server",
-      "source": "official-reference",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
-      ],
-      "note": "官方序列化思考服务器，高下载量"
-    },
-    {
-      "name": "context7",
-      "type": "mcp-server",
-      "source": "upstash",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@upstash/context7-mcp"
-      ],
-      "note": "Upstash 出品的文档检索服务器，生态内热门"
     },
     {
       "name": "playwright",
@@ -133,17 +77,6 @@
         "probe.sqlite"
       ],
       "note": "官方 SQLite 服务器（Python），评测使用临时库文件"
-    },
-    {
-      "name": "excel",
-      "type": "mcp-server",
-      "source": "community-popular",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@negokaz/excel-mcp-server"
-      ],
-      "note": "社区热门 Excel 操作服务器"
     },
     {
       "name": "commands",

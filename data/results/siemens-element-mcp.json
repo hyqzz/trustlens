@@ -2,12 +2,12 @@
   "name": "@siemens/element-mcp",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786157716.7974446,
+  "evaluated_at": 1786185101.3480196,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 83.1,
-  "grade": "B",
+  "total_score": 98.2,
+  "grade": "A",
   "dimensions": {
     "functionality": {
       "value": 95.0,
@@ -20,14 +20,15 @@
       ],
       "details": {
         "tools_total": 2,
-        "tools_callable": 2
+        "tools_callable": 2,
+        "tools_probed": 2
       }
     },
     "reliability": {
-      "value": 99.5,
+      "value": 99.7,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.558,
+        "avg_latency_s": 0.535,
         "failure_rate": 0.0,
         "attempts": 4
       }
@@ -40,10 +41,10 @@
       }
     },
     "compatibility": {
-      "value": 0.0,
+      "value": 100.0,
       "findings": [],
       "details": {
-        "success_rate": 0.0,
+        "success_rate": 1.0,
         "models": [
           "deepseek"
         ],

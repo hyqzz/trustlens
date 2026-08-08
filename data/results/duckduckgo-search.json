@@ -2,11 +2,11 @@
   "name": "duckduckgo-search",
   "server_type": "mcp-server",
   "source": "community-popular",
-  "evaluated_at": 1786157690.9002693,
+  "evaluated_at": 1786185058.5939696,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 84.1,
+  "total_score": 84.2,
   "grade": "B",
   "dimensions": {
     "functionality": {
@@ -14,16 +14,17 @@
       "findings": [],
       "details": {
         "tools_total": 2,
-        "tools_callable": 2
+        "tools_callable": 1,
+        "tools_probed": 1
       }
     },
     "reliability": {
-      "value": 96.5,
+      "value": 96.6,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.898,
+        "avg_latency_s": 0.883,
         "failure_rate": 0.0,
-        "attempts": 4
+        "attempts": 2
       }
     },
     "security": {

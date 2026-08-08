@@ -17,17 +17,28 @@ def total_score(dimensions: dict[str, DimensionScore]) -> tuple[float, str]:
 
 
 def functionality_score(handshake_ok: bool, tools_total: int, tools_callable: int,
-                        schema_findings: list[Finding]) -> DimensionScore:
+                        schema_findings: list[Finding],
+                        tools_probed: int | None = None) -> DimensionScore:
     if not handshake_ok:
         return DimensionScore(0.0, [Finding("critical", "FUNC-HANDSHAKE", "协议握手失败")])
     if tools_total == 0:
         return DimensionScore(20.0, schema_findings, {"tools_total": 0})
-    callable_ratio = tools_callable / tools_total
+    # 可调用率的分母 = 实际探测过的工具数（而非总工具数）。
+    # 用总工具数会惩罚"工具多但只探测前 N 个"的服务器；探测数由探针决定，
+    # 无法安全构造探针的工具（__skip__）不进入分母，不奖不罚。
+    details = {"tools_total": tools_total, "tools_callable": tools_callable,
+               "tools_probed": tools_probed}
+    denominator = tools_probed if tools_probed is not None else tools_total
+    if denominator == 0:
+        return DimensionScore(20.0,
+                              schema_findings + [Finding("warning", "FUNC-NOPROBE",
+                                                         "无可安全探测的工具，功能性无法实测")],
+                              details)
+    callable_ratio = tools_callable / denominator
     base = 40 + 60 * callable_ratio
     deductions = 5 * sum(1 for f in schema_findings if f.severity == "warning")
     value = max(0.0, min(100.0, base - deductions))
-    return DimensionScore(round(value, 1), schema_findings,
-                          {"tools_total": tools_total, "tools_callable": tools_callable})
+    return DimensionScore(round(value, 1), schema_findings, details)
 
 
 def reliability_score(latencies: list[float], failures: int, attempts: int) -> DimensionScore:

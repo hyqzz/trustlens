@@ -2,7 +2,7 @@
   "name": "mock-echo",
   "server_type": "mcp-server",
   "source": "builtin-fixture",
-  "evaluated_at": 1786157687.120228,
+  "evaluated_at": 1786185043.414337,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -14,7 +14,8 @@
       "findings": [],
       "details": {
         "tools_total": 3,
-        "tools_callable": 3
+        "tools_callable": 2,
+        "tools_probed": 2
       }
     },
     "reliability": {
@@ -23,7 +24,7 @@
       "details": {
         "avg_latency_s": 0.0,
         "failure_rate": 0.0,
-        "attempts": 6
+        "attempts": 4
       }
     },
     "security": {

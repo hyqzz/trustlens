@@ -2,15 +2,15 @@
   "name": "@modelcontextprotocol/server-sequential-thinking",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786157710.7377965,
+  "evaluated_at": 1786185098.249085,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 62.2,
-  "grade": "C",
+  "total_score": 98.2,
+  "grade": "A",
   "dimensions": {
     "functionality": {
-      "value": 35.0,
+      "value": 95.0,
       "findings": [
         {
           "severity": "warning",
@@ -20,7 +20,8 @@
       ],
       "details": {
         "tools_total": 1,
-        "tools_callable": 0
+        "tools_callable": 1,
+        "tools_probed": 1
       }
     },
     "reliability": {
@@ -40,10 +41,10 @@
       }
     },
     "compatibility": {
-      "value": 0.0,
+      "value": 100.0,
       "findings": [],
       "details": {
-        "success_rate": 0.0,
+        "success_rate": 1.0,
         "models": [
           "deepseek"
         ],

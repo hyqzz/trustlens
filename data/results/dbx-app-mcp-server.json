@@ -2,7 +2,7 @@
   "name": "@dbx-app/mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786157700.7960474,
+  "evaluated_at": 1786185086.5477562,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -14,7 +14,8 @@
       "findings": [],
       "details": {
         "tools_total": 12,
-        "tools_callable": 0
+        "tools_callable": 0,
+        "tools_probed": 5
       }
     },
     "reliability": {

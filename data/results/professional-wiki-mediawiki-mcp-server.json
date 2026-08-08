@@ -2,28 +2,29 @@
   "name": "@professional-wiki/mediawiki-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786157713.820279,
+  "evaluated_at": 1786185099.7142856,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 68.5,
-  "grade": "C",
+  "total_score": 84.0,
+  "grade": "B",
   "dimensions": {
     "functionality": {
-      "value": 44.1,
-      "findings": [],
-      "details": {
-        "tools_total": 29,
-        "tools_callable": 2
-      }
-    },
-    "reliability": {
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.367,
+        "tools_total": 29,
+        "tools_callable": 3,
+        "tools_probed": 3
+      }
+    },
+    "reliability": {
+      "value": 81.5,
+      "findings": [],
+      "details": {
+        "avg_latency_s": 2.586,
         "failure_rate": 0.0,
-        "attempts": 10
+        "attempts": 6
       }
     },
     "security": {
@@ -34,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 20.7,
+      "value": 24.1,
       "findings": [],
       "details": {
-        "success_rate": 0.207,
+        "success_rate": 0.241,
         "models": [
           "deepseek"
         ],

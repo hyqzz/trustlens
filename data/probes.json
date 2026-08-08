@@ -1,0 +1,1247 @@
+{
+  "generated_at": 1786184959.1195745,
+  "engine": "deepseek",
+  "probes": {
+    "0xmonaco-mcp-server": {
+      "search_docs": {
+        "args": {
+          "query": "Monaco protocol SDK"
+        }
+      },
+      "get_trading_pairs": {
+        "args": {
+          "page": 1,
+          "limit": 20,
+          "marketType": "spot",
+          "baseToken": "BTC",
+          "quoteToken": "USDT",
+          "isActive": true
+        }
+      },
+      "get_trading_pair_by_symbol": {
+        "args": {
+          "symbol": "BTC/USDC"
+        }
+      },
+      "get_candlesticks": {
+        "args": {
+          "tradingPairId": "a1b2c3d4-1234-4567-89ab-1234567890ab",
+          "interval": "1h",
+          "startTime": 1700000000,
+          "endTime": 1700086400,
+          "limit": 100
+        }
+      },
+      "get_market_metadata": {
+        "args": {
+          "tradingPairId": "9f8c1d5e-3a2b-4c7d-8e1f-6a0b9c2d3e4f"
+        }
+      }
+    },
+    "alchemy-mcp-server": {
+      "listSupportedNetworks": {
+        "__skip__": true
+      },
+      "fetchTokenPriceBySymbol": {
+        "args": {
+          "symbols": [
+            "BTC",
+            "ETH"
+          ]
+        }
+      },
+      "fetchTokenPriceByAddress": {
+        "args": {
+          "addresses": [
+            {
+              "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+              "network": "eth-mainnet"
+            },
+            {
+              "address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+              "network": "base-mainnet"
+            }
+          ]
+        }
+      },
+      "fetchTokenPriceHistoryBySymbol": {
+        "args": {
+          "symbol": "BTC",
+          "startTime": "2023-01-01",
+          "endTime": "2023-01-31",
+          "interval": "1d"
+        }
+      },
+      "fetchTokenPriceHistoryByTimeFrame": {
+        "args": {
+          "symbol": "BTC",
+          "timeFrame": "past-7d",
+          "interval": "1d",
+          "useNaturalLanguageProcessing": false
+        }
+      }
+    },
+    "bitwarden-mcp-server": {
+      "lock": {
+        "__skip__": true
+      },
+      "unlock": {
+        "__skip__": true
+      },
+      "sync": {
+        "__skip__": true
+      },
+      "status": {
+        "__skip__": true
+      },
+      "list": {
+        "args": {
+          "type": "items",
+          "search": "example",
+          "url": "notnull",
+          "folderid": "null",
+          "collectionid": "null",
+          "trash": false
+        }
+      }
+    },
+    "circleci-mcp-server-circleci": {
+      "get_build_failure_logs": {
+        "args": {
+          "params": {
+            "projectSlug": "gh/circleci/circleci-docs",
+            "branch": "main",
+            "workspaceRoot": "/tmp/trustlens_probe.txt",
+            "outputDir": "/tmp/trustlens_probe.txt"
+          }
+        }
+      },
+      "find_flaky_tests": {
+        "args": {
+          "params": {
+            "projectSlug": "gh/facebook/react"
+          }
+        }
+      },
+      "get_latest_pipeline_status": {
+        "args": {
+          "params": {
+            "projectSlug": "gh/circleci/circleci-docs",
+            "branch": "main"
+          }
+        }
+      },
+      "get_job_test_results": {
+        "args": {
+          "params": {
+            "projectSlug": "gh/circleci/circleci-docs",
+            "branch": "main",
+            "workspaceRoot": "/tmp/trustlens_probe.txt",
+            "gitRemoteURL": "https://github.com/circleci/circleci-docs.git",
+            "projectURL": "https://app.circleci.com/pipelines/gh/circleci/circleci-docs"
+          }
+        }
+      },
+      "config_helper": {
+        "__skip__": true
+      }
+    },
+    "cls-mcp-server": {
+      "DescribeLogContext": {
+        "args": {
+          "Region": "ap-guangzhou",
+          "TopicId": "7e6a0e63-4f1a-4b0e-9c3d-1a2b3c4d5e6f",
+          "Time": 1691234267890,
+          "PkgId": "pkg-1691234267890-abcdef",
+          "PkgLogId": 12345,
+          "PrevLogs": 10,
+          "NextLogs": 10,
+          "Query": "error",
+          "From": 1691233667890,
+          "To": 1691234567890
+        }
+      },
+      "TextToSearchLogQuery": {
+        "args": {
+          "Text": "查询最近一小时内 ERROR 级别日志的条数，按小时统计分布",
+          "Region": "ap-guangzhou",
+          "TopicId": "demo-topic-123"
+        }
+      },
+      "DescribeIndex": {
+        "args": {
+          "Region": "ap-guangzhou",
+          "TopicId": "c1c9b3e2-5f0a-4d3b-9a1e-2b3c4d5e6f7a"
+        }
+      },
+      "DescribeLogHistogram": {
+        "__skip__": true
+      }
+    },
+    "dbx-app-mcp-server": {
+      "dbx_add_connection": {
+        "args": {
+          "name": "prod-analytics-db",
+          "db_type": "postgresql",
+          "host": "db.example.com",
+          "port": 5432,
+          "username": "",
+          "password": "",
+          "database": "analytics",
+          "ssl": true,
+          "driver_profile": "postgresql"
+        }
+      },
+      "dbx_close_session": {
+        "args": {
+          "session_id": "sess-8f14e45f-cea4-4a6b-8a3c-1d2e3f4a5b6c"
+        }
+      },
+      "dbx_execute_and_show": {
+        "args": {
+          "sql": "SELECT 1 AS ok",
+          "connection_id": null,
+          "connection_name": null,
+          "database": null
+        }
+      }
+    },
+    "desktop-commander": {
+      "get_config": {
+        "args": {
+          "origin": "llm"
+        }
+      },
+      "set_config_value": {
+        "args": {
+          "key": "telemetryEnabled",
+          "value": false,
+          "origin": "ui"
+        }
+      },
+      "read_file": {
+        "args": {
+          "path": "https://example.com/",
+          "isUrl": true,
+          "offset": 0,
+          "length": 1000,
+          "origin": "llm",
+          "options": {}
+        }
+      },
+      "write_file": {
+        "__skip__": true
+      }
+    },
+    "duckduckgo-mcp-server": {
+      "duckduckgo_web_search": {
+        "args": {
+          "query": "latest developments in artificial intelligence",
+          "count": 5,
+          "safeSearch": "moderate"
+        }
+      }
+    },
+    "duckduckgo-search": {
+      "search": {
+        "__skip__": true
+      },
+      "fetch_content": {
+        "args": {
+          "url": "https://example.com/",
+          "start_index": 0,
+          "max_length": 8000,
+          "backend": null
+        }
+      }
+    },
+    "ehrocks-fe-mcp-server": {
+      "search_hero_design_component_examples": {
+        "args": {
+          "query": "form validation error message display with input field",
+          "limit": "3",
+          "threshold": "0.5"
+        }
+      }
+    },
+    "gezhe-mcp-server": {
+      "generate_ppt_by_topic": {
+        "args": {
+          "topic": "Artificial Intelligence"
+        }
+      }
+    },
+    "hostinger-api-mcp": {
+      "agencyHosting_deployNodeStaticWebsite": {
+        "args": {
+          "domain": "example.com",
+          "archivePath": "mywebsite_20250115_143022.zip",
+          "removeArchive": false
+        }
+      },
+      "hosting_importWordpressWebsite": {
+        "args": {
+          "domain": "example.com",
+          "archivePath": "uploads/example.com_20250115_143022.zip",
+          "databaseDump": "uploads/example.com_database.sql"
+        }
+      },
+      "hosting_deployWordpressPlugin": {
+        "args": {
+          "domain": "example.com",
+          "slug": "omnisend",
+          "pluginPath": "/tmp/trustlens_probe.txt"
+        }
+      },
+      "hosting_deployWordpressTheme": {
+        "args": {
+          "domain": "example.com",
+          "slug": "twentytwentyfive",
+          "themePath": "/tmp/trustlens_probe.txt",
+          "activate": false
+        }
+      }
+    },
+    "hourei-mcp-server": {
+      "search_law": {
+        "args": {
+          "keyword": "民法",
+          "category": "1",
+          "limit": 5
+        }
+      },
+      "get_law_data": {
+        "args": {
+          "lawNum": "平成十七年法律第百十七号"
+        }
+      },
+      "get_law_revision": {
+        "args": {
+          "lawNum": "平成十七年法律第百十七号"
+        }
+      }
+    },
+    "ifconfig-mcp": {
+      "get_location_ip": {
+        "__skip__": true
+      },
+      "get_location_by_ip": {
+        "args": {
+          "ip": "8.8.8.8",
+          "lang": "en"
+        }
+      }
+    },
+    "ingenx-io-valets-schema-mcp-server": {
+      "schema_overview": {
+        "args": {
+          "full": false
+        }
+      },
+      "snapshot_info": {
+        "__skip__": true
+      },
+      "get_schema": {
+        "args": {
+          "name": "order"
+        }
+      },
+      "get_doc": {
+        "args": {
+          "slug": "models/order"
+        }
+      },
+      "search_docs": {
+        "args": {
+          "query": "paymentMethod"
+        }
+      }
+    },
+    "langsmith-mcp-server": {
+      "list_prompts": {
+        "args": {
+          "is_public": "false",
+          "limit": 20
+        }
+      },
+      "get_prompt_by_name": {
+        "args": {
+          "prompt_name": "code_review"
+        }
+      },
+      "push_prompt": {
+        "__skip__": true
+      },
+      "get_thread_history": {
+        "args": {
+          "thread_id": "thread_12345",
+          "project_name": "demo_project",
+          "page_number": 1,
+          "max_chars_per_page": 25000,
+          "preview_chars": 150
+        }
+      },
+      "fetch_runs": {
+        "args": {
+          "project_name": "default",
+          "limit": 20,
+          "page_number": 1,
+          "order_by": "-start_time"
+        }
+      }
+    },
+    "lsp-mcp-server": {
+      "lsp_hover": {
+        "args": {
+          "file_path": "/tmp/trustlens_probe.txt",
+          "line": 1,
+          "column": 1
+        }
+      }
+    },
+    "microsoft-clarity-mcp-server": {
+      "query-analytics-dashboard": {
+        "args": {
+          "query": "Top pages by sessions last 7 days"
+        }
+      },
+      "list-session-recordings": {
+        "args": {
+          "filters": {
+            "date": "2024-03-15T12:00:00.000Z",
+            "userType": "NewUser",
+            "sessionIntent": "Medium Intention",
+            "referringUrl": "https://www.google.com/",
+            "visitedUrls": [
+              {
+                "url": "https://example.com",
+                "operator": "isExactly"
+              }
+            ],
+            "entryUrls": [
+              {
+                "url": "https://example.com",
+                "operator": "startsWith"
+              }
+            ],
+            "exitUrls": [
+              {
+                "url": "https://example.com/thank-you",
+                "operator": "contains"
+              }
+            ]
+          }
+        }
+      },
+      "query-documentation-resources": {
+        "args": {
+          "query": "How to install Microsoft Clarity tracking code on a website step by step"
+        }
+      }
+    },
+    "mock-echo": {
+      "echo": {
+        "args": {
+          "text": "Hello, MCP!"
+        }
+      },
+      "add": {
+        "args": {
+          "a": 1,
+          "b": 2
+        }
+      },
+      "read_notes": {
+        "__skip__": true
+      }
+    },
+    "modelcontextprotocol-server-everything": {
+      "echo": {
+        "args": {
+          "message": "Hello, MCP!"
+        }
+      },
+      "get-annotated-message": {
+        "args": {
+          "messageType": "success",
+          "includeImage": true
+        }
+      },
+      "get-env": {
+        "__skip__": true
+      },
+      "get-resource-links": {
+        "args": {
+          "count": 3
+        }
+      },
+      "get-resource-reference": {
+        "args": {
+          "resourceType": "Text",
+          "resourceId": 1
+        }
+      }
+    },
+    "modelcontextprotocol-server-filesystem": {
+      "read_text_file": {
+        "args": {
+          "path": "sample.txt",
+          "head": 10
+        }
+      },
+      "read_media_file": {
+        "args": {
+          "path": "sample.png"
+        }
+      },
+      "read_multiple_files": {
+        "args": {
+          "paths": [
+            "./README.md",
+            "./package.json"
+          ]
+        }
+      },
+      "write_file": {
+        "args": {
+          "path": "example.txt",
+          "content": "Hello, this is a test file."
+        }
+      }
+    },
+    "modelcontextprotocol-server-memory": {
+      "create_entities": {
+        "args": {
+          "entities": [
+            {
+              "name": "Artificial Intelligence",
+              "entityType": "Concept",
+              "observations": [
+                "AI is a field of computer science",
+                "Focuses on creating intelligent agents"
+              ]
+            },
+            {
+              "name": "Machine Learning",
+              "entityType": "Concept",
+              "observations": [
+                "A subset of AI",
+                "Uses algorithms to learn from data"
+              ]
+            }
+          ]
+        }
+      },
+      "create_relations": {
+        "args": {
+          "relations": [
+            {
+              "from": "Grace Hopper",
+              "to": "COBOL",
+              "relationType": "developed"
+            },
+            {
+              "from": "Tim Berners-Lee",
+              "to": "World Wide Web",
+              "relationType": "invented"
+            }
+          ]
+        }
+      },
+      "add_observations": {
+        "args": {
+          "observations": [
+            {
+              "entityName": "Albert Einstein",
+              "contents": [
+                "Developed the theory of relativity",
+                "Awarded Nobel Prize in Physics in 1921"
+              ]
+            }
+          ]
+        }
+      },
+      "delete_entities": {
+        "args": {
+          "entityNames": [
+            "Example Entity",
+            "Test Entity"
+          ]
+        }
+      }
+    },
+    "modelcontextprotocol-server-sequential-thinking": {
+      "sequentialthinking": {
+        "args": {
+          "thought": "Let me start by outlining the key factors we need to consider for this migration decision: cost, team expertise, performance, and long-term maintenance.",
+          "nextThoughtNeeded": true,
+          "thoughtNumber": 1,
+          "totalThoughts": 5,
+          "isRevision": false,
+          "needsMoreThoughts": true
+        }
+      }
+    },
+    "motiffcom-motiff-mcp-server": {
+      "get_motiff_node": {
+        "args": {
+          "docId": "sampleDocId",
+          "nodeId": "sampleNodeId",
+          "isDebug": false
+        }
+      },
+      "get_motiff_node_screenshot": {
+        "args": {
+          "docId": "sampleDocId123",
+          "nodeId": "sampleNodeId456"
+        }
+      }
+    },
+    "negokaz-excel-mcp-server": {
+      "excel_copy_sheet": {
+        "args": {
+          "fileAbsolutePath": "/tmp/trustlens_probe.txt",
+          "srcSheetName": "Sheet1",
+          "dstSheetName": "Sheet1_copy"
+        }
+      },
+      "excel_create_table": {
+        "args": {
+          "fileAbsolutePath": "/tmp/trustlens_probe.txt",
+          "sheetName": "Sheet1",
+          "tableName": "Table1",
+          "range": "A1:C10"
+        }
+      },
+      "excel_describe_sheets": {
+        "args": {
+          "fileAbsolutePath": "/tmp/trustlens_probe.txt"
+        }
+      },
+      "excel_format_range": {
+        "args": {
+          "fileAbsolutePath": "/tmp/trustlens_probe.txt",
+          "range": "A1:B2",
+          "sheetName": "Sheet1",
+          "styles": [
+            [
+              {
+                "border": [
+                  {
+                    "type": "bottom",
+                    "style": "continuous",
+                    "color": "#000000"
+                  }
+                ],
+                "decimalPlaces": 2
+              },
+              {
+                "border": [
+                  {
+                    "type": "top",
+                    "style": "continuous",
+                    "color": "#000000"
+                  }
+                ]
+              }
+            ],
+            [
+              null,
+              {
+                "border": [
+                  {
+                    "type": "left",
+                    "style": "continuous",
+                    "color": "#000000"
+                  }
+                ]
+              }
+            ]
+          ]
+        }
+      },
+      "excel_read_sheet": {
+        "args": {
+          "fileAbsolutePath": "/tmp/trustlens_probe.txt",
+          "sheetName": "Sheet1",
+          "range": "A1:E10",
+          "showFormula": false,
+          "showStyle": false
+        }
+      }
+    },
+    "next-devtools-mcp": {
+      "browser_eval": {
+        "args": {
+          "task": "Open https://example.com and take a screenshot"
+        }
+      },
+      "nextjs_docs": {
+        "args": {
+          "topic": "data fetching",
+          "project_path": "./my-nextjs-app"
+        }
+      },
+      "nextjs_index": {
+        "args": {
+          "port": "3000"
+        }
+      },
+      "nextjs_call": {
+        "args": {
+          "port": "3000",
+          "toolName": "get_compilation_errors"
+        }
+      }
+    },
+    "playwright": {
+      "browser_close": {
+        "__skip__": true
+      },
+      "browser_resize": {
+        "args": {
+          "width": 1280,
+          "height": 800
+        }
+      },
+      "browser_console_messages": {
+        "args": {
+          "level": "info",
+          "all": false,
+          "filename": "console_messages.txt"
+        }
+      },
+      "browser_handle_dialog": {
+        "args": {
+          "accept": true,
+          "promptText": "Hello"
+        }
+      },
+      "browser_evaluate": {
+        "args": {
+          "function": "() => document.title"
+        }
+      }
+    },
+    "professional-wiki-mediawiki-mcp-server": {
+      "get-page": {
+        "__skip__": true
+      },
+      "get-pages": {
+        "args": {
+          "titles": [
+            "Albert Einstein",
+            "Special relativity",
+            "Photoelectric effect",
+            "Nobel Prize in Physics",
+            "Einstein field equations"
+          ],
+          "content": "source",
+          "metadata": true,
+          "followRedirects": true,
+          "wiki": "en.wikipedia.org"
+        }
+      },
+      "get-page-history": {
+        "__skip__": true
+      },
+      "get-recent-changes": {
+        "args": {
+          "since": "2025-01-01T00:00:00Z",
+          "until": "2025-01-31T23:59:59Z",
+          "namespace": [
+            0
+          ],
+          "types": [
+            "edit",
+            "new"
+          ],
+          "hideBots": true
+        }
+      },
+      "search-page": {
+        "args": {
+          "query": "Albert Einstein",
+          "limit": 10,
+          "wiki": "en.wikipedia.org"
+        }
+      }
+    },
+    "qase-mcp-server": {
+      "qase_project_context": {
+        "args": {
+          "code": "DEMO"
+        }
+      },
+      "qase_get": {
+        "args": {
+          "entity": "case",
+          "code": "DEMO",
+          "id": 1,
+          "fields": [
+            "title",
+            "status"
+          ]
+        }
+      },
+      "qql_search": {
+        "args": {
+          "query": "entity = \"case\" and project = \"DEMO\" and status = \"Actual\"",
+          "limit": 10,
+          "offset": 0
+        }
+      },
+      "qql_help": {
+        "args": {
+          "topic": "examples"
+        }
+      },
+      "qase_case_upsert": {
+        "args": {
+          "code": "DEMO",
+          "title": "Verify user can log in with valid credentials",
+          "description": "Check that a user with valid credentials can successfully log in and is redirected to the dashboard.",
+          "preconditions": "A registered user account exists with known credentials.",
+          "postconditions": "User is logged in and session is created.",
+          "severity": "critical",
+          "priority": "high",
+          "type": "functional",
+          "layer": "api",
+          "behavior": "positive",
+          "automation": "manual",
+          "status": "actual"
+        }
+      }
+    },
+    "ref-tools-mcp": {
+      "ref_search_documentation": {
+        "__skip__": true
+      },
+      "ref_read_url": {
+        "args": {
+          "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+        }
+      }
+    },
+    "shadcn-ui-mcp-server": {
+      "list_shadcn_components": {
+        "__skip__": true
+      },
+      "get_component_details": {
+        "args": {
+          "componentName": "button"
+        }
+      },
+      "get_component_examples": {
+        "args": {
+          "componentName": "button"
+        }
+      },
+      "search_components": {
+        "args": {
+          "query": "button"
+        }
+      }
+    },
+    "siemens-element-mcp": {
+      "element-search": {
+        "args": {
+          "query": "button component",
+          "limit": 5
+        }
+      },
+      "element-icon-search": {
+        "args": {
+          "query": "settings",
+          "limit": 5
+        }
+      }
+    },
+    "softeria-ms-365-mcp-server": {
+      "login": {
+        "args": {
+          "force": false
+        }
+      },
+      "logout": {
+        "__skip__": true
+      },
+      "verify-login": {
+        "__skip__": true
+      },
+      "list-accounts": {
+        "__skip__": true
+      }
+    },
+    "square-mcp-server": {
+      "make_api_request": {
+        "args": {
+          "service": "locations",
+          "method": "list",
+          "request": {}
+        }
+      },
+      "get_type_info": {
+        "args": {
+          "service": "catalog",
+          "method": "list"
+        }
+      },
+      "get_service_info": {
+        "args": {
+          "service": "payments"
+        }
+      }
+    },
+    "superblocksteam-mcp-server": {
+      "assign_builder_seat": {
+        "args": {
+          "base_url": "https://example.com",
+          "user_id": "123e4567-e89b-12d3-a456-426614174000"
+        }
+      },
+      "create_folder": {
+        "args": {
+          "base_url": "https://example.com",
+          "name": "sample-folder"
+        }
+      }
+    },
+    "targetprocess-mcp-server": {
+      "get_user_story_content": {
+        "args": {
+          "id": "145789"
+        }
+      },
+      "get_current_releases": {
+        "__skip__": true
+      },
+      "get_release_user_stories": {
+        "args": {
+          "name": "v1.0",
+          "results": 20
+        }
+      },
+      "get_release_bugs": {
+        "args": {
+          "name": "v1.0.0",
+          "withDescription": true,
+          "results": 100
+        }
+      },
+      "get_release_features": {
+        "args": {
+          "name": "v1.0.0",
+          "results": 50
+        }
+      }
+    },
+    "tavily-mcp": {
+      "tavily_search": {
+        "args": {
+          "query": "latest developments in renewable energy",
+          "search_depth": "basic",
+          "topic": "general",
+          "time_range": "week",
+          "max_results": 5
+        }
+      },
+      "tavily_extract": {
+        "args": {
+          "urls": [
+            "https://example.com/",
+            "https://en.wikipedia.org/wiki/Web_scraping"
+          ],
+          "extract_depth": "basic",
+          "include_images": false,
+          "format": "markdown",
+          "include_favicon": false,
+          "query": "web scraping"
+        }
+      },
+      "tavily_crawl": {
+        "args": {
+          "url": "https://example.com",
+          "max_depth": 1,
+          "max_breadth": 5,
+          "limit": 10,
+          "instructions": "Return the main content of the page",
+          "select_paths": [],
+          "select_domains": [],
+          "allow_external": false
+        }
+      },
+      "tavily_map": {
+        "args": {
+          "url": "https://example.com",
+          "max_depth": 1,
+          "max_breadth": 5,
+          "limit": 10,
+          "instructions": "Focus on the main navigation and list any top-level links.",
+          "select_paths": [],
+          "select_domains": [
+            "^example\\.com$"
+          ],
+          "allow_external": false
+        }
+      },
+      "tavily_research": {
+        "args": {
+          "input": "What are the latest scientific findings on the effects of climate change on global agriculture and food security?",
+          "model": "auto"
+        }
+      }
+    },
+    "terry-mcp": {
+      "create": {
+        "args": {
+          "message": "Prepare the meeting notes for tomorrow's standup"
+        }
+      }
+    },
+    "tocharianou-mcp-server-kibana": {
+      "get_status": {
+        "args": {
+          "space": "default"
+        }
+      },
+      "execute_kb_api": {
+        "args": {
+          "method": "GET",
+          "path": "/api/status",
+          "space": "default",
+          "params": {
+            "pretty": true
+          }
+        }
+      },
+      "search_kibana_api_paths": {
+        "args": {
+          "search": "dashboard"
+        }
+      },
+      "list_all_kibana_api_paths": {
+        "__skip__": true
+      },
+      "get_kibana_api_detail": {
+        "args": {
+          "method": "GET",
+          "path": "/api/actions/connector_types",
+          "raw": false
+        }
+      }
+    },
+    "touchdesigner-mcp-server": {
+      "get_td_info": {
+        "args": {
+          "detailLevel": "summary",
+          "responseFormat": "json"
+        }
+      },
+      "get_td_nodes": {
+        "args": {
+          "parentPath": "/",
+          "pattern": "*",
+          "includeProperties": false,
+          "detailLevel": "summary",
+          "limit": 100,
+          "responseFormat": "json"
+        }
+      },
+      "get_td_node_parameters": {
+        "args": {
+          "nodePath": "/project1/textTOP",
+          "detailLevel": "summary",
+          "limit": 50,
+          "responseFormat": "json"
+        }
+      },
+      "get_td_node_errors": {
+        "args": {
+          "nodePath": "/project1",
+          "detailLevel": "detailed",
+          "limit": 100,
+          "responseFormat": "json"
+        }
+      }
+    },
+    "transcend-io-mcp-server-docs": {
+      "docs_list": {
+        "args": {
+          "keyword": "api"
+        }
+      },
+      "docs_fetch": {
+        "args": {
+          "url": "https://docs.transcend.io/docs/overview.md"
+        }
+      }
+    },
+    "transloadit-mcp-server": {
+      "transloadit_lint_assembly_instructions": {
+        "args": {
+          "instructions": {
+            "steps": {
+              "resized": {
+                "robot": "/image/resize",
+                "width": 100,
+                "height": 100,
+                "result": true
+              }
+            }
+          },
+          "strict": true,
+          "return_fixed": false
+        }
+      },
+      "transloadit_create_assembly": {
+        "__skip__": true
+      },
+      "transloadit_wait_for_assembly": {
+        "args": {
+          "assembly_url": "https://api2.transloadit.com/assemblies/6f2c2e1a-3f0b-4b5c-8f2a-2e1a3f0b4b5c",
+          "assembly_id": "6f2c2e1a-3f0b-4b5c-8f2a-2e1a3f0b4b5c",
+          "timeout_ms": 10000,
+          "poll_interval_ms": 500
+        }
+      },
+      "transloadit_list_robots": {
+        "args": {
+          "category": "image",
+          "search": "resize",
+          "limit": 10
+        }
+      }
+    },
+    "tsmztech-mcp-server-salesforce": {
+      "salesforce_search_objects": {
+        "args": {
+          "searchPattern": "Account"
+        }
+      },
+      "salesforce_describe_object": {
+        "args": {
+          "objectName": "Account"
+        }
+      },
+      "salesforce_query_records": {
+        "args": {
+          "objectName": "Account",
+          "fields": [
+            "Id",
+            "Name",
+            "Industry",
+            "(SELECT Id, FirstName, LastName FROM Contacts)"
+          ],
+          "whereClause": "Industry = 'Technology'",
+          "orderBy": "Name",
+          "limit": 10
+        }
+      },
+      "salesforce_aggregate_query": {
+        "args": {
+          "objectName": "Account",
+          "selectFields": [
+            "Industry",
+            "COUNT(Id) AccountCount"
+          ],
+          "groupByFields": [
+            "Industry"
+          ],
+          "whereClause": "Industry != null",
+          "havingClause": "COUNT(Id) > 0",
+          "orderBy": "COUNT(Id) DESC",
+          "limit": 10
+        }
+      },
+      "salesforce_dml_records": {
+        "__skip__": true
+      }
+    },
+    "ui5-mcp-server": {
+      "get_guidelines": {
+        "__skip__": true
+      },
+      "run_ui5_linter": {
+        "args": {
+          "projectDir": "/tmp/trustlens_probe.txt",
+          "fix": false,
+          "filePatterns": [
+            "src/**/*.js"
+          ],
+          "provideContextInformation": true
+        }
+      },
+      "get_api_reference": {
+        "args": {
+          "projectDir": "./ui5-project",
+          "query": "sap.m.Button"
+        }
+      },
+      "get_project_info": {
+        "args": {
+          "projectDir": "/tmp/trustlens_probe.txt"
+        }
+      },
+      "create_ui5_app": {
+        "args": {
+          "appNamespace": "com.example.myapp",
+          "basePath": "/tmp/trustlens_probe.txt",
+          "createAppDirectory": true,
+          "framework": "SAPUI5"
+        }
+      }
+    },
+    "upstash-context7-mcp": {
+      "resolve-library-id": {
+        "args": {
+          "query": "getting started with the library",
+          "libraryName": "Next.js"
+        }
+      },
+      "query-docs": {
+        "args": {
+          "libraryId": "/vercel/next.js",
+          "query": "How to fetch data in a Next.js App Router Server Component with async await?"
+        }
+      }
+    },
+    "variflight-ai-variflight-mcp": {
+      "searchFlightsByDepArr": {
+        "args": {
+          "depcity": "BJS",
+          "arrcity": "SHA",
+          "date": "2026-05-01"
+        }
+      },
+      "searchFlightsByNumber": {
+        "args": {
+          "fnum": "CA1831",
+          "date": "2026-05-01",
+          "dep": "SHA",
+          "arr": "PEK"
+        }
+      },
+      "getFlightTransferInfo": {
+        "args": {
+          "depdate": "2025-06-15",
+          "depcity": "BJS",
+          "arrcity": "LAX"
+        }
+      },
+      "flightHappinessIndex": {
+        "args": {
+          "fnum": "CA1831",
+          "date": "2026-05-15",
+          "dep": "SHA",
+          "arr": "PEK"
+        }
+      },
+      "getRealtimeLocationByAnum": {
+        "args": {
+          "anum": "B2021"
+        }
+      }
+    }
+  }
+}

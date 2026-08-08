@@ -2,28 +2,29 @@
   "name": "@ui5/mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786157726.7170308,
+  "evaluated_at": 1786185124.9273515,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 70.6,
+  "total_score": 68.5,
   "grade": "C",
   "dimensions": {
     "functionality": {
-      "value": 46.0,
+      "value": 40.0,
       "findings": [],
       "details": {
         "tools_total": 10,
-        "tools_callable": 1
+        "tools_callable": 0,
+        "tools_probed": 4
       }
     },
     "reliability": {
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.002,
+        "avg_latency_s": 0.129,
         "failure_rate": 0.0,
-        "attempts": 10
+        "attempts": 8
       }
     },
     "security": {

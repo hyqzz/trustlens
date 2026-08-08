@@ -2,7 +2,7 @@
   "name": "commands",
   "server_type": "mcp-server",
   "source": "community-popular",
-  "evaluated_at": 1786157690.8331983,
+  "evaluated_at": 1786185057.5566487,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -14,7 +14,8 @@
       "findings": [],
       "details": {
         "tools_total": 1,
-        "tools_callable": 0
+        "tools_callable": 0,
+        "tools_probed": 1
       }
     },
     "reliability": {
