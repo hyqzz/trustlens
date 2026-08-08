@@ -116,6 +116,19 @@ a:hover{text-decoration:underline}
 .dim b{display:inline-block;min-width:11em}
 .finding{font-size:.87em;opacity:.85;margin:.15rem 0 0 .4rem;word-break:break-all}
 .crit{color:#cf222e}.warn{color:#bf8700}
+/* 来源与安装 */
+.srcbox{border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:.55rem;padding:.7rem .95rem;margin:.8rem 0;font-size:.9rem}
+.srcbox h2{margin:.1rem 0 .5rem;font-size:1.05rem}
+.inst{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;margin:.4rem 0}
+.inst>span{opacity:.7;font-size:.84rem;min-width:3.4em}
+.inst code{background:var(--bg-card);border:1px solid var(--line);border-radius:.4rem;padding:.22em .6em;word-break:break-all;font-size:.88rem}
+.inst a{word-break:break-all}
+.insthint{font-size:.84rem;opacity:.8;margin:.45rem 0 .25rem}
+.copybtn{border:1px solid var(--line);background:Canvas;border-radius:.4rem;padding:.2em .7em;cursor:pointer;font:inherit;font-size:.8rem;white-space:nowrap}
+.copybtn:hover{border-color:var(--accent)}
+.copybtn.copied{border-color:#2da44e;color:#2da44e}
+.skillmeta{font-size:.84rem;opacity:.75;margin:.6rem 0 0}
+.skillmeta b{opacity:1;font-variant-numeric:tabular-nums}
 footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opacity:.6;font-size:.85rem}
 .faq{margin-top:2rem}
 .faq h2{font-size:1.15rem}
@@ -156,6 +169,21 @@ T = {
         "report_title": "{name} 质检报告 — TrustLens · 智码星", "score_line": "信任分",
         "dims_heading": "维度明细", "tools_heading": "工具清单（{n}）",
         "report_footer": "评测于 {ts} · 引擎版本 {v} · 来源 {src}", "error_prefix": "错误：",
+        "srcbox_heading": "来源与安装", "src_label": "来源", "pkg_label": "包页",
+        "install_label": "安装", "copy": "复制", "copied": "已复制",
+        "install_mcp_hint": "在支持 MCP 的客户端中添加该服务器（示例，Claude Code）：",
+        "install_mcp_prefix": "claude mcp add {name} --",
+        "no_install": "内置样例，不可安装",
+        "sk_report_title": "{name} 评测报告 — TrustLens · 智码星",
+        "sk_back": "← 返回 Skills 榜",
+        "sk_dims_heading": "三维评分", "sk_findings_heading": "安全发现",
+        "sk_llm_heading": "LLM 可执行性点评", "sk_llm_none": "未评测",
+        "sk_no_findings": "无发现", "repo_label": "仓库", "skill_path_label": "SKILL.md",
+        "install_skill_hint": "克隆仓库后，把该 skill 目录（含 SKILL.md）复制到你 agent 的 skills 目录（Claude Code：~/.claude/skills/）：",
+        "view_skill": "查看 SKILL.md",
+        "sk_meta": "评测于 {ts} · {chars} 字符 · {scripts} 个脚本 · {fm}frontmatter",
+        "fm_yes": "有", "fm_no": "无",
+        "sk_dim_struct": "结构", "sk_dim_sec": "安全", "sk_dim_llm": "质量(LLM)",
         "footer": "共 {n} 个评测对象 · 更新于 {ts} · © 智码星 ICodeStar · TrustLens 开源（Apache-2.0）",
         "switch": "English", "switch_href": "en/",
         "faq_heading": "常见问题",
@@ -199,6 +227,21 @@ T = {
         "report_title": "{name} Inspection Report — TrustLens · ICodeStar", "score_line": "Trust score",
         "dims_heading": "Dimension breakdown", "tools_heading": "Tools ({n})",
         "report_footer": "Evaluated {ts} · Engine v{v} · Source: {src}", "error_prefix": "Error: ",
+        "srcbox_heading": "Source & Install", "src_label": "Source", "pkg_label": "Package",
+        "install_label": "Install", "copy": "Copy", "copied": "Copied",
+        "install_mcp_hint": "Add this server to your MCP client (example, Claude Code):",
+        "install_mcp_prefix": "claude mcp add {name} --",
+        "no_install": "Built-in fixture, not installable",
+        "sk_report_title": "{name} Skill Report — TrustLens · ICodeStar",
+        "sk_back": "← Back to Skills leaderboard",
+        "sk_dims_heading": "Three dimensions", "sk_findings_heading": "Security findings",
+        "sk_llm_heading": "LLM actionability notes", "sk_llm_none": "Not evaluated",
+        "sk_no_findings": "No findings", "repo_label": "Repo", "skill_path_label": "SKILL.md",
+        "install_skill_hint": "Clone the repo, then copy the skill folder (containing SKILL.md) into your agent's skills directory (Claude Code: ~/.claude/skills/):",
+        "view_skill": "View SKILL.md",
+        "sk_meta": "Evaluated {ts} · {chars} chars · {scripts} scripts · {fm} frontmatter",
+        "fm_yes": "has", "fm_no": "no",
+        "sk_dim_struct": "Struct", "sk_dim_sec": "Security", "sk_dim_llm": "Quality(LLM)",
         "footer": "{n} evaluated · Updated {ts} · © ICodeStar · TrustLens is open source (Apache-2.0)",
         "switch": "中文", "switch_href": "../",
         "faq_heading": "FAQ",
@@ -235,6 +278,30 @@ def _esc(s: str) -> str:
 
 def _grade_badge(grade: str, lang: str) -> str:
     return f'<span class="grade g{grade}">{grade}</span> {GRADE_LABEL[lang].get(grade, "")}'
+
+
+def _pkg_url(command: str, args: list[str]) -> str:
+    """从启动命令推导包页链接（npm / PyPI），便于用户直达安装来源。"""
+    if command == "npx" and "-y" in args:
+        pkg = args[args.index("-y") + 1].replace("@latest", "")
+        return f"https://www.npmjs.com/package/{pkg}"
+    if command == "uvx" and args:
+        return f"https://pypi.org/project/{args[0]}"
+    return ""
+
+
+COPY_JS = """<script>
+document.querySelectorAll('.copybtn').forEach(function(b){
+  b.addEventListener('click', function(){
+    var code=b.closest('.inst').querySelector('code');
+    var txt=code?code.textContent:'';
+    navigator.clipboard.writeText(txt).then(function(){
+      var old=b.textContent; b.textContent='%(copied)s'; b.classList.add('copied');
+      setTimeout(function(){b.textContent=old;b.classList.remove('copied');},1400);
+    }).catch(function(){});
+  });
+});
+</script>"""
 
 
 def _brandbar(t: dict, toggle_href: str) -> str:
@@ -522,7 +589,7 @@ function rowsHtml(rows){
   var start=(st.page-1)*st.size;
   return rows.slice(start,start+st.size).map(function(r,i){
     return '<tr><td class="rank">'+(start+i+1)+'</td>'+
-      '<td class="name"><a href="'+esc(r.url)+'" target="_blank" rel="noopener">'+esc(r.name)+'</a>'+
+      '<td class="name"><a href="skill/'+r.slug+'.html">'+esc(r.name)+'</a>'+
       (r.description?'<small>'+esc(r.description)+'</small>':'')+'</td>'+
       '<td class="score" style="color:#'+r.color+'">'+r.score.toFixed(1)+'</td>'+
       '<td><span class="grade g'+r.grade+'">'+r.grade+'</span></td>'+
@@ -574,7 +641,8 @@ def _render_skills_index(skills: list[dict], lang: str) -> str:
     counts = {g: sum(1 for s in skills if s["grade"] == g) for g in "ABCDF"}
     pct = lambda g: round(counts[g] * 100 / total, 0) if total else 0
 
-    data = [{"name": s["name"], "repo": s["repo"], "url": s["url"], "score": s["total_score"],
+    data = [{"name": s["name"], "slug": slugify(s["name"]), "repo": s["repo"], "url": s["url"],
+             "score": s["total_score"],
              "grade": s["grade"], "color": GRADE_COLOR[s["grade"]],
              "structure": int(s["structure"]), "security": int(s["security"]),
              "llm": int(s["llm_quality"]) if s.get("llm_quality") is not None else None,
@@ -590,7 +658,7 @@ def _render_skills_index(skills: list[dict], lang: str) -> str:
         desc_html = f"<small>{_esc(desc[:90])}</small>" if desc else ""
         rows.append(
             f'<tr><td class="rank">{i}</td>'
-            f'<td class="name"><a href="{_esc(s["url"])}" target="_blank" rel="noopener">{_esc(s["name"])}</a>{desc_html}</td>'
+            f'<td class="name"><a href="skill/{slugify(s["name"])}.html">{_esc(s["name"])}</a>{desc_html}</td>'
             f'<td class="score">{s["total_score"]:.1f}</td>'
             f'<td><span class="grade g{s["grade"]}">{s["grade"]}</span></td>'
             f'<td class="src">{_esc(s["repo"])}</td>'
@@ -638,7 +706,7 @@ def _render_skills_index(skills: list[dict], lang: str) -> str:
                  f"{'' if en else '/en/'}skills.html", "") + body
 
 
-def _render_detail(r: ServerReport, lang: str) -> str:
+def _render_detail(r: ServerReport, lang: str, install_cmd: list[str] | None = None) -> str:
     t = T[lang]
     en = lang == "en"
     slug = slugify(r.name)
@@ -658,19 +726,116 @@ def _render_detail(r: ServerReport, lang: str) -> str:
     tools_html = "".join(tool_items) or "<li>—</li>"
     ts = time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime(r.evaluated_at))
     error = f'<p class="crit">{t["error_prefix"]}{_esc(r.error)}</p>' if r.error else ""
+
+    # 来源与安装（让用户看完分就能直接装）
+    srcbox = ""
+    if install_cmd:
+        cmd_text = " ".join(install_cmd)
+        pkg_url = _pkg_url(install_cmd[0], install_cmd[1:]) if len(install_cmd) > 1 else ""
+        if install_cmd[0] == "{python}":
+            srcbox = (f'<div class="srcbox"><h2>{t["srcbox_heading"]}</h2>'
+                      f'<div class="inst"><span>{t["src_label"]}</span><code>{_esc(r.source or "?")}</code></div>'
+                      f'<div class="inst"><span>{t["install_label"]}</span><span>{t["no_install"]}</span></div></div>')
+        else:
+            pkg_html = (f'<div class="inst"><span>{t["pkg_label"]}</span>'
+                        f'<a href="{pkg_url}" target="_blank" rel="noopener">{_esc(pkg_url)}</a></div>') if pkg_url else ""
+            mcp_add = t["install_mcp_prefix"].format(name=r.name) + " " + cmd_text
+            srcbox = (f'<div class="srcbox"><h2>{t["srcbox_heading"]}</h2>'
+                      f'<div class="inst"><span>{t["src_label"]}</span><code>{_esc(r.source or "?")}</code></div>'
+                      f'<div class="inst"><span>{t["install_label"]}</span><code>{_esc(cmd_text)}</code>'
+                      f'<button class="copybtn">{t["copy"]}</button></div>'
+                      f'<div class="insthint">{_esc(t["install_mcp_hint"])}</div>'
+                      f'<div class="inst"><code>{_esc(mcp_add)}</code>'
+                      f'<button class="copybtn">{t["copy"]}</button></div>'
+                      f'{pkg_html}</div>')
+
     body = f"""
 {_brandbar(t, toggle_href)}
 <p><a href="{back_href}">{t['back']}</a></p>
 <h1>{_esc(r.name)}</h1>
 <p class="subtitle">{t['score_line']} <span class="score">{r.total_score:.1f}/100</span> · {_grade_badge(r.grade, lang)}</p>
+{srcbox}
 {error}
 <h2>{t['dims_heading']}</h2>{''.join(dims_html)}
 <h2>{t['tools_heading'].format(n=len(r.tools))}</h2><ul>{tools_html}</ul>
 <footer>{t['report_footer'].format(ts=ts, v=r.engine_version, src=_esc(r.source) or '?')}</footer>
+{COPY_JS % {"copied": t["copied"]}}
 </body></html>"""
     title = t["report_title"].format(name=r.name)
     path = f"{'/en' if en else ''}/server/{slug}.html"
     alt = f"{'' if en else '/en'}/server/{slug}.html"
+    return _head(t, title, path, alt, toggle_href) + body
+
+
+def _render_skill_detail(s: dict, lang: str) -> str:
+    t = T[lang]
+    en = lang == "en"
+    slug = slugify(s["name"])
+    name_display = s["name"].split("/")[-1] if "/" in s["name"] else s["name"]
+    back_href = "../"
+    toggle_href = f"../../skill/{slug}.html" if en else f"../en/skill/{slug}.html"
+
+    # 三维评分
+    dims = [
+        ("structure", t["sk_dim_struct"], s.get("structure")),
+        ("security", t["sk_dim_sec"], s.get("security")),
+        ("llm_quality", t["sk_dim_llm"], s.get("llm_quality")),
+    ]
+    dims_html = []
+    for key, label, val in dims:
+        if val is None:
+            dims_html.append(f'<div class="dim"><b>{label}</b><div class="finding">{_esc(t["sk_llm_none"])}</div></div>')
+        else:
+            dims_html.append(f'<div class="dim"><b>{label} {float(val):.0f}</b></div>')
+
+    # 安全发现
+    findings = s.get("findings") or []
+    if findings:
+        fhtml = "".join(
+            f'<div class="finding {"crit" if f.get("severity") == "critical" else "warn" if f.get("severity") == "warning" else ""}">'
+            f"[{_esc(f.get('code', ''))}] {_esc(f.get('message', ''))}</div>" for f in findings)
+    else:
+        fhtml = f'<div class="finding">{_esc(t["sk_no_findings"])}</div>'
+
+    # LLM 可执行性点评
+    llm_reason = s.get("llm_reason")
+    llm_html = f'<div class="finding">{_esc(llm_reason)}</div>' if llm_reason else ""
+
+    # 来源与安装（看完分即可 clone / 找到 SKILL.md）
+    repo = s.get("repo", "")
+    repo_url = f"https://github.com/{repo}" if repo else ""
+    s_url = s.get("url", "")
+    clone_cmd = f"git clone https://github.com/{repo}.git" if repo else ""
+    srcbox = (f'<div class="srcbox"><h2>{t["srcbox_heading"]}</h2>'
+              f'<div class="inst"><span>{t["repo_label"]}</span>'
+              f'<a href="{repo_url}" target="_blank" rel="noopener">{_esc(repo)}</a></div>'
+              f'<div class="inst"><span>{t["skill_path_label"]}</span><code>{_esc(s.get("path", ""))}</code></div>'
+              f'<div class="inst"><span>{t["install_label"]}</span><code>{_esc(clone_cmd)}</code>'
+              f'<button class="copybtn">{t["copy"]}</button></div>'
+              f'<div class="inst"><span>📋</span>{_esc(t["install_skill_hint"])}</div>'
+              f'<div class="inst"><a href="{s_url}" target="_blank" rel="noopener">{t["view_skill"]} →</a></div></div>')
+
+    ts = time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime(s.get("evaluated_at", 0)))
+    meta = t["sk_meta"].format(ts=ts, chars=int(s.get("md_chars", 0)),
+                               scripts=int(s.get("script_count", 0)),
+                               fm=t["fm_yes"] if s.get("has_frontmatter") else t["fm_no"])
+    desc_html = f'<p class="subtitle">{_esc(s.get("description", ""))}</p>' if s.get("description") else ""
+    body = f"""
+{_brandbar(t, toggle_href)}
+<p><a href="{back_href}">{t['sk_back']}</a></p>
+<h1>{_esc(name_display)} <span class="badge">{t['sk_badge']}</span></h1>
+{desc_html}
+<p class="subtitle">{t['score_line']} <span class="score">{s['total_score']:.1f}/100</span> · {_grade_badge(s['grade'], lang)}</p>
+{srcbox}
+<h2>{t['sk_dims_heading']}</h2>{''.join(dims_html)}
+<h2>{t['sk_findings_heading']}</h2>{fhtml}
+{f'<h2>{t["sk_llm_heading"]}</h2>{llm_html}' if llm_html else ''}
+<footer>{_esc(meta)}</footer>
+{COPY_JS % {"copied": t["copied"]}}
+</body></html>"""
+    title = t["sk_report_title"].format(name=name_display)
+    path = f"{'/en' if en else ''}/skill/{slug}.html"
+    alt = f"{'' if en else '/en'}/skill/{slug}.html"
     return _head(t, title, path, alt, toggle_href) + body
 
 
@@ -684,6 +849,10 @@ def _render_sitemap(reports: list[ServerReport], skills: list[dict] | None = Non
     for r in reports:
         slug = slugify(r.name)
         locs += [f"/server/{slug}.html", f"/en/server/{slug}.html"]
+    for s in skills or []:
+        slug = slugify(s.get("name", ""))
+        if slug and slug != "unnamed":
+            locs += [f"/skill/{slug}.html", f"/en/skill/{slug}.html"]
     body = "\n".join(url(l) for l in locs)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}\n</urlset>\n'
 
@@ -696,7 +865,18 @@ def build_site(results_dir: Path | None = None, dist: Path | None = None) -> Pat
     dist = Path(dist) if dist else DIST
     reports = load_all(results_dir)
     skills = load_skills()
-    for sub in ("server", "en", "en/server"):
+
+    # 从 servers.json 取启动命令，供详情页展示安装方式
+    install_map: dict[str, list[str]] = {}
+    servers_file = Path("data/servers.json")
+    if servers_file.exists():
+        try:
+            for s in json.loads(servers_file.read_text(encoding="utf-8")).get("servers", []):
+                install_map[s["name"]] = [s.get("command", ""), *s.get("args", [])]
+        except (json.JSONDecodeError, KeyError):
+            pass
+
+    for sub in ("server", "skill", "en", "en/server", "en/skill"):
         (dist / sub).mkdir(parents=True, exist_ok=True)
     (dist / "index.html").write_text(_render_index(reports, "zh"), encoding="utf-8")
     (dist / "en" / "index.html").write_text(_render_index(reports, "en"), encoding="utf-8")
@@ -704,8 +884,13 @@ def build_site(results_dir: Path | None = None, dist: Path | None = None) -> Pat
     (dist / "en" / "skills.html").write_text(_render_skills_index(skills, "en"), encoding="utf-8")
     for r in reports:
         slug = slugify(r.name)
-        (dist / "server" / f"{slug}.html").write_text(_render_detail(r, "zh"), encoding="utf-8")
-        (dist / "en" / "server" / f"{slug}.html").write_text(_render_detail(r, "en"), encoding="utf-8")
+        cmd = install_map.get(r.name)
+        (dist / "server" / f"{slug}.html").write_text(_render_detail(r, "zh", install_cmd=cmd), encoding="utf-8")
+        (dist / "en" / "server" / f"{slug}.html").write_text(_render_detail(r, "en", install_cmd=cmd), encoding="utf-8")
+    for s in skills:
+        slug = slugify(s["name"])
+        (dist / "skill" / f"{slug}.html").write_text(_render_skill_detail(s, "zh"), encoding="utf-8")
+        (dist / "en" / "skill" / f"{slug}.html").write_text(_render_skill_detail(s, "en"), encoding="utf-8")
     (dist / "sitemap.xml").write_text(_render_sitemap(reports, skills), encoding="utf-8")
     (dist / "robots.txt").write_text(_render_robots(), encoding="utf-8")
     return dist

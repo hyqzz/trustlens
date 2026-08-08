@@ -98,6 +98,19 @@ a:hover{text-decoration:underline}
 .dim b{display:inline-block;min-width:11em}
 .finding{font-size:.87em;opacity:.85;margin:.15rem 0 0 .4rem;word-break:break-all}
 .crit{color:#cf222e}.warn{color:#bf8700}
+/* 来源与安装 */
+.srcbox{border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:.55rem;padding:.7rem .95rem;margin:.8rem 0;font-size:.9rem}
+.srcbox h2{margin:.1rem 0 .5rem;font-size:1.05rem}
+.inst{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;margin:.4rem 0}
+.inst>span{opacity:.7;font-size:.84rem;min-width:3.4em}
+.inst code{background:var(--bg-card);border:1px solid var(--line);border-radius:.4rem;padding:.22em .6em;word-break:break-all;font-size:.88rem}
+.inst a{word-break:break-all}
+.insthint{font-size:.84rem;opacity:.8;margin:.45rem 0 .25rem}
+.copybtn{border:1px solid var(--line);background:Canvas;border-radius:.4rem;padding:.2em .7em;cursor:pointer;font:inherit;font-size:.8rem;white-space:nowrap}
+.copybtn:hover{border-color:var(--accent)}
+.copybtn.copied{border-color:#2da44e;color:#2da44e}
+.skillmeta{font-size:.84rem;opacity:.75;margin:.6rem 0 0}
+.skillmeta b{opacity:1;font-variant-numeric:tabular-nums}
 footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opacity:.6;font-size:.85rem}
 .faq{margin-top:2rem}
 .faq h2{font-size:1.15rem}
@@ -110,8 +123,21 @@ footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opaci
 <p><a href="../">← 返回排行榜</a></p>
 <h1>@bitwarden/mcp-server</h1>
 <p class="subtitle">信任分 <span class="score">51.3/100</span> · <span class="grade gD">D</span> 风险</p>
+<div class="srcbox"><h2>来源与安装</h2><div class="inst"><span>来源</span><code>registry-npm</code></div><div class="inst"><span>安装</span><code>npx -y @bitwarden/mcp-server</code><button class="copybtn">复制</button></div><div class="insthint">在支持 MCP 的客户端中添加该服务器（示例，Claude Code）：</div><div class="inst"><code>claude mcp add @bitwarden/mcp-server -- npx -y @bitwarden/mcp-server</code><button class="copybtn">复制</button></div><div class="inst"><span>包页</span><a href="https://www.npmjs.com/package/@bitwarden/mcp-server" target="_blank" rel="noopener">https://www.npmjs.com/package/@bitwarden/mcp-server</a></div></div>
 
 <h2>维度明细</h2><div class="dim"><b>功能性 40.0</b></div><div class="dim"><b>可靠性 40.0</b><div class="finding warn">[REL-FAIL] 调用失败率 100%</div></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>模型调用 15.3</b></div>
 <h2>工具清单（59）</h2><ul><li><code>lock</code> — Lock the vault</li><li><code>unlock</code> — Unlock the Bitwarden vault. Takes no parameters. Prompts the user for their master password through a native OS dialog; the password is never exposed to the MCP</li><li><code>sync</code> — Sync vault data from the Bitwarden server</li><li><code>status</code> — Check the status of the Bitwarden CLI</li><li><code>list</code> — List items from your vault or organization</li><li><code>get</code> — Get a specific item from your vault or organization</li><li><code>generate</code> — Generate a secure password or passphrase</li><li><code>create_item</code> — Create a new item (login, secure note, card, or identity) in your vault</li><li><code>create_folder</code> — Create a new folder in your vault</li><li><code>edit_item</code> — Edit an existing item (login, secure note, card, or identity) in your vault</li><li><code>edit_folder</code> — Edit an existing folder in your vault</li><li><code>delete</code> — Delete an item from your vault</li><li><code>confirm</code> — Confirm an invited organization member who has accepted their invitation</li><li><code>create_org_collection</code> — Create a new organization collection</li><li><code>edit_org_collection</code> — Edit an existing organization collection</li><li><code>edit_item_collections</code> — Edit which collections an item belongs to</li><li><code>move</code> — Move (share) a vault item to an organization (formerly the share command)</li><li><code>device_approval_list</code> — List all pending device approval requests for an organization</li><li><code>device_approval_approve</code> — Approve a pending device authorization request</li><li><code>device_approval_approve_all</code> — Approve all current pending device authorization requests</li><li><code>device_approval_deny</code> — Deny a pending device authorization request</li><li><code>device_approval_deny_all</code> — Deny all pending device authorization requests</li><li><code>restore</code> — Restore an item from trash</li><li><code>create_text_send</code> — Create a new Bitwarden Send for securely sharing text</li><li><code>create_file_send</code> — Create a new Bitwarden Send for securely sharing a file</li><li><code>list_send</code> — List all Bitwarden Sends</li><li><code>get_send</code> — Get details of a specific Bitwarden Send</li><li><code>edit_send</code> — Edit an existing Bitwarden Send</li><li><code>delete_send</code> — Delete a Bitwarden Send</li><li><code>remove_send_password</code> — Remove the access password from a Bitwarden Send</li><li><code>create_attachment</code> — Attach a file to an existing vault item</li><li><code>list_org_collections</code> — List all collections</li><li><code>get_org_collection</code> — Retrieve a collection</li><li><code>update_org_collection</code> — Update a collection</li><li><code>delete_org_collection</code> — Delete a collection</li><li><code>list_org_members</code> — List all members</li><li><code>get_org_member</code> — Retrieve a member</li><li><code>get_org_member_groups</code> — Retrieve a member&#x27;s group ids</li><li><code>invite_org_member</code> — Create a member</li><li><code>update_org_member</code> — Update a member</li><li><code>update_org_member_groups</code> — Update a member&#x27;s groups</li><li><code>remove_org_member</code> — Remove a member</li><li><code>reinvite_org_member</code> — Re-invite a member</li><li><code>revoke_org_member</code> — Revoke a member&#x27;s access to an organization</li><li><code>restore_org_member</code> — Restore a previously revoked member</li><li><code>list_org_groups</code> — List all groups</li><li><code>get_org_group</code> — Retrieve a group</li><li><code>get_org_group_members</code> — Retrieve a group&#x27;s member ids</li><li><code>create_org_group</code> — Create a group</li><li><code>update_org_group</code> — Update a group</li><li><code>delete_org_group</code> — Delete a group</li><li><code>update_org_group_members</code> — Update a group&#x27;s members</li><li><code>list_org_policies</code> — List all policies</li><li><code>get_org_policy</code> — Retrieve a policy</li><li><code>update_org_policy</code> — Update a policy</li><li><code>get_org_events</code> — List all events</li><li><code>get_org_subscription</code> — Retrieve the subscription details for the current organization</li><li><code>update_org_subscription</code> — Update the organization&#x27;s current subscription for Password Manager and/or Secrets Manager</li><li><code>import_org_users_and_groups</code> — Import members and groups from an external system</li></ul>
 <footer>评测于 2026-08-07 01:00 UTC · 引擎版本 0.1.0 · 来源 registry-npm</footer>
+<script>
+document.querySelectorAll('.copybtn').forEach(function(b){
+  b.addEventListener('click', function(){
+    var code=b.closest('.inst').querySelector('code');
+    var txt=code?code.textContent:'';
+    navigator.clipboard.writeText(txt).then(function(){
+      var old=b.textContent; b.textContent='已复制'; b.classList.add('copied');
+      setTimeout(function(){b.textContent=old;b.classList.remove('copied');},1400);
+    }).catch(function(){});
+  });
+});
+</script>
 </body></html>

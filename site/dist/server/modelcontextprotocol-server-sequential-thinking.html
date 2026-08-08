@@ -98,6 +98,19 @@ a:hover{text-decoration:underline}
 .dim b{display:inline-block;min-width:11em}
 .finding{font-size:.87em;opacity:.85;margin:.15rem 0 0 .4rem;word-break:break-all}
 .crit{color:#cf222e}.warn{color:#bf8700}
+/* 来源与安装 */
+.srcbox{border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:.55rem;padding:.7rem .95rem;margin:.8rem 0;font-size:.9rem}
+.srcbox h2{margin:.1rem 0 .5rem;font-size:1.05rem}
+.inst{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;margin:.4rem 0}
+.inst>span{opacity:.7;font-size:.84rem;min-width:3.4em}
+.inst code{background:var(--bg-card);border:1px solid var(--line);border-radius:.4rem;padding:.22em .6em;word-break:break-all;font-size:.88rem}
+.inst a{word-break:break-all}
+.insthint{font-size:.84rem;opacity:.8;margin:.45rem 0 .25rem}
+.copybtn{border:1px solid var(--line);background:Canvas;border-radius:.4rem;padding:.2em .7em;cursor:pointer;font:inherit;font-size:.8rem;white-space:nowrap}
+.copybtn:hover{border-color:var(--accent)}
+.copybtn.copied{border-color:#2da44e;color:#2da44e}
+.skillmeta{font-size:.84rem;opacity:.75;margin:.6rem 0 0}
+.skillmeta b{opacity:1;font-variant-numeric:tabular-nums}
 footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opacity:.6;font-size:.85rem}
 .faq{margin-top:2rem}
 .faq h2{font-size:1.15rem}
@@ -110,9 +123,22 @@ footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opaci
 <p><a href="../">← 返回排行榜</a></p>
 <h1>@modelcontextprotocol/server-sequential-thinking</h1>
 <p class="subtitle">信任分 <span class="score">47.2/100</span> · <span class="grade gD">D</span> 风险</p>
+<div class="srcbox"><h2>来源与安装</h2><div class="inst"><span>来源</span><code>registry-npm</code></div><div class="inst"><span>安装</span><code>npx -y @modelcontextprotocol/server-sequential-thinking</code><button class="copybtn">复制</button></div><div class="insthint">在支持 MCP 的客户端中添加该服务器（示例，Claude Code）：</div><div class="inst"><code>claude mcp add @modelcontextprotocol/server-sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking</code><button class="copybtn">复制</button></div><div class="inst"><span>包页</span><a href="https://www.npmjs.com/package/@modelcontextprotocol/server-sequential-thinking" target="_blank" rel="noopener">https://www.npmjs.com/package/@modelcontextprotocol/server-sequential-thinking</a></div></div>
 
 <h2>维度明细</h2><div class="dim"><b>功能性 35.0</b><div class="finding warn">[SCHEMA-BLOAT] 工具 sequentialthinking 描述过长（2781 字符，加剧上下文膨胀）</div></div><div class="dim"><b>可靠性 40.0</b><div class="finding warn">[REL-FAIL] 调用失败率 100%</div></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>模型调用 0.0</b></div>
 <h2>工具清单（1）</h2><ul><li><code>sequentialthinking</code> — A detailed tool for dynamic and reflective problem-solving through thoughts.
 This tool helps analyze problems through a flexible thinking process that can adapt</li></ul>
 <footer>评测于 2026-08-07 01:00 UTC · 引擎版本 0.1.0 · 来源 registry-npm</footer>
+<script>
+document.querySelectorAll('.copybtn').forEach(function(b){
+  b.addEventListener('click', function(){
+    var code=b.closest('.inst').querySelector('code');
+    var txt=code?code.textContent:'';
+    navigator.clipboard.writeText(txt).then(function(){
+      var old=b.textContent; b.textContent='已复制'; b.classList.add('copied');
+      setTimeout(function(){b.textContent=old;b.classList.remove('copied');},1400);
+    }).catch(function(){});
+  });
+});
+</script>
 </body></html>

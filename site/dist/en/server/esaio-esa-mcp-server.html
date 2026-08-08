@@ -98,6 +98,19 @@ a:hover{text-decoration:underline}
 .dim b{display:inline-block;min-width:11em}
 .finding{font-size:.87em;opacity:.85;margin:.15rem 0 0 .4rem;word-break:break-all}
 .crit{color:#cf222e}.warn{color:#bf8700}
+/* 来源与安装 */
+.srcbox{border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:.55rem;padding:.7rem .95rem;margin:.8rem 0;font-size:.9rem}
+.srcbox h2{margin:.1rem 0 .5rem;font-size:1.05rem}
+.inst{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;margin:.4rem 0}
+.inst>span{opacity:.7;font-size:.84rem;min-width:3.4em}
+.inst code{background:var(--bg-card);border:1px solid var(--line);border-radius:.4rem;padding:.22em .6em;word-break:break-all;font-size:.88rem}
+.inst a{word-break:break-all}
+.insthint{font-size:.84rem;opacity:.8;margin:.45rem 0 .25rem}
+.copybtn{border:1px solid var(--line);background:Canvas;border-radius:.4rem;padding:.2em .7em;cursor:pointer;font:inherit;font-size:.8rem;white-space:nowrap}
+.copybtn:hover{border-color:var(--accent)}
+.copybtn.copied{border-color:#2da44e;color:#2da44e}
+.skillmeta{font-size:.84rem;opacity:.75;margin:.6rem 0 0}
+.skillmeta b{opacity:1;font-variant-numeric:tabular-nums}
 footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opacity:.6;font-size:.85rem}
 .faq{margin-top:2rem}
 .faq h2{font-size:1.15rem}
@@ -110,6 +123,7 @@ footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opaci
 <p><a href="../">← Back to leaderboard</a></p>
 <h1>@esaio/esa-mcp-server</h1>
 <p class="subtitle">Trust score <span class="score">25.0/100</span> · <span class="grade gF">F</span> Broken</p>
+<div class="srcbox"><h2>Source & Install</h2><div class="inst"><span>Source</span><code>registry-npm</code></div><div class="inst"><span>Install</span><code>npx -y @esaio/esa-mcp-server</code><button class="copybtn">Copy</button></div><div class="insthint">Add this server to your MCP client (example, Claude Code):</div><div class="inst"><code>claude mcp add @esaio/esa-mcp-server -- npx -y @esaio/esa-mcp-server</code><button class="copybtn">Copy</button></div><div class="inst"><span>Package</span><a href="https://www.npmjs.com/package/@esaio/esa-mcp-server" target="_blank" rel="noopener">https://www.npmjs.com/package/@esaio/esa-mcp-server</a></div></div>
 <p class="crit">Error: 等待 initialize 响应超时（进程已退出，退出码 1） | stderr: a-mcp-server/bin/index.js:2:614)
     at file:///C:/Users/hyqzz/AppData/Local/npm-cache/_npx/ce7623e6db249f3c/node_modules/@esaio/esa-mcp-server/bin/index.js:2:677
     at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
@@ -118,4 +132,16 @@ footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opaci
 <h2>Dimension breakdown</h2><div class="dim"><b>Func 0.0</b><div class="finding crit">[FUNC-HANDSHAKE] 协议握手失败</div></div><div class="dim"><b>Rel 0.0</b><div class="finding warn">[REL-NONE] 无可测调用</div></div><div class="dim"><b>Sec 100.0</b></div><div class="dim"><b>Tool-call 0.0</b><div class="finding ">[COMPAT-NONE] 未执行跨模型评估</div></div>
 <h2>Tools (0)</h2><ul><li>—</li></ul>
 <footer>Evaluated 2026-08-06 09:40 UTC · Engine v0.1.0 · Source: registry-npm</footer>
+<script>
+document.querySelectorAll('.copybtn').forEach(function(b){
+  b.addEventListener('click', function(){
+    var code=b.closest('.inst').querySelector('code');
+    var txt=code?code.textContent:'';
+    navigator.clipboard.writeText(txt).then(function(){
+      var old=b.textContent; b.textContent='Copied'; b.classList.add('copied');
+      setTimeout(function(){b.textContent=old;b.classList.remove('copied');},1400);
+    }).catch(function(){});
+  });
+});
+</script>
 </body></html>

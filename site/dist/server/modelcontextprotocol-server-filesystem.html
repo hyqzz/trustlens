@@ -98,6 +98,19 @@ a:hover{text-decoration:underline}
 .dim b{display:inline-block;min-width:11em}
 .finding{font-size:.87em;opacity:.85;margin:.15rem 0 0 .4rem;word-break:break-all}
 .crit{color:#cf222e}.warn{color:#bf8700}
+/* 来源与安装 */
+.srcbox{border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:.55rem;padding:.7rem .95rem;margin:.8rem 0;font-size:.9rem}
+.srcbox h2{margin:.1rem 0 .5rem;font-size:1.05rem}
+.inst{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;margin:.4rem 0}
+.inst>span{opacity:.7;font-size:.84rem;min-width:3.4em}
+.inst code{background:var(--bg-card);border:1px solid var(--line);border-radius:.4rem;padding:.22em .6em;word-break:break-all;font-size:.88rem}
+.inst a{word-break:break-all}
+.insthint{font-size:.84rem;opacity:.8;margin:.45rem 0 .25rem}
+.copybtn{border:1px solid var(--line);background:Canvas;border-radius:.4rem;padding:.2em .7em;cursor:pointer;font:inherit;font-size:.8rem;white-space:nowrap}
+.copybtn:hover{border-color:var(--accent)}
+.copybtn.copied{border-color:#2da44e;color:#2da44e}
+.skillmeta{font-size:.84rem;opacity:.75;margin:.6rem 0 0}
+.skillmeta b{opacity:1;font-variant-numeric:tabular-nums}
 footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opacity:.6;font-size:.85rem}
 .faq{margin-top:2rem}
 .faq h2{font-size:1.15rem}
@@ -110,8 +123,21 @@ footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opaci
 <p><a href="../">← 返回排行榜</a></p>
 <h1>@modelcontextprotocol/server-filesystem</h1>
 <p class="subtitle">信任分 <span class="score">52.2/100</span> · <span class="grade gD">D</span> 风险</p>
+<div class="srcbox"><h2>来源与安装</h2><div class="inst"><span>来源</span><code>registry-npm</code></div><div class="inst"><span>安装</span><code>npx -y @modelcontextprotocol/server-filesystem</code><button class="copybtn">复制</button></div><div class="insthint">在支持 MCP 的客户端中添加该服务器（示例，Claude Code）：</div><div class="inst"><code>claude mcp add @modelcontextprotocol/server-filesystem -- npx -y @modelcontextprotocol/server-filesystem</code><button class="copybtn">复制</button></div><div class="inst"><span>包页</span><a href="https://www.npmjs.com/package/@modelcontextprotocol/server-filesystem" target="_blank" rel="noopener">https://www.npmjs.com/package/@modelcontextprotocol/server-filesystem</a></div></div>
 
 <h2>维度明细</h2><div class="dim"><b>功能性 40.0</b></div><div class="dim"><b>可靠性 40.0</b><div class="finding warn">[REL-FAIL] 调用失败率 100%</div></div><div class="dim"><b>安全性 100.0</b></div><div class="dim"><b>模型调用 21.4</b></div>
 <h2>工具清单（14）</h2><ul><li><code>read_file</code> — Read the complete contents of a file as text. DEPRECATED: Use read_text_file instead.</li><li><code>read_text_file</code> — Read the complete contents of a file from the file system as text. Handles various text encodings and provides detailed error messages if the file cannot be rea</li><li><code>read_media_file</code> — Read a file and return it as a base64-encoded content block with its MIME type. Image and audio files are returned as image/audio content; any other file type i</li><li><code>read_multiple_files</code> — Read the contents of multiple files simultaneously. This is more efficient than reading files one by one when you need to analyze or compare multiple files. Eac</li><li><code>write_file</code> — Create a new file or completely overwrite an existing file with new content. Use with caution as it will overwrite existing files without warning. Handles text </li><li><code>edit_file</code> — Make line-based edits to a text file. Each edit replaces exact line sequences with new content. Returns a git-style diff showing the changes made. Only works wi</li><li><code>create_directory</code> — Create a new directory or ensure a directory exists. Can create multiple nested directories in one operation. If the directory already exists, this operation wi</li><li><code>list_directory</code> — Get a detailed listing of all files and directories in a specified path. Results clearly distinguish between files and directories with [FILE] and [DIR] prefixe</li><li><code>list_directory_with_sizes</code> — Get a detailed listing of all files and directories in a specified path, including sizes. Results clearly distinguish between files and directories with [FILE] </li><li><code>directory_tree</code> — Get a recursive tree view of files and directories as a JSON structure. Each entry includes &#x27;name&#x27;, &#x27;type&#x27; (file/directory), and &#x27;children&#x27; for directories. Fil</li><li><code>move_file</code> — Move or rename files and directories. Can move files between directories and rename them in a single operation. If the destination exists, the operation will fa</li><li><code>search_files</code> — Recursively search for files and directories matching a pattern. The patterns should be glob-style patterns that match paths relative to the working directory. </li><li><code>get_file_info</code> — Retrieve detailed metadata about a file or directory. Returns comprehensive information including size, creation time, last modified time, permissions, and type</li><li><code>list_allowed_directories</code> — Returns the list of directories that this server is allowed to access. Subdirectories within these allowed directories are also accessible. Use this to understa</li></ul>
 <footer>评测于 2026-08-07 01:00 UTC · 引擎版本 0.1.0 · 来源 registry-npm</footer>
+<script>
+document.querySelectorAll('.copybtn').forEach(function(b){
+  b.addEventListener('click', function(){
+    var code=b.closest('.inst').querySelector('code');
+    var txt=code?code.textContent:'';
+    navigator.clipboard.writeText(txt).then(function(){
+      var old=b.textContent; b.textContent='已复制'; b.classList.add('copied');
+      setTimeout(function(){b.textContent=old;b.classList.remove('copied');},1400);
+    }).catch(function(){});
+  });
+});
+</script>
 </body></html>
