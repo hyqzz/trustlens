@@ -2,11 +2,11 @@
   "name": "@ingenx-io/valets-schema-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064409.1189103,
+  "evaluated_at": 1786157704.700431,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 70.3,
+  "total_score": 74.8,
   "grade": "C",
   "dimensions": {
     "functionality": {
@@ -18,17 +18,11 @@
       }
     },
     "reliability": {
-      "value": 76.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 40%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
-        "avg_latency_s": 0.013,
-        "failure_rate": 0.4,
+        "avg_latency_s": 0.023,
+        "failure_rate": 0.0,
         "attempts": 10
       }
     },
@@ -40,10 +34,10 @@
       }
     },
     "compatibility": {
-      "value": 40.0,
+      "value": 30.0,
       "findings": [],
       "details": {
-        "success_rate": 0.4,
+        "success_rate": 0.3,
         "models": [
           "deepseek"
         ],

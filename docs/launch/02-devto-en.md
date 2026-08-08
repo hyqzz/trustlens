@@ -1,7 +1,7 @@
-# I benchmarked 119 real MCP servers (55% unusable) + 110 Agent Skills. So I built a "quality inspection" lab for the agent ecosystem.
+# I benchmarked 118 real MCP servers (55% unusable) + 110 Agent Skills. So I built a "quality inspection" lab for the agent ecosystem.
 
 > Project: https://github.com/hyqzz/trustlens
-> Live leaderboard (119 MCP servers + 110 Skills, searchable/filterable/paginated, auto-updated weekly): https://trustlens.icodestar.net/en/
+> Live leaderboard (118 MCP servers + 110 Skills, searchable/filterable/paginated, auto-updated weekly): https://trustlens.icodestar.net/en/
 
 ## The problem
 
@@ -15,15 +15,15 @@ The ecosystem has app stores, but no review system. Thousands of products, no qu
 
 ## Large-scale measurement: 55% of public servers are unusable
 
-I took **122 real MCP servers published on npm/PyPI** (official reference implementations + community servers), and evaluated **119** in an isolated, **zero-credential** environment:
+I took **122 real MCP servers published on npm/PyPI** (official reference implementations + community servers), and evaluated them in an isolated, **zero-credential** environment. Three (puppeteer, @enfyra, @mapbox) are paused pending methodology, and our built-in self-test fixture is not ranked — the leaderboard covers **118 real servers**:
 
 | Grade | Count | Share | Meaning |
 |---|---|---|---|
-| A | 3 | 3% | Works out of the box |
-| B | 11 | 9% | Usable, minor issues |
-| C | 11 | 9% | Mediocre |
-| D | 23 | 19% | Risky |
-| **F** | **71** | **60%** | **Cannot be used** |
+| A | 1 | 1% | Works out of the box |
+| B | 14 | 12% | Usable, minor issues |
+| C | 30 | 25% | Mediocre |
+| D | 5 | 4% | Risky |
+| **F** | **68** | **58%** | **Cannot be used** |
 
 **More than half of public MCP servers, installed per their README with no extra credentials, never even complete a protocol handshake.** Failure modes (audited from each process's stderr):
 
@@ -32,9 +32,7 @@ I took **122 real MCP servers published on npm/PyPI** (official reference implem
 - **Package resolution / compatibility (11)**: `npx` can't even find an executable entry, or deps fail to install
 - **Genuine startup hang (9)**: the process starts but never completes initialize within 90s — many silently wait for undocumented config or interactive input
 
-Three more (puppeteer, @enfyra, @mapbox) are paused pending methodology — they hard-hang the harness, which itself flags a gap: browser-automation tools need type-aware probes, not blind ones.
-
-**The good ones exist:** only 3 servers grade A — `ifconfig-mcp` and `ref-tools-mcp` (tied at the top) plus `@siemens/element-mcp`. Meanwhile the hugely popular official `filesystem` server scores just 54.6 (D) and `desktop-commander` sits at 48.0 (D). **"Popular" and "usable" are different things; "obscure" and "reliable" are different things too.**
+**The good ones exist:** exactly one server earns an A — `ifconfig-mcp` (100). Even high-scoring favorites like `ref-tools-mcp` (85) and `duckduckgo-search` (84) fall short. Meanwhile the hugely popular official `filesystem` server scores just 72 (C) and `desktop-commander` sits at 54 (D). **"Popular" and "usable" are different things; "obscure" and "reliable" are different things too.**
 
 ## What TrustLens is
 

@@ -2,12 +2,12 @@
   "name": "@modelcontextprotocol/server-filesystem",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064410.5636868,
+  "evaluated_at": 1786157709.0546465,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 52.2,
-  "grade": "D",
+  "total_score": 65.1,
+  "grade": "C",
   "dimensions": {
     "functionality": {
       "value": 40.0,
@@ -18,17 +18,11 @@
       }
     },
     "reliability": {
-      "value": 40.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 100%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
-        "avg_latency_s": 0.001,
-        "failure_rate": 1.0,
+        "avg_latency_s": 0.0,
+        "failure_rate": 0.0,
         "attempts": 10
       }
     },
@@ -40,10 +34,10 @@
       }
     },
     "compatibility": {
-      "value": 21.4,
+      "value": 7.1,
       "findings": [],
       "details": {
-        "success_rate": 0.214,
+        "success_rate": 0.071,
         "models": [
           "deepseek"
         ],

@@ -2,18 +2,18 @@
   "name": "@negokaz/excel-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064411.9002514,
+  "evaluated_at": 1786157712.403011,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 39.0,
-  "grade": "F",
+  "total_score": 41.1,
+  "grade": "D",
   "dimensions": {
     "functionality": {
       "value": 40.0,
       "findings": [],
       "details": {
-        "tools_total": 6,
+        "tools_total": 7,
         "tools_callable": 0
       }
     },
@@ -40,14 +40,14 @@
       }
     },
     "compatibility": {
-      "value": 0.0,
+      "value": 14.3,
       "findings": [],
       "details": {
-        "success_rate": 0.0,
+        "success_rate": 0.143,
         "models": [
           "deepseek"
         ],
-        "verdicts": 6
+        "verdicts": 7
       }
     }
   },
@@ -346,6 +346,31 @@
           "showStyle": {
             "description": "Show style information for cells",
             "type": "boolean"
+          }
+        },
+        "required": [
+          "fileAbsolutePath",
+          "sheetName"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "name": "excel_screen_capture",
+      "description": "[Windows only] Take a screenshot of the Excel sheet with pagination.",
+      "schema": {
+        "properties": {
+          "fileAbsolutePath": {
+            "description": "Absolute path to the Excel file",
+            "type": "string"
+          },
+          "range": {
+            "description": "Range of cells to read in the Excel sheet (e.g., \"A1:C10\"). [default: first paging range]",
+            "type": "string"
+          },
+          "sheetName": {
+            "description": "Sheet name in the Excel file",
+            "type": "string"
           }
         },
         "required": [

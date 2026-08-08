@@ -1390,11 +1390,11 @@
   "structure": 90,
   "security": 100,
   "llm_quality": null,
-  "llm_reason": "'content'",
-  "total_score": 94.0,
-  "grade": "A",
+  "llm_reason": "无输出",
+  "total_score": 66.0,
+  "grade": "C",
   "findings": [],
-  "evaluated_at": 1786024669.1087399
+  "evaluated_at": 1786157754.437073
  },
  {
   "name": "skills/accesslint-scan",

@@ -1,9 +1,9 @@
 # X/Twitter 推文串（英文，发布时按条拆分）
 
 1/
-I benchmarked 119 real MCP servers in a clean-room, zero-credential environment.
+I benchmarked 118 real MCP servers in a clean-room, zero-credential environment.
 
-Only 3 grade A. 71 (60%) are F — they never complete a handshake with the standard npx start and no config.
+Only 1 grade A. 68 (58%) are F — they never complete a handshake with the standard npx start and no config.
 
 Nobody measures this stuff. So I built the thing that does. 🧵
 
@@ -28,9 +28,9 @@ https://trustlens.icodestar.net/en/
 
 5/
 The numbers:
-• 119 evaluated → A:3 B:11 C:11 D:23 F:71 (60% unusable)
+• 118 evaluated → A:1 B:14 C:30 D:5 F:68 (58% unusable)
 • failure modes (audited from stderr): 30 runtime crash, 15 crash on missing API key, 11 package resolution/compat, 9 genuine hang
-• just 3 grade A (ifconfig-mcp, ref-tools-mcp lead) — while the hugely popular official filesystem is D (54.6) and desktop-commander is D (48.0)
+• exactly one A (ifconfig-mcp, 100) — even ref-tools-mcp (85) and duckduckgo-search (84) fall short; the hugely popular official filesystem is C (72) and desktop-commander is D (54)
 
 6/
 Open source, Apache-2.0. Harshest criticism welcome:

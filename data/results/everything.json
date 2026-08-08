@@ -2,11 +2,11 @@
   "name": "everything",
   "server_type": "mcp-server",
   "source": "official-reference",
-  "evaluated_at": 1786064401.5130985,
+  "evaluated_at": 1786157687.1207643,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 80.2,
+  "total_score": 79.7,
   "grade": "B",
   "dimensions": {
     "functionality": {
@@ -18,17 +18,11 @@
       }
     },
     "reliability": {
-      "value": 88.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 20%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
-        "avg_latency_s": 0.005,
-        "failure_rate": 0.2,
+        "avg_latency_s": 0.002,
+        "failure_rate": 0.0,
         "attempts": 10
       }
     },
@@ -40,10 +34,10 @@
       }
     },
     "compatibility": {
-      "value": 84.6,
+      "value": 61.5,
       "findings": [],
       "details": {
-        "success_rate": 0.846,
+        "success_rate": 0.615,
         "models": [
           "deepseek"
         ],

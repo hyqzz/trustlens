@@ -2,11 +2,11 @@
   "name": "targetprocess-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064432.511933,
+  "evaluated_at": 1786157743.2892754,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 61.3,
+  "total_score": 64.1,
   "grade": "C",
   "dimensions": {
     "functionality": {
@@ -29,17 +29,11 @@
       }
     },
     "reliability": {
-      "value": 88.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 20%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
         "avg_latency_s": 0.002,
-        "failure_rate": 0.2,
+        "failure_rate": 0.0,
         "attempts": 10
       }
     },
@@ -51,10 +45,10 @@
       }
     },
     "compatibility": {
-      "value": 17.8,
+      "value": 16.4,
       "findings": [],
       "details": {
-        "success_rate": 0.178,
+        "success_rate": 0.164,
         "models": [
           "deepseek"
         ],

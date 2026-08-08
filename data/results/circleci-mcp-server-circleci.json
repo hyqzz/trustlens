@@ -2,12 +2,12 @@
   "name": "@circleci/mcp-server-circleci",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064408.1906502,
+  "evaluated_at": 1786157700.5885887,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 36.2,
-  "grade": "F",
+  "total_score": 51.2,
+  "grade": "D",
   "dimensions": {
     "functionality": {
       "value": 0.0,
@@ -64,17 +64,11 @@
       }
     },
     "reliability": {
-      "value": 40.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 100%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
-        "avg_latency_s": 0.001,
-        "failure_rate": 1.0,
+        "avg_latency_s": 0.002,
+        "failure_rate": 0.0,
         "attempts": 10
       }
     },

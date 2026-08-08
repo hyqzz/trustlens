@@ -2,12 +2,12 @@
   "name": "@alchemy/mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064406.8227375,
+  "evaluated_at": 1786157695.0245833,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 56.2,
-  "grade": "D",
+  "total_score": 68.8,
+  "grade": "C",
   "dimensions": {
     "functionality": {
       "value": 40.6,
@@ -18,17 +18,11 @@
       }
     },
     "reliability": {
-      "value": 52.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 80%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
-        "avg_latency_s": 0.024,
-        "failure_rate": 0.8,
+        "avg_latency_s": 0.241,
+        "failure_rate": 0.0,
         "attempts": 10
       }
     },
@@ -40,10 +34,10 @@
       }
     },
     "compatibility": {
-      "value": 26.8,
+      "value": 30.9,
       "findings": [],
       "details": {
-        "success_rate": 0.268,
+        "success_rate": 0.309,
         "models": [
           "deepseek"
         ],

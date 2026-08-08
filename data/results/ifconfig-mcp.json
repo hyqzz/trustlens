@@ -2,11 +2,11 @@
   "name": "ifconfig-mcp",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064429.5350742,
+  "evaluated_at": 1786157734.6150901,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 92.5,
+  "total_score": 100.0,
   "grade": "A",
   "dimensions": {
     "functionality": {
@@ -21,7 +21,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.302,
+        "avg_latency_s": 0.203,
         "failure_rate": 0.0,
         "attempts": 4
       }
@@ -34,10 +34,10 @@
       }
     },
     "compatibility": {
-      "value": 50.0,
+      "value": 100.0,
       "findings": [],
       "details": {
-        "success_rate": 0.5,
+        "success_rate": 1.0,
         "models": [
           "deepseek"
         ],

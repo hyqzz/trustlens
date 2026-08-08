@@ -2,7 +2,7 @@
   "name": "@transloadit/mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064418.208272,
+  "evaluated_at": 1786157723.9915261,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -21,7 +21,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.005,
+        "avg_latency_s": 0.002,
         "failure_rate": 0.0,
         "attempts": 10
       }

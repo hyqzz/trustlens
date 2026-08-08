@@ -2,7 +2,7 @@
   "name": "tavily-mcp",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064432.9327176,
+  "evaluated_at": 1786157744.1798973,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -18,17 +18,11 @@
       }
     },
     "reliability": {
-      "value": 88.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 20%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
-        "avg_latency_s": 0.337,
-        "failure_rate": 0.2,
+        "avg_latency_s": 0.436,
+        "failure_rate": 0.0,
         "attempts": 10
       }
     },
@@ -40,10 +34,10 @@
       }
     },
     "compatibility": {
-      "value": 20.0,
+      "value": 0.0,
       "findings": [],
       "details": {
-        "success_rate": 0.2,
+        "success_rate": 0.0,
         "models": [
           "deepseek"
         ],

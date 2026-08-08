@@ -122,11 +122,11 @@ footer{margin-top:2.4rem;padding-top:1rem;border-top:1px solid var(--line);opaci
 <div class="brandbar"><span class="brand-logo">🛡️</span><span class="brand-name"><span class="en">ICodeStar</span> 智码星<span class="brand-sub">TrustLens</span></span><a class="lang" href="../../server/hostinger-api-mcp.html" onclick="tlSetLang()">中文</a></div>
 <p><a href="../">← Back to leaderboard</a></p>
 <h1>hostinger-api-mcp</h1>
-<p class="subtitle">Trust score <span class="score">40.4/100</span> · <span class="grade gD">D</span> Risky</p>
+<p class="subtitle">Trust score <span class="score">40.3/100</span> · <span class="grade gD">D</span> Risky</p>
 <div class="srcbox"><h2>Source & Install</h2><div class="inst"><span>Source</span><code>registry-npm</code></div><div class="inst"><span>Install</span><code>npx -y hostinger-api-mcp</code><button class="copybtn">Copy</button></div><div class="insthint">Add this server to your MCP client (example, Claude Code):</div><div class="inst"><code>claude mcp add hostinger-api-mcp -- npx -y hostinger-api-mcp</code><button class="copybtn">Copy</button></div><div class="inst"><span>Package</span><a href="https://www.npmjs.com/package/hostinger-api-mcp" target="_blank" rel="noopener">https://www.npmjs.com/package/hostinger-api-mcp</a></div></div>
 
-<h2>Dimension breakdown</h2><div class="dim"><b>Func 40.0</b></div><div class="dim"><b>Rel 0.0</b><div class="finding warn">[REL-FAIL] 调用失败率 100%</div></div><div class="dim"><b>Sec 100.0</b></div><div class="dim"><b>Tool-call 9.4</b></div>
-<h2>Tools (308)</h2><ul><li><code>agencyHosting_deployNodeStaticWebsite</code> — Deploy a node-static Agency Plan (h5g) website from an archive file. WARNING: this overwrites the website&#x27;s existing contents and cannot be undone — always conf</li><li><code>agencyHosting_deployPhpApplication</code> — Deploy a PHP (or other non-build) Agency Plan (h5g) website from an archive file. WARNING: this overwrites the website&#x27;s existing contents and cannot be undone </li><li><code>hosting_importWordpressWebsite</code> — Import a WordPress website from an archive file to a hosting server. This tool uploads a website archive (zip, tar, tar.gz, etc.) and a database dump (.sql file</li><li><code>hosting_deployWordpressPlugin</code> — Deploy a WordPress plugin from a directory to a hosting server. This tool uploads all plugin files and triggers plugin deployment.</li><li><code>hosting_deployWordpressTheme</code> — Deploy a WordPress theme from a directory to a hosting server. This tool uploads all theme files and triggers theme deployment. The uploaded theme can optionall</li><li><code>hosting_deployJsApplication</code> — Deploy a JavaScript application from an archive file to a hosting server. IMPORTANT: the archive must ONLY contain application source files, not the build outpu</li><li><code>hosting_deployStaticWebsite</code> — Deploy a static website from an archive file to a hosting server. IMPORTANT: This tool only works for static websites with no build process. The archive must co</li><li><code>hosting_listJsDeployments</code> — List javascript application deployments for checking their status. Use this tool when customer asks for the status of the deployment. This tool retrieves a pagi</li><li><code>hosting_showJsDeploymentLogs</code> — Retrieve logs for a specified JavaScript application deployment for debugging purposes in case of failure.</li><li><code>agency-hosting_listAvailableDatacentersForAnAgencyPlanOrderV1</code> — Lists the datacenters available for provisioning a new website on the given Agency Plan
+<h2>Dimension breakdown</h2><div class="dim"><b>Func 40.0</b></div><div class="dim"><b>Rel 0.0</b><div class="finding warn">[REL-FAIL] 调用失败率 100%</div></div><div class="dim"><b>Sec 100.0</b></div><div class="dim"><b>Tool-call 8.6</b></div>
+<h2>Tools (314)</h2><ul><li><code>agencyHosting_deployNodeStaticWebsite</code> — Deploy a node-static Agency Plan (h5g) website from an archive file. WARNING: this overwrites the website&#x27;s existing contents and cannot be undone — always conf</li><li><code>agencyHosting_deployPhpApplication</code> — Deploy a PHP (or other non-build) Agency Plan (h5g) website from an archive file. WARNING: this overwrites the website&#x27;s existing contents and cannot be undone </li><li><code>hosting_importWordpressWebsite</code> — Import a WordPress website from an archive file to a hosting server. This tool uploads a website archive (zip, tar, tar.gz, etc.) and a database dump (.sql file</li><li><code>hosting_deployWordpressPlugin</code> — Deploy a WordPress plugin from a directory to a hosting server. This tool uploads all plugin files and triggers plugin deployment.</li><li><code>hosting_deployWordpressTheme</code> — Deploy a WordPress theme from a directory to a hosting server. This tool uploads all theme files and triggers theme deployment. The uploaded theme can optionall</li><li><code>hosting_deployJsApplication</code> — Deploy a JavaScript application from an archive file to a hosting server. IMPORTANT: the archive must ONLY contain application source files, not the build outpu</li><li><code>hosting_deployStaticWebsite</code> — Deploy a static website from an archive file to a hosting server. IMPORTANT: This tool only works for static websites with no build process. The archive must co</li><li><code>hosting_listJsDeployments</code> — List javascript application deployments for checking their status. Use this tool when customer asks for the status of the deployment. This tool retrieves a pagi</li><li><code>hosting_showJsDeploymentLogs</code> — Retrieve logs for a specified JavaScript application deployment for debugging purposes in case of failure.</li><li><code>agency-hosting_listAvailableDatacentersForAnAgencyPlanOrderV1</code> — Lists the datacenters available for provisioning a new website on the given Agency Plan
 hosting order.
 
 Each datacenter includes a `pinger_url` you can ping fro</li><li><code>agency-hosting_changeAgencyPlanWebsiteDomainV1</code> — Changes the primary domain for an Agency Plan website.
@@ -520,12 +520,29 @@ This endpoint allows you to create a new contact with basic information like nam
 
 If </li><li><code>reach_listSegmentsV1</code> — Get a list of all contact segments.
 
-This endpoint returns a list of contact segments that can be used to organize contacts.</li><li><code>reach_createANewContactSegmentV1</code> — Create a new contact segment.
+This endpoint returns a list of contact segments that can be used to organize contacts.
+
+**Deprecated.** This endpoint cann</li><li><code>reach_createANewContactSegmentV1</code> — Create a new contact segment.
 
 This endpoint allows creating a new contact segment that can be used to organize contacts.
-The segment can be configured with spe</li><li><code>reach_listProfileSegmentContactsV1</code> — Retrieve contacts associated with a specific segment for a given profile.
+The segment can be configured with spe</li><li><code>reach_countProfileSegmentContactsV1</code> — Count the contacts currently matching a segment without listing them.
 
-This endpoint allows you to fetch and filter contacts that belong to a particular seg</li><li><code>reach_listSegmentContactsV1</code> — Retrieve contacts associated with a specific segment.
+Cheaper than paging through the segment contacts endpoint when only the size is needed.</li><li><code>reach_listProfileSegmentContactsV1</code> — Retrieve contacts associated with a specific segment for a given profile.
+
+This endpoint allows you to fetch and filter contacts that belong to a particular seg</li><li><code>reach_getProfileSegmentDetailsV1</code> — Get a single segment of a profile, including the conditions that define it.
+
+To retrieve the contacts currently matching those conditions, use the segment conta</li><li><code>reach_updateAProfileSegmentV1</code> — Rename a segment and/or replace the conditions that define it.
+
+`name` is always required. Omit `conditions` to rename without touching the conditions;
+supply t</li><li><code>reach_deleteAProfileSegmentV1</code> — Delete a segment.
+
+Only the segment definition is removed. The contacts that matched it are left untouched.</li><li><code>reach_listProfileSegmentsV1</code> — Get a paginated list of the segments defined in a profile.
+
+Each entry carries the number of contacts currently matching it, which is recalculated on
+read rathe</li><li><code>reach_createAProfileSegmentV1</code> — Create a segment in a profile.
+
+A segment is a saved set of conditions rather than a fixed list, so its membership changes
+as contacts change. Creating one does</li><li><code>reach_listSegmentContactsV1</code> — Retrieve contacts associated with a specific segment.
 
 This endpoint allows you to fetch and filter contacts that belong to a particular segment,
 identified by </li><li><code>reach_getSegmentDetailsV1</code> — Get details of a specific segment.
@@ -828,7 +845,7 @@ be obtained from GET /</li><li><code>hosting_updateWordPressThemesV1</code> — 
 installation.
 
 Provide the WordPress installation (software) identifier in the path. </li></ul>
-<footer>Evaluated 2026-08-07 01:00 UTC · Engine v0.1.0 · Source: registry-npm</footer>
+<footer>Evaluated 2026-08-08 02:55 UTC · Engine v0.1.0 · Source: registry-npm</footer>
 <script>
 document.querySelectorAll('.copybtn').forEach(function(b){
   b.addEventListener('click', function(){

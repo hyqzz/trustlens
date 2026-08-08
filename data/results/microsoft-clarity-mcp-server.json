@@ -2,12 +2,12 @@
   "name": "@microsoft/clarity-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064409.8813584,
+  "evaluated_at": 1786157706.8074598,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 73.0,
-  "grade": "C",
+  "total_score": 83.0,
+  "grade": "B",
   "dimensions": {
     "functionality": {
       "value": 80.0,
@@ -18,17 +18,11 @@
       }
     },
     "reliability": {
-      "value": 80.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 33%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
-        "avg_latency_s": 0.004,
-        "failure_rate": 0.3333333333333333,
+        "avg_latency_s": 0.005,
+        "failure_rate": 0.0,
         "attempts": 6
       }
     },
@@ -40,10 +34,10 @@
       }
     },
     "compatibility": {
-      "value": 0.0,
+      "value": 33.3,
       "findings": [],
       "details": {
-        "success_rate": 0.0,
+        "success_rate": 0.333,
         "models": [
           "deepseek"
         ],

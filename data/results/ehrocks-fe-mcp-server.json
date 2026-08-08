@@ -2,12 +2,12 @@
   "name": "@ehrocks/fe-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064408.855334,
+  "evaluated_at": 1786157704.5288737,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 39.0,
-  "grade": "F",
+  "total_score": 54.0,
+  "grade": "D",
   "dimensions": {
     "functionality": {
       "value": 40.0,
@@ -18,17 +18,11 @@
       }
     },
     "reliability": {
-      "value": 0.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 100%"
-        }
-      ],
+      "value": 60.0,
+      "findings": [],
       "details": {
-        "avg_latency_s": 10.523,
-        "failure_rate": 1.0,
+        "avg_latency_s": 5.125,
+        "failure_rate": 0.0,
         "attempts": 2
       }
     },

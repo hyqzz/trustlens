@@ -2,12 +2,12 @@
   "name": "ref-tools-mcp",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064431.052722,
+  "evaluated_at": 1786157738.8553123,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 92.5,
-  "grade": "A",
+  "total_score": 85.0,
+  "grade": "B",
   "dimensions": {
     "functionality": {
       "value": 100.0,
@@ -21,7 +21,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.001,
+        "avg_latency_s": 0.0,
         "failure_rate": 0.0,
         "attempts": 4
       }
@@ -34,10 +34,10 @@
       }
     },
     "compatibility": {
-      "value": 50.0,
+      "value": 0.0,
       "findings": [],
       "details": {
-        "success_rate": 0.5,
+        "success_rate": 0.0,
         "models": [
           "deepseek"
         ],

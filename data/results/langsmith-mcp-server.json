@@ -2,12 +2,12 @@
   "name": "langsmith-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064429.5663965,
+  "evaluated_at": 1786157734.814381,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 58.4,
-  "grade": "D",
+  "total_score": 70.4,
+  "grade": "C",
   "dimensions": {
     "functionality": {
       "value": 44.0,
@@ -18,17 +18,11 @@
       }
     },
     "reliability": {
-      "value": 52.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 80%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
-        "avg_latency_s": 0.001,
-        "failure_rate": 0.8,
+        "avg_latency_s": 0.002,
+        "failure_rate": 0.0,
         "attempts": 10
       }
     },

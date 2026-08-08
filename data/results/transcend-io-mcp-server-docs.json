@@ -2,11 +2,11 @@
   "name": "@transcend-io/mcp-server-docs",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064416.9469252,
+  "evaluated_at": 1786157722.7122576,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 67.0,
+  "total_score": 74.5,
   "grade": "C",
   "dimensions": {
     "functionality": {
@@ -18,17 +18,11 @@
       }
     },
     "reliability": {
-      "value": 70.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 50%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
-        "avg_latency_s": 0.13,
-        "failure_rate": 0.5,
+        "avg_latency_s": 0.414,
+        "failure_rate": 0.0,
         "attempts": 4
       }
     },

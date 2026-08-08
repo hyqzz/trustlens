@@ -47,7 +47,7 @@ trustlens check <server-name>
 
 ## 双榜单
 
-- **MCP 服务器榜**（119 个）：https://trustlens.icodestar.net/
+- **MCP 服务器榜**（118 个真实服务器）：https://trustlens.icodestar.net/
 - **Agent Skills 榜**（110 个）：https://trustlens.icodestar.net/skills.html
 
 真实模型工具调用分由 DeepSeek-V4 Flash（OpenCode Go，最低成本档）实测得出。

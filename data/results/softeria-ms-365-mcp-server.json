@@ -2,11 +2,11 @@
   "name": "@softeria/ms-365-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064414.384753,
+  "evaluated_at": 1786157719.465394,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 64.0,
+  "total_score": 66.8,
   "grade": "C",
   "dimensions": {
     "functionality": {
@@ -18,17 +18,11 @@
       }
     },
     "reliability": {
-      "value": 88.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 20%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
-        "avg_latency_s": 0.131,
-        "failure_rate": 0.2,
+        "avg_latency_s": 0.211,
+        "failure_rate": 0.0,
         "attempts": 10
       }
     },
@@ -40,10 +34,10 @@
       }
     },
     "compatibility": {
-      "value": 17.0,
+      "value": 15.4,
       "findings": [],
       "details": {
-        "success_rate": 0.17,
+        "success_rate": 0.154,
         "models": [
           "deepseek"
         ],
@@ -491,7 +485,7 @@
                   }
                 },
                 "additionalProperties": true,
-                "description": "[Note: Simplified from 136 properties to 25 most common ones]"
+                "description": "[Note: Simplified from 137 properties to 25 most common ones]"
               },
               "lastModifiedByUser": {
                 "type": "object",
@@ -573,7 +567,7 @@
                   }
                 },
                 "additionalProperties": true,
-                "description": "[Note: Simplified from 136 properties to 25 most common ones]"
+                "description": "[Note: Simplified from 137 properties to 25 most common ones]"
               },
               "audio": {
                 "type": "object",
@@ -1752,7 +1746,7 @@
                   }
                 },
                 "additionalProperties": true,
-                "description": "[Note: Simplified from 136 properties to 25 most common ones]"
+                "description": "[Note: Simplified from 137 properties to 25 most common ones]"
               },
               "lastModifiedByUser": {
                 "type": "object",
@@ -1834,7 +1828,7 @@
                   }
                 },
                 "additionalProperties": true,
-                "description": "[Note: Simplified from 136 properties to 25 most common ones]"
+                "description": "[Note: Simplified from 137 properties to 25 most common ones]"
               },
               "audio": {
                 "type": "object",

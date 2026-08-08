@@ -2,12 +2,12 @@
   "name": "@professional-wiki/mediawiki-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064412.2400143,
+  "evaluated_at": 1786157713.820279,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 59.0,
-  "grade": "D",
+  "total_score": 68.5,
+  "grade": "C",
   "dimensions": {
     "functionality": {
       "value": 44.1,
@@ -18,17 +18,11 @@
       }
     },
     "reliability": {
-      "value": 64.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 60%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
-        "avg_latency_s": 0.081,
-        "failure_rate": 0.6,
+        "avg_latency_s": 0.367,
+        "failure_rate": 0.0,
         "attempts": 10
       }
     },
@@ -40,10 +34,10 @@
       }
     },
     "compatibility": {
-      "value": 17.2,
+      "value": 20.7,
       "findings": [],
       "details": {
-        "success_rate": 0.172,
+        "success_rate": 0.207,
         "models": [
           "deepseek"
         ],

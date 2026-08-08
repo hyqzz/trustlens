@@ -2,12 +2,12 @@
   "name": "cls-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064422.5213091,
+  "evaluated_at": 1786157730.1752408,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 50.2,
-  "grade": "D",
+  "total_score": 66.8,
+  "grade": "C",
   "dimensions": {
     "functionality": {
       "value": 35.0,
@@ -24,17 +24,11 @@
       }
     },
     "reliability": {
-      "value": 40.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 100%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
-        "avg_latency_s": 0.122,
-        "failure_rate": 1.0,
+        "avg_latency_s": 0.028,
+        "failure_rate": 0.0,
         "attempts": 10
       }
     },
@@ -46,10 +40,10 @@
       }
     },
     "compatibility": {
-      "value": 20.0,
+      "value": 30.0,
       "findings": [],
       "details": {
-        "success_rate": 0.2,
+        "success_rate": 0.3,
         "models": [
           "deepseek"
         ],
@@ -911,7 +905,7 @@
           },
           "timeZone": {
             "type": "string",
-            "default": "UTC",
+            "default": "Asia/Singapore",
             "description": "时区，如 Asia/Shanghai。若 timeString 不含时区偏移信息则必须提供。"
           },
           "unit": {
@@ -957,7 +951,7 @@
           },
           "timeZone": {
             "type": "string",
-            "default": "UTC",
+            "default": "Asia/Singapore",
             "description": "输出时区，如 Asia/Shanghai。默认使用系统时区。"
           }
         },

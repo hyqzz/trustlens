@@ -2,12 +2,12 @@
   "name": "@dbx-app/mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786064408.2278545,
+  "evaluated_at": 1786157700.7960474,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 52.8,
-  "grade": "D",
+  "total_score": 66.5,
+  "grade": "C",
   "dimensions": {
     "functionality": {
       "value": 40.0,
@@ -18,17 +18,11 @@
       }
     },
     "reliability": {
-      "value": 40.0,
-      "findings": [
-        {
-          "severity": "warning",
-          "code": "REL-FAIL",
-          "message": "调用失败率 100%"
-        }
-      ],
+      "value": 100.0,
+      "findings": [],
       "details": {
         "avg_latency_s": 0.0,
-        "failure_rate": 1.0,
+        "failure_rate": 0.0,
         "attempts": 10
       }
     },
@@ -40,10 +34,10 @@
       }
     },
     "compatibility": {
-      "value": 25.0,
+      "value": 16.7,
       "findings": [],
       "details": {
-        "success_rate": 0.25,
+        "success_rate": 0.167,
         "models": [
           "deepseek"
         ],
