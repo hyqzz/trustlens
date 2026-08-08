@@ -15,7 +15,9 @@ from __future__ import annotations
 import html
 import json
 import os
+import shutil
 import time
+from collections import Counter
 from pathlib import Path
 
 from .engine import slugify
@@ -36,6 +38,29 @@ def load_skills() -> list[dict]:
         except json.JSONDecodeError:
             return []
     return []
+
+
+def _skill_slugs(skills: list[dict]) -> dict[str, str]:
+    """skill url → 唯一详情页 slug。同名 skill（不同仓库各一份）用仓库名消歧，
+    避免详情页互相覆盖、榜单链接指向错误版本。以 url（含仓库+路径）为唯一键。"""
+    base = Counter(slugify(s.get("name", "")) for s in skills)
+    out: dict[str, str] = {}
+    used: set[str] = set()
+    for s in skills:
+        url = s.get("url", "")
+        name = s.get("name", "")
+        slug = slugify(name)
+        if base[slug] > 1:
+            repo = slugify((s.get("repo") or "").rsplit("/", 1)[-1]) or "repo"
+            slug = f"{slug}-{repo}"
+        n = 1
+        candidate = slug
+        while candidate in used:
+            n += 1
+            candidate = f"{slug}-{n}"
+        used.add(candidate)
+        out[url] = candidate
+    return out
 
 FAVICON = ("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>"
            "<text y='.9em' font-size='90'>🛡️</text></svg>")
@@ -633,7 +658,7 @@ render(); bind();
 """
 
 
-def _render_skills_index(skills: list[dict], lang: str) -> str:
+def _render_skills_index(skills: list[dict], lang: str, slugs: dict[str, str]) -> str:
     t = T[lang]
     en = lang == "en"
     total = len(skills)
@@ -641,7 +666,7 @@ def _render_skills_index(skills: list[dict], lang: str) -> str:
     counts = {g: sum(1 for s in skills if s["grade"] == g) for g in "ABCDF"}
     pct = lambda g: round(counts[g] * 100 / total, 0) if total else 0
 
-    data = [{"name": s["name"], "slug": slugify(s["name"]), "repo": s["repo"], "url": s["url"],
+    data = [{"name": s["name"], "slug": slugs[s["url"]], "repo": s["repo"], "url": s["url"],
              "score": s["total_score"],
              "grade": s["grade"], "color": GRADE_COLOR[s["grade"]],
              "structure": int(s["structure"]), "security": int(s["security"]),
@@ -658,7 +683,7 @@ def _render_skills_index(skills: list[dict], lang: str) -> str:
         desc_html = f"<small>{_esc(desc[:90])}</small>" if desc else ""
         rows.append(
             f'<tr><td class="rank">{i}</td>'
-            f'<td class="name"><a href="skill/{slugify(s["name"])}.html">{_esc(s["name"])}</a>{desc_html}</td>'
+            f'<td class="name"><a href="skill/{slugs[s["url"]]}.html">{_esc(s["name"])}</a>{desc_html}</td>'
             f'<td class="score">{s["total_score"]:.1f}</td>'
             f'<td><span class="grade g{s["grade"]}">{s["grade"]}</span></td>'
             f'<td class="src">{_esc(s["repo"])}</td>'
@@ -767,10 +792,9 @@ def _render_detail(r: ServerReport, lang: str, install_cmd: list[str] | None = N
     return _head(t, title, path, alt, toggle_href) + body
 
 
-def _render_skill_detail(s: dict, lang: str) -> str:
+def _render_skill_detail(s: dict, lang: str, slug: str) -> str:
     t = T[lang]
     en = lang == "en"
-    slug = slugify(s["name"])
     name_display = s["name"].split("/")[-1] if "/" in s["name"] else s["name"]
     back_href = "../"
     toggle_href = f"../../skill/{slug}.html" if en else f"../en/skill/{slug}.html"
@@ -839,7 +863,8 @@ def _render_skill_detail(s: dict, lang: str) -> str:
     return _head(t, title, path, alt, toggle_href) + body
 
 
-def _render_sitemap(reports: list[ServerReport], skills: list[dict] | None = None) -> str:
+def _render_sitemap(reports: list[ServerReport], skills: list[dict] | None = None,
+                    skill_slugs: dict[str, str] | None = None) -> str:
     today = time.strftime("%Y-%m-%d", time.gmtime())
 
     def url(loc: str) -> str:
@@ -850,7 +875,7 @@ def _render_sitemap(reports: list[ServerReport], skills: list[dict] | None = Non
         slug = slugify(r.name)
         locs += [f"/server/{slug}.html", f"/en/server/{slug}.html"]
     for s in skills or []:
-        slug = slugify(s.get("name", ""))
+        slug = (skill_slugs or {}).get(s.get("url", "")) or slugify(s.get("name", ""))
         if slug and slug != "unnamed":
             locs += [f"/skill/{slug}.html", f"/en/skill/{slug}.html"]
     body = "\n".join(url(l) for l in locs)
@@ -865,6 +890,7 @@ def build_site(results_dir: Path | None = None, dist: Path | None = None) -> Pat
     dist = Path(dist) if dist else DIST
     reports = load_all(results_dir)
     skills = load_skills()
+    skill_slugs = _skill_slugs(skills)
 
     # 从 servers.json 取启动命令，供详情页展示安装方式
     install_map: dict[str, list[str]] = {}
@@ -876,21 +902,25 @@ def build_site(results_dir: Path | None = None, dist: Path | None = None) -> Pat
         except (json.JSONDecodeError, KeyError):
             pass
 
-    for sub in ("server", "skill", "en", "en/server", "en/skill"):
-        (dist / sub).mkdir(parents=True, exist_ok=True)
+    # 详情页目录先清空再重建（slug 会随消歧/改名变化，避免残留陈旧页面）
+    for sub in ("server", "skill", "en/server", "en/skill"):
+        d = dist / sub
+        if d.exists():
+            shutil.rmtree(d)
+        d.mkdir(parents=True, exist_ok=True)
     (dist / "index.html").write_text(_render_index(reports, "zh"), encoding="utf-8")
     (dist / "en" / "index.html").write_text(_render_index(reports, "en"), encoding="utf-8")
-    (dist / "skills.html").write_text(_render_skills_index(skills, "zh"), encoding="utf-8")
-    (dist / "en" / "skills.html").write_text(_render_skills_index(skills, "en"), encoding="utf-8")
+    (dist / "skills.html").write_text(_render_skills_index(skills, "zh", skill_slugs), encoding="utf-8")
+    (dist / "en" / "skills.html").write_text(_render_skills_index(skills, "en", skill_slugs), encoding="utf-8")
     for r in reports:
         slug = slugify(r.name)
         cmd = install_map.get(r.name)
         (dist / "server" / f"{slug}.html").write_text(_render_detail(r, "zh", install_cmd=cmd), encoding="utf-8")
         (dist / "en" / "server" / f"{slug}.html").write_text(_render_detail(r, "en", install_cmd=cmd), encoding="utf-8")
     for s in skills:
-        slug = slugify(s["name"])
-        (dist / "skill" / f"{slug}.html").write_text(_render_skill_detail(s, "zh"), encoding="utf-8")
-        (dist / "en" / "skill" / f"{slug}.html").write_text(_render_skill_detail(s, "en"), encoding="utf-8")
-    (dist / "sitemap.xml").write_text(_render_sitemap(reports, skills), encoding="utf-8")
+        slug = skill_slugs[s["url"]]
+        (dist / "skill" / f"{slug}.html").write_text(_render_skill_detail(s, "zh", slug), encoding="utf-8")
+        (dist / "en" / "skill" / f"{slug}.html").write_text(_render_skill_detail(s, "en", slug), encoding="utf-8")
+    (dist / "sitemap.xml").write_text(_render_sitemap(reports, skills, skill_slugs), encoding="utf-8")
     (dist / "robots.txt").write_text(_render_robots(), encoding="utf-8")
     return dist
