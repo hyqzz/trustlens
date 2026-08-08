@@ -10,7 +10,7 @@ sys.path.insert(0, str(ROOT))
 from trustlens import report as report_mod  # noqa: E402
 from trustlens.checks import schema_check, security_scan  # noqa: E402
 from trustlens.engine import evaluate_server, slugify  # noqa: E402
-from trustlens.models import ToolInfo  # noqa: E402
+from trustlens.models import DimensionScore, ServerReport, ToolInfo  # noqa: E402
 from trustlens.score import compatibility_score, functionality_score, security_score  # noqa: E402
 from trustlens.site import build_site  # noqa: E402
 
@@ -80,14 +80,27 @@ class TestEndToEnd(unittest.TestCase):
 
     def test_site_build(self):
         with tempfile.TemporaryDirectory() as tmp:
+            # 内置 fixture（source=builtin-fixture）应从公开榜单剔除
             report_mod.save_report(self.report, Path(tmp))
             dist = Path(tmp) / "dist"
             build_site(Path(tmp), dist)
             index = (dist / "index.html").read_text(encoding="utf-8")
-            self.assertIn("mock-echo", index)
-            detail = dist / "server" / f"{slugify('mock-echo')}.html"
+            self.assertNotIn("mock-echo", index)
+            self.assertFalse((dist / "server" / f"{slugify('mock-echo')}.html").exists())
+
+            # 普通（非 fixture）报告应正常渲染出榜单行与详情页
+            real = ServerReport(name="real-server", server_type="mcp-server",
+                                source="registry-npm", ok=True, total_score=80.0, grade="B")
+            real.dimensions = {"functionality": DimensionScore(80.0),
+                               "reliability": DimensionScore(90.0),
+                               "security": DimensionScore(100.0),
+                               "compatibility": DimensionScore(70.0)}
+            report_mod.save_report(real, Path(tmp))
+            build_site(Path(tmp), dist)
+            index2 = (dist / "index.html").read_text(encoding="utf-8")
+            self.assertIn("real-server", index2)
+            detail = dist / "server" / "real-server.html"
             self.assertTrue(detail.exists())
-            self.assertIn("read_notes", detail.read_text(encoding="utf-8"))
 
     def test_unreachable_server_reports_error(self):
         r = evaluate_server("ghost", [sys.executable, "-c",

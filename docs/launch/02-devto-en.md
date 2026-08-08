@@ -60,6 +60,7 @@ Every MCP server has a "model tool-call" score — not a static estimate, but **
 - **Out-of-the-box criterion**: start via the standard `npx -y <pkg>`, no config, no API key; handshake must complete within 90s. This is deliberate: **a server that needs you to hunt for a key just to boot is unusable for most users**
 - **Fail-fast guardrail**: 2 consecutive tool-call timeouts → the server is judged unusable for calls and the remaining probes are skipped (otherwise one pathological server can stall an entire evaluation round)
 - Model tool-call scores come from real calls by **DeepSeek-V4 Flash** (cheapest tier)
+- **Boundary of the security dimension**: a static text-pattern scan that catches obvious prompt-injection, exfiltration-style commands and hardcoded credentials — it **cannot detect runtime exfiltration or covert behavior; a 100 security score is not a safety certification**. The '66% have security issues' figure is an external research finding, measured under a different methodology than this leaderboard
 - Skills: structure completeness + security scan + model actionability judgment
 - Pipeline re-runs weekly and publishes automatically
 

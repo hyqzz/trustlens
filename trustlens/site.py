@@ -183,7 +183,7 @@ T = {
         "empty_title": "没有匹配的评测对象", "empty_hint": "试试清空搜索或换个筛选条件",
         "no_desc": "无描述", "back": "← 返回排行榜",
         "nav_mcp": "MCP 服务器", "nav_skills": "Skills",
-        "method_mcp": "<b>评测方法</b>：隔离沙箱 + 零凭证开箱即用（90s 握手超时）实测；模型工具调用维度由 <b>DeepSeek-V4 Flash</b> 真实调用评测。全部数据以 JSON 公开在仓库，git 历史即审计日志。",
+        "method_mcp": "<b>评测方法</b>：隔离沙箱 + 零凭证开箱即用（90s 握手超时）实测；模型工具调用维度由 <b>DeepSeek-V4 Flash</b> 真实调用评测。安全维度为<b>静态文本模式扫描</b>（提示注入/数据外发/硬编码凭证），只检出明显特征，<b>无法检出运行时外发等隐蔽行为——\"安全满分\"≠\"已证实安全\"</b>。全部数据以 JSON 公开在仓库，git 历史即审计日志。",
         "method_skills": "<b>评测方法</b>：对每个 SKILL.md 做结构质量 + 安全扫描（静态），并由 <b>DeepSeek-V4 Flash</b> 实测可执行性质量分。来源：GitHub 公开的官方与社区技能仓库。",
         "sk_heading": "Skills 信任榜", "sk_badge": "SKILLS",
         "sk_tagline": "Agent Skills（SKILL.md 能力单元）的质量与信任基准：结构、安全、可执行性三维实测。",
@@ -221,6 +221,8 @@ T = {
              "每周自动复测并更新排行榜，评测流水线全程无人值守，结果自动提交到 GitHub 并重建本站。"),
             ("我可以提交自己的服务器参与评测吗？",
              "可以。在 GitHub 仓库提交 issue 或 PR，把服务器加入 data/servers.json 清单即可进入下一周评测批次。"),
+            ("TrustLens 的\"安全分\"能保证服务器安全吗？",
+             "不能。安全维度是静态文本模式扫描，只能检出提示注入、明显的数据外发指令和硬编码凭证这类特征。运行时才会发生的外发、隐蔽投毒、依赖供应链攻击都无法被静态扫描发现；评测在剥离环境变量的沙箱中进行，被测服务器拿不到你的任何密钥，但恶意服务器理论上仍可向外部地址发数据。\"安全满分\"只代表未检出明显特征，不代表\"已证实安全\"。生态中\"66% 服务器存在安全问题\"是外部研究结论，评测口径与本站不同。"),
         ],
     },
     "en": {
@@ -240,7 +242,7 @@ T = {
         "empty_title": "No matching capability units", "empty_hint": "Clear the search or change filters",
         "no_desc": "no description", "back": "← Back to leaderboard",
         "nav_mcp": "MCP Servers", "nav_skills": "Skills",
-        "method_mcp": "<b>Method</b>: isolated sandbox, zero-credential out-of-the-box eval (90s handshake). Model tool-call accuracy is measured with real calls by <b>DeepSeek-V4 Flash</b>. All data is public JSON in the repo — git history is the audit log.",
+        "method_mcp": "<b>Method</b>: isolated sandbox, zero-credential out-of-the-box eval (90s handshake). Model tool-call accuracy is measured with real calls by <b>DeepSeek-V4 Flash</b>. The security dimension is a <b>static text-pattern scan</b> (prompt injection / exfiltration / hardcoded creds) — it catches obvious signatures only and <b>cannot detect runtime exfiltration or covert behavior; a 100 security score is not a safety certification</b>. All data is public JSON in the repo — git history is the audit log.",
         "method_skills": "<b>Method</b>: static structure + security scan of each SKILL.md, plus an actionability score judged by <b>DeepSeek-V4 Flash</b>. Sources: official and community skill repos on GitHub.",
         "sk_heading": "Skills Leaderboard", "sk_badge": "SKILLS",
         "sk_tagline": "Trust benchmark for Agent Skills (SKILL.md): structure, security and actionability, measured in three dimensions.",
@@ -279,6 +281,8 @@ T = {
              "Weekly. The evaluation pipeline runs unattended, commits results to GitHub, and rebuilds this site automatically."),
             ("Can I submit my own server for evaluation?",
              "Yes — open an issue or PR on GitHub to add it to data/servers.json, and it will be included in the next weekly batch."),
+            ("Does a 100 security score mean a server is safe?",
+             "No. The security dimension is a static text-pattern scan — it catches obvious prompt-injection phrases, exfiltration-style commands and hardcoded credentials. Runtime-only exfiltration, covert poisoning and supply-chain attacks cannot be detected statically. Evaluations run in an env-stripped sandbox, so a tested server gets none of your credentials — but a malicious server could still send data to external addresses in principle. A 100 security score means no obvious signatures were found, not that the server is verified safe. The often-cited '66% of servers have security issues' figure is an external research finding measured under a different methodology than this leaderboard."),
         ],
     },
 }
@@ -888,7 +892,7 @@ def _render_robots() -> str:
 
 def build_site(results_dir: Path | None = None, dist: Path | None = None) -> Path:
     dist = Path(dist) if dist else DIST
-    reports = load_all(results_dir)
+    reports = [r for r in load_all(results_dir) if r.source != "builtin-fixture"]
     skills = load_skills()
     skill_slugs = _skill_slugs(skills)
 

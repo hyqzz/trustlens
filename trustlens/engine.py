@@ -92,10 +92,11 @@ def evaluate_server(name: str, command: list[str], server_type: str = "mcp-serve
                     result, latency = client.call_tool(tool.name, _dummy_arguments(tool.schema))
                     latencies.append(latency)
                     consecutive_timeouts = 0
-                    # MCP 语义错误（isError: true）计为失败：工具被调用但未正确履职
-                    if result.get("isError"):
-                        failures += 1
-                    else:
+                    # isError（快速结构化响应）是服务器对 dummy 参数的正确校验拒绝，
+                    # 属于"有响应"，计入延迟但**不计入可靠性失败**；
+                    # 仅协议级超时/无响应（ProtocolError）才是可靠性失败。
+                    # 功能性维度仍以"能否成功调用"判定（isError 工具不算可调用）。
+                    if not result.get("isError"):
                         tool_ok = True
                 except ProtocolError:
                     failures += 1

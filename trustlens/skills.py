@@ -171,13 +171,12 @@ def evaluate_skill(cand: dict, llm: ToolUseProvider | None = None,
         else:
             llm_note = (err or "无输出")[:120]
 
-    # ---- 合成总分（权重已是 100 制，勿再乘 100）----
+    # ---- 合成总分（权重 40/30/30 已是 100 制；LLM 缺失时该维贡献 0，
+    #      与有 LLM 的 skill 口径一致，避免无 LLM 走更宽松的备用公式）----
     struct_ratio = min(struct / 100.0, 1.0)
     sec_ratio = max(sec, 0) / 100.0
-    if llm_score is not None:
-        total = 40 * struct_ratio + 30 * sec_ratio + 30 * (llm_score / 100)
-    else:
-        total = 60 * struct_ratio + 40 * sec_ratio
+    llm_ratio = (llm_score or 0) / 100.0
+    total = 40 * struct_ratio + 30 * sec_ratio + 30 * llm_ratio
     total = round(min(total, 100), 1)
 
     return {
