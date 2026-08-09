@@ -2,11 +2,11 @@
   "name": "@modelcontextprotocol/server-filesystem",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185097.1436298,
+  "evaluated_at": 1786247892.1077049,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 70.3,
+  "total_score": 72.5,
   "grade": "C",
   "dimensions": {
     "functionality": {
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 14.3,
+      "value": 28.6,
       "findings": [],
       "details": {
-        "success_rate": 0.143,
+        "success_rate": 0.286,
         "models": [
           "deepseek"
         ],

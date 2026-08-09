@@ -2,11 +2,11 @@
   "name": "@modelcontextprotocol/server-everything",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185096.4009635,
+  "evaluated_at": 1786247891.398935,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 97.7,
+  "total_score": 95.4,
   "grade": "A",
   "dimensions": {
     "functionality": {
@@ -22,7 +22,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.002,
+        "avg_latency_s": 0.005,
         "failure_rate": 0.0,
         "attempts": 8
       }
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 84.6,
+      "value": 69.2,
       "findings": [],
       "details": {
-        "success_rate": 0.846,
+        "success_rate": 0.692,
         "models": [
           "deepseek"
         ],

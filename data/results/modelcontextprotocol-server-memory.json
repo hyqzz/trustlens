@@ -2,19 +2,19 @@
   "name": "@modelcontextprotocol/server-memory",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185097.849351,
+  "evaluated_at": 1786247892.1942356,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 85.0,
+  "total_score": 82.5,
   "grade": "B",
   "dimensions": {
     "functionality": {
-      "value": 100.0,
+      "value": 88.0,
       "findings": [],
       "details": {
         "tools_total": 9,
-        "tools_callable": 5,
+        "tools_callable": 4,
         "tools_probed": 5
       }
     },
@@ -22,7 +22,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.002,
+        "avg_latency_s": 0.003,
         "failure_rate": 0.0,
         "attempts": 10
       }
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 0.0,
+      "value": 11.1,
       "findings": [],
       "details": {
-        "success_rate": 0.0,
+        "success_rate": 0.111,
         "models": [
           "deepseek"
         ],

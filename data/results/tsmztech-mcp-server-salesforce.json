@@ -2,11 +2,11 @@
   "name": "@tsmztech/mcp-server-salesforce",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185124.21493,
+  "evaluated_at": 1786247901.7653728,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 67.0,
+  "total_score": 68.0,
   "grade": "C",
   "dimensions": {
     "functionality": {
@@ -15,16 +15,16 @@
       "details": {
         "tools_total": 15,
         "tools_callable": 0,
-        "tools_probed": 4
+        "tools_probed": 3
       }
     },
     "reliability": {
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.002,
+        "avg_latency_s": 0.001,
         "failure_rate": 0.0,
-        "attempts": 8
+        "attempts": 6
       }
     },
     "security": {
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 20.0,
+      "value": 26.7,
       "findings": [],
       "details": {
-        "success_rate": 0.2,
+        "success_rate": 0.267,
         "models": [
           "deepseek"
         ],

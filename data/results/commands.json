@@ -2,7 +2,7 @@
   "name": "commands",
   "server_type": "mcp-server",
   "source": "community-popular",
-  "evaluated_at": 1786185057.5566487,
+  "evaluated_at": 1786247883.4860504,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -22,7 +22,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.0,
+        "avg_latency_s": 0.008,
         "failure_rate": 0.0,
         "attempts": 2
       }
@@ -49,7 +49,7 @@
   "tools": [
     {
       "name": "run_process",
-      "description": "Run a process on this win32 machine",
+      "description": "Run a process on this linux machine",
       "schema": {
         "type": "object",
         "properties": {

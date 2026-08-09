@@ -2,7 +2,7 @@
   "name": "cls-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185138.158937,
+  "evaluated_at": 1786247909.475912,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -21,16 +21,16 @@
       "details": {
         "tools_total": 20,
         "tools_callable": 0,
-        "tools_probed": 4
+        "tools_probed": 5
       }
     },
     "reliability": {
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.051,
+        "avg_latency_s": 0.124,
         "failure_rate": 0.0,
-        "attempts": 8
+        "attempts": 10
       }
     },
     "security": {
@@ -906,7 +906,7 @@
           },
           "timeZone": {
             "type": "string",
-            "default": "Asia/Singapore",
+            "default": "UTC",
             "description": "时区，如 Asia/Shanghai。若 timeString 不含时区偏移信息则必须提供。"
           },
           "unit": {
@@ -952,7 +952,7 @@
           },
           "timeZone": {
             "type": "string",
-            "default": "Asia/Singapore",
+            "default": "UTC",
             "description": "输出时区，如 Asia/Shanghai。默认使用系统时区。"
           }
         },

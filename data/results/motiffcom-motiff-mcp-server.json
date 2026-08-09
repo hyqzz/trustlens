@@ -2,11 +2,11 @@
   "name": "@motiffcom/motiff-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185098.6191854,
+  "evaluated_at": 1786247892.989464,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 63.6,
+  "total_score": 64.0,
   "grade": "C",
   "dimensions": {
     "functionality": {
@@ -19,10 +19,10 @@
       }
     },
     "reliability": {
-      "value": 98.3,
+      "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.691,
+        "avg_latency_s": 0.456,
         "failure_rate": 0.0,
         "attempts": 4
       }

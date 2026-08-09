@@ -2,27 +2,27 @@
   "name": "playwright",
   "server_type": "mcp-server",
   "source": "microsoft",
-  "evaluated_at": 1786185056.017939,
+  "evaluated_at": 1786247883.4852176,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 67.8,
-  "grade": "C",
+  "total_score": 76.7,
+  "grade": "B",
   "dimensions": {
     "functionality": {
-      "value": 40.0,
+      "value": 70.0,
       "findings": [],
       "details": {
         "tools_total": 24,
-        "tools_callable": 0,
+        "tools_callable": 2,
         "tools_probed": 4
       }
     },
     "reliability": {
-      "value": 100.0,
+      "value": 96.5,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.004,
+        "avg_latency_s": 0.89,
         "failure_rate": 0.0,
         "attempts": 8
       }
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 25.0,
+      "value": 20.8,
       "findings": [],
       "details": {
-        "success_rate": 0.25,
+        "success_rate": 0.208,
         "models": [
           "deepseek"
         ],

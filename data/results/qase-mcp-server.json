@@ -2,11 +2,11 @@
   "name": "@qase/mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185100.6583548,
+  "evaluated_at": 1786247893.9792993,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 69.4,
+  "total_score": 71.7,
   "grade": "C",
   "dimensions": {
     "functionality": {
@@ -22,7 +22,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.002,
+        "avg_latency_s": 0.001,
         "failure_rate": 0.0,
         "attempts": 10
       }
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 7.7,
+      "value": 23.1,
       "findings": [],
       "details": {
-        "success_rate": 0.077,
+        "success_rate": 0.231,
         "models": [
           "deepseek"
         ],

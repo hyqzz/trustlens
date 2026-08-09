@@ -2,11 +2,11 @@
   "name": "@professional-wiki/mediawiki-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185099.7142856,
+  "evaluated_at": 1786247893.6064208,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 84.0,
+  "total_score": 78.6,
   "grade": "B",
   "dimensions": {
     "functionality": {
@@ -14,17 +14,17 @@
       "findings": [],
       "details": {
         "tools_total": 29,
-        "tools_callable": 3,
-        "tools_probed": 3
+        "tools_callable": 4,
+        "tools_probed": 4
       }
     },
     "reliability": {
-      "value": 81.5,
+      "value": 60.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 2.586,
+        "avg_latency_s": 5.77,
         "failure_rate": 0.0,
-        "attempts": 6
+        "attempts": 8
       }
     },
     "security": {

@@ -2,11 +2,11 @@
   "name": "@tocharianou/mcp-server-kibana",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185112.5711842,
+  "evaluated_at": 1786247897.2992215,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 79.2,
+  "total_score": 77.3,
   "grade": "B",
   "dimensions": {
     "functionality": {
@@ -22,7 +22,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.029,
+        "avg_latency_s": 0.025,
         "failure_rate": 0.0,
         "attempts": 8
       }
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 31.2,
+      "value": 18.8,
       "findings": [],
       "details": {
-        "success_rate": 0.312,
+        "success_rate": 0.188,
         "models": [
           "deepseek"
         ],

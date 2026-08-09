@@ -2,7 +2,7 @@
   "name": "@ehrocks/fe-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185088.1562345,
+  "evaluated_at": 1786247888.2715466,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -22,7 +22,7 @@
       "value": 60.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 5.211,
+        "avg_latency_s": 10.519,
         "failure_rate": 0.0,
         "attempts": 2
       }

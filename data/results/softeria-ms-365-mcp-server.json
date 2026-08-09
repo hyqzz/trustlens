@@ -2,7 +2,7 @@
   "name": "@softeria/ms-365-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185103.5063343,
+  "evaluated_at": 1786247895.8506925,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -22,7 +22,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.496,
+        "avg_latency_s": 0.243,
         "failure_rate": 0.0,
         "attempts": 4
       }
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 28.2,
+      "value": 27.7,
       "findings": [],
       "details": {
-        "success_rate": 0.282,
+        "success_rate": 0.277,
         "models": [
           "deepseek"
         ],

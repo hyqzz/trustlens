@@ -2,11 +2,11 @@
   "name": "@0xmonaco/mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185059.3629055,
+  "evaluated_at": 1786247884.4782138,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 63.0,
+  "total_score": 72.0,
   "grade": "C",
   "dimensions": {
     "functionality": {
@@ -19,10 +19,10 @@
       }
     },
     "reliability": {
-      "value": 71.5,
+      "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 3.708,
+        "avg_latency_s": 0.131,
         "failure_rate": 0.0,
         "attempts": 10
       }
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 12.5,
+      "value": 25.0,
       "findings": [],
       "details": {
-        "success_rate": 0.125,
+        "success_rate": 0.25,
         "models": [
           "deepseek"
         ],

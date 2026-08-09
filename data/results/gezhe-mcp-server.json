@@ -2,7 +2,7 @@
   "name": "gezhe-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185145.3771517,
+  "evaluated_at": 1786247910.8763516,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -22,7 +22,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.0,
+        "avg_latency_s": 0.004,
         "failure_rate": 0.0,
         "attempts": 2
       }

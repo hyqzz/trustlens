@@ -2,12 +2,12 @@
   "name": "next-devtools-mcp",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185155.044614,
+  "evaluated_at": 1786247916.6947849,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 87.0,
-  "grade": "B",
+  "total_score": 94.5,
+  "grade": "A",
   "dimensions": {
     "functionality": {
       "value": 95.0,
@@ -28,7 +28,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.031,
+        "avg_latency_s": 0.008,
         "failure_rate": 0.0,
         "attempts": 8
       }
@@ -41,10 +41,10 @@
       }
     },
     "compatibility": {
-      "value": 25.0,
+      "value": 75.0,
       "findings": [],
       "details": {
-        "success_rate": 0.25,
+        "success_rate": 0.75,
         "models": [
           "deepseek"
         ],

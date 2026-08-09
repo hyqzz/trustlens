@@ -2,12 +2,12 @@
   "name": "terry-mcp",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786185166.4204001,
+  "evaluated_at": 1786247920.5940256,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 85.0,
-  "grade": "B",
+  "total_score": 100.0,
+  "grade": "A",
   "dimensions": {
     "functionality": {
       "value": 100.0,
@@ -22,7 +22,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.046,
+        "avg_latency_s": 0.006,
         "failure_rate": 0.0,
         "attempts": 2
       }
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 0.0,
+      "value": 100.0,
       "findings": [],
       "details": {
-        "success_rate": 0.0,
+        "success_rate": 1.0,
         "models": [
           "deepseek"
         ],
