@@ -350,7 +350,8 @@ def _nav(t: dict, en: bool, current: str) -> str:
             f'<a href="{sk_href}"{sk_on}>{t["nav_skills"]}</a></nav>')
 
 
-def _head(t: dict, title: str, path: str, alt_path: str, rel_alt: str) -> str:
+def _head(t: dict, title: str, path: str, alt_path: str, rel_alt: str,
+          extra_jsonld: str = "") -> str:
     canonical = f"{BASE_URL}{path}"
     alt = f"{BASE_URL}{alt_path}"
     script = LANG_SCRIPT % {"is_zh": "true" if t["is_zh"] else "false", "alt": rel_alt}
@@ -369,10 +370,16 @@ def _head(t: dict, title: str, path: str, alt_path: str, rel_alt: str) -> str:
 <meta property="og:description" content="{_esc(t['meta_desc'])}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:site_name" content="TrustLens · ICodeStar">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{BASE_URL}{'/og-card.png' if t['is_zh'] else '/og-card-en.png'}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{_esc(title)}">
 <meta name="twitter:description" content="{_esc(t['meta_desc'])}">
+<meta name="twitter:image" content="{BASE_URL}{'/og-card.png' if t['is_zh'] else '/og-card-en.png'}">
 {script}
+{extra_jsonld}
 <style>{CSS}</style></head><body>"""
 
 
@@ -735,6 +742,84 @@ def _render_skills_index(skills: list[dict], lang: str, slugs: dict[str, str]) -
                  f"{'' if en else '/en/'}skills.html", "") + body
 
 
+def _detail_jsonld(r: ServerReport, t: dict, en: bool, path: str) -> str:
+    """server 详情页结构化数据：SoftwareApplication(评分/评测) + 面包屑，供 Google 富摘要。"""
+    lang = "en" if en else "zh"
+    grade_full = GRADE_LABEL[lang].get(r.grade, r.grade)
+    dims_desc = ("; " if en else "；").join(
+        f"{DIM_LABEL[lang].get(k, k)} {dim.value:.1f}" for k, dim in r.dimensions.items())
+    ts = time.strftime("%Y-%m-%d", time.gmtime(r.evaluated_at))
+    if en:
+        body = (f"TrustLens automated evaluation: trust score {r.total_score:.1f}/100, "
+                f"grade {grade_full}. Dimensions: {dims_desc}.")
+        crumb = [("Leaderboard", "/en/"), ("This server", None)]
+    else:
+        body = (f"TrustLens 自动化实测：信任分 {r.total_score:.1f}/100，等级 {grade_full}。"
+                f"维度得分：{dims_desc}。")
+        crumb = [("信任榜", "/"), ("本服务器", None)]
+    data = {"@context": "https://schema.org", "@graph": [
+        {"@type": "SoftwareApplication", "name": r.name,
+         "applicationCategory": "DeveloperApplication", "operatingSystem": "Any",
+         "url": f"{BASE_URL}{path}", "dateModified": ts,
+         "description": t["meta_desc"],
+         "author": {"@type": "Organization", "name": "ICodeStar 智码星", "url": BASE_URL},
+         "aggregateRating": {"@type": "AggregateRating",
+                             "ratingValue": round(r.total_score, 1),
+                             "bestRating": 100, "worstRating": 0,
+                             "ratingCount": 1, "reviewCount": 1},
+         "review": {"@type": "Review",
+                    "author": {"@type": "Organization", "name": "ICodeStar 智码星",
+                               "url": BASE_URL},
+                    "datePublished": ts, "reviewBody": body,
+                    "reviewRating": {"@type": "Rating",
+                                     "ratingValue": round(r.total_score, 1),
+                                     "bestRating": 100, "worstRating": 0}}},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": crumb[0][0],
+             "item": f"{BASE_URL}{crumb[0][1]}"},
+            {"@type": "ListItem", "position": 2, "name": crumb[1][0]}]}
+    ]}
+    return f'<script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>'
+
+
+def _skill_jsonld(s: dict, name_display: str, t: dict, en: bool, path: str) -> str:
+    """skill 详情页结构化数据：SoftwareSourceCode(三维评分) + 面包屑。"""
+    lang = "en" if en else "zh"
+    grade_full = GRADE_LABEL[lang].get(s.get("grade", ""), s.get("grade", ""))
+    ts = time.strftime("%Y-%m-%d", time.gmtime())
+    if en:
+        body = (f"TrustLens automated evaluation: trust score {s.get('total_score', 0):.1f}/100, "
+                f"grade {grade_full}.")
+        crumb = [("Skills", "/skills.html"), ("This skill", None)]
+    else:
+        body = (f"TrustLens 自动化实测：信任分 {s.get('total_score', 0):.1f}/100，等级 {grade_full}。")
+        crumb = [("Skills 信任榜", "/skills.html"), ("本 Skill", None)]
+    repo = s.get("repo", "")
+    data = {"@context": "https://schema.org", "@graph": [
+        {"@type": "SoftwareSourceCode", "name": name_display,
+         "codeRepository": f"https://github.com/{repo}" if repo else "",
+         "url": f"{BASE_URL}{path}", "dateModified": ts,
+         "description": t["meta_desc"],
+         "author": {"@type": "Organization", "name": "ICodeStar 智码星", "url": BASE_URL},
+         "aggregateRating": {"@type": "AggregateRating",
+                             "ratingValue": round(s.get("total_score", 0), 1),
+                             "bestRating": 100, "worstRating": 0,
+                             "ratingCount": 1, "reviewCount": 1},
+         "review": {"@type": "Review",
+                    "author": {"@type": "Organization", "name": "ICodeStar 智码星",
+                               "url": BASE_URL},
+                    "datePublished": ts, "reviewBody": body,
+                    "reviewRating": {"@type": "Rating",
+                                     "ratingValue": round(s.get("total_score", 0), 1),
+                                     "bestRating": 100, "worstRating": 0}}},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": crumb[0][0],
+             "item": f"{BASE_URL}{crumb[0][1]}"},
+            {"@type": "ListItem", "position": 2, "name": crumb[1][0]}]}
+    ]}
+    return f'<script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>'
+
+
 def _render_detail(r: ServerReport, lang: str, install_cmd: list[str] | None = None) -> str:
     t = T[lang]
     en = lang == "en"
@@ -793,7 +878,8 @@ def _render_detail(r: ServerReport, lang: str, install_cmd: list[str] | None = N
     title = t["report_title"].format(name=r.name)
     path = f"{'/en' if en else ''}/server/{slug}.html"
     alt = f"{'' if en else '/en'}/server/{slug}.html"
-    return _head(t, title, path, alt, toggle_href) + body
+    return _head(t, title, path, alt, toggle_href,
+                 extra_jsonld=_detail_jsonld(r, t, en, path)) + body
 
 
 def _render_skill_detail(s: dict, lang: str, slug: str) -> str:
@@ -864,7 +950,8 @@ def _render_skill_detail(s: dict, lang: str, slug: str) -> str:
     title = t["sk_report_title"].format(name=name_display)
     path = f"{'/en' if en else ''}/skill/{slug}.html"
     alt = f"{'' if en else '/en'}/skill/{slug}.html"
-    return _head(t, title, path, alt, toggle_href) + body
+    return _head(t, title, path, alt, toggle_href,
+                 extra_jsonld=_skill_jsonld(s, name_display, t, en, path)) + body
 
 
 def _render_sitemap(reports: list[ServerReport], skills: list[dict] | None = None,
@@ -927,4 +1014,9 @@ def build_site(results_dir: Path | None = None, dist: Path | None = None) -> Pat
         (dist / "en" / "skill" / f"{slug}.html").write_text(_render_skill_detail(s, "en", slug), encoding="utf-8")
     (dist / "sitemap.xml").write_text(_render_sitemap(reports, skills, skill_slugs), encoding="utf-8")
     (dist / "robots.txt").write_text(_render_robots(), encoding="utf-8")
+    try:
+        from .ogcard import render_og_cards
+        render_og_cards(dist, reports, skills)
+    except Exception:
+        pass
     return dist

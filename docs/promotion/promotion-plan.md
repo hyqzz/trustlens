@@ -63,8 +63,25 @@
 
 | 渠道 | 语言 | 文件 |
 |---|---|---|
-| 掘金/公众号/知乎 | 中 | `docs/launch/01-juejin-zh.md` |
+| 掘金（首发） | 中 | `docs/launch/01-juejin-zh.md` |
+| 公众号 | 中 | `docs/promotion/wechat-mp.md` |
+| 知乎（回答+专栏） | 中 | `docs/promotion/zhihu.md` |
 | V2EX | 中 | `docs/promotion/v2ex.md` |
-| Dev.to / X | 英 | `docs/launch/02-devto-en.md` / `docs/promotion/x-thread-en.md` |
+| CSDN / OSCHINA / SegmentFault | 中 | `docs/promotion/csdn-oschina-segmentfault.md` |
+| 即刻 / 微博 | 中 | `docs/promotion/weibo-jike.md` |
+| B站 / 视频号 | 中 | `docs/promotion/bilibili-script.md` |
+| 科技媒体投稿 | 中 | `docs/promotion/media-pitch-zh.md` |
+| 阮一峰周刊 / HelloGitHub | 中 | `docs/promotion/weekly-submissions.md` |
+| 每周红黑榜 | 中 | `docs/promotion/weekly-zh.md` |
+| Dev.to（英文首发） | 英 | `docs/launch/02-devto-en.md` |
+| X / LinkedIn | 英 | `docs/promotion/x-thread-en.md` / `linkedin.md` |
 | Hacker News | 英 | `docs/promotion/show-hn.md` |
 | Reddit | 英 | `docs/promotion/reddit.md` |
+| Product Hunt | 英 | `docs/promotion/producthunt.md` |
+| Lobsters / IndieHackers | 英 | `docs/promotion/lobsters-indiehackers.md` |
+| Medium / HackerNoon | 英 | `docs/promotion/medium-hackernoon.md` |
+| awesome-mcp-servers PR | 英 | `docs/promotion/awesome-pr.md` |
+| 每周红黑榜 | 英 | `docs/promotion/weekly-en.md` |
+| **执行清单（调度+追踪+信号统计）** | — | `docs/promotion/checklist.md` |
+| **账号与资质确认** | — | `docs/promotion/accounts-checklist.md` |
+| **搜索引擎收录（GSC/Bing/百度）** | — | `docs/promotion/seo-submit.md` |
