@@ -6,12 +6,12 @@
 ## L1 · 首发条（D-Day 当天）
 
 **标题：**
-60% of public MCP servers are unusable out of the box — I benchmarked 112 of them.
+60.7% of public MCP servers are unusable out of the box — I benchmarked 112 of them.
 
 **正文：**
 I've spent the last month building TrustLens, an open-source "QA lab" for the agent ecosystem: it runs real MCP servers in a zero-credential sandbox, checks the protocol handshake, generates realistic probe args with DeepSeek-V4 Flash, and outputs a 0–100 trust score — with every byte of evidence committed to the repo (git history is the audit log).
 
-First real run: **112 distinct npm/PyPI servers → only 8 grade A (7%), 67 are F (60%)** — they never complete a handshake with the standard `npx -y <pkg>` and no config. The official filesystem server scores C (70). "Popular" is not a reliability signal.
+First real run: **112 distinct npm/PyPI servers → only 7 grade A (6.3%), 68 are F (60.7%)** — they never complete a handshake with the standard `npx -y <pkg>` and no config. The official filesystem server scores C (70). "Popular" is not a reliability signal.
 
 Leaderboard (bilingual, weekly auto-update): https://trustlens.icodestar.net/en/
 Repo: https://github.com/hyqzz/trustlens
@@ -44,7 +44,7 @@ I left a stable role to build agent-infrastructure tooling. Here's what 15 years
 
 Three things this project forced me to relearn:
 1. **Auditability beats claims.** Every score ships with its evidence; git history is the audit log. In a "trust" product, transparency is the product.
-2. **"Out of the box" is a spec, not a wish.** 60% of the 112 real MCP servers I benchmarked never complete a handshake with zero config. Most users are not power users.
+2. **"Out of the box" is a spec, not a wish.** 60.7% of the 112 real MCP servers I benchmarked never complete a handshake with zero config. Most users are not power users.
 3. **Harsh, specific feedback is the best gift.** The HN / r/mcp threads taught me more in a week than a year of retrospectives.
 
 Looking for opportunities in agent infrastructure / AI tooling / developer platforms. Remote-friendly, happy to share the full data and methodology.

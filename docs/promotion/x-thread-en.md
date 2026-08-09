@@ -3,7 +3,7 @@
 1/
 I benchmarked 112 distinct real MCP servers in a clean-room, zero-credential environment.
 
-Only 8 grade A (7%). 67 (60%) are F — they never complete a handshake with the standard npx start and no config.
+Only 7 grade A (6.3%). 68 (60.7%) are F — they never complete a handshake with the standard npx start and no config.
 
 Nobody measures this stuff. So I built the thing that does. 🧵
 
@@ -29,9 +29,9 @@ https://trustlens.icodestar.net/en/
 
 5/
 The numbers:
-• 112 distinct servers evaluated → A:8 B:13 C:21 D:3 F:67 (60% unusable out of the box)
-• failure modes (audited from stderr of the 66 handshake failures): 49 startup crash, 14 crash on missing API key, 2 package resolution/compat, 1 genuine hang
-• exactly one perfect score (ifconfig-mcp, 100) and only 8 A's; the hugely popular official filesystem is C (70) and desktop-commander is C (72); even duckduckgo-search (84, B) and ref-tools-mcp (93, A) prove that hot repos ≠ reliability
+• 112 distinct servers evaluated → A:7 B:14 C:20 D:3 F:68 (60.7% unusable out of the box)
+• failure modes (audited from stderr of the 68 handshake failures): startup crashes and missing-API-key crashes dominate, plus a few package-resolution/compat failures and an occasional genuine hang (per-server stderr audit on each detail page)
+• exactly one perfect score (ifconfig-mcp, 100) and only 7 A's; the hugely popular official filesystem is C (70) and desktop-commander is C (72); even duckduckgo-search (84, B) and ref-tools-mcp (93, A) prove that hot repos ≠ reliability
 
 6/
 Open source, Apache-2.0. Harshest criticism welcome:

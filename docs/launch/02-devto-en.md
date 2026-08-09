@@ -13,7 +13,7 @@ Less than two years after MCP shipped, there are **60,000+ public MCP servers** 
 
 The ecosystem has app stores, but no review system. Thousands of products, no quality inspection.
 
-## Large-scale measurement: 60% of public servers are unusable
+## Large-scale measurement: about 60% of public servers are unusable
 
 I took **real MCP servers published on npm/PyPI** (official reference implementations + community servers), de-duplicated the same package appearing under multiple names, and evaluated them in an isolated, **zero-credential** environment. Three (puppeteer, @enfyra, @mapbox) are paused pending methodology, and our built-in self-test fixture is not ranked — the leaderboard covers **112 distinct real servers**:
 
@@ -23,16 +23,16 @@ I took **real MCP servers published on npm/PyPI** (official reference implementa
 | B | 13 | 12% | Usable, minor issues |
 | C | 21 | 19% | Mediocre |
 | D | 3 | 3% | Risky |
-| **F** | **67** | **60%** | **Cannot be used** |
+| **F** | **68** | **60.7%** | **Cannot be used** |
 
 **Six in ten public MCP servers, installed per their README with no extra credentials, never even complete a protocol handshake.** Failure modes (audited from each process's stderr):
 
-- **Startup crash / process exit (49)**: the process dies within the handshake window (JS/Python stack, module load failure, port conflicts)
-- **Requires API credentials just to boot (14)**: crashes on a missing key the docs never mention
-- **Package resolution / compatibility (2)**: `npx` can't even find an executable entry, or deps fail to install
-- **Genuine startup hang (1)**: the process starts but never completes initialize within 90s — silently waits for undocumented config or interactive input
+- **Startup crash / process exit**: the process dies within the handshake window (JS/Python stack, module load failure, port conflicts)
+- **Requires API credentials just to boot**: crashes on a missing key the docs never mention
+- **Package resolution / compatibility**: `npx` can't even find an executable entry, or deps fail to install
+- **Genuine startup hang**: the process starts but never completes initialize within 90s — silently waits for undocumented config or interactive input
 
-**"Popular" is not a reliability signal:** only 8 servers earn an A and exactly one is perfect — `ifconfig-mcp` (100). Even the hugely popular official `filesystem` server scores just C (70) and `desktop-commander` sits at C (72). **"Popular" and "usable" are different things; "obscure" and "reliable" are different things too.**
+**"Popular" is not a reliability signal:** only 7 servers earn an A and exactly one is perfect — `ifconfig-mcp` (100). Even the hugely popular official `filesystem` server scores just C (70) and `desktop-commander` sits at C (72). **"Popular" and "usable" are different things; "obscure" and "reliable" are different things too.**
 
 ## What TrustLens is
 

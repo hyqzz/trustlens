@@ -6,7 +6,7 @@
 ## 即刻本（技术从业者多，可发长一点）
 
 **J1（配 og-card.png）：**
-实测 112 个去重的真实 MCP 服务器，60%（67 个）按文档装完、不配任何凭证，90 秒内连协议握手都完不成。唯一满分是名不见经传的 ifconfig-mcp；官方 filesystem 只有 C 级。星标代表被看到，不代表能用。榜单每周自动更新：trustlens.icodestar.net
+实测 112 个去重的真实 MCP 服务器，60.7%（68 个）按文档装完、不配任何凭证，90 秒内连协议握手都完不成。唯一满分是名不见经传的 ifconfig-mcp；官方 filesystem 只有 C 级。星标代表被看到，不代表能用。榜单每周自动更新：trustlens.icodestar.net
 
 **J2（配榜单截图，偏方法论）：**
 做 Agent 工具评测的第 1 个心得：想反映"真实可用性"，光测能不能启动不够。功能维度我们用 DeepSeek 智能探针——按每个工具的真实场景生成调用参数（文件→路径、HTTP→example.com、搜索→关键词），安全护栏清洗后再真实调用。同一个工具，模型到底能不能用起来——这个数据没人发布过。trustlens.icodestar.net
@@ -17,7 +17,7 @@
 ## 微博本（140–200 字，带话题）
 
 **W1：**
-#AI应用 #开源 #MCP 实测 112 个去重的真实 MCP 服务器：60% 装完根本没法用（F 级），官方 filesystem 只有 C 级，唯一满分是名不见经传的 ifconfig-mcp。GitHub 星标≠能用。我把评测做成了开源项目 TrustLens，数据全公开、每周自动更新。装 Agent 工具之前，先查个分：trustlens.icodestar.net
+#AI应用 #开源 #MCP 实测 112 个去重的真实 MCP 服务器：约六成装完根本没法用（F 级），官方 filesystem 只有 C 级，唯一满分是名不见经传的 ifconfig-mcp。GitHub 星标≠能用。我把评测做成了开源项目 TrustLens，数据全公开、每周自动更新。装 Agent 工具之前，先查个分：trustlens.icodestar.net
 
 **W2（配分享卡）：**
 #大模型 #开源 88% 的企业 Agent 试点死在上生产之前——不是模型不行，是没人敢保证工具组合靠谱。MCP 生态 6 万+ 服务器，有应用商店没大众点评。TrustLens 想做这个"质检局"：实测 112 个服务器 + 110 个 Skills，0–100 信任分。https://trustlens.icodestar.net/

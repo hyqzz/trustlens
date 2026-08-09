@@ -6,12 +6,12 @@
 ## Lobsters
 
 **提交标题：**
-I benchmarked 112 distinct MCP servers — 60% are unusable out of the box
+I benchmarked 112 distinct MCP servers — ~60% are unusable out of the box
 
 **提交描述：**
 MCP has 60k+ public servers and essentially no quality signal. I built an evaluation engine that runs each server in a sandbox (zero credentials, 90s handshake, DeepSeek-generated smart probes, real-model tool-call checks) and outputs a 0–100 trust score with all evidence committed to the repo.
 
-First real run over 112 distinct npm/PyPI servers: **only 8 (7%) grade A, 67 (60%) are F** — they never complete a handshake with the standard `npx -y <pkg>` and no config. Failure modes (audited from stderr): startup crash (49), missing-API-key crash (14), package resolution/compat (2), genuine hang (1). Even the official filesystem server is C (70).
+First real run over 112 distinct npm/PyPI servers: **only 7 (6.3%) grade A, 68 (60.7%) are F** — they never complete a handshake with the standard `npx -y <pkg>` and no config. Failure modes (audited from stderr): startup crashes and missing-API-key crashes dominate, plus a few package-resolution/compat failures and an occasional genuine hang. Even the official filesystem server is C (70).
 
 All data is JSON in the repo — git history is the audit log. Leaderboard: https://trustlens.icodestar.net/en/
 

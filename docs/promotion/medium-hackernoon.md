@@ -14,7 +14,7 @@ I Benchmarked 112 Real MCP Servers — 60% Are Unusable Out of the Box (and I Bu
 - 每段小标题用英文"##"，命令块保留；表格 Medium 支持不佳 → 等级表改成列表或 HTML 表格
 
 **正文适配（相对 devto 文）：**
-1. 开头加 2 行 summary："**TL;DR**：112 distinct npm/PyPI MCP servers, zero credentials, 90s handshake → only 8 grade A, 67 (60%) are F. All data public (git = audit log)."
+1. 开头加 2 行 summary："**TL;DR**：112 distinct npm/PyPI MCP servers, zero credentials, 90s handshake → only 7 grade A, 68 (60.7%) are F. All data public (git = audit log)."
 2. 结尾 CTA 改为："If you'd like the data for your own research, all JSON is in the repo — and the leaderboard refreshes weekly. Comments welcome."
 3. 段落之间留白更大（Medium 阅读器吃短段落）
 

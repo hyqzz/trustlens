@@ -116,7 +116,7 @@ def _render_card(reports: list, skills: list, en: bool) -> Image.Image:
     counts = Counter(getattr(r, "grade", "") for r in reports)
     n = len(reports)
     n_f = counts.get("F", 0)
-    pct_f = round(n_f / n * 100) if n else 0
+    pct_f = (n_f / n * 100) if n else 0.0
     n_a = counts.get("A", 0)
     n_sk = len(skills)
 
@@ -147,7 +147,7 @@ def _render_card(reports: list, skills: list, en: bool) -> Image.Image:
     x0 = 60
     cards = [
         (f"{n}", "个去重真实服务器" if not en else "distinct real servers", _ACCENT),
-        (f"{pct_f}%", "开箱即用无法用（F 级）" if not en else "unusable out of the box (F)", _RED),
+        (f"{pct_f:.1f}%", "开箱即用无法用（F 级）" if not en else "unusable out of the box (F)", _RED),
         (f"{n_a}", "个真正开箱即用（A 级）" if not en else "grade A out of the box", _GREEN),
     ]
     for i, (num, lab, col) in enumerate(cards):
