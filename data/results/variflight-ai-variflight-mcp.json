@@ -2,11 +2,11 @@
   "name": "@variflight-ai/variflight-mcp",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786247904.7690618,
+  "evaluated_at": 1786850292.6693423,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 65.7,
+  "total_score": 64.0,
   "grade": "C",
   "dimensions": {
     "functionality": {
@@ -22,7 +22,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.375,
+        "avg_latency_s": 0.288,
         "failure_rate": 0.0,
         "attempts": 10
       }
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 11.1,
+      "value": 0.0,
       "findings": [],
       "details": {
-        "success_rate": 0.111,
+        "success_rate": 0.0,
         "models": [
           "deepseek"
         ],

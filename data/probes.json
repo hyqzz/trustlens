@@ -1,11 +1,11 @@
 {
-  "generated_at": 1786247883.310125,
+  "generated_at": 1786850270.9094026,
   "engine": "deepseek",
   "probes": {
     "0xmonaco-mcp-server": {
       "search_docs": {
         "args": {
-          "query": "Monaco protocol SDK trading guide"
+          "query": "protocol"
         }
       },
       "get_trading_pairs": {
@@ -25,16 +25,16 @@
       },
       "get_candlesticks": {
         "args": {
-          "tradingPairId": "550e8400-e29b-41d4-a716-446655440000",
+          "tradingPairId": "9e1b2c3d-4f5a-6b7c-8d9e-0f1a2b3c4d5e",
           "interval": "1h",
-          "startTime": 1706720400,
-          "endTime": 1706724000,
+          "startTime": 1710000000,
+          "endTime": 1710086400,
           "limit": 100
         }
       },
       "get_market_metadata": {
         "args": {
-          "tradingPairId": "9b1c6f3e-1a4d-4e2a-9f2c-2a4b6e8f1c0a"
+          "tradingPairId": "1f6e2b8a-5c3d-4e7f-9a2b-8c1d4e5f6a7b"
         }
       }
     },
@@ -54,7 +54,11 @@
         "args": {
           "addresses": [
             {
-              "address": "0xA0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+              "network": "eth-mainnet"
+            },
+            {
+              "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
               "network": "eth-mainnet"
             },
             {
@@ -68,16 +72,16 @@
         "args": {
           "symbol": "BTC",
           "startTime": "2023-01-01",
-          "endTime": "2023-01-31",
+          "endTime": "2023-12-31",
           "interval": "1d"
         }
       },
       "fetchTokenPriceHistoryByTimeFrame": {
         "args": {
           "symbol": "BTC",
-          "timeFrame": "past-7d",
+          "timeFrame": "last week",
           "interval": "1d",
-          "useNaturalLanguageProcessing": false
+          "useNaturalLanguageProcessing": true
         }
       }
     },
@@ -88,16 +92,12 @@
       "unlock": {
         "__skip__": true
       },
-      "sync": {
-        "__skip__": true
-      },
       "status": {
         "__skip__": true
       },
       "list": {
         "args": {
           "type": "items",
-          "search": "example",
           "trash": false
         }
       }
@@ -106,28 +106,34 @@
       "get_build_failure_logs": {
         "args": {
           "params": {
-            "projectSlug": "gh/octo-org/Hello-World",
+            "projectSlug": "gh/vercel/next.js",
             "branch": "main",
-            "projectURL": "https://app.circleci.com/pipelines/gh/octo-org/Hello-World?branch=main",
-            "workspaceRoot": "/tmp/trustlens_probe.txt"
+            "outputDir": "~/Downloads"
           }
         }
       },
       "find_flaky_tests": {
         "args": {
           "params": {
-            "projectSlug": "gh/cypress-io/cypress"
+            "projectSlug": "gh/facebook/react"
+          }
+        }
+      },
+      "get_latest_pipeline_status": {
+        "args": {
+          "params": {
+            "projectURL": "https://app.circleci.com/pipelines/gh/circleci/circleci-docs?branch=main"
           }
         }
       },
       "get_job_test_results": {
         "args": {
           "params": {
-            "projectSlug": "gh/circleci/circleci-docs",
+            "projectSlug": "gh/angular/angular",
             "branch": "main",
             "workspaceRoot": "/tmp/trustlens_probe.txt",
-            "gitRemoteURL": "https://github.com/circleci/circleci-docs.git",
-            "projectURL": "https://app.circleci.com/pipelines/gh/circleci/circleci-docs"
+            "gitRemoteURL": "https://github.com/angular/angular.git",
+            "projectURL": "https://app.circleci.com/pipelines/gh/angular/angular"
           }
         }
       },
@@ -136,75 +142,43 @@
       }
     },
     "cls-mcp-server": {
-      "SearchLog": {
-        "args": {
-          "From": 1672531200000,
-          "To": 1672532100000,
-          "Query": "level:ERROR",
-          "TopicId": "example-topic-id",
-          "Sort": "desc",
-          "Limit": 20,
-          "Offset": 0
-        }
-      },
       "TextToSearchLogQuery": {
         "args": {
-          "Text": "查询 ERROR 级别日志按小时统计数量",
+          "Text": "查询 ERROR 级别日志，并按小时统计数量",
           "Region": "ap-guangzhou",
-          "TopicId": "6f7b8c9d-1a2b-3c4d-5e6f-7a8b9c0d1e2f"
+          "TopicId": "topic-9a3f7c2e5b1d4f8a"
         }
       },
       "DescribeIndex": {
         "args": {
           "Region": "ap-guangzhou",
-          "TopicId": "6e0f1f0e-1c3e-4b3a-8f3f-2b2d5c2e4b8a"
+          "TopicId": "1f8e3b2a-4c6d-4e7f-9a0b-2c3d4e5f6a7b"
         }
       },
       "DescribeLogHistogram": {
-        "args": {
-          "Region": "ap-guangzhou",
-          "TopicId": "c7a5a2e0-1a2b-4c3d-8e4f-5a6b7c8d9e0f",
-          "From": 1704067200000,
-          "To": 1704068100000,
-          "Query": "*",
-          "Interval": 60000
-        }
+        "__skip__": true
       }
     },
     "commands": {
       "run_process": {
         "args": {
           "argv": [
-            "/tmp/trustlens_probe.txt",
-            "where.exe"
+            "echo",
+            "hello from MCP"
           ],
-          "cwd": "C:\\",
-          "timeout_ms": 15000
+          "cwd": "/tmp/trustlens_probe.txt",
+          "timeout_ms": 10000
         }
       }
     },
     "dbx-app-mcp-server": {
-      "dbx_add_connection": {
-        "args": {
-          "name": "Sample PostgreSQL Connection",
-          "db_type": "postgresql",
-          "host": "db.example.com",
-          "port": 5432,
-          "username": "",
-          "password": "",
-          "database": "postgres",
-          "ssl": true,
-          "driver_profile": "PostgreSQL"
-        }
-      },
       "dbx_close_session": {
         "args": {
-          "session_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "session_id": "session_abc123"
         }
       },
       "dbx_describe_table": {
         "args": {
-          "connection_name": "default",
           "database": "samples",
           "schema": "nyctaxi",
           "table": "trips"
@@ -212,19 +186,25 @@
       },
       "dbx_execute_and_show": {
         "__skip__": true
+      },
+      "dbx_execute_query": {
+        "args": {
+          "database": "default",
+          "sql": "SELECT 1 AS test"
+        }
       }
     },
     "desktop-commander": {
       "get_config": {
         "args": {
-          "origin": "ui"
+          "origin": "llm"
         }
       },
       "set_config_value": {
         "args": {
           "key": "telemetryEnabled",
           "value": false,
-          "origin": "llm"
+          "origin": "ui"
         }
       },
       "read_file": {
@@ -232,7 +212,7 @@
           "path": "https://example.com/",
           "isUrl": true,
           "offset": 0,
-          "length": 100,
+          "length": 1000,
           "origin": "llm"
         }
       },
@@ -240,19 +220,23 @@
         "args": {
           "paths": [
             "/tmp/trustlens_probe.txt",
-            "/tmp/trustlens_probe.txt",
             "/tmp/trustlens_probe.txt"
           ]
         }
       },
       "write_file": {
-        "__skip__": true
+        "args": {
+          "path": "example.txt",
+          "content": "Hello, this is a test file.",
+          "mode": "rewrite",
+          "origin": "llm"
+        }
       }
     },
     "duckduckgo-mcp-server": {
       "duckduckgo_web_search": {
         "args": {
-          "query": "latest news on artificial intelligence",
+          "query": "latest developments in artificial intelligence",
           "count": 5,
           "safeSearch": "moderate"
         }
@@ -266,7 +250,7 @@
         "args": {
           "url": "https://example.com",
           "start_index": 0,
-          "max_length": 2000,
+          "max_length": 8000,
           "backend": null
         }
       }
@@ -274,7 +258,7 @@
     "ehrocks-fe-mcp-server": {
       "search_hero_design_component_examples": {
         "args": {
-          "query": "date picker range",
+          "query": "modal confirmation dialog with action buttons and loading state",
           "limit": "3",
           "threshold": "0.5"
         }
@@ -292,32 +276,28 @@
         "__skip__": true
       },
       "agencyHosting_deployPhpApplication": {
-        "args": {
-          "domain": "example.com",
-          "archivePath": "website_20250115_143022.zip",
-          "removeArchive": false
-        }
+        "__skip__": true
       },
       "hosting_importWordpressWebsite": {
         "args": {
           "domain": "example.com",
-          "archivePath": "./wordpress-backup.zip",
-          "databaseDump": "./wordpress-db.sql"
+          "archivePath": "/tmp/trustlens_probe.txt",
+          "databaseDump": "/tmp/trustlens_probe.txt"
         }
       },
       "hosting_deployWordpressPlugin": {
         "args": {
           "domain": "example.com",
           "slug": "hello-dolly",
-          "pluginPath": "/tmp/trustlens_probe.txt"
+          "pluginPath": "./hello-dolly"
         }
       },
       "hosting_deployWordpressTheme": {
         "args": {
           "domain": "example.com",
-          "slug": "twentytwentyfive",
-          "themePath": "./twentytwentyfive",
-          "activate": false
+          "slug": "mytheme",
+          "themePath": "./themes/mytheme",
+          "activate": true
         }
       }
     },
@@ -326,7 +306,7 @@
         "args": {
           "keyword": "民法",
           "category": "1",
-          "limit": 5
+          "limit": 10
         }
       },
       "get_law_data": {
@@ -385,7 +365,7 @@
       },
       "get_prompt_by_name": {
         "args": {
-          "prompt_name": "code_review"
+          "prompt_name": "summarize"
         }
       },
       "push_prompt": {
@@ -393,17 +373,17 @@
       },
       "get_thread_history": {
         "args": {
-          "thread_id": "thread_12345",
-          "project_name": "demo_project",
+          "thread_id": "thread_abc123",
+          "project_name": "my-project",
           "page_number": 1,
-          "max_chars_per_page": 20000,
+          "max_chars_per_page": 25000,
           "preview_chars": 150
         }
       },
       "fetch_runs": {
         "args": {
           "project_name": "default",
-          "limit": 50,
+          "limit": 10,
           "page_number": 1,
           "run_type": "llm",
           "error": "false",
@@ -413,53 +393,65 @@
       }
     },
     "lsp-mcp-server": {
-      "lsp_goto_definition": {
+      "lsp_find_implementations": {
         "args": {
-          "file_path": "/tmp/trustlens_probe.txt",
-          "line": 10,
-          "column": 5
-        }
-      },
-      "lsp_goto_type_definition": {
-        "args": {
-          "file_path": "/workspace/example.ts",
-          "line": 1,
-          "column": 1
-        }
-      },
-      "lsp_find_references": {
-        "args": {
-          "file_path": "/tmp/trustlens_probe.txt",
-          "line": 1,
-          "column": 5,
-          "include_declaration": true,
-          "limit": 20,
-          "offset": 0
+          "file_path": "/app/src/main/java/com/example/pets/Animal.java",
+          "line": 3,
+          "column": 23,
+          "limit": 20
         }
       }
     },
     "microsoft-clarity-mcp-server": {
       "query-analytics-dashboard": {
         "args": {
-          "query": "Top pages by page views in the last 7 days"
+          "query": "Number of unique visitors by device category in the last 7 days"
+        }
+      },
+      "list-session-recordings": {
+        "args": {
+          "filters": {
+            "date": "2024-06-01T00:00:00.000Z",
+            "userType": "ReturningUser",
+            "sessionIntent": "High Intention",
+            "referringUrl": "https://www.google.com/",
+            "visitedUrls": [
+              {
+                "url": "https://example.com/products",
+                "operator": "startsWith"
+              }
+            ],
+            "entryUrls": [
+              {
+                "url": "https://example.com/",
+                "operator": "isExactly"
+              }
+            ],
+            "exitUrls": [
+              {
+                "url": "/thank-you",
+                "operator": "endsWith"
+              }
+            ]
+          }
         }
       },
       "query-documentation-resources": {
         "args": {
-          "query": "How to exclude your own visits from Microsoft Clarity analytics?"
+          "query": "How to set up Microsoft Clarity on a WordPress site step by step"
         }
       }
     },
     "mock-echo": {
       "echo": {
         "args": {
-          "text": "Hello, world!"
+          "text": "Hello, MCP!"
         }
       },
       "add": {
         "args": {
-          "a": 3,
-          "b": 5
+          "a": 2,
+          "b": 3
         }
       },
       "read_notes": {
@@ -469,7 +461,7 @@
     "modelcontextprotocol-server-everything": {
       "echo": {
         "args": {
-          "message": "Hello, MCP!"
+          "message": "Hello, world!"
         }
       },
       "get-annotated-message": {
@@ -494,16 +486,10 @@
       }
     },
     "modelcontextprotocol-server-filesystem": {
-      "read_file": {
-        "args": {
-          "path": "/tmp/trustlens_probe.txt",
-          "head": 5
-        }
-      },
       "read_text_file": {
         "args": {
           "path": "README.md",
-          "head": 5
+          "head": 50
         }
       },
       "read_media_file": {
@@ -514,15 +500,16 @@
       "read_multiple_files": {
         "args": {
           "paths": [
-            "docs/README.md",
-            "docs/CHANGELOG.md"
+            "README.md",
+            "package.json",
+            "LICENSE"
           ]
         }
       },
       "write_file": {
         "args": {
-          "path": "test/output.txt",
-          "content": "Hello, this is a sample file created for MCP tool validation."
+          "path": "example.txt",
+          "content": "Hello, world!"
         }
       }
     },
@@ -531,19 +518,27 @@
         "args": {
           "entities": [
             {
-              "name": "Ada Lovelace",
+              "name": "Albert Einstein",
               "entityType": "Person",
               "observations": [
-                "Mathematician and writer",
-                "Known for work on Charles Babbage's Analytical Engine"
+                "Developed the theory of relativity",
+                "Awarded Nobel Prize in Physics in 1921"
               ]
             },
             {
-              "name": "Analytical Engine",
-              "entityType": "Machine",
+              "name": "Eiffel Tower",
+              "entityType": "Landmark",
               "observations": [
-                "A proposed mechanical general-purpose computer",
-                "Designed by Charles Babbage"
+                "Located in Paris, France",
+                "Constructed in 1889"
+              ]
+            },
+            {
+              "name": "Photosynthesis",
+              "entityType": "Concept",
+              "observations": [
+                "Process used by plants to convert light energy into chemical energy",
+                "Produces oxygen as a byproduct"
               ]
             }
           ]
@@ -553,18 +548,18 @@
         "args": {
           "relations": [
             {
-              "from": "Albert Einstein",
-              "to": "Theory of Relativity",
-              "relationType": "developed"
-            },
-            {
               "from": "Marie Curie",
               "to": "Polonium",
               "relationType": "discovered"
             },
             {
-              "from": "Isaac Newton",
-              "to": "Law of Universal Gravitation",
+              "from": "Alan Turing",
+              "to": "Turing Machine",
+              "relationType": "invented"
+            },
+            {
+              "from": "Newton",
+              "to": "Laws of Motion",
               "relationType": "formulated"
             }
           ]
@@ -576,8 +571,8 @@
             {
               "entityName": "Albert Einstein",
               "contents": [
-                "Developed the theory of relativity",
-                "Won the Nobel Prize in Physics in 1921"
+                "Developed the theory of general relativity",
+                "Awarded the Nobel Prize in Physics in 1921"
               ]
             }
           ]
@@ -586,9 +581,8 @@
       "delete_entities": {
         "args": {
           "entityNames": [
-            "Paris",
-            "France",
-            "Einstein"
+            "example_entity_1",
+            "example_entity_2"
           ]
         }
       },
@@ -596,9 +590,10 @@
         "args": {
           "deletions": [
             {
-              "entityName": "test-entity-abc",
+              "entityName": "Albert Einstein",
               "observations": [
-                "temporary observation to be removed"
+                "Born in Ulm",
+                "Developed the theory of relativity"
               ]
             }
           ]
@@ -608,23 +603,12 @@
     "modelcontextprotocol-server-sequential-thinking": {
       "sequentialthinking": {
         "args": {
-          "thought": "Let me break down this problem step by step. First, I need to clarify the core objective, then gather relevant facts, and finally evaluate possible approaches before deciding on the best one.",
+          "thought": "Let me outline the key considerations for designing a paginated REST API, including performance, consistency, and client usability.",
           "thoughtNumber": 1,
           "totalThoughts": 5,
           "nextThoughtNeeded": true,
           "isRevision": false,
-          "branchFromThought": 1,
-          "branchId": "main",
           "needsMoreThoughts": true
-        }
-      }
-    },
-    "motiffcom-motiff-mcp-server": {
-      "get_motiff_node": {
-        "args": {
-          "docId": "demo-design-file",
-          "nodeId": "0:1",
-          "isDebug": false
         }
       }
     },
@@ -633,7 +617,7 @@
         "args": {
           "fileAbsolutePath": "/tmp/trustlens_probe.txt",
           "srcSheetName": "Sheet1",
-          "dstSheetName": "Sheet1 Copy"
+          "dstSheetName": "Sheet1_Copy"
         }
       },
       "excel_create_table": {
@@ -645,7 +629,9 @@
         }
       },
       "excel_describe_sheets": {
-        "__skip__": true
+        "args": {
+          "fileAbsolutePath": "/tmp/trustlens_probe.txt"
+        }
       },
       "excel_format_range": {
         "args": {
@@ -658,9 +644,21 @@
                 "fill": {
                   "pattern": "solid",
                   "color": [
-                    "#FFFF00"
+                    "#FFEB84"
                   ]
-                }
+                },
+                "border": [
+                  {
+                    "type": "top",
+                    "style": "continuous",
+                    "color": "#000000"
+                  },
+                  {
+                    "type": "bottom",
+                    "style": "continuous",
+                    "color": "#000000"
+                  }
+                ]
               },
               {
                 "decimalPlaces": 2
@@ -669,13 +667,12 @@
             [
               null,
               {
-                "border": [
-                  {
-                    "type": "top",
-                    "style": "continuous",
-                    "color": "#000000"
-                  }
-                ]
+                "fill": {
+                  "pattern": "solid",
+                  "color": [
+                    "#B4C7E7"
+                  ]
+                }
               }
             ]
           ]
@@ -699,8 +696,8 @@
       },
       "nextjs_docs": {
         "args": {
-          "topic": "app router",
-          "project_path": "./my-nextjs-project"
+          "topic": "data-fetching",
+          "project_path": "/tmp/trustlens_probe.txt"
         }
       },
       "nextjs_index": {
@@ -727,72 +724,72 @@
       },
       "browser_console_messages": {
         "args": {
-          "level": "info",
+          "level": "warning",
           "all": true
         }
       },
       "browser_handle_dialog": {
         "args": {
           "accept": true,
-          "promptText": "Hello"
+          "promptText": "sample input"
         }
+      },
+      "browser_evaluate": {
+        "__skip__": true
       }
     },
     "professional-wiki-mediawiki-mcp-server": {
       "get-page": {
         "args": {
-          "title": "Earth",
           "wiki": "en.wikipedia.org",
+          "title": "Earth",
           "content": "source",
-          "metadata": true,
-          "section": 0
+          "metadata": true
         }
       },
       "get-pages": {
-        "__skip__": true
+        "args": {
+          "titles": [
+            "Earth",
+            "Moon",
+            "Sun"
+          ],
+          "content": "source",
+          "metadata": true,
+          "followRedirects": true,
+          "wiki": "en.wikipedia.org"
+        }
       },
       "get-page-history": {
         "args": {
-          "title": "Main Page",
+          "title": "Barack Obama",
           "wiki": "en.wikipedia.org"
         }
       },
       "get-recent-changes": {
         "args": {
-          "since": "2025-03-01T00:00:00Z",
-          "until": "2025-03-02T00:00:00Z",
+          "since": "2026-04-25T00:00:00Z",
+          "until": "2026-04-26T00:00:00Z",
           "namespace": [
             0
           ],
           "types": [
             "edit",
             "new"
-          ]
+          ],
+          "hideBots": true,
+          "hideMinor": true
         }
       },
       "search-page": {
         "args": {
-          "query": "quantum mechanics",
-          "limit": 5,
+          "query": "artificial intelligence",
+          "limit": 10,
           "wiki": "en.wikipedia.org"
         }
       }
     },
     "qase-mcp-server": {
-      "qase_project_context": {
-        "args": {
-          "code": "DEMO"
-        }
-      },
-      "qase_get": {
-        "args": {
-          "entity": "user",
-          "id": 1,
-          "fields": [
-            "*"
-          ]
-        }
-      },
       "qql_search": {
         "args": {
           "query": "entity = \"case\" and project = \"DEMO\" and status = \"Actual\"",
@@ -808,17 +805,17 @@
       "qase_case_upsert": {
         "args": {
           "code": "DEMO",
-          "title": "Verify user can log in with valid credentials",
-          "description": "Ensure that a registered user can successfully log in to the application using a valid email and password.",
-          "preconditions": "A registered user account exists with known credentials.",
+          "title": "Verify login with valid credentials",
+          "description": "Ensure that a user can log in using correct username and password.",
+          "preconditions": "User is registered and has valid credentials.",
           "postconditions": "User is redirected to the dashboard.",
           "severity": "critical",
           "priority": "high",
           "type": "functional",
-          "layer": "e2e",
+          "layer": "api",
           "behavior": "positive",
-          "automation": "manual",
-          "status": "draft"
+          "automation": "to-be-automated",
+          "status": "actual"
         }
       }
     },
@@ -828,7 +825,7 @@
       },
       "ref_read_url": {
         "args": {
-          "url": "https://example.com"
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
         }
       }
     },
@@ -861,8 +858,8 @@
       },
       "element-icon-search": {
         "args": {
-          "query": "notification",
-          "limit": 5
+          "query": "warning",
+          "limit": 10
         }
       }
     },
@@ -892,20 +889,18 @@
         "args": {
           "service": "catalog",
           "method": "list",
-          "request": {
-            "limit": 10
-          }
+          "request": {}
         }
       },
       "get_type_info": {
         "args": {
-          "service": "payments",
+          "service": "catalog",
           "method": "list"
         }
       },
       "get_service_info": {
         "args": {
-          "service": "payments"
+          "service": "catalog"
         }
       }
     },
@@ -920,28 +915,28 @@
       },
       "get_release_user_stories": {
         "args": {
-          "name": "Release 1.0",
-          "results": 10
+          "name": "v1.0",
+          "results": 50
         }
       },
       "get_release_bugs": {
         "args": {
-          "name": "v1.0.0",
-          "results": 300,
+          "name": "v1.2.0",
+          "results": 100,
           "withDescription": true
         }
       },
       "get_release_features": {
         "args": {
           "name": "v1.0.0",
-          "results": 50
+          "results": 20
         }
       }
     },
     "tavily-mcp": {
       "tavily_search": {
         "args": {
-          "query": "OpenAI latest news",
+          "query": "latest developments in artificial intelligence",
           "search_depth": "advanced",
           "topic": "general",
           "time_range": "week",
@@ -951,23 +946,22 @@
       "tavily_extract": {
         "args": {
           "urls": [
-            "https://example.com",
-            "https://en.wikipedia.org/wiki/Tavily"
+            "https://example.com"
           ],
           "extract_depth": "basic",
           "include_images": false,
           "format": "markdown",
-          "include_favicon": true,
-          "query": "Tavily search API"
+          "include_favicon": false,
+          "query": "example"
         }
       },
       "tavily_crawl": {
         "args": {
           "url": "https://example.com",
-          "max_depth": 1,
+          "max_depth": 2,
           "max_breadth": 5,
           "limit": 10,
-          "instructions": "Focus on the main landing page content",
+          "instructions": "Extract the main content and list all internal links",
           "select_paths": [],
           "select_domains": [],
           "allow_external": false
@@ -976,10 +970,10 @@
       "tavily_map": {
         "args": {
           "url": "https://example.com",
-          "max_depth": 1,
-          "max_breadth": 5,
-          "limit": 10,
-          "instructions": "Map the main page structure.",
+          "max_depth": 2,
+          "max_breadth": 10,
+          "limit": 30,
+          "instructions": "Find key landing pages and documentation links.",
           "select_paths": [],
           "select_domains": [
             "^example\\.com$"
@@ -989,7 +983,7 @@
       },
       "tavily_research": {
         "args": {
-          "input": "What are the latest developments in artificial intelligence for medical imaging diagnosis?",
+          "input": "Research the health benefits of the Mediterranean diet, including key scientific studies and nutritional guidelines.",
           "model": "auto"
         }
       }
@@ -997,7 +991,7 @@
     "terry-mcp": {
       "create": {
         "args": {
-          "message": "Prepare quarterly report"
+          "message": "Prepare project status report"
         }
       }
     },
@@ -1011,16 +1005,14 @@
         "args": {
           "method": "GET",
           "path": "/api/status",
+          "params": {},
           "space": "default",
-          "params": {
-            "pretty": true
-          },
           "break_token_rule": false
         }
       },
       "search_kibana_api_paths": {
         "args": {
-          "search": "discover"
+          "search": "dashboard"
         }
       },
       "list_all_kibana_api_paths": {
@@ -1043,18 +1035,18 @@
       },
       "execute_python_script": {
         "args": {
-          "script": "print('Children in project:', [child.name for child in op('/project1').children])",
+          "script": "print('TouchDesigner nodes:', [n.name for n in op('/').children])",
           "detailLevel": "summary",
           "responseFormat": "json"
         }
       },
       "get_td_nodes": {
         "args": {
-          "parentPath": "/",
+          "parentPath": "/public",
           "pattern": "*",
           "includeProperties": false,
           "detailLevel": "summary",
-          "limit": 10,
+          "limit": 50,
           "responseFormat": "json"
         }
       },
@@ -1068,23 +1060,17 @@
       },
       "get_td_node_errors": {
         "args": {
-          "nodePath": "/project1",
+          "nodePath": "/project1/geo1",
           "detailLevel": "summary",
-          "limit": 100,
+          "limit": 50,
           "responseFormat": "json"
         }
       }
     },
     "transcend-io-mcp-server-docs": {
-      "docs_list": {
-        "args": {
-          "section": "Guides",
-          "keyword": "quickstart"
-        }
-      },
       "docs_fetch": {
         "args": {
-          "url": "https://docs.transcend.io/introduction.md"
+          "url": "https://docs.transcend.io/docs/overview.md"
         }
       }
     },
@@ -1093,16 +1079,11 @@
         "args": {
           "instructions": {
             "steps": {
-              "import": {
-                "robot": "/http/import",
-                "url": "https://example.com/photo.jpg"
-              },
               "resize": {
                 "robot": "/image/resize",
-                "use": "import",
-                "width": 200,
+                "width": 300,
                 "height": 200,
-                "resize_strategy": "fit"
+                "result": true
               }
             }
           },
@@ -1111,7 +1092,45 @@
         }
       },
       "transloadit_create_assembly": {
-        "__skip__": true
+        "args": {
+          "instructions": {
+            "steps": {
+              "resized": {
+                "robot": "/image/resize",
+                "width": 100,
+                "height": 100,
+                "result": true
+              }
+            }
+          },
+          "files": [
+            {
+              "kind": "url",
+              "field": "file",
+              "url": "https://example.com/",
+              "filename": "sample.html",
+              "contentType": "text/html"
+            }
+          ],
+          "fields": {},
+          "wait_for_completion": true,
+          "wait_timeout_ms": 60000,
+          "upload_concurrency": 2,
+          "upload_chunk_size": 1048576
+        }
+      },
+      "transloadit_get_assembly_status": {
+        "args": {
+          "assembly_url": "https://api2.transloadit.com/assemblies/abcdef0123456789"
+        }
+      },
+      "transloadit_wait_for_assembly": {
+        "args": {
+          "assembly_url": "https://api2.transloadit.com/assemblies/4e2f8c1a-6b3d-4f5e-9a7b-3c2d1e0f9a8b",
+          "assembly_id": "4e2f8c1a-6b3d-4f5e-9a7b-3c2d1e0f9a8b",
+          "timeout_ms": 60000,
+          "poll_interval_ms": 1000
+        }
       },
       "transloadit_list_robots": {
         "args": {
@@ -1133,19 +1152,30 @@
         }
       },
       "salesforce_query_records": {
-        "__skip__": true
+        "args": {
+          "objectName": "Contact",
+          "fields": [
+            "FirstName",
+            "LastName",
+            "Account.Name",
+            "Account.Industry"
+          ],
+          "whereClause": "Account.Industry = 'Technology'",
+          "orderBy": "LastName",
+          "limit": 10
+        }
       },
       "salesforce_aggregate_query": {
         "args": {
-          "objectName": "Opportunity",
+          "objectName": "Account",
           "selectFields": [
-            "StageName",
-            "COUNT(Id) OpportunityCount"
+            "Industry",
+            "COUNT(Id) Total"
           ],
           "groupByFields": [
-            "StageName"
+            "Industry"
           ],
-          "whereClause": "IsClosed = false",
+          "whereClause": "Industry != null",
           "havingClause": "COUNT(Id) > 5",
           "orderBy": "COUNT(Id) DESC",
           "limit": 10
@@ -1159,30 +1189,15 @@
       "get_guidelines": {
         "__skip__": true
       },
-      "run_ui5_linter": {
-        "args": {
-          "projectDir": "/tmp/trustlens_probe.txt",
-          "fix": false,
-          "filePatterns": [
-            "webapp/**/*.js"
-          ],
-          "provideContextInformation": false
-        }
-      },
       "get_api_reference": {
         "args": {
-          "projectDir": "/tmp/trustlens_probe.txt",
+          "projectDir": ".",
           "query": "sap.m.Button"
-        }
-      },
-      "get_project_info": {
-        "args": {
-          "projectDir": "/tmp/trustlens_probe.txt"
         }
       },
       "create_ui5_app": {
         "args": {
-          "appNamespace": "com.sample.myapp",
+          "appNamespace": "com.example.myapp",
           "basePath": "/tmp/trustlens_probe.txt",
           "createAppDirectory": true,
           "framework": "SAPUI5"
@@ -1192,14 +1207,14 @@
     "upstash-context7-mcp": {
       "resolve-library-id": {
         "args": {
-          "query": "App Router dynamic routes",
+          "query": "App Router server-side rendering",
           "libraryName": "Next.js"
         }
       },
       "query-docs": {
         "args": {
           "libraryId": "/vercel/next.js",
-          "query": "How to set up middleware for authentication in Next.js App Router"
+          "query": "How to use environment variables in Next.js App Router"
         }
       }
     },
@@ -1208,29 +1223,29 @@
         "args": {
           "depcity": "BJS",
           "arrcity": "SHA",
-          "date": "2025-12-01"
+          "date": "2025-12-31"
         }
       },
       "searchFlightsByNumber": {
         "args": {
-          "fnum": "MU2157",
-          "date": "2025-04-02",
-          "dep": "HFE",
-          "arr": "CAN"
+          "fnum": "CA1501",
+          "date": "2026-04-26",
+          "dep": "PEK",
+          "arr": "SHA"
         }
       },
       "getFlightTransferInfo": {
         "args": {
-          "depdate": "2025-08-15",
+          "depdate": "2025-10-01",
           "depcity": "BJS",
-          "arrcity": "LAX"
+          "arrcity": "SHA"
         }
       },
       "flightHappinessIndex": {
         "args": {
-          "fnum": "MU2157",
-          "date": "2026-05-10",
-          "dep": "SHA",
+          "fnum": "CA1831",
+          "date": "2026-05-01",
+          "dep": "PVG",
           "arr": "CAN"
         }
       },

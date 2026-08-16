@@ -2,11 +2,11 @@
   "name": "@softeria/ms-365-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786247895.8506925,
+  "evaluated_at": 1786850283.4556634,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 78.7,
+  "total_score": 79.0,
   "grade": "B",
   "dimensions": {
     "functionality": {
@@ -22,7 +22,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.243,
+        "avg_latency_s": 0.299,
         "failure_rate": 0.0,
         "attempts": 4
       }
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 27.7,
+      "value": 29.8,
       "findings": [],
       "details": {
-        "success_rate": 0.277,
+        "success_rate": 0.298,
         "models": [
           "deepseek"
         ],
@@ -205,7 +205,7 @@
     },
     {
       "name": "move-rename-onedrive-item",
-      "description": "Update the navigation property items in drives\n\n💡 TIP: Move and/or rename a file or folder. To move, provide parentReference with the target folder's id. To rename, provide a new name. Both can be done in a single request.",
+      "description": "Move or rename a OneDrive item.\n\n💡 TIP: Move and/or rename a file or folder. To move, provide parentReference with the target folder's id. To rename, provide a new name. Both can be done in a single request.",
       "schema": {
         "type": "object",
         "properties": {
@@ -1357,7 +1357,7 @@
     },
     {
       "name": "delete-onedrive-file",
-      "description": "Delete navigation property items for drives",
+      "description": "Delete a OneDrive file.",
       "schema": {
         "type": "object",
         "properties": {
@@ -1466,7 +1466,7 @@
     },
     {
       "name": "create-onedrive-folder",
-      "description": "Create new navigation property to children for drives\n\n💡 TIP: Creates a new folder inside the specified drive item. Body must include name (string) and folder ({}) fields. Use @microsoft.graph.conflictBehavior to control behavior on name conflict: 'rename' (default), 'replace', or 'fail'.",
+      "description": "Create a OneDrive folder.\n\n💡 TIP: Creates a new folder inside the specified drive item. Body must include name (string) and folder ({}) fields. Use @microsoft.graph.conflictBehavior to control behavior on name conflict: 'rename' (default), 'replace', or 'fail'.",
       "schema": {
         "type": "object",
         "properties": {
@@ -2658,7 +2658,7 @@
     },
     {
       "name": "copy-drive-item",
-      "description": "Invoke action copy\n\n💡 TIP: Asynchronously copy a file or folder to a new location and/or name. Body: { parentReference: { driveId: '...', id: '...' }, name?: 'New Name.xlsx' }. Returns 202 Accepted with a Location header pointing at a monitor URL for the async job. Ideal for duplicating templates (e.g. clone an Armhr Census Template per prospect), bulk file provisioning, or preserving an immutable snapshot of a working file.",
+      "description": "Copy a drive item.\n\n💡 TIP: Asynchronously copy a file or folder to a new location and/or name. Body: { parentReference: { driveId: '...', id: '...' }, name?: 'New Name.xlsx' }. Returns 202 Accepted with a Location header pointing at a monitor URL for the async job. Ideal for duplicating templates (e.g. clone an Armhr Census Template per prospect), bulk file provisioning, or preserving an immutable snapshot of a working file.",
       "schema": {
         "type": "object",
         "properties": {
@@ -2961,7 +2961,7 @@
     },
     {
       "name": "create-upload-session",
-      "description": "Invoke action createUploadSession\n\n💡 TIP: For large file uploads (no size limit). Returns a pre-authenticated uploadUrl for direct PUT of file bytes. For new files use path: /items/{parentId}:/{fileName}:/createUploadSession. Body (optional): { item: { '@microsoft.graph.conflictBehavior': 'rename' } }.",
+      "description": "Create an upload session.\n\n💡 TIP: For large file uploads (no size limit). Returns a pre-authenticated uploadUrl for direct PUT of file bytes. For new files use path: /items/{parentId}:/{fileName}:/createUploadSession. Body (optional): { item: { '@microsoft.graph.conflictBehavior': 'rename' } }.",
       "schema": {
         "type": "object",
         "properties": {
@@ -3397,7 +3397,7 @@
     },
     {
       "name": "delete-drive-item-permission",
-      "description": "Delete navigation property permissions for drives\n\n💡 TIP: Removes a specific permission from a file or folder. Only permissions that are not inherited can be deleted. Use list-drive-item-permissions first to find the permission ID.",
+      "description": "Delete a drive item permission.\n\n💡 TIP: Removes a specific permission from a file or folder. Only permissions that are not inherited can be deleted. Use list-drive-item-permissions first to find the permission ID.",
       "schema": {
         "type": "object",
         "properties": {
@@ -3441,7 +3441,7 @@
     },
     {
       "name": "create-drive-item-preview",
-      "description": "Invoke action preview\n\n💡 TIP: Generate a short-lived embeddable preview URL for a file (Office docs, PDFs, images). Body: { page?: number | string, zoom?: number, viewer?: 'onedrive' | 'office' }. Returns getUrl (interactive) and postUrl (form-post). Useful for surfacing inline previews in summary emails or chat messages without needing the recipient to open the file.",
+      "description": "Create a drive item preview.\n\n💡 TIP: Generate a short-lived embeddable preview URL for a file (Office docs, PDFs, images). Body: { page?: number | string, zoom?: number, viewer?: 'onedrive' | 'office' }. Returns getUrl (interactive) and postUrl (form-post). Useful for surfacing inline previews in summary emails or chat messages without needing the recipient to open the file.",
       "schema": {
         "type": "object",
         "properties": {
@@ -3843,7 +3843,7 @@
     },
     {
       "name": "add-excel-table-rows",
-      "description": "Create new navigation property to rows for drives\n\n💡 TIP: Adds rows to a table. Body: { values: [['col1val', 'col2val', 'col3val'], ['row2col1', 'row2col2', 'row2col3']] }. Each inner array is one row. Values must match the number of columns in the table.",
+      "description": "Add Excel table rows.\n\n💡 TIP: Adds rows to a table. Body: { values: [['col1val', 'col2val', 'col3val'], ['row2col1', 'row2col2', 'row2col3']] }. Each inner array is one row. Values must match the number of columns in the table.",
       "schema": {
         "type": "object",
         "properties": {
@@ -3903,7 +3903,7 @@
     },
     {
       "name": "update-excel-table-row",
-      "description": "Update a single row in a formal Excel table by zero-based row index. Body: { values: [[...]] } with one inner array matching the column count.\n\n💡 TIP: Update a single row in a formal Excel table by zero-based row index. Body: { values: [[...]] } with one inner array matching the column count.",
+      "description": "Update an Excel table row.\n\n💡 TIP: Update a single row in a formal Excel table by zero-based row index. Body: { values: [[...]] } with one inner array matching the column count.",
       "schema": {
         "type": "object",
         "properties": {
@@ -3954,7 +3954,7 @@
     },
     {
       "name": "delete-excel-table-row",
-      "description": "Delete a single row from a formal Excel table by zero-based row index.\n\n💡 TIP: Delete a single row from a formal Excel table by zero-based row index.",
+      "description": "Delete an Excel table row.\n\n💡 TIP: Delete a single row from a formal Excel table by zero-based row index.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4123,7 +4123,7 @@
     },
     {
       "name": "sort-excel-range",
-      "description": "Update the navigation property sort in drives",
+      "description": "Sort an Excel range.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4174,7 +4174,7 @@
     },
     {
       "name": "get-excel-range",
-      "description": "Invoke function range",
+      "description": "Get an Excel range.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4219,7 +4219,7 @@
     },
     {
       "name": "update-excel-range",
-      "description": "Set cell values, formulas, or number format on any range — does NOT require the worksheet to be a formal Excel table. Body: { values: [['v1','v2','v3']] } for a single row, or [['a','b'],['c','d']] for multi-row. Use this for append (target the next empty row's address, e.g. 'A172:H172'), update (target a single cell like 'H42'), or prepend-style edits (read existing, concatenate, write back). Number of inner-array values must match the column count of the address.\n\n💡 TIP: Set cell values, formulas, or number format on any range — does NOT require the worksheet to be a formal Excel table. Body: { values: [['v1','v2','v3']] } for a single row, or [['a','b'],['c','d']] for multi-row. Use this for append (target the next empty row's address, e.g. 'A172:H172'), update (target a single cell like 'H42'), or prepend-style edits (read existing, concatenate, write back). Number of inner-array values must match the column count of the address.",
+      "description": "Update an Excel range.\n\n💡 TIP: Set cell values, formulas, or number format on any range — does NOT require the worksheet to be a formal Excel table. Body: { values: [['v1','v2','v3']] } for a single row, or [['a','b'],['c','d']] for multi-row. Use this for append (target the next empty row's address, e.g. 'A172:H172'), update (target a single cell like 'H42'), or prepend-style edits (read existing, concatenate, write back). Number of inner-array values must match the column count of the address.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4270,7 +4270,7 @@
     },
     {
       "name": "clear-excel-range",
-      "description": "Invoke action clear\n\n💡 TIP: Clear cell contents and/or formatting on the given range. Body: { applyTo: 'All' | 'Formats' | 'Contents' }. 'Contents' wipes values but keeps formatting; 'Formats' resets styling but keeps values; 'All' wipes both. Use this to reset a worksheet section before a fresh write rather than overwriting cell-by-cell.",
+      "description": "Clear an Excel range.\n\n💡 TIP: Clear cell contents and/or formatting on the given range. Body: { applyTo: 'All' | 'Formats' | 'Contents' }. 'Contents' wipes values but keeps formatting; 'Formats' resets styling but keeps values; 'All' wipes both. Use this to reset a worksheet section before a fresh write rather than overwriting cell-by-cell.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4325,7 +4325,7 @@
     },
     {
       "name": "delete-excel-range",
-      "description": "Invoke action delete\n\n💡 TIP: Delete cells at the given range, shifting remaining content. Body: { shift: 'Up' } or { shift: 'Left' }. Use 'Up' to delete entire rows.",
+      "description": "Delete an Excel range.\n\n💡 TIP: Delete cells at the given range, shifting remaining content. Body: { shift: 'Up' } or { shift: 'Left' }. Use 'Up' to delete entire rows.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4436,7 +4436,7 @@
     },
     {
       "name": "format-excel-range",
-      "description": "Update the navigation property format in drives\n\n💡 TIP: Apply rangeFormat properties to a specific range. Required path param 'address' (e.g. 'A1:E5' or 'Sheet1!A1:E5'). Body: { horizontalAlignment, verticalAlignment, wrapText, columnWidth, rowHeight }. Font, fill, and borders are NOT set here; use format-excel-range-font, format-excel-range-fill, and format-excel-range-border for those.",
+      "description": "Format an Excel range.\n\n💡 TIP: Apply rangeFormat properties to a specific range. Required path param 'address' (e.g. 'A1:E5' or 'Sheet1!A1:E5'). Body: { horizontalAlignment, verticalAlignment, wrapText, columnWidth, rowHeight }. Font, fill, and borders are NOT set here; use format-excel-range-font, format-excel-range-fill, and format-excel-range-border for those.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4662,7 +4662,7 @@
     },
     {
       "name": "format-excel-range-border",
-      "description": "Sets one border side. The {sideIndex} path param selects which side: EdgeTop, EdgeBottom, EdgeLeft, EdgeRight, InsideVertical, InsideHorizontal, DiagonalDown, or DiagonalUp. To outline all four edges, call once per side.\n\n💡 TIP: Sets one border side. The {sideIndex} path param selects which side: EdgeTop, EdgeBottom, EdgeLeft, EdgeRight, InsideVertical, InsideHorizontal, DiagonalDown, or DiagonalUp. To outline all four edges, call once per side.",
+      "description": "Format an Excel range border.\n\n💡 TIP: Sets one border side. The {sideIndex} path param selects which side: EdgeTop, EdgeBottom, EdgeLeft, EdgeRight, InsideVertical, InsideHorizontal, DiagonalDown, or DiagonalUp. To outline all four edges, call once per side.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4745,7 +4745,7 @@
     },
     {
       "name": "format-excel-range-fill",
-      "description": "Set the background fill color of a range's cells.\n\n💡 TIP: Set the background fill color of a range's cells.",
+      "description": "Format an Excel range fill.\n\n💡 TIP: Set the background fill color of a range's cells.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4801,7 +4801,7 @@
     },
     {
       "name": "format-excel-range-font",
-      "description": "Set font formatting on a range: bold, italic, underline, size, color, and font name.\n\n💡 TIP: Set font formatting on a range: bold, italic, underline, size, color, and font name.",
+      "description": "Format an Excel range font.\n\n💡 TIP: Set font formatting on a range: bold, italic, underline, size, color, and font name.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4881,7 +4881,7 @@
     },
     {
       "name": "insert-excel-range",
-      "description": "Invoke action insert\n\n💡 TIP: Insert blank cells at the given range, shifting existing content. Body: { shift: 'Down' } or { shift: 'Right' }. Use 'Down' to insert blank rows above existing data.",
+      "description": "Insert an Excel range.\n\n💡 TIP: Insert blank cells at the given range, shifting existing content. Body: { shift: 'Down' } or { shift: 'Right' }. Use 'Down' to insert blank rows above existing data.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4936,7 +4936,7 @@
     },
     {
       "name": "merge-excel-range",
-      "description": "Invoke action merge\n\n💡 TIP: Merge the cells in the given range into a single cell. Body: { across: false } merges the entire range into one cell; { across: true } merges each row separately. Useful for building styled headers, banner rows, and report layouts.",
+      "description": "Merge an Excel range.\n\n💡 TIP: Merge the cells in the given range into a single cell. Body: { across: false } merges the entire range into one cell; { across: true } merges each row separately. Useful for building styled headers, banner rows, and report layouts.",
       "schema": {
         "type": "object",
         "properties": {
@@ -4992,7 +4992,7 @@
     },
     {
       "name": "unmerge-excel-range",
-      "description": "Invoke action unmerge\n\n💡 TIP: Unmerge any merged cells within the given range back into individual cells. No request body. Inverse of merge-excel-range.",
+      "description": "Unmerge an Excel range.\n\n💡 TIP: Unmerge any merged cells within the given range back into individual cells. No request body. Inverse of merge-excel-range.",
       "schema": {
         "type": "object",
         "properties": {
@@ -5094,7 +5094,7 @@
     },
     {
       "name": "get-excel-used-range",
-      "description": "Invoke function usedRange\n\n💡 TIP: Get the smallest range that encompasses any cells with values or formatting on the worksheet. Returns address, values, formulas, numberFormat, rowCount, columnCount. Use this to discover the populated bounds of a sheet before reading or appending — avoids guessing how far data extends. Optional $select to trim the response.",
+      "description": "Get an Excel used range.\n\n💡 TIP: Get the smallest range that encompasses any cells with values or formatting on the worksheet. Returns address, values, formulas, numberFormat, rowCount, columnCount. Use this to discover the populated bounds of a sheet before reading or appending — avoids guessing how far data extends. Optional $select to trim the response.",
       "schema": {
         "type": "object",
         "properties": {
@@ -5445,7 +5445,7 @@
     },
     {
       "name": "update-my-calendar-permission",
-      "description": "Update the navigation property calendarPermissions in me\n\n💡 TIP: Changes the role (permission level) granted to an existing share recipient or delegate. Body: { role: 'read' | 'write' | 'delegateWithoutPrivateEventAccess' | 'delegateWithPrivateEventAccess' }. Only the role property is writable — to change the recipient's email or other properties, delete and recreate via delete-my-calendar-permission + create-my-calendar-permission. Get the permission id via list-my-calendar-permissions.",
+      "description": "Update my calendar permission.\n\n💡 TIP: Changes the role (permission level) granted to an existing share recipient or delegate. Body: { role: 'read' | 'write' | 'delegateWithoutPrivateEventAccess' | 'delegateWithPrivateEventAccess' }. Only the role property is writable — to change the recipient's email or other properties, delete and recreate via delete-my-calendar-permission + create-my-calendar-permission. Get the permission id via list-my-calendar-permissions.",
       "schema": {
         "type": "object",
         "properties": {
@@ -5554,7 +5554,7 @@
     },
     {
       "name": "delete-my-calendar-permission",
-      "description": "Delete navigation property calendarPermissions for me\n\n💡 TIP: Revokes a calendar share or delegate access. Get the permission id via list-my-calendar-permissions. Permissions where isRemovable=false (e.g. the implicit 'My Organization' default) cannot be deleted — Graph returns an error.",
+      "description": "Delete my calendar permission.\n\n💡 TIP: Revokes a calendar share or delegate access. Get the permission id via list-my-calendar-permissions. Permissions where isRemovable=false (e.g. the implicit 'My Organization' default) cannot be deleted — Graph returns an error.",
       "schema": {
         "type": "object",
         "properties": {
@@ -6539,7 +6539,7 @@
     },
     {
       "name": "update-calendar",
-      "description": "Update the navigation property calendars in me\n\n💡 TIP: Updates a calendar's properties. Body: { name: 'New Name', color: 'lightBlue' }. Cannot update the default calendar's name.",
+      "description": "Update a calendar.\n\n💡 TIP: Updates a calendar's properties. Body: { name: 'New Name', color: 'lightBlue' }. Cannot update the default calendar's name.",
       "schema": {
         "type": "object",
         "properties": {
@@ -7471,7 +7471,7 @@
     },
     {
       "name": "get-specific-calendar-view",
-      "description": "The calendar view for the calendar. Navigation property. Read-only.\n\n💡 TIP: Returns expanded recurring event instances (not just seriesMaster) within a date range for a specific calendar. Requires startDateTime and endDateTime query parameters in ISO 8601 format (e.g., 2024-01-01T00:00:00Z). Each instance includes seriesMasterId and type (occurrence/exception) fields for recurring event linkage. Use fetchAllPages=true to retrieve all results when there are many events. To find Teams meetings, use $filter=isOnlineMeeting eq true. Teams meetings include a joinWebUrl property needed for transcript access via list-online-meetings.",
+      "description": "List the occurrences, exceptions, and single instances of events over a time range, from one of the signed-in user's calendars addressed by calendar ID.\n\n💡 TIP: Returns expanded recurring event instances (not just seriesMaster) within a date range for a specific calendar. Requires startDateTime and endDateTime query parameters in ISO 8601 format (e.g., 2024-01-01T00:00:00Z). Each instance includes seriesMasterId and type (occurrence/exception) fields for recurring event linkage. Use fetchAllPages=true to retrieve all results when there are many events. To find Teams meetings, use $filter=isOnlineMeeting eq true. Teams meetings include a joinWebUrl property needed for transcript access via list-online-meetings.",
       "schema": {
         "type": "object",
         "properties": {
@@ -7554,7 +7554,7 @@
     },
     {
       "name": "list-specific-calendar-events",
-      "description": "The events in the calendar. Navigation property. Read-only.\n\n💡 TIP: WARNING: Does NOT expand recurring events — only returns seriesMaster. Use get-specific-calendar-view instead.",
+      "description": "List events from one of the signed-in user's calendars, addressed by calendar ID.\n\n💡 TIP: WARNING: Does NOT expand recurring events — only returns seriesMaster. Use get-specific-calendar-view instead.",
       "schema": {
         "type": "object",
         "properties": {
@@ -8305,7 +8305,7 @@
     },
     {
       "name": "get-specific-calendar-event",
-      "description": "The events in the calendar. Navigation property. Read-only.",
+      "description": "Get a single event from one of the signed-in user's calendars, addressed by calendar ID and event ID. Any calendar can be addressed this way, including the default one.",
       "schema": {
         "type": "object",
         "properties": {
@@ -8359,7 +8359,7 @@
     },
     {
       "name": "update-specific-calendar-event",
-      "description": "Update the navigation property events in me\n\n💡 TIP: CRITICAL: Do not try to guess the email address of the recipients. Use the list-users tool to find the email address of the recipients. WARNING: Setting attendees replaces the entire attendee list — include all attendees, not just new ones.",
+      "description": "Update a specific calendar event.\n\n💡 TIP: CRITICAL: Do not try to guess the email address of the recipients. Use the list-users tool to find the email address of the recipients. WARNING: Setting attendees replaces the entire attendee list — include all attendees, not just new ones.",
       "schema": {
         "type": "object",
         "properties": {
@@ -9042,7 +9042,7 @@
     },
     {
       "name": "delete-specific-calendar-event",
-      "description": "Delete navigation property events for me\n\n💡 TIP: Deleting a seriesMaster deletes ALL occurrences. To cancel a single occurrence, use the specific instance ID.",
+      "description": "Delete a specific calendar event.\n\n💡 TIP: Deleting a seriesMaster deletes ALL occurrences. To cancel a single occurrence, use the specific instance ID.",
       "schema": {
         "type": "object",
         "properties": {
@@ -20517,7 +20517,7 @@
     },
     {
       "name": "delete-mail-attachment",
-      "description": "Delete navigation property attachments for me",
+      "description": "Delete a mail attachment.",
       "schema": {
         "type": "object",
         "properties": {
@@ -20682,7 +20682,7 @@
     },
     {
       "name": "create-forward-draft",
-      "description": "Invoke action createForward\n\n💡 TIP: Create a forward draft (does not send). Useful when user wants to review before sending.",
+      "description": "Create a forward draft.\n\n💡 TIP: Create a forward draft (does not send). Useful when user wants to review before sending.",
       "schema": {
         "type": "object",
         "properties": {

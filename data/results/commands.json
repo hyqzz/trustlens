@@ -2,12 +2,12 @@
   "name": "commands",
   "server_type": "mcp-server",
   "source": "community-popular",
-  "evaluated_at": 1786247883.4860504,
+  "evaluated_at": 1786850271.0379956,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 64.0,
-  "grade": "C",
+  "total_score": 39.0,
+  "grade": "F",
   "dimensions": {
     "functionality": {
       "value": 40.0,
@@ -19,11 +19,17 @@
       }
     },
     "reliability": {
-      "value": 100.0,
-      "findings": [],
+      "value": 0.0,
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "REL-FAIL",
+          "message": "调用失败率 100%"
+        }
+      ],
       "details": {
-        "avg_latency_s": 0.008,
-        "failure_rate": 0.0,
+        "avg_latency_s": null,
+        "failure_rate": 1.0,
         "attempts": 2
       }
     },

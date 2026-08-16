@@ -2,11 +2,11 @@
   "name": "@professional-wiki/mediawiki-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786247893.6064208,
+  "evaluated_at": 1786850281.5001004,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 78.6,
+  "total_score": 78.1,
   "grade": "B",
   "dimensions": {
     "functionality": {
@@ -14,17 +14,17 @@
       "findings": [],
       "details": {
         "tools_total": 29,
-        "tools_callable": 4,
-        "tools_probed": 4
+        "tools_callable": 5,
+        "tools_probed": 5
       }
     },
     "reliability": {
       "value": 60.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 5.77,
+        "avg_latency_s": 5.799,
         "failure_rate": 0.0,
-        "attempts": 8
+        "attempts": 10
       }
     },
     "security": {
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 24.1,
+      "value": 20.7,
       "findings": [],
       "details": {
-        "success_rate": 0.241,
+        "success_rate": 0.207,
         "models": [
           "deepseek"
         ],
@@ -625,7 +625,7 @@
     },
     {
       "name": "list-wikis",
-      "description": "Lists every configured wiki: its key (pass as the `wiki` argument to other tools), sitename, server URL, whether it is read-only or the default, whether it is currently reachable, and which extension-gated tools (cargo-*, smw-*, bucket-query) work on it. Use to discover the configured wikis, their keys, and which extension tools each supports.",
+      "description": "Lists every configured wiki: its key (pass as the `wiki` argument to other tools), sitename, server URL, whether it is read-only or the default, whether it is currently reachable, and which extension-gated tools work on it. Use to discover the configured wikis, their keys, and which extension tools each supports.",
       "schema": {
         "type": "object",
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -690,7 +690,7 @@
     },
     {
       "name": "update-page",
-      "description": "Replaces the existing content of a wiki page and returns the new revision ID. Fails if the page does not exist; for new pages, use create-page. Pass latestId (obtained from get-page with metadata=true) to enable edit-conflict detection: if the page has been edited since that revision, the update is rejected rather than silently clobbering concurrent changes. For large pages, three modifiers avoid shipping the full source: section=N edits one section (pairs with get-page section=N for reads), section='new' adds a new heading section, and mode='append' or 'prepend' sends a delta. Each call is a separate revision; for chains of mode='append' calls, re-fetching latestId between calls confirms the previous chunk landed before the next.",
+      "description": "Replaces the existing content of a wiki page and returns the new revision ID. Fails if the page does not exist; for new pages, use create-page. Pass latestId (obtained from get-page with metadata=true) to enable edit-conflict detection: if the page has been edited since that revision, the update is rejected rather than silently clobbering concurrent changes. For large pages, two modifiers avoid shipping the full source: section=N replaces one section together with every subsection nested under it, and is refused when source would drop those subsections; paired with get-page section=N it reads, changes and writes back a single section, which is also how to add content in the middle of a page; mode='append' or 'prepend' sends a delta, and adding a new section means appending a source that begins with a heading. Each call is a separate revision; for chains of mode='append' calls, re-fetching latestId between calls confirms the previous chunk landed before the next. Resending a mode='append' or 'prepend' call whose result never arrived adds the delta a second time.",
       "schema": {
         "type": "object",
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -701,7 +701,7 @@
           },
           "source": {
             "type": "string",
-            "description": "The content to write, in the existing page's content model. Interpreted as the full page by default; as the given section's content when section is set; or as a delta (appended or prepended) when mode is set."
+            "description": "The content to write, in the existing page's content model. Interpreted as the full page by default; as the given section's content when section is set; or as a delta (appended or prepended) when mode is set. An appended source that opens a new section must begin on its own line, as in \"\\n\\n== History ==\\n\\nBody.\"; without the leading newline the heading runs on from the last line of the page and is not recognised as a heading."
           },
           "latestId": {
             "description": "Base revision ID for edit-conflict detection; obtain from get-page with metadata=true. If omitted, the update is applied without conflict detection.",
@@ -714,18 +714,10 @@
             "type": "string"
           },
           "section": {
-            "description": "Section to edit: 0 (lead), 1..N (existing heading sections), or 'new' to append a new heading section.",
-            "anyOf": [
-              {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 9007199254740991
-              },
-              {
-                "type": "string",
-                "const": "new"
-              }
-            ]
+            "description": "Section number (0 = lead; 1..N = heading sections). Replaces that section's content, along with every subsection nested under it; see removeSubsections.",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
           },
           "mode": {
             "description": "Adds source to the existing content instead of replacing it: 'append' to the end, 'prepend' to the start.",
@@ -735,12 +727,12 @@
               "prepend"
             ]
           },
-          "sectionTitle": {
-            "description": "Heading for a new section; required when section='new', rejected otherwise.",
-            "type": "string"
-          },
           "bot": {
             "description": "Marks the edit as a bot edit, which Special:RecentChanges hides by default. Takes effect only when the authenticated account has the `bot` right (granted by the bot group, or by the high-volume grant on a bot password or OAuth consumer); without it the edit saves unflagged and the response reports botMarked: false. Use when performing bulk or automated edit runs, or when the user requests it.",
+            "type": "boolean"
+          },
+          "removeSubsections": {
+            "description": "Confirms that replacing this section is meant to remove the subsections nested under it. Required only when section is set and source contains fewer subsection headings than the section currently has.",
             "type": "boolean"
           },
           "wiki": {

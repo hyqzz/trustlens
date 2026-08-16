@@ -2,7 +2,7 @@
   "name": "cls-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786247909.475912,
+  "evaluated_at": 1786850296.2837589,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -21,16 +21,16 @@
       "details": {
         "tools_total": 20,
         "tools_callable": 0,
-        "tools_probed": 5
+        "tools_probed": 4
       }
     },
     "reliability": {
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.124,
+        "avg_latency_s": 0.043,
         "failure_rate": 0.0,
-        "attempts": 10
+        "attempts": 8
       }
     },
     "security": {

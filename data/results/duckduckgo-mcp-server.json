@@ -2,7 +2,7 @@
   "name": "duckduckgo-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786247910.3543692,
+  "evaluated_at": 1786850297.4664626,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -22,7 +22,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.125,
+        "avg_latency_s": 0.172,
         "failure_rate": 0.0,
         "attempts": 2
       }

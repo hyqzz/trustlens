@@ -2,18 +2,18 @@
   "name": "@dbx-app/mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786247887.57939,
+  "evaluated_at": 1786850275.272847,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 67.8,
+  "total_score": 65.2,
   "grade": "C",
   "dimensions": {
     "functionality": {
       "value": 40.0,
       "findings": [],
       "details": {
-        "tools_total": 12,
+        "tools_total": 13,
         "tools_callable": 0,
         "tools_probed": 4
       }
@@ -35,14 +35,14 @@
       }
     },
     "compatibility": {
-      "value": 25.0,
+      "value": 7.7,
       "findings": [],
       "details": {
-        "success_rate": 0.25,
+        "success_rate": 0.077,
         "models": [
           "deepseek"
         ],
-        "verdicts": 12
+        "verdicts": 13
       }
     }
   },
@@ -133,17 +133,11 @@
         "properties": {
           "connection_id": {
             "description": "Unique ID of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "connection_name": {
             "description": "Name of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "table": {
             "description": "Table name",
@@ -167,6 +161,31 @@
       }
     },
     {
+      "name": "dbx_duplicate_connection",
+      "description": "Duplicate a DBX connection with its complete settings, credentials, tunnels, and sidebar group",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "required": [
+          "new_name"
+        ],
+        "type": "object",
+        "properties": {
+          "connection_id": {
+            "description": "Unique ID of the DBX connection",
+            "type": "string"
+          },
+          "connection_name": {
+            "description": "Name of the DBX connection",
+            "type": "string"
+          },
+          "new_name": {
+            "description": "Name for the copied connection",
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
       "name": "dbx_execute_and_show",
       "description": "Execute a SQL query in DBX desktop app UI and show results there. Requires DBX to be running.",
       "schema": {
@@ -178,17 +197,11 @@
         "properties": {
           "connection_id": {
             "description": "Unique ID of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "connection_name": {
             "description": "Name of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "sql": {
             "type": "string"
@@ -214,17 +227,11 @@
         "properties": {
           "connection_id": {
             "description": "Unique ID of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "connection_name": {
             "description": "Name of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "database": {
             "description": "Database name",
@@ -243,6 +250,24 @@
               "string",
               "null"
             ]
+          },
+          "cell_char_offset": {
+            "description": "Start character offset for every string cell (default 0, max 1000000). Use the next offset reported by a truncated result to slide through a long value; narrow the query to the target row and column first.",
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "uint64",
+            "minimum": 0
+          },
+          "cell_char_limit": {
+            "description": "Maximum characters returned per string cell (default 200, max 4000). Increase only for an explicit long-value expansion.",
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "uint64",
+            "minimum": 0
           }
         }
       }
@@ -259,17 +284,11 @@
         "properties": {
           "connection_id": {
             "description": "Unique ID of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "connection_name": {
             "description": "Name of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "db": {
             "description": "Redis logical database number",
@@ -295,17 +314,11 @@
         "properties": {
           "connection_id": {
             "description": "Unique ID of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "connection_name": {
             "description": "Name of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "database": {
             "type": [
@@ -321,10 +334,7 @@
           },
           "tables": {
             "description": "Specific table names to include",
-            "type": [
-              "array",
-              "null"
-            ],
+            "type": "array",
             "items": {
               "type": "string"
             }
@@ -344,7 +354,7 @@
     },
     {
       "name": "dbx_list_connections",
-      "description": "List database connections configured in DBX. Returns connection IDs, names, database types, endpoints, and selected databases.",
+      "description": "List database connections configured in DBX. Returns connection IDs, names, group paths, database types, endpoints, and selected databases.",
       "schema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object"
@@ -358,17 +368,11 @@
         "properties": {
           "connection_id": {
             "description": "Unique ID of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "connection_name": {
             "description": "Name of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "database": {
             "description": "Database name",
@@ -396,17 +400,11 @@
         "properties": {
           "connection_id": {
             "description": "Unique ID of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "connection_name": {
             "description": "Name of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "database": {
             "description": "Database name",
@@ -431,17 +429,11 @@
         "properties": {
           "connection_id": {
             "description": "Unique ID of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "connection_name": {
             "description": "Name of the DBX connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "table": {
             "type": "string"

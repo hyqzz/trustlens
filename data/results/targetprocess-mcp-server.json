@@ -2,11 +2,11 @@
   "name": "targetprocess-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786247919.2499275,
+  "evaluated_at": 1786850305.519376,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 84.0,
+  "total_score": 84.1,
   "grade": "B",
   "dimensions": {
     "functionality": {
@@ -24,7 +24,7 @@
         }
       ],
       "details": {
-        "tools_total": 73,
+        "tools_total": 75,
         "tools_callable": 4,
         "tools_probed": 4
       }
@@ -33,7 +33,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.002,
+        "avg_latency_s": 0.003,
         "failure_rate": 0.0,
         "attempts": 8
       }
@@ -46,14 +46,14 @@
       }
     },
     "compatibility": {
-      "value": 16.4,
+      "value": 17.3,
       "findings": [],
       "details": {
-        "success_rate": 0.164,
+        "success_rate": 0.173,
         "models": [
           "deepseek"
         ],
-        "verdicts": 73
+        "verdicts": 75
       }
     }
   },
@@ -445,7 +445,7 @@
     },
     {
       "name": "create_bug_based_on_card",
-      "description": "Create a new bug card based on provided card id that summarizes the problem in concise, descriptive manner answering questions What? Where? When?, and content explaining what happened in detail. \n      NOTE: this tool requires a user story, bug, or feature card as a reference (i.e. card ID).\n      CRITICAL WORKFLOW: Before calling this tool, you MUST follow these steps:\n        1) IF you already have user story, bug, or feature card content, proceed to step 3 skipping step 2;\n        2) ELSE call \"get_user_story_content\" tool, \"get_bug_content\" tool, or fetch the feature to get card content;\n        3) format the new bug inside html <div> tags with Environment (describes where bug was found, dev, feature, review or uat Environment), Issue Description, Steps to Reproduce, Expected Behavior, Actual Behavior and Attachments sections (note: section titles should be wrapped in <h3> tags, e.g. <h3>Issue Description</h3>);\n        4) IF the user specified a team by name (not ID), call \"get_teams\" to find the matching team and use its ID as teamId;\n        5) IF the user specified a project by name (not ID), call \"get_projects\" to find the matching project and use its ID as projectId;\n        6) add a comment to the card with created bug Id and its Title",
+      "description": "Create a new bug card based on provided card id that summarizes the problem in concise, descriptive manner answering questions What? Where? When?, and content explaining what happened in detail. \n      NOTE: this tool requires a user story, bug, or feature card as a reference (i.e. card ID).\n      CRITICAL WORKFLOW: Before calling this tool, you MUST follow these steps:\n        1) IF you already have user story, bug, or feature card content, proceed to step 3 skipping step 2;\n        2) ELSE call \"get_user_story_content\" tool, \"get_bug_content\" tool, or fetch the feature to get card content;\n        3) format the new bug inside html <div> tags with Environment (describes where bug was found, dev, feature, review or uat Environment), Issue Description, Steps to Reproduce, Expected Behavior, Actual Behavior and Attachments sections (note: section titles should be wrapped in <h3> tags, e.g. <h3>Issue Description</h3>);\n        4) IF the user specified a team by name (not ID), call \"get_teams\" to find the matching team and use its ID as teamId;\n        5) IF the user specified a project by name (not ID), call \"get_projects\" to find the matching project and use its ID as projectId;\n        6) IF the user specified a release by name (not ID), call \"get_current_releases\" to find the matching release and use its ID as releaseId;\n        7) add a comment to the card with created bug Id and its Title",
       "schema": {
         "type": "object",
         "properties": {
@@ -496,6 +496,12 @@
             ],
             "description": "Where the bug was found, defaults to \"Manual QA\" if no origin was specified"
           },
+          "releaseId": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 9,
+            "description": "Optional Release ID to assign this bug to — if user gave a release name, resolve it via \"get_current_releases\" first"
+          },
           "projectId": {
             "type": "string",
             "description": "Optional Project ID — if user gave a project name, resolve it via \"get_projects\" first; defaults to TP_PROJECT_ID from config"
@@ -516,7 +522,7 @@
     },
     {
       "name": "update_bug",
-      "description": "Update a bug card with data proded from user input.\n      NOTE: pass only the fields that user wants to update.\n      CRITICAL WORKFLOW: Before calling this tool, you MUST follow these steps:\n        1) IF the user specified a team by name (not ID), call \"get_teams\" to find the matching team and use its ID as teamId;\n        2) IF the user specified a project by name (not ID), call \"get_projects\" to find the matching project and use its ID as projectId;\n        3) IF the user specified a state by name (not ID), call \"get_bug_workflows\" to find the matching state and use its ID as entityStateId;\n        4) IF the user specified a sprint/iteration by name, call \"get_team_iterations\" to find the matching iteration and use its ID as teamIterationId;",
+      "description": "Update a bug card with data proded from user input.\n      NOTE: pass only the fields that user wants to update.\n      CRITICAL WORKFLOW: Before calling this tool, you MUST follow these steps:\n        1) IF the user specified a team by name (not ID), call \"get_teams\" to find the matching team and use its ID as teamId;\n        2) IF the user specified a project by name (not ID), call \"get_projects\" to find the matching project and use its ID as projectId;\n        3) IF the user specified a state by name (not ID), call \"get_bug_workflows\" to find the matching state and use its ID as entityStateId;\n        4) IF the user specified a sprint/iteration by name, call \"get_team_iterations\" to find the matching iteration and use its ID as teamIterationId;\n        5) IF the user specified a release by name (not ID), call \"get_current_releases\" to find the matching release and use its ID as releaseId;",
       "schema": {
         "type": "object",
         "properties": {
@@ -548,6 +554,12 @@
               "Operations"
             ],
             "description": "Where the bug was found, defaults to \"Manual QA\""
+          },
+          "releaseId": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 9,
+            "description": "Optional Release ID to assign this bug to — if user gave a release name, resolve it via \"get_current_releases\" first"
           },
           "projectId": {
             "type": "string",
@@ -610,6 +622,48 @@
       }
     },
     {
+      "name": "set_business_value",
+      "description": "Set the Business Value (Priority) on a Targetprocess User Story, Feature, or Epic.\n      Business Value in the TP UI maps to the Priority field in the API.\n      CRITICAL WORKFLOW: Call \"get_priorities\" first to retrieve the list of valid priority IDs and their names for this instance before calling this tool — do not guess priority IDs.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the card to update (e.g. \"151282\")"
+          },
+          "entityType": {
+            "type": "string",
+            "enum": [
+              "UserStories",
+              "Features",
+              "Epics"
+            ],
+            "description": "Entity type of the card"
+          },
+          "priorityId": {
+            "type": "string",
+            "description": "Priority ID — resolve via \"get_priorities\" first"
+          }
+        },
+        "required": [
+          "id",
+          "entityType",
+          "priorityId"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "get_priorities",
+      "description": "Returns the list of Priority options available in this Targetprocess instance. Use this before calling \"set_business_value\" to resolve a priority name (e.g. \"Must Have\", \"Normal\", \"10\") to its ID.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
       "name": "update_user_story",
       "description": "Update a user story card with data provided from user input.\n      NOTE: pass only the fields that user wants to update.\n      CRITICAL WORKFLOW: Before calling this tool, you MUST follow these steps:\n        1) IF the user specified a team by name (not ID), call \"get_teams\" to find the matching team and use its ID as teamId;\n        2) IF the user specified a project by name (not ID), call \"get_projects\" to find the matching project and use its ID as projectId;\n        3) IF the user specified a state by name (not ID), call \"get_user_story_workflows\" to find the matching state and use its ID as entityStateId;\n        4) IF the user specified a sprint/iteration by name, call \"get_team_iterations\" to find the matching iteration and use its ID as teamIterationId;",
       "schema": {
@@ -663,7 +717,7 @@
     },
     {
       "name": "create_bug",
-      "description": "Create a new bug card that summarizes the problem in concise, descriptive manner answering questions \"What? Where? When?\" and content explaining what happened in detail.\n      NOTE: this tool does not require a user story or bug card reference.\n      CRITICAL WORKFLOW: Before calling this tool, you MUST follow these steps:\n        1) format the new bug inside html <div> tags with Environment(describes where bug was found, dev, feature, review or uat Environment), Issue Description, Steps to Reproduce, Expected Behavior, Actual Behavior and Attachments sections (note: section titles should be wrapped in <h3> tags, e.g. <h3>Issue Description</h3>, step to reproduce should be wrapped in <ol>);\n        2) IF the user specified a team by name (not ID), call \"get_teams\" to find the matching team and use its ID as teamId;\n        3) IF the user specified a project by name (not ID), call \"get_projects\" to find the matching project and use its ID as projectId;\n        4) IF the user specified a sprint/iteration by name, call \"get_team_iterations\" to find the matching iteration and use its ID as teamIterationId;",
+      "description": "Create a new bug card that summarizes the problem in concise, descriptive manner answering questions \"What? Where? When?\" and content explaining what happened in detail.\n      NOTE: this tool does not require a user story or bug card reference.\n      CRITICAL WORKFLOW: Before calling this tool, you MUST follow these steps:\n        1) format the new bug inside html <div> tags with Environment(describes where bug was found, dev, feature, review or uat Environment), Issue Description, Steps to Reproduce, Expected Behavior, Actual Behavior and Attachments sections (note: section titles should be wrapped in <h3> tags, e.g. <h3>Issue Description</h3>, step to reproduce should be wrapped in <ol>);\n        2) IF the user specified a team by name (not ID), call \"get_teams\" to find the matching team and use its ID as teamId;\n        3) IF the user specified a project by name (not ID), call \"get_projects\" to find the matching project and use its ID as projectId;\n        4) IF the user specified a sprint/iteration by name, call \"get_team_iterations\" to find the matching iteration and use its ID as teamIterationId;\n        5) IF the user specified a release by name (not ID), call \"get_current_releases\" to find the matching release and use its ID as releaseId;",
       "schema": {
         "type": "object",
         "properties": {
@@ -689,6 +743,12 @@
               "Operations"
             ],
             "description": "Where the bug was found, defaults to \"Manual QA\" if no origin was specified"
+          },
+          "releaseId": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 9,
+            "description": "Optional Release ID to assign this bug to — if user gave a release name, resolve it via \"get_current_releases\" first"
           },
           "projectId": {
             "type": "string",
@@ -1150,7 +1210,7 @@
     },
     {
       "name": "create_feature",
-      "description": "Create a new Feature in Targetprocess.",
+      "description": "DEPRECATED — use \"create_formatted_feature\" instead for all new features. Only call this tool when you have a fully pre-written HTML description and the user has explicitly opted out of the structured template.",
       "schema": {
         "type": "object",
         "properties": {

@@ -2,7 +2,7 @@
   "name": "@tsmztech/mcp-server-salesforce",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786247901.7653728,
+  "evaluated_at": 1786850289.772582,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -15,7 +15,7 @@
       "details": {
         "tools_total": 15,
         "tools_callable": 0,
-        "tools_probed": 3
+        "tools_probed": 4
       }
     },
     "reliability": {
@@ -24,7 +24,7 @@
       "details": {
         "avg_latency_s": 0.001,
         "failure_rate": 0.0,
-        "attempts": 6
+        "attempts": 8
       }
     },
     "security": {
@@ -98,18 +98,15 @@
           },
           "whereClause": {
             "type": "string",
-            "description": "WHERE clause, can include conditions on related objects",
-            "optional": true
+            "description": "WHERE clause, can include conditions on related objects"
           },
           "orderBy": {
             "type": "string",
-            "description": "ORDER BY clause, can include fields from related objects",
-            "optional": true
+            "description": "ORDER BY clause, can include fields from related objects"
           },
           "limit": {
             "type": "number",
-            "description": "Maximum number of records to return",
-            "optional": true
+            "description": "Maximum number of records to return"
           }
         },
         "required": [
@@ -144,23 +141,19 @@
           },
           "whereClause": {
             "type": "string",
-            "description": "WHERE clause to filter rows BEFORE grouping (cannot contain aggregate functions)",
-            "optional": true
+            "description": "WHERE clause to filter rows BEFORE grouping (cannot contain aggregate functions)"
           },
           "havingClause": {
             "type": "string",
-            "description": "HAVING clause to filter results AFTER grouping (use for aggregate conditions)",
-            "optional": true
+            "description": "HAVING clause to filter results AFTER grouping (use for aggregate conditions)"
           },
           "orderBy": {
             "type": "string",
-            "description": "ORDER BY clause - can only use grouped fields or aggregate functions",
-            "optional": true
+            "description": "ORDER BY clause - can only use grouped fields or aggregate functions"
           },
           "limit": {
             "type": "number",
-            "description": "Maximum number of grouped results to return",
-            "optional": true
+            "description": "Maximum number of grouped results to return"
           }
         },
         "required": [
@@ -199,8 +192,7 @@
           },
           "externalIdField": {
             "type": "string",
-            "description": "External ID field name for upsert operations",
-            "optional": true
+            "description": "External ID field name for upsert operations"
           }
         },
         "required": [
@@ -238,13 +230,11 @@
           },
           "description": {
             "type": "string",
-            "description": "Description of the object",
-            "optional": true
+            "description": "Description of the object"
           },
           "nameFieldLabel": {
             "type": "string",
-            "description": "Label for the name field",
-            "optional": true
+            "description": "Label for the name field"
           },
           "nameFieldType": {
             "type": "string",
@@ -252,13 +242,11 @@
               "Text",
               "AutoNumber"
             ],
-            "description": "Type of the name field",
-            "optional": true
+            "description": "Type of the name field"
           },
           "nameFieldFormat": {
             "type": "string",
-            "description": "Display format for AutoNumber field (e.g., 'A-{0000}')",
-            "optional": true
+            "description": "Display format for AutoNumber field (e.g., 'A-{0000}')"
           },
           "sharingModel": {
             "type": "string",
@@ -268,8 +256,7 @@
               "Private",
               "ControlledByParent"
             ],
-            "description": "Sharing model for the object",
-            "optional": true
+            "description": "Sharing model for the object"
           }
         },
         "required": [
@@ -302,8 +289,7 @@
           },
           "label": {
             "type": "string",
-            "description": "Label for the field",
-            "optional": true
+            "description": "Label for the field"
           },
           "type": {
             "type": "string",
@@ -326,53 +312,43 @@
               "Lookup",
               "MasterDetail"
             ],
-            "description": "Field type (required for create)",
-            "optional": true
+            "description": "Field type (required for create)"
           },
           "required": {
             "type": "boolean",
-            "description": "Whether the field is required",
-            "optional": true
+            "description": "Whether the field is required"
           },
           "unique": {
             "type": "boolean",
-            "description": "Whether the field value must be unique",
-            "optional": true
+            "description": "Whether the field value must be unique"
           },
           "externalId": {
             "type": "boolean",
-            "description": "Whether the field is an external ID",
-            "optional": true
+            "description": "Whether the field is an external ID"
           },
           "length": {
             "type": "number",
-            "description": "Length for text fields",
-            "optional": true
+            "description": "Length for text fields"
           },
           "precision": {
             "type": "number",
-            "description": "Precision for numeric fields",
-            "optional": true
+            "description": "Precision for numeric fields"
           },
           "scale": {
             "type": "number",
-            "description": "Scale for numeric fields",
-            "optional": true
+            "description": "Scale for numeric fields"
           },
           "referenceTo": {
             "type": "string",
-            "description": "API name of the object to reference (for Lookup/MasterDetail)",
-            "optional": true
+            "description": "API name of the object to reference (for Lookup/MasterDetail)"
           },
           "relationshipLabel": {
             "type": "string",
-            "description": "Label for the relationship (for Lookup/MasterDetail)",
-            "optional": true
+            "description": "Label for the relationship (for Lookup/MasterDetail)"
           },
           "relationshipName": {
             "type": "string",
-            "description": "API name for the relationship (for Lookup/MasterDetail)",
-            "optional": true
+            "description": "API name for the relationship (for Lookup/MasterDetail)"
           },
           "deleteConstraint": {
             "type": "string",
@@ -381,8 +357,7 @@
               "Restrict",
               "SetNull"
             ],
-            "description": "Delete constraint for Lookup fields",
-            "optional": true
+            "description": "Delete constraint for Lookup fields"
           },
           "picklistValues": {
             "type": "array",
@@ -393,26 +368,22 @@
                   "type": "string"
                 },
                 "isDefault": {
-                  "type": "boolean",
-                  "optional": true
+                  "type": "boolean"
                 }
               }
             },
-            "description": "Values for Picklist/MultiselectPicklist fields",
-            "optional": true
+            "description": "Values for Picklist/MultiselectPicklist fields"
           },
           "description": {
             "type": "string",
-            "description": "Description of the field",
-            "optional": true
+            "description": "Description of the field"
           },
           "grantAccessTo": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "Profile names to grant field access to (defaults to ['System Administrator'])",
-            "optional": true
+            "description": "Profile names to grant field access to (defaults to ['System Administrator'])"
           }
         },
         "required": [
@@ -450,18 +421,15 @@
             "items": {
               "type": "string"
             },
-            "description": "Names of profiles to grant/revoke access (e.g., ['System Administrator', 'Sales User'])",
-            "optional": true
+            "description": "Names of profiles to grant/revoke access (e.g., ['System Administrator', 'Sales User'])"
           },
           "readable": {
             "type": "boolean",
-            "description": "Grant/revoke read access (default: true)",
-            "optional": true
+            "description": "Grant/revoke read access (default: true)"
           },
           "editable": {
             "type": "boolean",
-            "description": "Grant/revoke edit access (default: true)",
-            "optional": true
+            "description": "Grant/revoke edit access (default: true)"
           }
         },
         "required": [
@@ -490,8 +458,7 @@
               "PHONE FIELDS",
               "SIDEBAR FIELDS"
             ],
-            "description": "Which fields to search in",
-            "optional": true
+            "description": "Which fields to search in"
           },
           "objects": {
             "type": "array",
@@ -511,18 +478,15 @@
                 },
                 "where": {
                   "type": "string",
-                  "description": "WHERE clause for this object",
-                  "optional": true
+                  "description": "WHERE clause for this object"
                 },
                 "orderBy": {
                   "type": "string",
-                  "description": "ORDER BY clause for this object",
-                  "optional": true
+                  "description": "ORDER BY clause for this object"
                 },
                 "limit": {
                   "type": "number",
-                  "description": "Maximum number of records to return for this object",
-                  "optional": true
+                  "description": "Maximum number of records to return for this object"
                 }
               },
               "required": [
@@ -551,34 +515,29 @@
                 },
                 "value": {
                   "type": "string",
-                  "description": "Value for the WITH clause",
-                  "optional": true
+                  "description": "Value for the WITH clause"
                 },
                 "fields": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   },
-                  "description": "Fields for SNIPPET clause",
-                  "optional": true
+                  "description": "Fields for SNIPPET clause"
                 }
               },
               "required": [
                 "type"
               ]
             },
-            "description": "Additional WITH clauses for the search",
-            "optional": true
+            "description": "Additional WITH clauses for the search"
           },
           "updateable": {
             "type": "boolean",
-            "description": "Return only updateable records",
-            "optional": true
+            "description": "Return only updateable records"
           },
           "viewable": {
             "type": "boolean",
-            "description": "Return only viewable records",
-            "optional": true
+            "description": "Return only viewable records"
           }
         },
         "required": [

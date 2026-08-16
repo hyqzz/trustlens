@@ -2,18 +2,18 @@
   "name": "@0xmonaco/mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786247884.4782138,
+  "evaluated_at": 1786850272.0773902,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 72.0,
+  "total_score": 69.7,
   "grade": "C",
   "dimensions": {
     "functionality": {
       "value": 52.0,
       "findings": [],
       "details": {
-        "tools_total": 8,
+        "tools_total": 20,
         "tools_callable": 1,
         "tools_probed": 5
       }
@@ -22,7 +22,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.131,
+        "avg_latency_s": 0.132,
         "failure_rate": 0.0,
         "attempts": 10
       }
@@ -35,14 +35,14 @@
       }
     },
     "compatibility": {
-      "value": 25.0,
+      "value": 10.0,
       "findings": [],
       "details": {
-        "success_rate": 0.25,
+        "success_rate": 0.1,
         "models": [
           "deepseek"
         ],
-        "verdicts": 8
+        "verdicts": 20
       }
     }
   },
@@ -75,13 +75,17 @@
             "description": "Page number (starts from 1)",
             "type": "number"
           },
-          "limit": {
+          "pageSize": {
             "description": "Number of items per page (max 100)",
             "type": "number"
           },
           "marketType": {
             "description": "Filter by market type",
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "SPOT",
+              "MARGIN"
+            ]
           },
           "baseToken": {
             "description": "Filter by base token",
@@ -94,6 +98,10 @@
           "isActive": {
             "description": "Filter by active status",
             "type": "boolean"
+          },
+          "category": {
+            "description": "Filter by category (e.g. crypto, equities, commodities)",
+            "type": "string"
           }
         }
       }
@@ -172,6 +180,225 @@
         "required": [
           "tradingPairId"
         ]
+      }
+    },
+    {
+      "name": "get_screener",
+      "description": "Screen trading pairs with market stats (price, volume, change), filtered by market type, category, and active status.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "page": {
+            "description": "Page number (1-based)",
+            "type": "number"
+          },
+          "pageSize": {
+            "description": "Items per page",
+            "type": "number"
+          },
+          "marketType": {
+            "description": "Filter by market type",
+            "type": "string",
+            "enum": [
+              "SPOT",
+              "MARGIN"
+            ]
+          },
+          "isActive": {
+            "description": "Filter by active status",
+            "type": "boolean"
+          },
+          "category": {
+            "description": "Filter by category (e.g. crypto, equities, commodities)",
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_market_stats",
+      "description": "Get exchange-wide life-to-date cumulative volume and trade count across all markets.",
+      "schema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "get_perp_market_config",
+      "description": "Get a perpetual market's configuration (leverage limits, margin requirements, funding parameters).",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "tradingPairId": {
+            "type": "string",
+            "description": "Trading pair UUID"
+          }
+        },
+        "required": [
+          "tradingPairId"
+        ]
+      }
+    },
+    {
+      "name": "get_perp_market_summary",
+      "description": "Get a perpetual market's live summary (mark/index price, funding rate, open interest, 24h stats).",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "tradingPairId": {
+            "type": "string",
+            "description": "Trading pair UUID"
+          }
+        },
+        "required": [
+          "tradingPairId"
+        ]
+      }
+    },
+    {
+      "name": "get_mark_price",
+      "description": "Get the current mark price for a perpetual market.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "tradingPairId": {
+            "type": "string",
+            "description": "Trading pair UUID"
+          }
+        },
+        "required": [
+          "tradingPairId"
+        ]
+      }
+    },
+    {
+      "name": "get_index_price",
+      "description": "Get the current index (oracle) price for a perpetual market.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "tradingPairId": {
+            "type": "string",
+            "description": "Trading pair UUID"
+          }
+        },
+        "required": [
+          "tradingPairId"
+        ]
+      }
+    },
+    {
+      "name": "get_funding_state",
+      "description": "Get the current funding rate and next funding time for a perpetual market.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "tradingPairId": {
+            "type": "string",
+            "description": "Trading pair UUID"
+          }
+        },
+        "required": [
+          "tradingPairId"
+        ]
+      }
+    },
+    {
+      "name": "get_open_interest",
+      "description": "Get the current open interest for a perpetual market.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "tradingPairId": {
+            "type": "string",
+            "description": "Trading pair UUID"
+          }
+        },
+        "required": [
+          "tradingPairId"
+        ]
+      }
+    },
+    {
+      "name": "get_funding_history",
+      "description": "List historical funding-rate records for a perpetual market.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "tradingPairId": {
+            "type": "string",
+            "description": "Trading pair UUID"
+          },
+          "startTime": {
+            "description": "Start time as a Unix millisecond-epoch timestamp string (e.g. \"1717200000000\"); ISO 8601 is rejected by the API",
+            "type": "string"
+          },
+          "endTime": {
+            "description": "End time as a Unix millisecond-epoch timestamp string (e.g. \"1717200000000\"); ISO 8601 is rejected by the API",
+            "type": "string"
+          },
+          "page": {
+            "description": "Page number (1-based)",
+            "type": "number"
+          },
+          "pageSize": {
+            "description": "Items per page",
+            "type": "number"
+          },
+          "orderBy": {
+            "description": "Sort order by time",
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          }
+        },
+        "required": [
+          "tradingPairId"
+        ]
+      }
+    },
+    {
+      "name": "get_all_funding_history",
+      "description": "List historical funding-rate records across all perpetual markets.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "startTime": {
+            "description": "Start time as a Unix millisecond-epoch timestamp string (e.g. \"1717200000000\"); ISO 8601 is rejected by the API",
+            "type": "string"
+          },
+          "endTime": {
+            "description": "End time as a Unix millisecond-epoch timestamp string (e.g. \"1717200000000\"); ISO 8601 is rejected by the API",
+            "type": "string"
+          },
+          "page": {
+            "description": "Page number (1-based)",
+            "type": "number"
+          },
+          "pageSize": {
+            "description": "Items per page",
+            "type": "number"
+          },
+          "orderBy": {
+            "description": "Sort order by time",
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          }
+        }
       }
     },
     {
@@ -254,6 +481,31 @@
         "required": [
           "code"
         ]
+      }
+    },
+    {
+      "name": "check_trader_code_availability",
+      "description": "Public advisory check of whether a custom PitPass TraderCode handle is available. Returns `available` and, when unavailable, a `reason` (one of taken, too_short, too_long, reserved, invalid_char, looks_like_address). Advisory only — the authoritative gate is the atomic claim in set_trader_code, so a positive result is not a reservation.",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The custom handle to check for availability."
+          }
+        },
+        "required": [
+          "code"
+        ]
+      }
+    },
+    {
+      "name": "get_pulse",
+      "description": "Get the latest market-pulse news feed: AI-synthesized, per-asset headlines with sentiment tags.",
+      "schema": {
+        "type": "object",
+        "properties": {}
       }
     }
   ]

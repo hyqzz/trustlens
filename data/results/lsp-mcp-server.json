@@ -2,12 +2,12 @@
   "name": "lsp-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786247913.6218843,
+  "evaluated_at": 1786850300.6469994,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 57.5,
-  "grade": "D",
+  "total_score": 61.8,
+  "grade": "C",
   "dimensions": {
     "functionality": {
       "value": 40.0,
@@ -15,22 +15,22 @@
       "details": {
         "tools_total": 29,
         "tools_callable": 0,
-        "tools_probed": 2
+        "tools_probed": 4
       }
     },
     "reliability": {
-      "value": 70.0,
+      "value": 85.0,
       "findings": [
         {
           "severity": "warning",
           "code": "REL-FAIL",
-          "message": "调用失败率 50%"
+          "message": "调用失败率 25%"
         }
       ],
       "details": {
-        "avg_latency_s": 0.002,
-        "failure_rate": 0.5,
-        "attempts": 4
+        "avg_latency_s": 0.001,
+        "failure_rate": 0.25,
+        "attempts": 8
       }
     },
     "security": {
@@ -41,10 +41,10 @@
       }
     },
     "compatibility": {
-      "value": 6.9,
+      "value": 10.3,
       "findings": [],
       "details": {
-        "success_rate": 0.069,
+        "success_rate": 0.103,
         "models": [
           "deepseek"
         ],

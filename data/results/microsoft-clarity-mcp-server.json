@@ -2,7 +2,7 @@
   "name": "@microsoft/clarity-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786247890.515035,
+  "evaluated_at": 1786850278.1072507,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",

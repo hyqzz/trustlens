@@ -2,12 +2,12 @@
   "name": "shadcn-ui-mcp-server",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786247917.4399965,
+  "evaluated_at": 1786850304.414199,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
-  "total_score": 85.0,
-  "grade": "B",
+  "total_score": 92.5,
+  "grade": "A",
   "dimensions": {
     "functionality": {
       "value": 100.0,
@@ -22,7 +22,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.161,
+        "avg_latency_s": 0.149,
         "failure_rate": 0.0,
         "attempts": 6
       }
@@ -35,10 +35,10 @@
       }
     },
     "compatibility": {
-      "value": 0.0,
+      "value": 50.0,
       "findings": [],
       "details": {
-        "success_rate": 0.0,
+        "success_rate": 0.5,
         "models": [
           "deepseek"
         ],

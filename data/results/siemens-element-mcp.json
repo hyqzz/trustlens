@@ -2,7 +2,7 @@
   "name": "@siemens/element-mcp",
   "server_type": "mcp-server",
   "source": "registry-npm",
-  "evaluated_at": 1786247895.317554,
+  "evaluated_at": 1786850283.2327535,
   "engine_version": "0.1.0",
   "ok": true,
   "error": "",
@@ -28,7 +28,7 @@
       "value": 100.0,
       "findings": [],
       "details": {
-        "avg_latency_s": 0.161,
+        "avg_latency_s": 0.248,
         "failure_rate": 0.0,
         "attempts": 4
       }
